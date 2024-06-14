@@ -68,13 +68,14 @@ export default function loginPage() {
                 />
               </div>
               <div className="flex flex-col  h-[30px] items-end p-3">
-                <button
+                <a
                   type="button"
-                  className=" text-gray-600 border border-transparent  hover:opacity-75 text-[12px]"
+                  className=" text-gray-600 border border-transparent  hover:opacity-75 text-[12px] hover:cursor-pointer"
+                  href="http://localhost:3000/forgotpassword"
                   //   onClick={() => router.push("/forgotpassword")}
                 >
                   forgot password?
-                </button>
+                </a>
               </div>
               <div className=" flex  h-[70px] items-center justify-center p-2 mt-2">
                 <button
@@ -87,9 +88,12 @@ export default function loginPage() {
                 </button>
               </div>
               <div className="flex flex-col mt-8 items-end">
-                <button className="hover:opacity-75 text-gray-600 text-[14px]">
+                <a
+                  className="hover:opacity-75 text-gray-600 text-[14px]"
+                  href="http://localhost:3000/createaccount"
+                >
                   Create your Account →
-                </button>
+                </a>
               </div>
             </div>
           </div>
