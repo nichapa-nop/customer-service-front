@@ -1,43 +1,68 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { forgotPassword } from "@/actions/forgotpassword.action";
+import toast, { Toaster } from "react-hot-toast";
+import { sendMail } from "@/actions/sendmailforgotpass.action";
 
 export default function forgotpassword() {
+  const [email, setEmail] = useState<string>();
+
+  async function handleSendmail() {
+    // if (!email) {
+    //   // toast.error("Email is requires.");
+    // }
+    let sendMailResponse = await sendMail({ email });
+    if (sendMailResponse.success) {
+      toast.success("Please check your Email!");
+    } else {
+      toast.error("Email is requires.");
+    }
+  }
+
   return (
     <div className="h-screen  bg-gradient-to-r from-orange-300 to-red-500">
       <div className="flex items-center justify-center min-h-screen">
-        <div className="w-[400px] h-[350px] bg-white shadow-lg rounded-lg p-8 items-center justify-center">
-          <div className=" text-center mt-4 mb-5">
+        <div className="w-[400px] h-[380px] bg-white shadow-lg rounded-lg p-8 items-center justify-center">
+          <div className="flex items-center justify-center mt-5">
+            <img
+              className="w-[52px] h-[50px]"
+              src="https://www.freeiconspng.com/thumbs/lock-icon/lock-icon-11.png"
+            ></img>
+          </div>
+          <div className=" text-center mt-2 mb-2">
             <p className=" font-bold text-[24px]">Trouble logging in?</p>
           </div>
           <div>
-            <div className=" flex flex-col h-[220px] rounded-md p-1 bg-red-500">
-              <div className="flex flex-col  h-[130px] p-1 bg-pink-400 mt-2">
-                <div className=" flex bg-yellow-400 h-[60px] items-center justify-center  ">
-                  <p className=" bg-white text-[13px] text-center text-balance">
-                    Enter your email and we'll send you a link to get back into
-                    your account.
+            <div className=" flex flex-col h-[220px] rounded-md p-1 ">
+              <div className="flex flex-col  h-[130px] p-1 ">
+                <div className=" flex  h-[60px] items-center justify-center  ">
+                  <p className="  text-[13px] text-center text-balance">
+                    Enter your email and we'll send you a link to reset your
+                    password.
                   </p>
                 </div>
                 {/* <p className=" text-[16px] ">Email</p> */}
-                <div className="flex bg-orange-400 h-[60px] justify-center items-center">
+                <div className="flex  h-[60px] justify-center items-center">
                   <input
                     type="text"
                     id="email"
-                    className="  w-[230px] h-[26px] rounded-[4px] text-[12px] text-center"
+                    className=" bg-gray-100  w-[230px] h-[26px] rounded-[4px] text-[12px] text-center"
                     placeholder="Enter your Email"
-                    // onChange={(e) => {
-                    //   e.preventDefault();
-                    //   setEmail(e.target.value);
-                    // }}
-                    // value={email}
+                    onChange={(e) => {
+                      e.preventDefault();
+                      setEmail(e.target.value);
+                    }}
+                    value={email}
                   />
                 </div>
               </div>
 
-              <div className="flex h-[60px] bg-blue-400 p-2 justify-center items-center">
-                <button className=" w-[120px] h-10 hover:opacity-75  bg-gradient-to-r from-orange-300 to-red-500  rounded-[30px]">
+              <div className="flex h-[60px]  p-2 justify-center items-center">
+                <button
+                  className=" w-[120px] h-10 hover:opacity-75  bg-gradient-to-r from-orange-300 to-red-500  rounded-[30px]"
+                  onClick={handleSendmail}
+                >
                   <p className=" text-white font-semibold text-[15px] ">SEND</p>
                 </button>
               </div>
@@ -45,6 +70,7 @@ export default function forgotpassword() {
           </div>
         </div>
       </div>
+      <Toaster position="bottom-center" />
 
       {/* <div>forgotpassword</div> */}
     </div>

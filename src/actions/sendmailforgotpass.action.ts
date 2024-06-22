@@ -2,7 +2,7 @@
 
 import { cookies } from "next/headers";
 
-export async function forgotPassword({ email }: { email: string }) {
+export async function sendMail({ email }: { email: string }) {
   const res = await fetch(`http://localhost:5000/v1/reset-password`, {
     headers: {
       "Content-Type": "application/json",
