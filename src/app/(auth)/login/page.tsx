@@ -34,7 +34,7 @@ export default function loginPage() {
     <div className="h-screen  bg-gradient-to-r from-orange-300 to-red-500">
       <div className="flex items-center justify-center min-h-screen">
         <div className="w-[400px] h-[500px] bg-white shadow-lg rounded-lg p-8 items-center justify-center">
-          <div className="text-center mt-3 mb-8">
+          <div className="text-center mt-4 mb-5">
             <p className=" font-bold text-[32px]">Login</p>
           </div>
           <div>
@@ -44,7 +44,7 @@ export default function loginPage() {
                 <input
                   type="text"
                   id="email"
-                  className=" w-[280px] h-[26px] mt-2 rounded-[4px] text-[12px]"
+                  className=" bg-gray-100 w-[280px] h-[26px] mt-2 rounded-[4px] text-[12px]"
                   placeholder="Enter your Email"
                   onChange={(e) => {
                     e.preventDefault();
@@ -58,7 +58,7 @@ export default function loginPage() {
                 <input
                   type="password"
                   id="password"
-                  className=" w-[280px] h-[26px]  mt-2 rounded-[4px] text-[12px]"
+                  className=" bg-gray-100 w-[280px] h-[26px]  mt-2 rounded-[4px] text-[12px]"
                   placeholder="Enter your Password"
                   onChange={(e) => {
                     e.preventDefault();
