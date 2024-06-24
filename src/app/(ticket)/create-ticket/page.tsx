@@ -23,7 +23,7 @@ export default function ticketManagement() {
           <div className="bg-gray-600 h-[2px] mb-1"></div>
           <div className=" flex  h-[45px] items-center justify-end mb-1">
             <button
-              className=" bg-gradient-to-r from-red-500 to-orange-300 h-[32px] w-[105px] rounded-md mr-3 hover:opacity-75 "
+              className=" bg-orange-400 h-[32px] w-[105px] rounded-md mr-3 hover:opacity-75 "
               //   onClick={}
             >
               <p className="text-[12px] font-semibold text-white">
