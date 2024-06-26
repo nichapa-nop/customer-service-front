@@ -50,7 +50,7 @@ export default function ticketManagement() {
                                     <input
                                         type="text"
                                         id="lastname"
-                                        className=" bg-gray-100  w-[200px] h-[20px] rounded-[4px] text-[12px] "
+                                        className=" bg-gray-100  w-[200px] h-[20px] rounded-[4px] text-[12px]   "
                                     ></input>
                                 </div>
                                 <div className="flex flex-col bg-blue-300 p-1">
