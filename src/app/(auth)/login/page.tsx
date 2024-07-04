@@ -8,9 +8,9 @@ import bgpic from "../../../../img/Rectangle 3.png";
 import toast, { Toaster } from "react-hot-toast";
 import { login } from "@/actions/login.action";
 
-export default function loginPage() {
-  const [email, setEmail] = useState<string>();
-  const [password, setPassword] = useState<string>();
+export default function LoginPage() {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const router = useRouter();
 
   async function handleLogin() {
