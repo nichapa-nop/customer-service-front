@@ -18,7 +18,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={montserrat.className}>{children}</body>
+      <body
+        className={classNames(
+          montserrat.className
+          // "max-h-screen overflow-y-auto"
+        )}
+      >
+        {children}
+      </body>
     </html>
   );
 }
