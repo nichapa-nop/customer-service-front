@@ -190,7 +190,7 @@ export default function Example() {
       >
         <div className="fixed inset-0 w-screen overflow-y-auto p-1">
           <div className="flex min-h-full  items-center justify-center">
-            <DialogPanel className=" w-[1000px] space-y-[50px] border rounded-xl bg-white p-12">
+            <DialogPanel className=" w-[1000px] space-y-[50px] border rounded-xl bg-red-300 p-12">
               <DialogTitle className="font-semibold text-center text-[20px]">
                 Create New Ticket
               </DialogTitle>
@@ -198,95 +198,97 @@ export default function Example() {
                 {/* This will permanently deactivate your account */}
               </Description>
 
-              <div className="grid grid-cols-2 gap-2 bg-blue-300 p-6 h-[480px] rounded-xl">
-                <p className=" col-span-2 font-semibold text-[20px]">
-                  Customer Info
-                </p>
-                <div className="flex flex-col gap-2 bg-red-200 p-4">
-                  <p>First Name (EN)</p>
-                  <input
-                    className=" w-full h-10 rounded-[15px] pl-4"
-                    placeholder="Nichapa"
-                  ></input>
-                </div>
-                <div className="flex flex-col gap-2 bg-lime-200 p-4">
-                  <p>Last Name (EN)</p>
-                  <input
-                    className=" w-full h-10 rounded-[15px] pl-4"
-                    placeholder="Nopparat"
-                  ></input>
-                </div>
-                <div className="flex flex-col gap-2 bg-lime-200 p-4">
-                  <p>Phone Number</p>
-                  <input
-                    className=" w-full h-10 rounded-[15px] pl-4"
-                    placeholder="0123456789"
-                  ></input>
-                </div>
-                <div className="flex flex-col gap-2 bg-red-200 p-4">
-                  <p>Type</p>
-                  <input
-                    className=" w-full h-10 rounded-[15px] pl-4"
-                    placeholder="Select"
-                  ></input>
-                </div>
-                <div className=" flex flex-col gap-2 bg-red-200 p-4">
-                  <p>Email</p>
-                  <input
-                    className=" w-full h-10 rounded-[15px] pl-4"
-                    placeholder="ee@baseplayhouse.co"
-                  ></input>
-                </div>
-                <div className=" flex flex-col gap-2 bg-lime-200 p-4">
-                  <p>Company Name</p>
-                  <input
-                    className=" w-full h-10 rounded-[15px] pl-4"
-                    placeholder="BASE PLAYHOUSE CO. TLD."
-                  ></input>
+              <div className=" bg-blue-300 p-6 h-[480px] rounded-xl">
+                <p className="font-semibold text-[20px] pl-6">Customer Info</p>
+                <div className="grid grid-cols-2 gap-2  bg-slate-500 p-3">
+                  <div className="flex flex-col gap-2 bg-red-200 p-4">
+                    <p>First Name (EN)</p>
+                    <input
+                      className=" w-full h-10 rounded-[15px] pl-4"
+                      placeholder="Nichapa"
+                    ></input>
+                  </div>
+                  <div className="flex flex-col gap-2 bg-lime-200 p-4">
+                    <p>Last Name (EN)</p>
+                    <input
+                      className=" w-full h-10 rounded-[15px] pl-4"
+                      placeholder="Nopparat"
+                    ></input>
+                  </div>
+                  <div className="flex flex-col gap-2 bg-lime-200 p-4">
+                    <p>Phone Number</p>
+                    <input
+                      className=" w-full h-10 rounded-[15px] pl-4"
+                      placeholder="0123456789"
+                    ></input>
+                  </div>
+                  <div className="flex flex-col gap-2 bg-red-200 p-4">
+                    <p>Type</p>
+                    <input
+                      className=" w-full h-10 rounded-[15px] pl-4"
+                      placeholder="Select"
+                    ></input>
+                  </div>
+                  <div className=" flex flex-col gap-2 bg-red-200 p-4">
+                    <p>Email</p>
+                    <input
+                      className=" w-full h-10 rounded-[15px] pl-4"
+                      placeholder="ee@baseplayhouse.co"
+                    ></input>
+                  </div>
+                  <div className=" flex flex-col gap-2 bg-lime-200 p-4">
+                    <p>Company Name</p>
+                    <input
+                      className=" w-full h-10 rounded-[15px] pl-4"
+                      placeholder="BASE PLAYHOUSE CO. TLD."
+                    ></input>
+                  </div>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-2 p-6 rounded-xl bg-pink-300 h-[420px]">
-                <p className=" col-span-2 font-semibold text-[20px] mb-2">
+              <div className="p-6 rounded-xl bg-pink-300 h-[420px]">
+                <p className="font-semibold text-[20px] mb-2  pl-6">
                   System Info
                 </p>
-                <div className="flex flex-col gap-2 bg-red-200 p-4">
-                  <p>Platform</p>
-                  <input
-                    className=" w-full h-10 rounded-[15px] pl-4"
-                    placeholder="Nichapa"
-                  ></input>
-                </div>
-                <div className="flex flex-col gap-2 bg-lime-200 p-4">
-                  <p>Incident Type</p>
-                  <input
-                    className=" w-full h-10 rounded-[15px] pl-4"
-                    placeholder="Nopparat"
-                  ></input>
-                </div>
-                <div className="flex flex-col gap-2 bg-lime-200 p-4">
-                  <p>Business Impact</p>
-                  <input
-                    className=" w-full h-10 rounded-[15px] pl-4"
-                    placeholder="Nichapa"
-                  ></input>
-                </div>
-                <div className="flex flex-col gap-2 bg-red-200 p-4">
-                  <p>Feedback Channels</p>
-                  <input
-                    className=" w-full h-10 rounded-[15px] pl-4"
-                    placeholder="Nichapa"
-                  ></input>
-                </div>
-                <div className="flex flex-col gap-2 bg-red-200 p-4">
-                  <p>Ticket Link</p>
-                  <input
-                    className=" w-full h-10 rounded-[15px] pl-4"
-                    placeholder="Nichapa"
-                  ></input>
+                <div className="grid grid-cols-2 gap-2  bg-slate-500 p-3">
+                  <div className="flex flex-col gap-2 bg-red-200 p-4">
+                    <p>Platform</p>
+                    <input
+                      className=" w-full h-10 rounded-[15px] pl-4"
+                      placeholder="Nichapa"
+                    ></input>
+                  </div>
+                  <div className="flex flex-col gap-2 bg-lime-200 p-4">
+                    <p>Incident Type</p>
+                    <input
+                      className=" w-full h-10 rounded-[15px] pl-4"
+                      placeholder="Nopparat"
+                    ></input>
+                  </div>
+                  <div className="flex flex-col gap-2 bg-lime-200 p-4">
+                    <p>Business Impact</p>
+                    <input
+                      className=" w-full h-10 rounded-[15px] pl-4"
+                      placeholder="Nichapa"
+                    ></input>
+                  </div>
+                  <div className="flex flex-col gap-2 bg-red-200 p-4">
+                    <p>Feedback Channels</p>
+                    <input
+                      className=" w-full h-10 rounded-[15px] pl-4"
+                      placeholder="Nichapa"
+                    ></input>
+                  </div>
+                  <div className="flex flex-col gap-2 bg-red-200 p-4">
+                    <p>Ticket Link</p>
+                    <input
+                      className=" w-full h-10 rounded-[15px] pl-4"
+                      placeholder="Nichapa"
+                    ></input>
+                  </div>
                 </div>
               </div>
-              <div className="flex flex-col p-6 rounded-xl bg-green-300 h-[480px]">
-                <p className=" font-semibold text-[20px]">General Info</p>
+              <div className="flex flex-col p-6 rounded-xl bg-green-300 h-[500px]">
+                <p className=" font-semibold text-[20px] pl-6">General Info</p>
                 <div className=" bg-slate-500 p-3">
                   <div className="flex flex-col gap-2 bg-red-200 p-4">
                     <p>Topic</p>
@@ -298,32 +300,43 @@ export default function Example() {
                   <div className="flex flex-col gap-2 bg-lime-200 p-4">
                     <p>Description</p>
                     <input
-                      className=" w-full h-10 rounded-[15px] pl-4"
+                      className=" w-full h-[240px] rounded-[15px] pl-4 "
                       placeholder="Text"
                     ></input>
                   </div>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-2 p-6 rounded-xl bg-cyan-300 h-60">
-                <p className=" col-span-2 font-semibold text-[20px]">CS Info</p>
-                <div className="flex flex-col gap-2 bg-red-200 p-4">
-                  <p>First Name (EN)</p>
-                  <input
-                    className=" w-full h-10 rounded-[15px] pl-4"
-                    placeholder="Nichapa"
-                  ></input>
-                </div>
-                <div className="flex flex-col gap-2 bg-lime-200 p-4">
-                  <p>Last Name (EN)</p>
-                  <input
-                    className=" w-full h-10 rounded-[15px] pl-4"
-                    placeholder="Nopparat"
-                  ></input>
+              <div className=" p-6 rounded-xl bg-cyan-300 h-80">
+                <p className=" font-semibold text-[20px] pl-6">CS Info</p>
+                <div className="grid grid-cols-2 gap-2  bg-slate-500 p-3">
+                  <div className="flex flex-col gap-2 bg-red-200 p-4">
+                    <p>First Name (EN)</p>
+                    <input
+                      className=" w-full h-10 rounded-[15px] pl-4"
+                      placeholder="Nichapa"
+                    ></input>
+                  </div>
+                  <div className="flex flex-col gap-2 bg-lime-200 p-4">
+                    <p>Last Name (EN)</p>
+                    <input
+                      className=" w-full h-10 rounded-[15px] pl-4"
+                      placeholder="Nopparat"
+                    ></input>
+                  </div>
+                  <div className="col-span-2 flex flex-col gap-2 bg-lime-200 p-4">
+                    <p>Assign To</p>
+                    <input
+                      className=" w-full h-10 rounded-[15px] pl-4"
+                      placeholder="ee@baseplayhouse.co"
+                    ></input>
+                  </div>
                 </div>
               </div>
-              <div className="flex gap-4">
-                <button onClick={() => setIsOpen(false)}>Cancel</button>
-                {/* <button onClick={() => setIsOpen(false)}>Deactivate</button> */}
+              <div className="flex gap-4 items-center justify-center ">
+                <button className=" bg-slate-600 w-64 h-14 rounded-[30px] text-white">
+                  Create Ticket
+                </button>
+                {/* <button onClick={() => setIsOpen(false)}>Cancel</button> */}
               </div>
             </DialogPanel>
           </div>
