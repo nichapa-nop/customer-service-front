@@ -34,7 +34,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className=" bg-gradient-to-tr from-deep-blue via-fade-purple to-bright-red h-screen ">
+    <div className=" bg-gradient-to-tr from-deep-blue  to-bright-red h-screen ">
       <div className="flex items-center justify-center min-h-screen">
         <div className="flex flex-row bg-white h-[529px] w-[923px] rounded-lg overflow-hidden">
           <div className=" flex flex-col w-[462px] p-12">

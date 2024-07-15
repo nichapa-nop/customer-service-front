@@ -27,8 +27,10 @@ export default function Example() {
               {/* <Description>
                 This will permanently deactivate your account
               </Description> */}
-              <div className=" bg-blue-300 p-6 h-[480px] rounded-xl">
-                <p className="font-semibold text-[20px] pl-6">Ticket ID</p>
+              <div className=" bg-blue-300 p-6 h-[90px] rounded-xl items-center justify-center">
+                <p className="font-semibold text-[20px] pl-6">
+                  Ticket ID : INC00001
+                </p>
               </div>
 
               <div className=" bg-blue-300 p-6 h-[480px] rounded-xl">
@@ -37,42 +39,42 @@ export default function Example() {
                   <div className="flex flex-col gap-2 bg-red-200 p-4">
                     <p>First Name (EN)</p>
                     <input
-                      className=" w-full h-10 rounded-[15px] pl-4"
+                      className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                       placeholder="Nichapa"
                     ></input>
                   </div>
                   <div className="flex flex-col gap-2 bg-lime-200 p-4">
                     <p>Last Name (EN)</p>
                     <input
-                      className=" w-full h-10 rounded-[15px] pl-4"
+                      className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                       placeholder="Nopparat"
                     ></input>
                   </div>
                   <div className="flex flex-col gap-2 bg-lime-200 p-4">
                     <p>Phone Number</p>
                     <input
-                      className=" w-full h-10 rounded-[15px] pl-4"
+                      className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                       placeholder="0123456789"
                     ></input>
                   </div>
                   <div className="flex flex-col gap-2 bg-red-200 p-4">
                     <p>Type</p>
                     <input
-                      className=" w-full h-10 rounded-[15px] pl-4"
+                      className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                       placeholder="Select"
                     ></input>
                   </div>
                   <div className=" flex flex-col gap-2 bg-red-200 p-4">
                     <p>Email</p>
                     <input
-                      className=" w-full h-10 rounded-[15px] pl-4"
+                      className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                       placeholder="ee@baseplayhouse.co"
                     ></input>
                   </div>
                   <div className=" flex flex-col gap-2 bg-lime-200 p-4">
                     <p>Company Name</p>
                     <input
-                      className=" w-full h-10 rounded-[15px] pl-4"
+                      className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                       placeholder="BASE PLAYHOUSE CO. TLD."
                     ></input>
                   </div>
@@ -86,56 +88,61 @@ export default function Example() {
                   <div className="flex flex-col gap-2 bg-red-200 p-4">
                     <p>Platform</p>
                     <input
-                      className=" w-full h-10 rounded-[15px] pl-4"
+                      className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                       placeholder="Nichapa"
                     ></input>
                   </div>
                   <div className="flex flex-col gap-2 bg-lime-200 p-4">
                     <p>Incident Type</p>
                     <input
-                      className=" w-full h-10 rounded-[15px] pl-4"
-                      placeholder="Nopparat"
+                      className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                      placeholder="Nopparat "
                     ></input>
                   </div>
                   <div className="flex flex-col gap-2 bg-lime-200 p-4">
                     <p>Business Impact</p>
                     <input
-                      className=" w-full h-10 rounded-[15px] pl-4"
+                      className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                       placeholder="Nichapa"
                     ></input>
                   </div>
                   <div className="flex flex-col gap-2 bg-red-200 p-4">
                     <p>Feedback Channels</p>
                     <input
-                      className=" w-full h-10 rounded-[15px] pl-4"
+                      className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                       placeholder="Nichapa"
                     ></input>
                   </div>
                   <div className="flex flex-col gap-2 bg-red-200 p-4">
                     <p>Ticket Link</p>
                     <input
-                      className=" w-full h-10 rounded-[15px] pl-4"
+                      className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                       placeholder="Nichapa"
                     ></input>
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col p-6 rounded-xl bg-green-300 h-[500px]">
+              <div className="flex flex-col p-6 rounded-xl bg-green-300 h-[560px]">
                 <p className=" font-semibold text-[20px] pl-6">General Info</p>
                 <div className=" bg-slate-500 p-3">
                   <div className="flex flex-col gap-2 bg-red-200 p-4">
                     <p>Topic</p>
                     <input
-                      className=" w-full h-10 rounded-[15px] pl-4"
+                      className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                       placeholder="Text"
                     ></input>
                   </div>
                   <div className="flex flex-col gap-2 bg-lime-200 p-4">
                     <p>Description</p>
                     <input
-                      className=" w-full h-[240px] rounded-[15px] pl-4 "
+                      className=" w-full h-[240px] rounded-[15px] pl-4 hover:placeholder:text-space-black"
                       placeholder="Text"
                     ></input>
+                  </div>
+                  <div className="flex mt-2 justify-end">
+                    <button className=" bg-gradient-to-tr from-deep-blue via-fade-purple to-bright-red w-64 h-14 rounded-[30px] text-white">
+                      + New Description
+                    </button>
                   </div>
                 </div>
               </div>
@@ -145,29 +152,53 @@ export default function Example() {
                   <div className="flex flex-col gap-2 bg-red-200 p-4">
                     <p>First Name (EN)</p>
                     <input
-                      className=" w-full h-10 rounded-[15px] pl-4"
+                      className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                       placeholder="Nichapa"
                     ></input>
                   </div>
                   <div className="flex flex-col gap-2 bg-lime-200 p-4">
                     <p>Last Name (EN)</p>
                     <input
-                      className=" w-full h-10 rounded-[15px] pl-4"
+                      className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                       placeholder="Nopparat"
                     ></input>
                   </div>
                   <div className="col-span-2 flex flex-col gap-2 bg-lime-200 p-4">
                     <p>Assign To</p>
                     <input
-                      className=" w-full h-10 rounded-[15px] pl-4"
+                      className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                       placeholder="ee@baseplayhouse.co"
                     ></input>
                   </div>
                 </div>
               </div>
+              <div className=" p-6 rounded-xl bg-cyan-300 h-60">
+                <p className=" font-semibold text-[20px] pl-6">
+                  Ticket Setting
+                </p>
+
+                <div className=" flex justify-between bg-lime-200 p-7">
+                  <div>
+                    <img></img>
+                    <p>Close/Re-open Ticket</p>
+                  </div>
+                  <button className=" bg-gradient-to-tr from-cancel-bl to-cancel-tr w-28 h-8 rounded-[15px] text-white">
+                    Close
+                  </button>
+                </div>
+                <div className=" flex justify-between bg-pink-200 p-7">
+                  <div>
+                    <img></img>
+                    <p>Export</p>
+                  </div>
+                  <button className=" bg-gradient-to-tr from-deep-blue  to-bright-red w-28 h-8 rounded-[15px] text-white">
+                    Export
+                  </button>
+                </div>
+              </div>
               <div className="flex gap-4 items-center justify-center ">
-                <button className=" bg-slate-600 w-64 h-14 rounded-[30px] text-white">
-                  Create Ticket
+                <button className=" bg-gradient-to-tr from-deep-blue to-bright-red w-64 h-14 rounded-[30px] text-white">
+                  Save
                 </button>
                 {/* <button onClick={() => setIsOpen(false)}>Cancel</button> */}
               </div>

@@ -140,42 +140,42 @@ export default function TicketManagementClient({ data }: Props) {
                               <div className="flex flex-col gap-2 bg-red-200 p-4">
                                 <p>First Name (EN)</p>
                                 <input
-                                  className=" w-full h-10 rounded-[15px] pl-4"
+                                  className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                                   placeholder="Nichapa"
                                 ></input>
                               </div>
                               <div className="flex flex-col gap-2 bg-lime-200 p-4">
                                 <p>Last Name (EN)</p>
                                 <input
-                                  className=" w-full h-10 rounded-[15px] pl-4"
+                                  className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                                   placeholder="Nopparat"
                                 ></input>
                               </div>
                               <div className="flex flex-col gap-2 bg-lime-200 p-4">
                                 <p>Phone Number</p>
                                 <input
-                                  className=" w-full h-10 rounded-[15px] pl-4"
+                                  className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                                   placeholder="0123456789"
                                 ></input>
                               </div>
                               <div className="flex flex-col gap-2 bg-red-200 p-4">
                                 <p>Type</p>
                                 <input
-                                  className=" w-full h-10 rounded-[15px] pl-4"
+                                  className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                                   placeholder="Select"
                                 ></input>
                               </div>
                               <div className=" flex flex-col gap-2 bg-red-200 p-4">
                                 <p>Email</p>
                                 <input
-                                  className=" w-full h-10 rounded-[15px] pl-4"
+                                  className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                                   placeholder="ee@baseplayhouse.co"
                                 ></input>
                               </div>
                               <div className=" flex flex-col gap-2 bg-lime-200 p-4">
                                 <p>Company Name</p>
                                 <input
-                                  className=" w-full h-10 rounded-[15px] pl-4"
+                                  className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                                   placeholder="BASE PLAYHOUSE CO. TLD."
                                 ></input>
                               </div>
@@ -189,35 +189,35 @@ export default function TicketManagementClient({ data }: Props) {
                               <div className="flex flex-col gap-2 bg-red-200 p-4">
                                 <p>Platform</p>
                                 <input
-                                  className=" w-full h-10 rounded-[15px] pl-4"
+                                  className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                                   placeholder="Select"
                                 ></input>
                               </div>
                               <div className="flex flex-col gap-2 bg-lime-200 p-4">
                                 <p>Incident Type</p>
                                 <input
-                                  className=" w-full h-10 rounded-[15px] pl-4"
+                                  className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                                   placeholder="Select"
                                 ></input>
                               </div>
                               <div className="flex flex-col gap-2 bg-lime-200 p-4">
                                 <p>Business Impact</p>
                                 <input
-                                  className=" w-full h-10 rounded-[15px] pl-4"
+                                  className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                                   placeholder="Select"
                                 ></input>
                               </div>
                               <div className="flex flex-col gap-2 bg-red-200 p-4">
                                 <p>Feedback Channels</p>
                                 <input
-                                  className=" w-full h-10 rounded-[15px] pl-4"
+                                  className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                                   placeholder="Select"
                                 ></input>
                               </div>
                               <div className="flex flex-col gap-2 bg-red-200 p-4">
                                 <p>Ticket Link</p>
                                 <input
-                                  className=" w-full h-10 rounded-[15px] pl-4"
+                                  className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                                   placeholder="Select"
                                 ></input>
                               </div>
@@ -231,14 +231,14 @@ export default function TicketManagementClient({ data }: Props) {
                               <div className="flex flex-col gap-2 bg-red-200 p-4">
                                 <p>Topic</p>
                                 <input
-                                  className=" w-full h-10 rounded-[15px] pl-4"
+                                  className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                                   placeholder="Text"
                                 ></input>
                               </div>
                               <div className="flex flex-col gap-2 bg-lime-200 p-4">
                                 <p>Description</p>
                                 <input
-                                  className=" w-full h-[240px] rounded-[15px] pl-4 "
+                                  className=" w-full h-[240px] rounded-[15px] pl-4 hover:placeholder:text-space-black"
                                   placeholder="Text"
                                 ></input>
                               </div>
@@ -249,31 +249,31 @@ export default function TicketManagementClient({ data }: Props) {
                               CS Info
                             </p>
                             <div className="grid grid-cols-2 gap-2  bg-slate-500 p-3">
-                              <div className="flex flex-col gap-2 bg-red-200 p-4">
+                              <div className="flex flex-col gap-2 bg-red-200 p-4 hover:placeholder:text-space-black">
                                 <p>First Name (EN)</p>
                                 <input
-                                  className=" w-full h-10 rounded-[15px] pl-4"
+                                  className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                                   placeholder="Nichapa"
                                 ></input>
                               </div>
                               <div className="flex flex-col gap-2 bg-lime-200 p-4">
                                 <p>Last Name (EN)</p>
                                 <input
-                                  className=" w-full h-10 rounded-[15px] pl-4"
+                                  className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                                   placeholder="Nopparat"
                                 ></input>
                               </div>
                               <div className="col-span-2 flex flex-col gap-2 bg-lime-200 p-4">
                                 <p>Assign To</p>
                                 <input
-                                  className=" w-full h-10 rounded-[15px] pl-4"
+                                  className=" w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                                   placeholder="ee@baseplayhouse.co"
                                 ></input>
                               </div>
                             </div>
                           </div>
                           <div className="flex gap-4 items-center justify-center ">
-                            <button className=" bg-slate-600 w-64 h-14 rounded-[30px] text-white">
+                            <button className=" bg-gradient-to-tr from-deep-blue to-bright-red w-64 h-14 rounded-[30px] text-white">
                               Create Ticket
                             </button>
                             {/* <button onClick={() => setIsOpen(false)}>Cancel</button> */}
