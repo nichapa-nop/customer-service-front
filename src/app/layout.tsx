@@ -1,10 +1,21 @@
 import type { Metadata } from "next";
-import { Inter, Montserrat } from "next/font/google";
+import { Inter, Montserrat, Prompt } from "next/font/google";
 import "./globals.css";
 import classNames from "classnames";
 
 const inter = Inter({ subsets: ["latin"] });
-const montserrat = Montserrat({ subsets: ["latin"] });
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-prompt",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
+const prompt = Prompt({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-prompt",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 
 export const metadata: Metadata = {
   title: "Customer Service",

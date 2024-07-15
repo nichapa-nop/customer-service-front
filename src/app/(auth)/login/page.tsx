@@ -27,9 +27,9 @@ export default function LoginPage() {
       });
       router.replace("/ticket-management");
     } else {
-      // toast.error(loginResponse.data.message, {
-      //   //   position: "top-right",
-      // });
+      toast.error(loginResponse.data.message, {
+        //   position: "top-right",
+      });
     }
   }
 
@@ -59,7 +59,7 @@ export default function LoginPage() {
                   <input
                     id="email"
                     type="text"
-                    className=" w-full h-[48px] rounded-[13px] pl-4"
+                    className=" w-full h-[48px] rounded-[13px] pl-4 lowercase"
                     placeholder="example.ee@baseplayhouse.co"
                     onChange={(e) => {
                       e.preventDefault();
