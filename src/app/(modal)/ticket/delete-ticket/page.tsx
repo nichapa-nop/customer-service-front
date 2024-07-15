@@ -6,7 +6,7 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import { useState } from "react";
-import vectorpic from "../../../../img/Vector.png";
+import warningpic from "../../../../../img/warning.png";
 
 export default function Example() {
   let [isOpen, setIsOpen] = useState(false);
@@ -26,7 +26,7 @@ export default function Example() {
                 This will permanently deactivate your account
               </Description> */}
               <div className="flex justify-center items-center mt-7 mb-7">
-                <img src={vectorpic.src} className="h-[90px] w-[90px] "></img>
+                <img src={warningpic.src} className="h-[90px] w-[90px] "></img>
               </div>
 
               <div className="flex flex-col bg-blue-300 h-[120px] rounded-xl mb-10 items-center justify-center">
