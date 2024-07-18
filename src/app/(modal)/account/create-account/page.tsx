@@ -38,10 +38,10 @@ export default function ticketManagement() {
         className="relative z-50 "
       >
         <DialogBackdrop className="fixed inset-0 bg-black/30" />
-        <div className="fixed inset-0 w-screen overflow-y-auto p-1 py-24">
+        <div className="fixed inset-0 w-screen overflow-y-auto p-1 ">
           <div className="flex min-h-full  items-center justify-center">
-            <DialogPanel className=" bg-white w-[830px] h-[620px]  border rounded-xl p-12">
-              <DialogTitle className="font-semibold text-center text-[20px] mb-10">
+            <DialogPanel className=" bg-white w-[830px] h-[620px]  border rounded-[20px] p-6">
+              <DialogTitle className="font-semibold text-center text-[20px] mt-6 mb-10">
                 Create New Account
               </DialogTitle>
               {/* <Description>
@@ -52,7 +52,7 @@ export default function ticketManagement() {
                 {/* <p className="font-semibold text-[20px] pl-6">
                               Customer Info
                             </p> */}
-                <div className="grid grid-cols-2 gap-x-9 gap-y-6 p-3">
+                <div className="grid grid-cols-2 gap-x-9 gap-y-6 ">
                   <div className="flex flex-col gap-2 ">
                     <p className=" font-medium text-[14px]">First Name (EN)</p>
                     <input

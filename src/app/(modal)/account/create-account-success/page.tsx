@@ -2,11 +2,12 @@
 import {
   Description,
   Dialog,
+  DialogBackdrop,
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
 import { useState } from "react";
-import successpic from "../../../../img/success.png";
+import successpic from "../../../../../img/success.png";
 
 export default function Example() {
   let [isOpen, setIsOpen] = useState(false);
@@ -19,17 +20,22 @@ export default function Example() {
         onClose={() => setIsOpen(false)}
         className="relative z-50"
       >
+        <DialogBackdrop className="fixed inset-0 bg-black/30" />
+
         <div className="fixed inset-0 w-screen overflow-y-auto p-1">
           <div className="flex min-h-full  items-center justify-center">
-            <DialogPanel className=" w-[650px] h-[400px] space-y-[50px] border rounded-xl bg-red-300 p-12 ">
+            <DialogPanel className="bg-white w-[650px] h-[400px] border rounded-[20px] p-12 ">
               {/* <Description>
                 This will permanently deactivate your account
               </Description> */}
-              <div className="flex justify-center items-center mt-7">
-                <img src={successpic.src} className="h-[90px] w-[90px] "></img>
+              <div className="flex justify-center items-center mt-8 mb-6">
+                <img
+                  src={successpic.src}
+                  className="h-[110px] w-[110px] "
+                ></img>
               </div>
 
-              <div className="flex flex-col bg-blue-300 h-[120px] rounded-xl items-center justify-center">
+              <div className="flex flex-col h-[120px] rounded-xl items-center justify-center">
                 <p className="font-semibold text-[20px]  mb-3 text-center">
                   Account has been created!
                 </p>

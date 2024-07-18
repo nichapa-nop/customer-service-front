@@ -2,6 +2,7 @@
 import {
   Description,
   Dialog,
+  DialogBackdrop,
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
@@ -19,17 +20,22 @@ export default function Example() {
         onClose={() => setIsOpen(false)}
         className="relative z-50"
       >
+        <DialogBackdrop className="fixed inset-0 bg-black/30" />
+
         <div className="fixed inset-0 w-screen overflow-y-auto p-1">
           <div className="flex min-h-full  items-center justify-center">
-            <DialogPanel className=" w-[650px] h-[460px] border rounded-xl bg-red-300 p-12 ">
+            <DialogPanel className="bg-white w-[650px] h-[460px] border rounded-[20px] p-12 ">
               {/* <Description>
                 This will permanently deactivate your account
               </Description> */}
-              <div className="flex justify-center items-center mt-7 mb-7">
-                <img src={warningpic.src} className="h-[90px] w-[90px] "></img>
+              <div className="flex justify-center items-center mt-8 mb-5">
+                <img
+                  src={warningpic.src}
+                  className="h-[110px] w-[110px] "
+                ></img>
               </div>
 
-              <div className="flex flex-col bg-blue-300 h-[120px] rounded-xl mb-10 items-center justify-center">
+              <div className="flex flex-col h-[120px] rounded-xl mb-6 items-center justify-center">
                 <p className="font-semibold text-[20px] mb-3 text-center">
                   Are you sure you want to delete Ticket #INC000xx?
                 </p>
