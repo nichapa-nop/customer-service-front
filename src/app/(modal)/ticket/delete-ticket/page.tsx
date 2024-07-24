@@ -31,7 +31,7 @@ export default function Example() {
               <div className="flex justify-center items-center mt-8 mb-5">
                 <img
                   src={warningpic.src}
-                  className="h-[110px] w-[110px] "
+                  className="h-[100px] w-[100px] "
                 ></img>
               </div>
 

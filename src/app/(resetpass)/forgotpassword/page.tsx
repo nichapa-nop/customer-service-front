@@ -24,7 +24,7 @@ export default function ForgotPasswordPage() {
     }
   }
   return (
-    <div className=" bg-gradient-to-tr from-deep-blue via-fade-purple to-bright-red h-screen ">
+    <div className=" bg-gradient-to-tr from-deep-blue to-bright-red h-screen w-full">
       <div className="flex items-center justify-center min-h-screen">
         <div className="flex flex-row bg-white h-[529px] w-[923px] rounded-lg overflow-hidden">
           <div className="bg-gradient-to-tr from-deep-blue via-fade-purple to-bright-red w-[461px] h-[529px] overflow-hidden">

@@ -7,7 +7,6 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import React, { useState } from "react";
-import seenpic from "../../../../img/image 7.png";
 
 export default function AccountManagementClient() {
   let [isOpen, setIsOpen] = useState(false);
