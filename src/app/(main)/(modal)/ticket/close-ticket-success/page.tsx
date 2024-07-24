@@ -7,9 +7,9 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import { useState } from "react";
-import successpic from "../../../../../img/success.png";
+import successpic from "../../../../../../img/success.png";
 
-export default function Example() {
+export default function CloseTicketSuccess() {
   let [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -37,12 +37,12 @@ export default function Example() {
 
               <div className="flex flex-col h-[120px] rounded-xl items-center justify-center">
                 <p className="font-semibold text-[20px]  mb-3 text-center">
-                  Ticket #INC000xx has been deleted
+                  Ticket #INC000xx has been closed
                 </p>
-                <p className=" text-[16px]  text-center">
-                  You can review the updated ticket list in the 'Ticket
+                <p className=" text-[16px] text-center">
+                  To re-open this ticket, please access the ticket list page and
                   <br />
-                  Management' section accessible via the sidebar.
+                  use the 'Edit' icon associated with this ticket number.
                 </p>
               </div>
             </DialogPanel>

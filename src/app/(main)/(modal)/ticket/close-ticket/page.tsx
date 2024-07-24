@@ -8,7 +8,7 @@ import {
 } from "@headlessui/react";
 import { useState } from "react";
 
-export default function Example() {
+export default function CloseTicket() {
   let [isOpen, setIsOpen] = useState(false);
 
   return (

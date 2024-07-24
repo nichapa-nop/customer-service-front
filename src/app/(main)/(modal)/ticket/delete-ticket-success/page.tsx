@@ -7,9 +7,9 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import { useState } from "react";
-import successpic from "../../../../../img/success.png";
+import successpic from "../../../../../../img/success.png";
 
-export default function Example() {
+export default function DeleteTicketSuccess() {
   let [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -21,6 +21,7 @@ export default function Example() {
         className="relative z-50"
       >
         <DialogBackdrop className="fixed inset-0 bg-black/30" />
+
         <div className="fixed inset-0 w-screen overflow-y-auto p-1">
           <div className="flex min-h-full  items-center justify-center">
             <DialogPanel className="bg-white w-[650px] h-[400px] border rounded-[20px] p-12 ">
@@ -34,13 +35,14 @@ export default function Example() {
                 ></img>
               </div>
 
-              <div className="flex flex-col p-6 h-[120px] rounded-xl items-center justify-center">
+              <div className="flex flex-col h-[120px] rounded-xl items-center justify-center">
                 <p className="font-semibold text-[20px]  mb-3 text-center">
-                  Your Change has been save!
+                  Ticket #INC000xx has been deleted
                 </p>
                 <p className=" text-[16px]  text-center">
-                  You can review these changes in the <br />
-                  'Ticket Management' section accessible from the sidebar.
+                  You can review the updated ticket list in the 'Ticket
+                  <br />
+                  Management' section accessible via the sidebar.
                 </p>
               </div>
             </DialogPanel>

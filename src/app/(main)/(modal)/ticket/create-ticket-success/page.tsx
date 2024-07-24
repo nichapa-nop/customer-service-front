@@ -7,9 +7,9 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import { useState } from "react";
-import successpic from "../../../../../img/success.png";
+import successpic from "../../../../../../img/success.png";
 
-export default function Example() {
+export default function CreateTicketSuccess() {
   let [isOpen, setIsOpen] = useState(false);
 
   return (

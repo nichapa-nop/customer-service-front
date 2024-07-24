@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import seenpic from "../../../../img/SV_SEEN-C_.png";
-import bgpic from "../../../../img/Rectangle 3.png";
+import seenpic from "../../../img/SV_SEEN-C_.png";
+import bgpic from "../../../img/Rectangle 3.png";
 import toast, { Toaster } from "react-hot-toast";
 import { login } from "@/actions/login.action";
 

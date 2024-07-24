@@ -7,9 +7,9 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import { useState } from "react";
-import warningpic from "../../../../../img/warning.png";
+import warningpic from "../../../../../../img/warning.png";
 
-export default function Example() {
+export default function DeleteTicket() {
   let [isOpen, setIsOpen] = useState(false);
 
   return (
