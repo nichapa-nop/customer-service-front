@@ -32,7 +32,7 @@ export async function ApiManager<
   const response = await fetch(targetEndpoint, {
     headers: {
       Authorization: useAccessToken
-        ? `Bearer ${cookies().get("access_token")?.value}`
+        ? `Bearer ${cookies().get("accessToken")?.value}`
         : "",
     },
     method,

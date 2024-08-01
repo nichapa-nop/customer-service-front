@@ -32,9 +32,9 @@ export default function TicketManagementClient({
     );
   }
 
-  //   useEffect(() => {
-  //     getTicketList(page);
-  //   }, [page]);
+  useEffect(() => {
+    getTicketList(page);
+  }, [page]);
 
   return (
     <div className="h-full w-full flex ">
@@ -93,14 +93,14 @@ export default function TicketManagementClient({
               </thead>
               <tbody>
                 {initialTickets.map((ticket) => (
-                  <tr className="h-[68px] ">
+                  <tr key={ticket.ticketId} className="h-[60px] ">
                     <td>
                       <input
                         type="checkbox"
                         className="w-[27px] h-[27px]"
                       ></input>
                     </td>
-                    <td>key={ticket.ticketId}</td>
+                    <td>{ticket.ticketId}</td>
                     <td>{ticket.topic}</td>
                     <td>{ticket.platform}</td>
                     <td>{ticket.incidentType}</td>
@@ -114,7 +114,7 @@ export default function TicketManagementClient({
             </table>
             {/* <div className=" grid grid-rows-9 h-full bg-pink-200 "></div>
             </div> */}
-            <div className=" flex space-x-5 items-center  justify-end p-3 ">
+            <footer className=" flex space-x-5 items-center  justify-end p-3 ">
               <button
                 className="bg-white h-10 w-20 rounded-[20px]"
                 onClick={() => setPage(page - 1)}
@@ -129,7 +129,7 @@ export default function TicketManagementClient({
                 next
               </button>
               <span>Page {page} from 10</span>
-            </div>
+            </footer>
           </div>
         </div>
       </div>
