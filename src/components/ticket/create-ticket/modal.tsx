@@ -6,10 +6,17 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 
-export default function CreateTicket() {
-  let [isOpen, setIsOpen] = useState(false);
+type Props = {
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+};
+
+export default function CreateTicket({ isOpen, setIsOpen }: Props) {
+  // let [isOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {};
 
   return (
     <>

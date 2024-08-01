@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Montserrat, Prompt } from "next/font/google";
-import "../../../src/app/globals.css";
+// import "../../../src/app/globals.css";
 import classNames from "classnames";
 import seenpic from "../../../img/image 7.png";
 

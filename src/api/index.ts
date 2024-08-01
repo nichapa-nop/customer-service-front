@@ -1,0 +1,51 @@
+"use server";
+
+import { cookies } from "next/headers";
+
+const apiEndpoint = process.env.PROJECT_API_ENDPOINT;
+
+type ApiResponse<T> = {
+  success: boolean;
+  data: T | null;
+};
+
+export async function ApiManager<
+  TResponseBody = never,
+  TRequestQuery = never,
+  TRequestBody = never
+>({
+  path,
+  body,
+  query,
+  useAccessToken = true,
+  apiVersion = "v1",
+  method,
+}: {
+  path: string;
+  body?: TRequestBody;
+  query?: TRequestQuery;
+  useAccessToken?: boolean;
+  apiVersion?: "v1" | "v2";
+  method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
+}): Promise<ApiResponse<TResponseBody>> {
+  const targetEndpoint = `${apiEndpoint}/${apiVersion}${path}`;
+  const response = await fetch(targetEndpoint, {
+    headers: {
+      Authorization: useAccessToken
+        ? `Bearer ${cookies().get("access_token")?.value}`
+        : "",
+    },
+    method,
+    body: body ? JSON.stringify(body) : undefined,
+  });
+
+  const success = response.ok;
+  if (!success) {
+    return { success, data: null };
+  }
+  const responseData = await response.json();
+  return {
+    success,
+    data: responseData,
+  };
+}

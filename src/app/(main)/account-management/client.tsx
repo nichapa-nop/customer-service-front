@@ -149,7 +149,7 @@ export default function AccountManagementClient() {
                 <tr className="h-[68px] ">
                   <td className="flex flex-col items-start">
                     Nichapa Nopparat
-                    <span>Trainee</span>
+                    <span className="text-dark-gray">Trainee</span>
                   </td>
                   <td>nichapa.no@baseplayhouse.co</td>
                   <td>0909090909</td>

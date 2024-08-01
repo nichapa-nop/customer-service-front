@@ -1,23 +1,43 @@
 "use client";
-import {
-  Description,
-  Dialog,
-  DialogBackdrop,
-  DialogPanel,
-  DialogTitle,
-} from "@headlessui/react";
-import React, { useState } from "react";
-import seenpic from "../../../img/image 7.png";
 
-type Props = {
-  data: string;
-};
+import { getTicket } from "@/actions/getticket.action";
+import React, { useEffect, useState } from "react";
 
-export default function TicketManagementClient({ data }: Props) {
-  let [isOpen, setIsOpen] = useState(false);
+export default function TicketManagementClient({
+  tickets: initialTickets,
+}: {
+  tickets: TicketResponse[];
+}) {
+  // let [isOpen, setIsOpen] = useState(false);
+
+  // const openModal = () => {
+  //   setIsOpen(true);
+  // };
+
+  // const closeModal = () => {
+  //   setIsOpen(false);
+  // };
+
+  const [page, setPage] = useState<number>(1);
+  const [tickets, setTickets] = useState<TicketResponse[]>([]);
+  const [pageCount, setPageCount] = useState<number>();
+
+  async function getTicketList(page: number = 1) {
+    const response = await getTicket({ page });
+    setTickets(response.data);
+    setPageCount(
+      Math.ceil(
+        response.pagination.itemsCount / response.pagination.itemsPerpage
+      )
+    );
+  }
+
+  //   useEffect(() => {
+  //     getTicketList(page);
+  //   }, [page]);
 
   return (
-    <div className="h-full w-full flex">
+    <div className="h-full w-full flex ">
       <div className="w-full">
         <div className="flex w-full items-center justify-center ">
           <div className="h-screen w-full  shadow-lg rounded-lg  items-center justify-center">
@@ -44,7 +64,7 @@ export default function TicketManagementClient({ data }: Props) {
                   <button
                     type="button"
                     className="bg-gradient-to-tr from-deep-blue to-bright-red text-white h-10 rounded-[20px]"
-                    onClick={() => setIsOpen(true)}
+                    // onClick={CreateTicket}
                   >
                     + New Ticket
                   </button>
@@ -52,7 +72,7 @@ export default function TicketManagementClient({ data }: Props) {
               </div>
             </div>
             {/* <div className="flex flex-col"> */}
-            <table className=" bg-white w-full items-center justify-center text-center">
+            <table className=" bg-light-gray2 w-full items-center justify-center text-center">
               <thead>
                 <tr className="h-[68px] ">
                   <th>
@@ -72,119 +92,43 @@ export default function TicketManagementClient({ data }: Props) {
                 </tr>
               </thead>
               <tbody>
-                <tr className="h-[68px] ">
-                  <td>
-                    <input
-                      type="checkbox"
-                      className="w-[27px] h-[27px]"
-                    ></input>
-                  </td>
-                  <td>INC00001</td>
-                  <td>Test</td>
-                  <td>HR</td>
-                  <td>ISSUE</td>
-                  <td>S1</td>
-                  <td>Nichapa</td>
-                  <td>
-                    {/* <div className=" bg-green-300 h-10 w-[110px] rounded-[20px]"> */}
-                    In progress
-                    {/* </div> */}
-                  </td>
-                  <td>S1</td>
-                </tr>
-                <tr className="h-[68px] ">
-                  <td>
-                    <input
-                      type="checkbox"
-                      className="w-[27px] h-[27px]"
-                    ></input>
-                  </td>
-                  <td>INC00001</td>
-                  <td>Test</td>
-                  <td>HR</td>
-                  <td>ISSUE</td>
-                  <td>S1</td>
-                  <td>Nichapa</td>
-                  <td>In progress</td>
-                  <td>S1</td>
-                </tr>
-                <tr className="h-[68px] ">
-                  <td>
-                    <input
-                      type="checkbox"
-                      className="w-[27px] h-[27px]"
-                    ></input>
-                  </td>
-                  <td>INC00001</td>
-                  <td>Test</td>
-                  <td>HR</td>
-                  <td>ISSUE</td>
-                  <td>S1</td>
-                  <td>Nichapa</td>
-                  <td>In progress</td>
-                  <td>S1</td>
-                </tr>
-                <tr className="h-[68px] ">
-                  <td>
-                    <input
-                      type="checkbox"
-                      className="w-[27px] h-[27px]"
-                    ></input>
-                  </td>
-                  <td>INC00001</td>
-                  <td>Test</td>
-                  <td>HR</td>
-                  <td>ISSUE</td>
-                  <td>S1</td>
-                  <td>Nichapa</td>
-                  <td>In progress</td>
-                  <td>S1</td>
-                </tr>
-                <tr className="h-[68px] ">
-                  <td>
-                    <input
-                      type="checkbox"
-                      className="w-[27px] h-[27px]"
-                    ></input>
-                  </td>
-                  <td>INC00001</td>
-                  <td>Test</td>
-                  <td>HR</td>
-                  <td>ISSUE</td>
-                  <td>S1</td>
-                  <td>Nichapa</td>
-                  <td>In progress</td>
-                  <td>S1</td>
-                </tr>
-                <tr className="h-[68px] ">
-                  <td>
-                    <input
-                      type="checkbox"
-                      className="w-[27px] h-[27px]"
-                    ></input>
-                  </td>
-                  <td>INC00001</td>
-                  <td>Test</td>
-                  <td>HR</td>
-                  <td>ISSUE</td>
-                  <td>S1</td>
-                  <td>Nichapa</td>
-                  <td>In progress</td>
-                  <td>S1</td>
-                </tr>
+                {initialTickets.map((ticket) => (
+                  <tr className="h-[68px] ">
+                    <td>
+                      <input
+                        type="checkbox"
+                        className="w-[27px] h-[27px]"
+                      ></input>
+                    </td>
+                    <td>key={ticket.ticketId}</td>
+                    <td>{ticket.topic}</td>
+                    <td>{ticket.platform}</td>
+                    <td>{ticket.incidentType}</td>
+                    <td>{ticket.businessImpact}</td>
+                    <td>{ticket.assignTo}</td>
+                    <td>{ticket.status}</td>
+                    <td>Action</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
             {/* <div className=" grid grid-rows-9 h-full bg-pink-200 "></div>
             </div> */}
             <div className=" flex space-x-5 items-center  justify-end p-3 ">
-              <button className="bg-white h-10 w-20 rounded-[20px]">
+              <button
+                className="bg-white h-10 w-20 rounded-[20px]"
+                onClick={() => setPage(page - 1)}
+              >
                 previous
               </button>
               <input className=" w-9"></input>
-              <button className="bg-white  h-10 w-20 rounded-[20px]">
+              <button
+                className="bg-white  h-10 w-20 rounded-[20px]"
+                onClick={() => setPage(page + 1)}
+              >
                 next
               </button>
-              <span>Page 1 from 10</span>
+              <span>Page {page} from 10</span>
             </div>
           </div>
         </div>
