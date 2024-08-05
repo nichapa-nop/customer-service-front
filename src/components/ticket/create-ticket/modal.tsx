@@ -8,12 +8,18 @@ import {
 } from "@headlessui/react";
 import React, { Dispatch, SetStateAction, useState } from "react";
 
-type Props = {
-  isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-};
+// type Props = {
+//   isOpen: boolean;
+//   setIsOpen: Dispatch<SetStateAction<boolean>>;
+// };
 
-export default function CreateTicket({ isOpen, setIsOpen }: Props) {
+interface CreateTicketModal {
+  isOpen: boolean;
+  onClose: () => void;
+}
+//const CreateTicket({ isOpen, setIsOpen }: Props) {
+
+const CreateTicket: React.FC<CreateTicketModal> = ({ isOpen, onClose }) => {
   // let [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {};
@@ -29,7 +35,7 @@ export default function CreateTicket({ isOpen, setIsOpen }: Props) {
       </button> */}
       <Dialog
         open={isOpen}
-        onClose={() => setIsOpen(false)}
+        onClose={() => onClose()}
         className="relative z-50 "
       >
         <DialogBackdrop className="fixed inset-0 bg-black/30" />
@@ -189,4 +195,6 @@ export default function CreateTicket({ isOpen, setIsOpen }: Props) {
       </Dialog>
     </>
   );
-}
+};
+
+export default CreateTicket;

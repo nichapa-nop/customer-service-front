@@ -1,22 +1,19 @@
 "use client";
 
 import { getTicket } from "@/actions/getticket.action";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import CreateTicket from "@/components/ticket/create-ticket/modal";
+
+type Props = {};
 
 export default function TicketManagementClient({
   tickets: initialTickets,
 }: {
   tickets: TicketResponse[];
 }) {
-  // let [isOpen, setIsOpen] = useState(false);
-
-  // const openModal = () => {
-  //   setIsOpen(true);
-  // };
-
-  // const closeModal = () => {
-  //   setIsOpen(false);
-  // };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   const [page, setPage] = useState<number>(1);
   const [tickets, setTickets] = useState<TicketResponse[]>([]);
@@ -32,6 +29,7 @@ export default function TicketManagementClient({
     );
   }
 
+  console.log(page);
   useEffect(() => {
     getTicketList(page);
   }, [page]);
@@ -64,11 +62,12 @@ export default function TicketManagementClient({
                   <button
                     type="button"
                     className="bg-gradient-to-tr from-deep-blue to-bright-red text-white h-10 rounded-[20px]"
-                    // onClick={CreateTicket}
+                    onClick={openModal}
                   >
                     + New Ticket
                   </button>
                 </div>
+                <CreateTicket isOpen={isModalOpen} onClose={closeModal} />
               </div>
             </div>
             {/* <div className="flex flex-col"> */}
@@ -92,7 +91,7 @@ export default function TicketManagementClient({
                 </tr>
               </thead>
               <tbody>
-                {initialTickets.map((ticket) => (
+                {tickets.map((ticket) => (
                   <tr key={ticket.ticketId} className="h-[60px] ">
                     <td>
                       <input
