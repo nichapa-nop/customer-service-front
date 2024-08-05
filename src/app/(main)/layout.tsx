@@ -36,7 +36,7 @@ export default function RootLayout({
         aria-label="Sidebar"
       >
         <div className="h-full w-full px-3 py-4 bg-gray-50 dark:bg-gray-800">
-          <ul className="space-y-2 font-medium">
+          <ul className="space-y-4 font-medium">
             <li>
               <a
                 href="#"
@@ -54,7 +54,7 @@ export default function RootLayout({
             <li>
               <a
                 href="/ticket-management"
-                className="flex items-center p-2 text-gray-900  dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group h-14 rounded-[20px] shadow-md"
+                className="flex items-center p-2 text-gray-900  dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group h-14 rounded-[20px] shadow-light1 "
               >
                 <span className="flex-1 ms-3 whitespace-nowrap">
                   Ticket Management
@@ -64,7 +64,7 @@ export default function RootLayout({
             <li>
               <a
                 href="/account-management"
-                className="flex items-center p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group h-14 rounded-[20px] shadow-md"
+                className="flex items-center p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group h-14 rounded-[20px] shadow-light1"
               >
                 <span className="flex-1 ms-3 whitespace-nowrap">
                   Account Management
@@ -74,7 +74,7 @@ export default function RootLayout({
             <li>
               <a
                 href="/role-management"
-                className="flex items-center p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group h-14 rounded-[20px] shadow-md"
+                className="flex items-center p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group h-14 rounded-[20px] shadow-light1"
               >
                 <span className="flex-1 ms-3 whitespace-nowrap">
                   Role Management
@@ -82,8 +82,8 @@ export default function RootLayout({
               </a>
             </li>
           </ul>
-          <div className="flex min-h-[440px] rounded-[20px] items-end justify-center p-1">
-            <div className=" flex flex-col bg-white w-full h-[75px] rounded-[20px] p-3 shadow-md">
+          <div className="flex min-h-[400px] rounded-[20px] items-end justify-center p-1">
+            <div className=" flex flex-col bg-white w-full h-[75px] rounded-[20px] p-3 shadow-light1">
               <span>Nichapa Nopparat</span>
               <span className=" text-gray-500">Trainee</span>
             </div>

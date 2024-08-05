@@ -29,39 +29,39 @@ export default function TicketManagementClient({
     );
   }
 
-  console.log(page);
+  // console.log(page);
   useEffect(() => {
     getTicketList(page);
   }, [page]);
 
   return (
-    <div className="h-full w-full flex ">
+    <div className="bg-white h-full w-full flex ">
       <div className="w-full">
         <div className="flex w-full items-center justify-center ">
           <div className="h-screen w-full  shadow-lg rounded-lg  items-center justify-center">
             <div className="pt-6 px-6 p-2">
-              <div className="mt-6 mb-10">
+              <div className="mt-3 mb-10">
                 <span className="text-lg md:text-xl lg:text-2xl font-semibold ">
                   Ticket Management
                 </span>
               </div>
 
               <div className=" flex flex-col h-full">
-                <div className="grid grid-cols-7 space-x-2 h-[50px]  justify-center items-center mb-2">
+                <div className="grid grid-cols-7 space-x-2 h-[50px]  justify-center items-center mb-2 text-[14px] ">
                   <input
                     id="searchbox"
                     placeholder="search"
-                    className=" col-span-4 h-10 rounded-[20px] pl-4"
+                    className=" col-span-4 h-10 rounded-[20px] pl-4 shadow-light2"
                   ></input>
-                  <button className="bg-white h-10 rounded-[20px]">
-                    export
+                  <button className="bg-white h-10 rounded-[20px] shadow-light2">
+                    Export
                   </button>
-                  <button className="bg-white h-10 rounded-[20px]">
-                    filter
+                  <button className="bg-white h-10 rounded-[20px] shadow-light2">
+                    Filter
                   </button>
                   <button
                     type="button"
-                    className="bg-gradient-to-tr from-deep-blue to-bright-red text-white h-10 rounded-[20px]"
+                    className="bg-gradient-to-tr from-deep-blue to-bright-red text-white h-10 rounded-[20px] shadow-light2"
                     onClick={openModal}
                   >
                     + New Ticket
@@ -71,7 +71,7 @@ export default function TicketManagementClient({
               </div>
             </div>
             {/* <div className="flex flex-col"> */}
-            <table className=" bg-light-gray2 w-full items-center justify-center text-center">
+            <table className=" bg-white w-full items-center justify-center text-center">
               <thead>
                 <tr className="h-[68px] ">
                   <th>

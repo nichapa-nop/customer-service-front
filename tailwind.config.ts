@@ -33,8 +33,14 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       fontFamily: {},
+      boxShadow: {
+        light1:
+          "0 -10px 20px -5px rgba(0, 0, 0, 0.025), 0 10px 20px -5px rgba(0, 0, 0, 0.025)",
+        light2:
+          "0 -10px 20px -5px rgba(0, 0, 0, 0.045), 0 8px 12px -2px rgba(0, 0, 0, 0.045)",
+      },
     },
   },
-  plugins: [nextui()],
+  plugins: [nextui(), require("daisyui")],
 };
 export default config;
