@@ -56,6 +56,10 @@ export default function ForgotPasswordPage() {
                   type="text"
                   className=" w-full h-[48px] rounded-[13px] pl-4"
                   placeholder="example.ee@baseplayhouse.co"
+                  onFocus={(e) => (e.target.placeholder = "")}
+                  onBlur={(e) =>
+                    (e.target.placeholder = "example.ee@baseplayhouse.co")
+                  }
                   onChange={(e) => {
                     e.preventDefault();
                     setEmail(e.target.value);

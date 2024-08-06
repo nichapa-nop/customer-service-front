@@ -60,6 +60,10 @@ export default function LoginPage() {
                     type="text"
                     className=" w-full h-[48px] rounded-[13px] pl-4 lowercase"
                     placeholder="example.ee@baseplayhouse.co"
+                    onFocus={(e) => (e.target.placeholder = "")}
+                    onBlur={(e) =>
+                      (e.target.placeholder = "example.ee@baseplayhouse.co")
+                    }
                     onChange={(e) => {
                       e.preventDefault();
                       setEmail(e.target.value);
@@ -83,6 +87,10 @@ export default function LoginPage() {
                     id="password"
                     className=" w-full h-[48px] rounded-[13px] pl-5"
                     placeholder="● ● ● ● ● ● ● ● ● ● ● ●"
+                    onFocus={(e) => (e.target.placeholder = "")}
+                    onBlur={(e) =>
+                      (e.target.placeholder = "● ● ● ● ● ● ● ● ● ● ● ●")
+                    }
                     onChange={(e) => {
                       e.preventDefault();
                       setPassword(e.target.value);
