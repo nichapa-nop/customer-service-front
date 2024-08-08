@@ -1,6 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { stringify } from "querystring";
 
 const apiEndpoint = process.env.PROJECT_API_ENDPOINT;
 
@@ -11,7 +12,10 @@ type ApiResponse<T> = {
 
 export async function ApiManager<
   TResponseBody = never,
-  TRequestQuery = never,
+  TRequestQuery extends Record<string, string | number> = Record<
+    string,
+    string | number
+  >,
   TRequestBody = never
 >({
   path,
@@ -28,7 +32,10 @@ export async function ApiManager<
   apiVersion?: "v1" | "v2";
   method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 }): Promise<ApiResponse<TResponseBody>> {
-  const targetEndpoint = `${apiEndpoint}/${apiVersion}${path}`;
+  let targetEndpoint = `${apiEndpoint}/${apiVersion}${path}`;
+  if (query) {
+    targetEndpoint += `?${stringify(query)}`;
+  }
   const response = await fetch(targetEndpoint, {
     headers: {
       Authorization: useAccessToken

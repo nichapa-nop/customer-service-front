@@ -24,114 +24,184 @@ export default function AccountManagementClient() {
               </div>
 
               <div className=" flex flex-col h-full">
-                <div className="grid grid-cols-7 space-x-4 h-[50px]  justify-center items-center mb-2 text-[14px] ">
-                  <input
-                    id="searchbox"
-                    placeholder="search"
-                    className="focus:placeholder:text-transparent col-span-5 h-10 rounded-[20px] pl-4 shadow-light2"
-                  ></input>
-                  {/* <button className="bg-white h-10 rounded-[20px]">
-                    export
-                  </button> */}
-                  <button className="bg-white h-10 rounded-[20px] shadow-light2">
-                    Filter
+                <div className="grid grid-cols-7 space-x-4 h-[44px]  justify-center items-center mb-2 text-[14px] ">
+                  <label className="flex items-center col-span-5 h-full rounded-[20px] px-4 space-x-3 shadow-light2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="h-[21px] "
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                      />
+                    </svg>
+
+                    <input
+                      id="searchbox"
+                      placeholder="Search"
+                      className="grow focus:placeholder:text-white focus:outline-none placeholder:text-transparent placeholder:bg-clip-text placeholder:bg-gradient-to-tr from-deep-blue via-fade-purple to-bright-red placeholder:text-bold"
+                    ></input>
+                  </label>
+                  <button className="flex flex-row items-center justify-between px-10 bg-white h-full rounded-[20px] shadow-light2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      className="size-6"
+                    >
+                      <defs>
+                        <linearGradient
+                          id="gradient1"
+                          x1="0%"
+                          y1="100%"
+                          x2="100%"
+                          y2="0%"
+                        >
+                          <stop
+                            offset="0%"
+                            style={{ stopColor: "#1f1a4f", stopOpacity: 1 }}
+                          />{" "}
+                          {/* deep-blue */}
+                          <stop
+                            offset="50%"
+                            style={{ stopColor: "#82303d", stopOpacity: 1 }}
+                          />{" "}
+                          {/* fade-purple */}
+                          <stop
+                            offset="100%"
+                            style={{ stopColor: "#ec4723", stopOpacity: 1 }}
+                          />{" "}
+                          {/* bright-red */}
+                        </linearGradient>
+                      </defs>
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z"
+                        stroke="url(#gradient1)"
+                      />
+                    </svg>
+                    <span className="bg-gradient-to-tr from-deep-blue via-fade-purple to-bright-red inline-block text-transparent bg-clip-text">
+                      Filter
+                    </span>
                   </button>
                   <button
-                    className=" bg-gradient-to-tr from-deep-blue to-bright-red text-white h-10 rounded-[20px] shadow-light2"
-                    onClick={() => setIsOpen(true)}
+                    type="button"
+                    className="flex flex-row items-center justify-between px-4 bg-gradient-to-tr from-deep-blue to-bright-red text-white h-full rounded-[20px] shadow-light2"
+                    // onClick={openModal}
                   >
-                    + New Accont
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="size-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 4.5v15m7.5-7.5h-15"
+                      />
+                    </svg>
+                    New Account
                   </button>
-                  <Dialog
-                    open={isOpen}
-                    onClose={() => setIsOpen(false)}
-                    className="relative z-50 "
-                  >
-                    <DialogBackdrop className="fixed inset-0 bg-black/30" />
-                    <div className="fixed inset-0 w-screen overflow-y-auto p-1 py-24">
-                      <div className="flex min-h-full  items-center justify-center">
-                        <DialogPanel className=" w-[1000px] space-y-[50px] border rounded-xl bg-red-300 p-12">
-                          <DialogTitle className="font-semibold text-center text-[20px]">
-                            Create New Account
-                          </DialogTitle>
-                          {/* <Description>
+                </div>
+                <Dialog
+                  open={isOpen}
+                  onClose={() => setIsOpen(false)}
+                  className="relative z-50 "
+                >
+                  <DialogBackdrop className="fixed inset-0 bg-black/30" />
+                  <div className="fixed inset-0 w-screen overflow-y-auto p-1 py-24">
+                    <div className="flex min-h-full  items-center justify-center">
+                      <DialogPanel className=" w-[1000px] space-y-[50px] border rounded-xl bg-red-300 p-12">
+                        <DialogTitle className="font-semibold text-center text-[20px]">
+                          Create New Account
+                        </DialogTitle>
+                        {/* <Description>
                             This will permanently deactivate your account
                           </Description> */}
 
-                          <div className=" bg-blue-300 px-6 h-[500px] rounded-xl">
-                            {/* <p className="font-semibold text-[20px] pl-6">
+                        <div className=" bg-blue-300 px-6 h-[500px] rounded-xl">
+                          {/* <p className="font-semibold text-[20px] pl-6">
                               Customer Info
                             </p> */}
-                            <div className="grid grid-cols-2 gap-2  bg-slate-500 p-3">
-                              <div className="flex flex-col gap-2 bg-red-200 p-4">
-                                <p>First Name (EN)</p>
-                                <input
-                                  className=" w-full h-10 rounded-[15px] pl-4"
-                                  placeholder="Nichapa"
-                                ></input>
-                              </div>
-                              <div className="flex flex-col gap-2 bg-lime-200 p-4">
-                                <p>Last Name (EN)</p>
-                                <input
-                                  className=" w-full h-10 rounded-[15px] pl-4"
-                                  placeholder="Nopparat"
-                                ></input>
-                              </div>
-                              <div className="flex flex-col gap-2 bg-purple-200 p-4">
-                                <p>First Name (TH)</p>
-                                <input
-                                  className=" w-full h-10 rounded-[15px] pl-4"
-                                  placeholder="Nichapa"
-                                ></input>
-                              </div>
-                              <div className="flex flex-col gap-2 bg-yellow-200 p-4">
-                                <p>Last Name (TH)</p>
-                                <input
-                                  className=" w-full h-10 rounded-[15px] pl-4"
-                                  placeholder="Nopparat"
-                                ></input>
-                              </div>
-                              <div className="flex flex-col gap-2 bg-pink-200 p-4">
-                                <p>Phone Number</p>
-                                <input
-                                  className=" w-full h-10 rounded-[15px] pl-4"
-                                  placeholder="0123456789"
-                                ></input>
-                              </div>
-                              <div className="flex flex-col gap-2 bg-red-200 p-4">
-                                <p>Type</p>
-                                <input
-                                  className=" w-full h-10 rounded-[15px] pl-4"
-                                  placeholder="Select"
-                                ></input>
-                              </div>
-                              <div className=" flex flex-col gap-2 bg-red-200 p-4">
-                                <p>Email</p>
-                                <input
-                                  className=" w-full h-10 rounded-[15px] pl-4"
-                                  placeholder="ee@baseplayhouse.co"
-                                ></input>
-                              </div>
-                              <div className=" flex flex-col gap-2 bg-lime-200 p-4">
-                                <p>Company Name</p>
-                                <input
-                                  className=" w-full h-10 rounded-[15px] pl-4"
-                                  placeholder="BASE PLAYHOUSE CO. TLD."
-                                ></input>
-                              </div>
+                          <div className="grid grid-cols-2 gap-2  bg-slate-500 p-3">
+                            <div className="flex flex-col gap-2 bg-red-200 p-4">
+                              <p>First Name (EN)</p>
+                              <input
+                                className=" w-full h-10 rounded-[15px] pl-4"
+                                placeholder="Nichapa"
+                              ></input>
+                            </div>
+                            <div className="flex flex-col gap-2 bg-lime-200 p-4">
+                              <p>Last Name (EN)</p>
+                              <input
+                                className=" w-full h-10 rounded-[15px] pl-4"
+                                placeholder="Nopparat"
+                              ></input>
+                            </div>
+                            <div className="flex flex-col gap-2 bg-purple-200 p-4">
+                              <p>First Name (TH)</p>
+                              <input
+                                className=" w-full h-10 rounded-[15px] pl-4"
+                                placeholder="Nichapa"
+                              ></input>
+                            </div>
+                            <div className="flex flex-col gap-2 bg-yellow-200 p-4">
+                              <p>Last Name (TH)</p>
+                              <input
+                                className=" w-full h-10 rounded-[15px] pl-4"
+                                placeholder="Nopparat"
+                              ></input>
+                            </div>
+                            <div className="flex flex-col gap-2 bg-pink-200 p-4">
+                              <p>Phone Number</p>
+                              <input
+                                className=" w-full h-10 rounded-[15px] pl-4"
+                                placeholder="0123456789"
+                              ></input>
+                            </div>
+                            <div className="flex flex-col gap-2 bg-red-200 p-4">
+                              <p>Type</p>
+                              <input
+                                className=" w-full h-10 rounded-[15px] pl-4"
+                                placeholder="Select"
+                              ></input>
+                            </div>
+                            <div className=" flex flex-col gap-2 bg-red-200 p-4">
+                              <p>Email</p>
+                              <input
+                                className=" w-full h-10 rounded-[15px] pl-4"
+                                placeholder="ee@baseplayhouse.co"
+                              ></input>
+                            </div>
+                            <div className=" flex flex-col gap-2 bg-lime-200 p-4">
+                              <p>Company Name</p>
+                              <input
+                                className=" w-full h-10 rounded-[15px] pl-4"
+                                placeholder="BASE PLAYHOUSE CO. TLD."
+                              ></input>
                             </div>
                           </div>
-                          <div className="flex gap-4 items-center justify-center ">
-                            <button className=" bg-slate-600 w-64 h-14 rounded-[30px] text-white">
-                              Create Ticket
-                            </button>
-                            {/* <button onClick={() => setIsOpen(false)}>Cancel</button> */}
-                          </div>
-                        </DialogPanel>
-                      </div>
+                        </div>
+                        <div className="flex gap-4 items-center justify-center ">
+                          <button className=" bg-slate-600 w-64 h-14 rounded-[30px] text-white">
+                            Create Ticket
+                          </button>
+                          {/* <button onClick={() => setIsOpen(false)}>Cancel</button> */}
+                        </div>
+                      </DialogPanel>
                     </div>
-                  </Dialog>
-                </div>
+                  </div>
+                </Dialog>
               </div>
             </div>
             {/* <div className="flex flex-col"> */}
@@ -286,16 +356,51 @@ export default function AccountManagementClient() {
             </table>
             {/* <div className=" grid grid-rows-9 h-full bg-pink-200 "></div>
             </div> */}
-            <div className=" flex space-x-5 items-center  justify-end p-3 ">
-              <button className="bg-white h-10 w-20 rounded-[20px]">
-                previous
+            <footer className=" flex space-x-5 items-center  justify-end p-3 ">
+              <button
+                className="flex bg-light-gray1 h-[34px] w-[34px] rounded-[20px]  items-center justify-center"
+                // onClick={() => setPage(page - 1)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="white"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 19.5 8.25 12l7.5-7.5"
+                  />
+                </svg>
               </button>
-              <input className=" w-9"></input>
-              <button className="bg-white  h-10 w-20 rounded-[20px]">
-                next
+              <input
+                className="outline outline-light-gray1 w-20 h-11 rounded-[15px] text-center"
+                placeholder={`page`}
+              ></input>
+              <button
+                className="flex bg-light-gray1 h-[34px] w-[34px] rounded-[20px]  items-center justify-center"
+                // onClick={() => setPage(page + 1)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="white"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                  />
+                </svg>
               </button>
               <span>Page 1 from 10</span>
-            </div>
+            </footer>
           </div>
         </div>
       </div>

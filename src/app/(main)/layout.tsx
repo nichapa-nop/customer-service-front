@@ -90,7 +90,9 @@ export default function RootLayout({
           </div>
         </div>
       </aside>
-      {children}
+      <main className="flex flex-grow bg-white w-full h-full overflow-hidden">
+        {children}
+      </main>
     </>
   );
 }

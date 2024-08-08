@@ -2,10 +2,11 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import seenpic from "../../../img/SV_SEEN-C_.png";
-import bgpic from "../../../img/Rectangle 3.png";
+// import bgpic from "../../../img/Rectangle 3.png";
+// import seenpic from "../../../../img/SV_SEEN-C_.png";
 import toast, { Toaster } from "react-hot-toast";
 import { login } from "@/actions/login.action";
+import Image from "next/image";
 
 export default function LoginPage() {
   const [email, setEmail] = useState<string>("");
@@ -38,11 +39,18 @@ export default function LoginPage() {
         <div className="flex flex-row bg-white h-[529px] w-[923px] rounded-lg overflow-hidden">
           <div className=" flex flex-col w-[462px] p-12">
             <div className=" flex mt-2 justify-center">
-              <img
+              <Image
+                src="/assets/images/SV_SEEN-C_.png"
+                alt="image"
+                // className=" w-[137px] h-[95px]"
+                width={137}
+                height={95}
+              ></Image>
+              {/* <img
                 src={seenpic.src}
                 alt="image"
                 className=" w-[137px] h-[95px]"
-              ></img>
+              ></img> */}
             </div>
 
             <div className=" mt-4 justify-center items-center text-center">
@@ -123,12 +131,18 @@ export default function LoginPage() {
             </label>
             {/* </form> */}
           </div>
-          <div className="bg-gradient-to-tr from-deep-blue via-fade-purple to-bright-red w-[461px] h-[529px] overflow-hidden">
-            <img
+          <div className="bg-gradient-to-tr relative from-deep-blue via-fade-purple to-bright-red w-[461px] h-[529px] overflow-hidden">
+            <Image
+              src="/assets/images/Rectangle 3.png"
+              alt=""
+              fill
+              className="object-fill"
+            ></Image>
+            {/* <img
               src={bgpic.src}
               alt="image"
               className="w-full h-full opacity-60"
-            ></img>
+            ></img> */}
           </div>
         </div>
         <Toaster position="bottom-center" />

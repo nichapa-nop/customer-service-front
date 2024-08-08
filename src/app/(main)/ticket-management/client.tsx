@@ -16,7 +16,7 @@ export default function TicketManagementClient({
   const closeModal = () => setIsModalOpen(false);
 
   const [page, setPage] = useState<number>(1);
-  const [tickets, setTickets] = useState<TicketResponse[]>([]);
+  const [tickets, setTickets] = useState<TicketResponse[]>(initialTickets);
   const [pageCount, setPageCount] = useState<number>();
 
   async function getTicketList(page: number = 1) {
@@ -66,7 +66,7 @@ export default function TicketManagementClient({
 
                     <input
                       id="searchbox"
-                      placeholder="search"
+                      placeholder="Search"
                       className="grow focus:placeholder:text-white focus:outline-none placeholder:text-transparent placeholder:bg-clip-text placeholder:bg-gradient-to-tr from-deep-blue via-fade-purple to-bright-red"
                     ></input>
                   </label>

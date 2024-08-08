@@ -52,7 +52,7 @@ export default function TicketManagementClient({ data }: Props) {
                 <div className="grid grid-cols-7 space-x-2 h-[50px]  justify-center items-center mb-2">
                   <input
                     id="searchbox"
-                    placeholder="search"
+                    placeholder="Search"
                     className=" col-span-4 h-10 rounded-[20px] pl-4"
                   ></input>
                   <button className="bg-white h-10 rounded-[20px]">

@@ -32,7 +32,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={classNames(
-          `${montserrat.className} h-screen flex flex-1 overflow-hidden`
+          `${montserrat.className} min-h-screen flex flex-1 overflow-hidden`
           // "max-h-screen overflow-y-auto"
         )}
       >

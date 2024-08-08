@@ -7,23 +7,20 @@ export async function getTicket({
   page = 1,
   itemsPerPage = 7,
 }: { page?: number; itemsPerPage?: number } = {}) {
-  const res = await fetch(
-    `http://localhost:5000/v1/ticket?page=${page}&itemsPerPage=${itemsPerPage}`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${cookies().get("accessToken")?.value}`,
-      },
-      method: "GET",
-    }
-  );
+  const response = await ApiManager<{
+    tickets: TicketResponse[];
+    pagination: PaginationResponse;
+  }>({
+    path: "/ticket",
+    method: "GET",
+    query: { page, itemsPerPage },
+  });
 
-  const ticketData = await res.json();
-  if (res.ok) {
+  if (response.success && response.data) {
     return {
-      data: ticketData.tickets as TicketResponse[],
-      success: res.ok,
-      pagination: ticketData.pagination as PaginationResponse,
+      data: response.data.tickets,
+      success: true,
+      pagination: response.data.pagination,
     };
   } else {
     throw new Error("Failed to fetch data");
