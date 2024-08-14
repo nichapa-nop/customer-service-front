@@ -4,7 +4,7 @@ interface TicketResponse {
   platform: string;
   incidentType: string;
   businessImpact: string;
-  assignTo: string;
+  assignTo: IAccountResponse;
   status: string;
 }
 

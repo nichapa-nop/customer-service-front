@@ -3,6 +3,7 @@
 import { getTicket } from "@/actions/getticket.action";
 import React, { useEffect, useRef, useState } from "react";
 import CreateTicket from "@/components/ticket/create-ticket/modal";
+import EditTicketModal from "@/components/ticket/edit-ticket/modal";
 
 type Props = {};
 
@@ -18,6 +19,8 @@ export default function TicketManagementClient({
   const [page, setPage] = useState<number>(1);
   const [tickets, setTickets] = useState<TicketResponse[]>(initialTickets);
   const [pageCount, setPageCount] = useState<number>();
+  const [isEditTicketModalOpen, setIsEditModalOpen] = useState<boolean>(false);
+  const [focusEditTicket, setFocusEditTicket] = useState<TicketResponse>();
 
   async function getTicketList(page: number = 1) {
     const response = await getTicket({ page });
@@ -222,10 +225,19 @@ export default function TicketManagementClient({
                     <td>{ticket.platform}</td>
                     <td>{ticket.incidentType}</td>
                     <td>{ticket.businessImpact}</td>
-                    <td>{ticket.assignTo}</td>
+                    <td>
+                      {ticket.assignTo?.firstName && ticket.assignTo?.lastName
+                        ? `${ticket.assignTo?.firstName} ${ticket.assignTo?.lastName}`
+                        : "-"}
+                    </td>
                     <td>{ticket.status}</td>
                     <td className="space-x-2">
-                      <button>
+                      <button
+                        onClick={() => {
+                          setFocusEditTicket(ticket);
+                          setIsEditModalOpen(true);
+                        }}
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 24 24"
@@ -236,6 +248,13 @@ export default function TicketManagementClient({
                           <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
                         </svg>
                       </button>
+                      {focusEditTicket && (
+                        <EditTicketModal
+                          isOpen={isEditTicketModalOpen}
+                          setIsOpen={setIsEditModalOpen}
+                          initialTicket={focusEditTicket}
+                        />
+                      )}
                       <button>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
