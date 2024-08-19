@@ -95,8 +95,8 @@ export default function TicketManagementClient({
                 </span>
               </div>
 
-              <div className=" flex flex-col h-full mx-6">
-                <div className="grid grid-cols-7 space-x-4 h-[44px]  justify-center items-center mb-2 text-[14px] ">
+              <div className=" flex flex-col h-full mx-6 text-[14px]">
+                <div className="grid grid-cols-7 space-x-4 h-[44px]  justify-center items-center mb-2">
                   <label className="flex items-center col-span-4 h-full rounded-[20px] px-4 space-x-3 shadow-light2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -116,13 +116,13 @@ export default function TicketManagementClient({
                     <input
                       id="searchbox"
                       placeholder="Search"
-                      className="grow focus:placeholder:text-white focus:outline-none placeholder:text-transparent placeholder:bg-clip-text placeholder:bg-gradient-to-tr from-deep-blue via-fade-purple to-bright-red"
+                      className="grow focus:placeholder:text-white focus:outline-none placeholder:text-transparent placeholder:bg-clip-text placeholder:bg-gradient-to-tr from-deep-blue to-bright-red"
                       onChange={(e) => {
                         setSearchKeyword(e.target.value);
                       }}
                     ></input>
                   </label>
-                  <button className="flex flex-row items-center justify-between px-10 bg-white h-full rounded-[20px] shadow-light2">
+                  <button className="flex flex-row items-center justify-center px-10 bg-white h-full rounded-[20px] shadow-light2 space-x-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -142,17 +142,17 @@ export default function TicketManagementClient({
                           <stop
                             offset="0%"
                             style={{ stopColor: "#1f1a4f", stopOpacity: 1 }}
-                          />{" "}
+                          />
                           {/* deep-blue */}
                           <stop
                             offset="50%"
                             style={{ stopColor: "#82303d", stopOpacity: 1 }}
-                          />{" "}
+                          />
                           {/* fade-purple */}
                           <stop
                             offset="100%"
                             style={{ stopColor: "#ec4723", stopOpacity: 1 }}
-                          />{" "}
+                          />
                           {/* bright-red */}
                         </linearGradient>
                       </defs>
@@ -164,11 +164,11 @@ export default function TicketManagementClient({
                       />
                     </svg>
 
-                    <span className="bg-gradient-to-tr from-deep-blue via-fade-purple to-bright-red inline-block text-transparent bg-clip-text">
+                    <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
                       Export
                     </span>
                   </button>
-                  <button className="flex flex-row items-center justify-between px-10 bg-white h-full rounded-[20px] shadow-light2">
+                  <button className="flex flex-row items-center justify-center px-10 bg-white h-full rounded-[20px] shadow-light2 space-x-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -187,17 +187,17 @@ export default function TicketManagementClient({
                           <stop
                             offset="0%"
                             style={{ stopColor: "#1f1a4f", stopOpacity: 1 }}
-                          />{" "}
+                          />
                           {/* deep-blue */}
                           <stop
                             offset="50%"
                             style={{ stopColor: "#82303d", stopOpacity: 1 }}
-                          />{" "}
+                          />
                           {/* fade-purple */}
                           <stop
                             offset="100%"
                             style={{ stopColor: "#ec4723", stopOpacity: 1 }}
-                          />{" "}
+                          />
                           {/* bright-red */}
                         </linearGradient>
                       </defs>
@@ -208,7 +208,7 @@ export default function TicketManagementClient({
                         stroke="url(#gradient1)"
                       />
                     </svg>
-                    <span className="bg-gradient-to-tr from-deep-blue via-fade-purple to-bright-red inline-block text-transparent bg-clip-text">
+                    <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
                       Filter
                     </span>
                   </button>
@@ -231,7 +231,7 @@ export default function TicketManagementClient({
                         d="M12 4.5v15m7.5-7.5h-15"
                       />
                     </svg>
-                    New Ticket
+                    <span className="text-[14px]">New Ticket</span>
                   </button>
 
                   <CreateTicket
@@ -243,48 +243,61 @@ export default function TicketManagementClient({
                 </div>
               </div>
               {/* <div className="flex flex-col"> */}
-              <table className=" bg-white w-full items-center justify-center text-center">
-                <thead>
-                  <tr className="h-[68px] ">
-                    <th className="px-2">
-                      {/* <input
+              <div className="overflow-x-auto text-[14px]">
+                <table className="bg-white w-full table-fixed items-center justify-center text-center">
+                  <colgroup>
+                    <col className="w-[5%]" />
+                    <col className="w-[10%]" />
+                    <col className="w-[17%]" />
+                    <col className="w-[11%]" />
+                    <col className="w-[15%]" />
+                    <col className="w-[3%]" />
+                    <col className="w-[15%]" />
+                    <col className="w-[12%]" />
+                    <col className="w-[12%]" />
+                  </colgroup>
+                  <thead>
+                    <tr className="h-[68px] ">
+                      <th className="px-2">
+                        {/* <input
                         type="checkbox"
                         className="appearance-none rounded-md cursor-pointer checked:bg-gradient-to-tr from-deep-blue to-bright-red w-[27px] h-[27px] border-light-gray1 border-[2px]"
                       ></input> */}
-                      <input
-                        type="checkbox"
-                        className="appearance-none rounded-md cursor-pointer checked:bg-gradient-to-tr from-deep-blue to-bright-red w-[27px] h-[27px] border-light-gray1 border-[2px] relative
+                        <input
+                          type="checkbox"
+                          className="appearance-none rounded-md cursor-pointer checked:bg-gradient-to-tr from-deep-blue to-bright-red w-[27px] h-[27px] border-light-gray1 border-[2px] relative
              checked:after:content-[''] checked:after:absolute checked:after:left-[8px] checked:after:top-[3px] checked:after:w-[7px] checked:after:h-[14px] checked:after:border-white checked:after:border-r-[2px] checked:after:border-b-[2px] checked:after:rotate-45"
-                      ></input>
-                    </th>
-                    <th>Ticket ID</th>
-                    <th>Topic</th>
-                    <th>Platform</th>
-                    <th>Incident Type</th>
-                    <th>BI</th>
-                    <th>Assign To</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {/* <tr
+                        ></input>
+                      </th>
+                      <th>Ticket ID</th>
+                      <th className="w-44">Topic</th>
+                      <th>Platform</th>
+                      <th>Incident Type</th>
+                      <th>BI</th>
+                      <th>Assign To</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {/* <tr
                   // key={ticket.ticketId}
                   // className={`h-[60px] ${
                   //   checkedRows[ticket.ticketId] ? "bg-light-orange" : ""
                   // }`}
                   >
                   </tr> */}
-                  {tickets.map((ticket) => (
-                    <TicketRow
-                      key={ticket.ticketId}
-                      ticket={ticket}
-                      checkedRows={checkedRows}
-                      handleCheckboxChange={handleCheckboxChange}
-                    />
-                  ))}
-                </tbody>
-              </table>
+                    {tickets.map((ticket) => (
+                      <TicketRow
+                        key={ticket.ticketId}
+                        ticket={ticket}
+                        checkedRows={checkedRows}
+                        handleCheckboxChange={handleCheckboxChange}
+                      />
+                    ))}
+                  </tbody>
+                </table>
+              </div>
               {/* <div className=" grid grid-rows-9 h-full bg-pink-200 "></div>
             </div> */}
               <footer className="flex justify-between items-center p-3">

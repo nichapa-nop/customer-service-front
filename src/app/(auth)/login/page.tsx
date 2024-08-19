@@ -34,7 +34,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className=" bg-gradient-to-tr from-deep-blue  to-bright-red h-screen w-full">
+    <div className=" bg-gradient-to-tr from-deep-blue to-bright-red h-screen w-full">
       <div className="flex items-center justify-center min-h-screen">
         <div className="flex flex-row bg-white h-[529px] w-[923px] rounded-lg overflow-hidden">
           <div className=" flex flex-col w-[462px] p-12">
@@ -54,7 +54,7 @@ export default function LoginPage() {
             </div>
 
             <div className=" mt-4 justify-center items-center text-center">
-              <p className=" bg-gradient-to-tr from-deep-blue via-fade-purple to-bright-red   inline-block text-transparent bg-clip-text font-medium">
+              <p className=" bg-gradient-to-tr from-deep-blue to-bright-red   inline-block text-transparent bg-clip-text font-medium">
                 Sign in
               </p>
             </div>
@@ -62,7 +62,7 @@ export default function LoginPage() {
             <label>
               <div className=" flex flex-col  mt-1 ">
                 <span>Email</span>
-                <div className="bg-dark-gray hover:bg-gradient-to-tr from-deep-blue via-fade-purple to-bright-red p-[2px]  mt-1 rounded-[15px]">
+                <div className="bg-dark-gray hover:bg-gradient-to-tr from-deep-blue to-bright-red p-[2px]  mt-1 rounded-[15px]">
                   <input
                     id="email"
                     type="text"
@@ -89,7 +89,7 @@ export default function LoginPage() {
             <label>
               <div className=" flex flex-col  mt-[14px] ">
                 <span>Password</span>
-                <div className="bg-dark-gray hover:bg-gradient-to-tr from-deep-blue via-fade-purple to-bright-red  mt-1 p-[2px]  rounded-[15px]">
+                <div className="bg-dark-gray hover:bg-gradient-to-tr from-deep-blue to-bright-red  mt-1 p-[2px]  rounded-[15px]">
                   <input
                     type="password"
                     id="password"
@@ -114,7 +114,7 @@ export default function LoginPage() {
               </div>
               <div className=" flex justify-end mt-2">
                 <a
-                  className="bg-gradient-to-tr from-deep-blue via-fade-purple to-bright-red  inline-block text-transparent bg-clip-text font-medium hover:opacity-70 "
+                  className="bg-gradient-to-tr from-deep-blue to-bright-red  inline-block text-transparent bg-clip-text font-medium hover:opacity-70 "
                   href="/forgotpassword"
                 >
                   Forgot Password?
@@ -122,7 +122,7 @@ export default function LoginPage() {
               </div>
               <div className=" mt-5 text-center ">
                 <button
-                  className="bg-gradient-to-tr from-deep-blue via-fade-purple to-bright-red w-full rounded-[15px] h-12 text-white text-md hover:opacity-90 "
+                  className="bg-gradient-to-tr from-deep-blue to-bright-red w-full rounded-[15px] h-12 text-white text-md hover:opacity-90 "
                   onClick={handleLogin}
                 >
                   Sign In
@@ -131,7 +131,7 @@ export default function LoginPage() {
             </label>
             {/* </form> */}
           </div>
-          <div className="bg-gradient-to-tr relative from-deep-blue via-fade-purple to-bright-red w-[461px] h-[529px] overflow-hidden">
+          <div className="bg-gradient-to-tr relative from-deep-blue to-bright-red w-[461px] h-[529px] overflow-hidden">
             <Image
               src="/assets/images/Rectangle 3.png"
               alt=""

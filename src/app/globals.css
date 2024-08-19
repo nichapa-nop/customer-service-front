@@ -24,4 +24,13 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* input:focus::placeholder {
+    color: transparent;
+    
+  } */
+
+  input:focus::-webkit-input-placeholder {
+    opacity: 0;
+  }
 }

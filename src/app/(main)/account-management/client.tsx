@@ -66,17 +66,17 @@ export default function AccountManagementClient() {
                           <stop
                             offset="0%"
                             style={{ stopColor: "#1f1a4f", stopOpacity: 1 }}
-                          />{" "}
+                          />
                           {/* deep-blue */}
                           <stop
                             offset="50%"
                             style={{ stopColor: "#82303d", stopOpacity: 1 }}
-                          />{" "}
+                          />
                           {/* fade-purple */}
                           <stop
                             offset="100%"
                             style={{ stopColor: "#ec4723", stopOpacity: 1 }}
-                          />{" "}
+                          />
                           {/* bright-red */}
                         </linearGradient>
                       </defs>
@@ -258,17 +258,17 @@ export default function AccountManagementClient() {
                             <stop
                               offset="0%"
                               style={{ stopColor: "#1f1a4f", stopOpacity: 1 }}
-                            />{" "}
+                            />
                             {/* deep-blue */}
                             <stop
                               offset="50%"
                               style={{ stopColor: "#82303d", stopOpacity: 1 }}
-                            />{" "}
+                            />
                             {/* fade-purple */}
                             <stop
                               offset="100%"
                               style={{ stopColor: "#ec4723", stopOpacity: 1 }}
-                            />{" "}
+                            />
                             {/* bright-red */}
                           </linearGradient>
                         </defs>

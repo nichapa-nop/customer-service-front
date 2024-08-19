@@ -9,7 +9,7 @@ export default function Sidebar() {
   return (
     <aside
       id="default-sidebar"
-      className=" top-0 left-0 z-40 min-w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 text-[14px]"
+      className=" top-0 left-0 z-40 min-w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 text-[14px] shadow-sm"
       aria-label="Sidebar"
     >
       <div className="h-full w-full px-3 py-4 bg-gray-50 dark:bg-gray-800">
@@ -237,13 +237,15 @@ export default function Sidebar() {
           </li>
         </ul>
         <div className="flex min-h-[400px] rounded-[20px] items-end justify-center p-1">
-          <div className=" flex space-x-2 bg-white w-full h-[75px] rounded-[20px] p-4 shadow-light1">
-            <Image
-              src="/assets/images/123.png"
-              alt="user"
-              width={40}
-              height={40}
-            ></Image>
+          <div className=" flex space-x-3 bg-white w-full h-[75px] rounded-[20px] p-4 shadow-light1">
+            <div className="rounded-full overflow-hidden">
+              <Image
+                src="/assets/images/profilepic.jpg"
+                alt="user"
+                width={40}
+                height={40}
+              ></Image>
+            </div>
             <div className="flex flex-col">
               <span>Nichapa Nopparat</span>
               <span className=" text-gray-500">Trainee</span>

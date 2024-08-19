@@ -24,6 +24,22 @@ const EditTicketModal: React.FC<Props> = ({
 }) => {
   // let [isOpen, setIsOpen] = useState(false);
   // console.log(initialTicket);
+
+  const getStatusBackgroundColor = (status: string) => {
+    switch (status.toLowerCase()) {
+      case "in progress":
+        return "bg-gradient-to-tr relative from-waiting-bl to-waiting-tr";
+      case "open":
+        return "bg-gradient-to-tr relative from-approve-bl to-approve-tr";
+      case "closed":
+        return "bg-gradient-to-tr relative from-cancel-bl to-cancel-tr";
+      case "deleted":
+        return "bg-dark-gray";
+      default:
+        return "";
+    }
+  };
+
   return (
     <>
       <Transition appear show={isOpen}>
@@ -48,16 +64,38 @@ const EditTicketModal: React.FC<Props> = ({
           <div className="fixed inset-0 w-screen overflow-y-auto p-1 py-24">
             <div className="flex min-h-full  items-center justify-center">
               <DialogPanel className="bg-light-gray2 w-[1000px] space-y-[50px] border rounded-[30px] p-12">
-                <DialogTitle className="font-semibold text-center text-[20px]">
-                  Edit Ticket
-                </DialogTitle>
+                <div className="relative flex items-center justify-center">
+                  <DialogTitle className="flex font-semibold text-[20px] text-center items-center">
+                    Edit Ticket
+                    <button
+                      className="absolute right-0"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className="size-10"
+                      >
+                        <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
+                      </svg>
+                    </button>
+                  </DialogTitle>
+                </div>
                 {/* <Description>
                 This will permanently deactivate your account
               </Description> */}
-                <div className=" bg-white p-6 h-[90px] rounded-xl items-center justify-center shadow-sm">
-                  <p className="font-semibold text-[20px] pl-6">
+                <div className="flex bg-white px-6 h-[90px] rounded-xl items-center justify-between shadow-sm">
+                  <span className="font-semibold text-[20px] pl-6">
                     Ticket ID : {initialTicket.ticketId}
-                  </p>
+                  </span>
+                  <div
+                    className={`flex justify-center items-center h-9 w-32 rounded-[15px] ${getStatusBackgroundColor(
+                      initialTicket.status
+                    )}`}
+                  >
+                    <span className="text-white">{initialTicket.status}</span>
+                  </div>
                 </div>
 
                 <div className="bg-white p-6 h-[440px] rounded-xl shadow-sm">
@@ -231,7 +269,7 @@ const EditTicketModal: React.FC<Props> = ({
                   <button className=" bg-gradient-to-tr from-deep-blue to-bright-red w-64 h-14 rounded-[30px] text-white">
                     Save
                   </button>
-                  <button onClick={() => setIsOpen(false)}>Cancel</button>
+                  {/* <button onClick={() => setIsOpen(false)}>Cancel</button> */}
                 </div>
               </DialogPanel>
             </div>

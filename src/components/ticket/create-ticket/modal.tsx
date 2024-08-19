@@ -185,10 +185,11 @@ const CreateTicketModal: React.FC<Props> = ({ isOpen, onClose, setIsOpen }) => {
                     </div>
                     <div className="flex flex-col gap-2 p-4">
                       <p>Description</p>
-                      <input
-                        className="bg-light-gray2 w-full h-[240px] rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                      <textarea
+                        className="bg-light-gray2 w-full h-[240px] rounded-[15px] p-4 hover:placeholder:text-space-black"
                         placeholder="Text"
-                      ></input>
+                        // defaultValue={initialTicket.description}
+                      ></textarea>
                     </div>
                   </div>
                 </div>
