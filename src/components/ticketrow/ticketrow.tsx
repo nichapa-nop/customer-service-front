@@ -46,7 +46,7 @@ const TicketRow: React.FC<TicketRowProps> = ({
         checkedRows[ticket.ticketId] ? "bg-light-orange" : ""
       }`}
     >
-      <td className="justify-center w-[5%]">
+      <td className="justify-center w-[7%]">
         <input
           type="checkbox"
           className="appearance-none rounded-md cursor-pointer checked:bg-gradient-to-tr from-deep-blue to-bright-red w-[27px] h-[27px] border-light-gray1 border-[2px] relative
@@ -76,14 +76,14 @@ const TicketRow: React.FC<TicketRowProps> = ({
       </td>
       <td className="w-[12%]">
         <div
-          className={`flex justify-center items-center h-9 rounded-[15px] text-white ${getStatusBackgroundColor(
+          className={`flex justify-center items-center  w-[118px] h-[35px] rounded-[15px] text-white text ${getStatusBackgroundColor(
             ticket.status
           )}`}
         >
-          <span className="truncate px-6">{ticket.status}</span>
+          <span className="truncate px-2">{ticket.status}</span>
         </div>
       </td>
-      <td className="w-[12%] space-x-2">
+      <td className="w-[10%] space-x-2">
         <button
           onClick={() => {
             //   setFocusEditTicket(ticket);

@@ -246,7 +246,7 @@ export default function TicketManagementClient({
               <div className="overflow-x-auto text-[14px]">
                 <table className="bg-white w-full table-fixed items-center justify-center text-center">
                   <colgroup>
-                    <col className="w-[5%]" />
+                    <col className="w-[7%]" />
                     <col className="w-[10%]" />
                     <col className="w-[17%]" />
                     <col className="w-[11%]" />
@@ -254,7 +254,7 @@ export default function TicketManagementClient({
                     <col className="w-[3%]" />
                     <col className="w-[15%]" />
                     <col className="w-[12%]" />
-                    <col className="w-[12%]" />
+                    <col className="w-[10%]" />
                   </colgroup>
                   <thead>
                     <tr className="h-[68px] ">
