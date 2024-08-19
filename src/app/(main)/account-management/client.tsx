@@ -224,7 +224,7 @@ export default function AccountManagementClient() {
                   <td>nichapa.no@baseplayhouse.co</td>
                   <td>0909090909</td>
                   <td>
-                    <div className="bg-green-400 h-7 rounded-[15px] items-center justify-center">
+                    <div className="bg-approve-bl h-7 rounded-[15px] items-center justify-center">
                       <span>Verified</span>
                     </div>
                   </td>
@@ -290,7 +290,7 @@ export default function AccountManagementClient() {
                   <td>nichapa.no@baseplayhouse.co</td>
                   <td>0909090909</td>
                   <td>
-                    <div className="bg-green-400 h-7 rounded-[15px] items-center justify-center">
+                    <div className="bg-approve-bl h-7 rounded-[15px] items-center justify-center">
                       <span>Verified</span>
                     </div>
                   </td>
@@ -304,7 +304,7 @@ export default function AccountManagementClient() {
                   <td>nichapa.no@baseplayhouse.co</td>
                   <td>0909090909</td>
                   <td>
-                    <div className="bg-green-400 h-7 rounded-[15px] items-center justify-center">
+                    <div className="bg-approve-bl h-7 rounded-[15px] items-center justify-center">
                       <span>Verified</span>
                     </div>
                   </td>
@@ -318,7 +318,7 @@ export default function AccountManagementClient() {
                   <td>nichapa.no@baseplayhouse.co</td>
                   <td>0909090909</td>
                   <td>
-                    <div className="bg-green-400 h-7 rounded-[15px] items-center justify-center">
+                    <div className="bg-approve-bl h-7 rounded-[15px] items-center justify-center">
                       <span>Verified</span>
                     </div>
                   </td>
@@ -332,7 +332,7 @@ export default function AccountManagementClient() {
                   <td>nichapa.no@baseplayhouse.co</td>
                   <td>0909090909</td>
                   <td>
-                    <div className="bg-green-400 h-7 rounded-[15px] items-center justify-center">
+                    <div className="bg-approve-bl h-7 rounded-[15px] items-center justify-center">
                       <span>Verified</span>
                     </div>
                   </td>
@@ -346,7 +346,7 @@ export default function AccountManagementClient() {
                   <td>nichapa.no@baseplayhouse.co</td>
                   <td>0909090909</td>
                   <td>
-                    <div className="bg-green-400 h-7 rounded-[15px] items-center justify-center">
+                    <div className="bg-approve-bl h-7 rounded-[15px] items-center justify-center">
                       <span>Verified</span>
                     </div>
                   </td>

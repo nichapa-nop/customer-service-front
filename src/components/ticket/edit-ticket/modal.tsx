@@ -23,11 +23,11 @@ const EditTicketModal: React.FC<Props> = ({
   initialTicket,
 }) => {
   // let [isOpen, setIsOpen] = useState(false);
-  console.log(initialTicket);
+  // console.log(initialTicket);
   return (
     <>
       <Transition appear show={isOpen}>
-        <Transition.Child
+        {/* <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
           enterFrom="opacity-0"
@@ -37,7 +37,7 @@ const EditTicketModal: React.FC<Props> = ({
           leaveTo="opacity-0"
         >
           <div className="fixed inset-0" />
-        </Transition.Child>
+        </Transition.Child> */}
         <Dialog
           open={isOpen}
           onClose={() => (onClose ? onClose() : setIsOpen(false))}
@@ -118,35 +118,35 @@ const EditTicketModal: React.FC<Props> = ({
                       <p>Platform</p>
                       <input
                         className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                        placeholder="Nichapa"
+                        defaultValue={initialTicket.platform}
                       ></input>
                     </div>
                     <div className="flex flex-col gap-2 p-4">
                       <p>Incident Type</p>
                       <input
                         className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                        placeholder="Nopparat "
+                        defaultValue={initialTicket.incidentType}
                       ></input>
                     </div>
                     <div className="flex flex-col gap-2 p-4">
                       <p>Business Impact</p>
                       <input
                         className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                        placeholder="Nichapa"
+                        defaultValue={initialTicket.businessImpact}
                       ></input>
                     </div>
                     <div className="flex flex-col gap-2 p-4">
                       <p>Feedback Channels</p>
                       <input
                         className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                        placeholder="Nichapa"
+                        defaultValue={initialTicket.feedbackCh}
                       ></input>
                     </div>
                     <div className="flex flex-col gap-2 p-4">
                       <p>Ticket Link</p>
                       <input
                         className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                        placeholder="Nichapa"
+                        defaultValue={initialTicket.ticketLink}
                       ></input>
                     </div>
                   </div>
@@ -160,15 +160,15 @@ const EditTicketModal: React.FC<Props> = ({
                       <p>Topic</p>
                       <input
                         className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                        placeholder="Text"
+                        defaultValue={initialTicket.topic}
                       ></input>
                     </div>
                     <div className="flex flex-col gap-2 p-4">
                       <p>Description</p>
-                      <input
-                        className="bg-light-gray2 w-full h-[240px] rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                        placeholder="Text"
-                      ></input>
+                      <textarea
+                        className="bg-light-gray2 w-full h-[240px] rounded-[15px] p-4 hover:placeholder:text-space-black"
+                        defaultValue={initialTicket.description}
+                      ></textarea>
                     </div>
                     <div className="flex mt-2 justify-end">
                       <button className=" bg-gradient-to-tr from-deep-blue via-fade-purple to-bright-red w-64 h-14 rounded-[30px] text-white">
@@ -184,21 +184,21 @@ const EditTicketModal: React.FC<Props> = ({
                       <p>First Name (EN)</p>
                       <input
                         className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                        placeholder="Nichapa"
+                        defaultValue={initialTicket.assignTo?.firstName}
                       ></input>
                     </div>
                     <div className="flex flex-col gap-2 p-4">
                       <p>Last Name (EN)</p>
                       <input
                         className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                        placeholder="Nopparat"
+                        defaultValue={initialTicket.assignTo?.lastName}
                       ></input>
                     </div>
                     <div className="col-span-2 flex flex-col gap-2 p-4">
                       <p>Assign To</p>
                       <input
                         className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                        placeholder="ee@baseplayhouse.co"
+                        defaultValue={initialTicket.assignTo?.email}
                       ></input>
                     </div>
                   </div>

@@ -6,16 +6,17 @@ import { cookies } from "next/headers";
 export async function getTicket({
   page = 1,
   itemsPerPage = 7,
-}: { page?: number; itemsPerPage?: number } = {}) {
+  keyword,
+}: { page?: number; itemsPerPage?: number; keyword?: string } = {}) {
   const response = await ApiManager<{
     tickets: TicketResponse[];
     pagination: PaginationResponse;
   }>({
     path: "/ticket",
     method: "GET",
-    query: { page, itemsPerPage },
+    query: { page, itemsPerPage, keyword },
   });
-
+  // console.log(keyword);
   if (response.success && response.data) {
     return {
       data: response.data.tickets,

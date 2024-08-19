@@ -3,6 +3,8 @@ import { Inter, Montserrat, Prompt } from "next/font/google";
 // import "../../../src/app/globals.css";
 import classNames from "classnames";
 import seenpic from "../../../img/image 7.png";
+import { usePathname } from "next/navigation";
+import Sidebar from "@/components/sidebar/sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 const montserrat = Montserrat({
@@ -28,68 +30,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // const pathname = usePathname();
+
   return (
     <>
-      <aside
-        id="default-sidebar"
-        className=" top-0 left-0 z-40 min-w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 text-[14px]"
-        aria-label="Sidebar"
-      >
-        <div className="h-full w-full px-3 py-4 bg-gray-50 dark:bg-gray-800">
-          <ul className="space-y-4 font-medium">
-            <li>
-              <a
-                href="#"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-              >
-                <img
-                  src={seenpic.src}
-                  alt="image"
-                  className="mb-4"
-
-                  // className=" w-[80px] h-[60px]"
-                ></img>
-              </a>
-            </li>
-            <li>
-              <a
-                href="/ticket-management"
-                className="flex items-center p-2 text-gray-900  dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group h-14 rounded-[20px] shadow-light1 "
-              >
-                <span className="flex-1 ms-3 whitespace-nowrap">
-                  Ticket Management
-                </span>
-              </a>
-            </li>
-            <li>
-              <a
-                href="/account-management"
-                className="flex items-center p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group h-14 rounded-[20px] shadow-light1"
-              >
-                <span className="flex-1 ms-3 whitespace-nowrap">
-                  Account Management
-                </span>
-              </a>
-            </li>
-            <li>
-              <a
-                href="/role-management"
-                className="flex items-center p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group h-14 rounded-[20px] shadow-light1"
-              >
-                <span className="flex-1 ms-3 whitespace-nowrap">
-                  Role Management
-                </span>
-              </a>
-            </li>
-          </ul>
-          <div className="flex min-h-[400px] rounded-[20px] items-end justify-center p-1">
-            <div className=" flex flex-col bg-white w-full h-[75px] rounded-[20px] p-3 shadow-light1">
-              <span>Nichapa Nopparat</span>
-              <span className=" text-gray-500">Trainee</span>
-            </div>
-          </div>
-        </div>
-      </aside>
+      <Sidebar />
       <main className="flex flex-grow bg-white w-full h-full overflow-hidden">
         {children}
       </main>

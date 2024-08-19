@@ -32,7 +32,9 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
-      fontFamily: {},
+      fontFamily: {
+        montserrat: ["Montserrat", "Prompt"],
+      },
       boxShadow: {
         light1:
           "0 -10px 20px -5px rgba(0, 0, 0, 0.025), 0 10px 20px -5px rgba(0, 0, 0, 0.025)",

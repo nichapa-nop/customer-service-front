@@ -1,6 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { stringify } from "querystring";
 
 const apiEndpoint = process.env.PROJECT_API_ENDPOINT;
@@ -12,9 +13,9 @@ type ApiResponse<T> = {
 
 export async function ApiManager<
   TResponseBody = never,
-  TRequestQuery extends Record<string, string | number> = Record<
+  TRequestQuery extends Record<string, string | number | undefined> = Record<
     string,
-    string | number
+    string | number | undefined
   >,
   TRequestBody = never
 >({
@@ -48,6 +49,9 @@ export async function ApiManager<
 
   const success = response.ok;
   if (!success) {
+    if ([401, 403].includes(response.status)) {
+      redirect("/login");
+    }
     return { success, data: null };
   }
   const responseData = await response.json();
