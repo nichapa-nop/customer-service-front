@@ -1,36 +1,29 @@
-"use client";
 import {
-  Description,
   Dialog,
   DialogBackdrop,
   DialogPanel,
   DialogTitle,
-  Transition,
 } from "@headlessui/react";
 import { motion } from "framer-motion";
-import { Dispatch, Fragment, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 
 interface Props {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   onClose?: () => void;
-  // initialTicket: TicketResponse;
 }
 
-const CreateTicketSuccess: React.FC<Props> = ({
+const CloseTicketSuccessModal: React.FC<Props> = ({
   isOpen,
   onClose,
   setIsOpen,
-  // initialTicket,
 }) => {
-  //   let [isOpen, setIsOpen] = useState(false);
-
   return (
     <>
       <Dialog
         open={isOpen}
         onClose={() => (onClose ? onClose() : setIsOpen(false))}
-        className="relative z-50 "
+        className="relative z-50"
       >
         <DialogBackdrop className="fixed inset-0 bg-black/30" />
 
@@ -72,12 +65,13 @@ const CreateTicketSuccess: React.FC<Props> = ({
 
                 <div className="flex flex-col h-[120px] rounded-xl items-center justify-center">
                   <p className="font-semibold text-[20px]  mb-3 text-center">
-                    Ticket #INC0000xx has been created!
+                    Ticket #INC000xx has been closed
                   </p>
                   <p className=" text-[16px] text-center">
-                    You can access and manage this ticket details through the
+                    To re-open this ticket, please access the ticket list page
+                    and
                     <br />
-                    'Ticket Management' section accessible from the sidebar.
+                    use the 'Edit' icon associated with this ticket number.
                   </p>
                 </div>
               </DialogPanel>
@@ -88,4 +82,5 @@ const CreateTicketSuccess: React.FC<Props> = ({
     </>
   );
 };
-export default CreateTicketSuccess;
+
+export default CloseTicketSuccessModal;

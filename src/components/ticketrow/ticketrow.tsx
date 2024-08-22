@@ -3,6 +3,7 @@ import React, { useState } from "react";
 // import TicketResponse  from '@/api-interface/ticket.interface'; // Adjust import based on your project structure
 import EditTicketModal from "@/components/ticket/edit-ticket/modal"; // Adjust import as necessary
 import DeleteTicketModal from "../ticket/delete-ticket/modal";
+import TicketDetail from "../ticket/ticket-detail/modal";
 
 interface TicketRowProps {
   ticket: TicketResponse;
@@ -25,6 +26,8 @@ const TicketRow: React.FC<TicketRowProps> = ({
 }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+  const [isTicketDetailModalOpen, setIsTicketDetailModalOpen] =
+    useState<boolean>(false);
 
   const getStatusBackgroundColor = (status: string) => {
     switch (status.toLowerCase()) {
@@ -57,12 +60,64 @@ const TicketRow: React.FC<TicketRowProps> = ({
           onChange={() => handleCheckboxChange(ticket.ticketId)}
         />
       </td>
-      <td className="w-[10%] truncate">{ticket.ticketId}</td>
-      <td className="w-[17%] truncate px-5 text-left">{ticket.topic}</td>
-      <td className="w-[11%] truncate">{ticket.platform}</td>
-      <td className="w-[15%] truncate">{ticket.incidentType}</td>
-      <td className="w-[3%] truncate">{ticket.businessImpact}</td>
-      <td className="w-[15%]">
+      <td
+        className="w-[10%] truncate"
+        onClick={() => {
+          //   setFocusEditTicket(ticket);
+          //   openModal("edit");
+          setIsTicketDetailModalOpen(true);
+        }}
+      >
+        {ticket.ticketId}
+      </td>
+      <td
+        className="w-[17%] truncate px-5 text-left"
+        onClick={() => {
+          //   setFocusEditTicket(ticket);
+          //   openModal("edit");
+          setIsTicketDetailModalOpen(true);
+        }}
+      >
+        {ticket.topic}
+      </td>
+      <td
+        className="w-[11%] truncate"
+        onClick={() => {
+          //   setFocusEditTicket(ticket);
+          //   openModal("edit");
+          setIsTicketDetailModalOpen(true);
+        }}
+      >
+        {ticket.platform}
+      </td>
+      <td
+        className="w-[15%] truncate"
+        onClick={() => {
+          //   setFocusEditTicket(ticket);
+          //   openModal("edit");
+          setIsTicketDetailModalOpen(true);
+        }}
+      >
+        {ticket.incidentType}
+      </td>
+      <td
+        className="w-[3%] truncate"
+        onClick={() => {
+          //   setFocusEditTicket(ticket);
+          //   openModal("edit");
+          setIsTicketDetailModalOpen(true);
+        }}
+      >
+        {ticket.businessImpact}
+      </td>
+      <td
+        className="w-[15%]"
+        onClick={() => {
+          //   setFocusEditTicket(ticket);
+          //   openModal("edit");
+          setIsTicketDetailModalOpen(true);
+        }}
+      >
         <div className="flex flex-col">
           <span className="truncate">
             {ticket.assignTo?.firstName
@@ -76,7 +131,14 @@ const TicketRow: React.FC<TicketRowProps> = ({
           </span>
         </div>
       </td>
-      <td className="w-[12%]">
+      <td
+        className="w-[12%]"
+        onClick={() => {
+          //   setFocusEditTicket(ticket);
+          //   openModal("edit");
+          setIsTicketDetailModalOpen(true);
+        }}
+      >
         <div
           className={`flex justify-center items-center  w-[118px] h-[35px] rounded-[15px] text-white text ${getStatusBackgroundColor(
             ticket.status
@@ -159,6 +221,13 @@ const TicketRow: React.FC<TicketRowProps> = ({
             initialTicket={ticket}
             isOpen={isDeleteModalOpen}
             setIsOpen={setIsDeleteModalOpen}
+          />
+        )}
+        {isTicketDetailModalOpen && (
+          <TicketDetail
+            initialTicket={ticket}
+            isOpen={isTicketDetailModalOpen}
+            setIsOpen={setIsTicketDetailModalOpen}
           />
         )}
       </td>

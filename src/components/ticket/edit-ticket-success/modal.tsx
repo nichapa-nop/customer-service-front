@@ -1,30 +1,25 @@
-"use client";
 import {
-  Description,
   Dialog,
   DialogBackdrop,
   DialogPanel,
   DialogTitle,
-  Transition,
 } from "@headlessui/react";
 import { motion } from "framer-motion";
-import { Dispatch, Fragment, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 
 interface Props {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  //   initialTicket: TicketResponse;
   onClose?: () => void;
-  // initialTicket: TicketResponse;
 }
 
-const CreateTicketSuccess: React.FC<Props> = ({
+const EditTicketSuccess: React.FC<Props> = ({
   isOpen,
   onClose,
   setIsOpen,
-  // initialTicket,
+  //   initialTicket,
 }) => {
-  //   let [isOpen, setIsOpen] = useState(false);
-
   return (
     <>
       <Dialog
@@ -65,18 +60,17 @@ const CreateTicketSuccess: React.FC<Props> = ({
               </Description> */}
                 <div className="flex justify-center items-center mt-8 mb-6">
                   <img
-                    src="/assets/images/success.png"
+                    src="/assets/images/success.png "
                     className="h-[100px] w-[100px] "
                   ></img>
                 </div>
 
-                <div className="flex flex-col h-[120px] rounded-xl items-center justify-center">
+                <div className="flex flex-col p-6 h-[120px] rounded-xl items-center justify-center">
                   <p className="font-semibold text-[20px]  mb-3 text-center">
-                    Ticket #INC0000xx has been created!
+                    Your Change has been save!
                   </p>
-                  <p className=" text-[16px] text-center">
-                    You can access and manage this ticket details through the
-                    <br />
+                  <p className=" text-[16px]  text-center">
+                    You can review these changes in the <br />
                     'Ticket Management' section accessible from the sidebar.
                   </p>
                 </div>
@@ -88,4 +82,5 @@ const CreateTicketSuccess: React.FC<Props> = ({
     </>
   );
 };
-export default CreateTicketSuccess;
+
+export default EditTicketSuccess;

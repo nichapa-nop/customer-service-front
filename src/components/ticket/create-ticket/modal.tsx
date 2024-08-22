@@ -57,7 +57,7 @@ const CreateTicketModal: React.FC<Props> = ({
                   <DialogTitle className="flex font-semibold text-[20px] text-center items-center">
                     Create New Ticket
                     <button
-                      className="absolute right-0  "
+                      className="absolute right-0"
                       onClick={() => setIsOpen(false)}
                     >
                       <svg

@@ -9,6 +9,8 @@ import {
 } from "@headlessui/react";
 import { motion } from "framer-motion";
 import { Dispatch, Fragment, SetStateAction, useState } from "react";
+import EditTicketSuccess from "../edit-ticket-success/modal";
+import CloseTicketModal from "../close-ticket/modal";
 
 interface Props {
   isOpen: boolean;
@@ -38,6 +40,19 @@ const EditTicketModal: React.FC<Props> = ({
         return "bg-dark-gray";
       default:
         return "";
+    }
+  };
+
+  const [isEditTicketSuccessModalOpen, setIsEditTicketSuccessModalOpen] =
+    useState(false);
+  const [isCloseTicketModalOpen, setIsCloseTicketModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsEditTicketSuccessModalOpen(true);
+    if (onClose) {
+      onClose();
+    } else {
+      setIsOpen(false);
     }
   };
 
@@ -246,9 +261,21 @@ const EditTicketModal: React.FC<Props> = ({
                       <img></img>
                       <p>Close/Re-open Ticket</p>
                     </div>
-                    <button className=" bg-gradient-to-tr from-cancel-bl to-cancel-tr w-28 h-8 rounded-[15px] text-white">
+                    <button
+                      className=" bg-gradient-to-tr from-cancel-bl to-cancel-tr w-28 h-8 rounded-[15px] text-white"
+                      onClick={() => {
+                        setIsCloseTicketModalOpen(true);
+                      }}
+                    >
                       Close
                     </button>
+                    {isCloseTicketModalOpen && (
+                      <CloseTicketModal
+                        isOpen={isCloseTicketModalOpen}
+                        setIsOpen={setIsCloseTicketModalOpen}
+                        // onClose={() => setIsEditTicketSuccessModalOpen(false)}
+                      />
+                    )}
                   </div>
                   <div className=" flex justify-between py-4 px-7">
                     <div>
@@ -261,9 +288,22 @@ const EditTicketModal: React.FC<Props> = ({
                   </div>
                 </div>
                 <div className="flex gap-4 items-center justify-center ">
-                  <button className=" bg-gradient-to-tr from-deep-blue to-bright-red w-64 h-14 rounded-[30px] text-white">
+                  <button
+                    className=" bg-gradient-to-tr from-deep-blue to-bright-red w-64 h-14 rounded-[30px] text-white"
+                    onClick={() => {
+                      setIsEditTicketSuccessModalOpen(true);
+                    }}
+                  >
                     Save
                   </button>
+                  {isEditTicketSuccessModalOpen && (
+                    <EditTicketSuccess
+                      isOpen={isEditTicketSuccessModalOpen}
+                      setIsOpen={setIsEditTicketSuccessModalOpen}
+                      // onClose={() => setIsEditTicketSuccessModalOpen(false)}
+                    />
+                  )}
+
                   {/* <button onClick={() => setIsOpen(false)}>Cancel</button> */}
                 </div>
               </DialogPanel>
