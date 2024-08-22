@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 // import TicketResponse  from '@/api-interface/ticket.interface'; // Adjust import based on your project structure
 import EditTicketModal from "@/components/ticket/edit-ticket/modal"; // Adjust import as necessary
+import DeleteTicketModal from "../ticket/delete-ticket/modal";
 
 interface TicketRowProps {
   ticket: TicketResponse;
@@ -23,6 +24,7 @@ const TicketRow: React.FC<TicketRowProps> = ({
   //   focusEditTicket,
 }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 
   const getStatusBackgroundColor = (status: string) => {
     switch (status.toLowerCase()) {
@@ -83,7 +85,7 @@ const TicketRow: React.FC<TicketRowProps> = ({
           <span className="truncate px-2">{ticket.status}</span>
         </div>
       </td>
-      <td className="w-[10%] space-x-2">
+      <td className="w-[10%] space-x-3">
         <button
           onClick={() => {
             //   setFocusEditTicket(ticket);
@@ -108,7 +110,11 @@ const TicketRow: React.FC<TicketRowProps> = ({
             setIsOpen={setIsEditModalOpen}
           />
         )}
-        <button>
+        <button
+          onClick={() => {
+            setIsDeleteModalOpen(true);
+          }}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -148,6 +154,13 @@ const TicketRow: React.FC<TicketRowProps> = ({
             />
           </svg>
         </button>
+        {isDeleteModalOpen && (
+          <DeleteTicketModal
+            initialTicket={ticket}
+            isOpen={isDeleteModalOpen}
+            setIsOpen={setIsDeleteModalOpen}
+          />
+        )}
       </td>
     </tr>
   );

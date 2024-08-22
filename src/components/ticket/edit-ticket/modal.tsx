@@ -7,6 +7,7 @@ import {
   DialogTitle,
   Transition,
 } from "@headlessui/react";
+import { motion } from "framer-motion";
 import { Dispatch, Fragment, SetStateAction, useState } from "react";
 
 interface Props {
@@ -42,27 +43,21 @@ const EditTicketModal: React.FC<Props> = ({
 
   return (
     <>
-      <Transition appear show={isOpen}>
-        {/* <Transition.Child
-          as={Fragment}
-          enter="ease-out duration-300"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="ease-in duration-200"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <div className="fixed inset-0" />
-        </Transition.Child> */}
-        <Dialog
-          open={isOpen}
-          onClose={() => (onClose ? onClose() : setIsOpen(false))}
-          className="relative z-50"
-        >
-          <DialogBackdrop className="fixed inset-0 bg-black/30" />
+      <Dialog
+        open={isOpen}
+        onClose={() => (onClose ? onClose() : setIsOpen(false))}
+        className="relative z-50"
+      >
+        <DialogBackdrop className="fixed inset-0 bg-black/30" />
 
-          <div className="fixed inset-0 w-screen overflow-y-auto p-1 py-24">
-            <div className="flex min-h-full  items-center justify-center">
+        <div className="fixed inset-0 w-screen overflow-y-auto p-1 py-24">
+          <div className="flex min-h-full  items-center justify-center">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+            >
               <DialogPanel className="bg-light-gray2 w-[1000px] space-y-[50px] border rounded-[30px] p-12">
                 <div className="relative flex items-center justify-center">
                   <DialogTitle className="flex font-semibold text-[20px] text-center items-center">
@@ -272,10 +267,10 @@ const EditTicketModal: React.FC<Props> = ({
                   {/* <button onClick={() => setIsOpen(false)}>Cancel</button> */}
                 </div>
               </DialogPanel>
-            </div>
+            </motion.div>
           </div>
-        </Dialog>
-      </Transition>
+        </div>
+      </Dialog>
     </>
   );
 };

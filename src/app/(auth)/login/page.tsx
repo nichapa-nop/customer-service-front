@@ -60,7 +60,7 @@ export default function LoginPage() {
             </div>
             {/* <form action="#" noValidate> */}
             <label>
-              <div className=" flex flex-col  mt-1 ">
+              <div className=" flex flex-col  mt-1">
                 <span>Email</span>
                 <div className="bg-dark-gray hover:bg-gradient-to-tr from-deep-blue to-bright-red p-[2px]  mt-1 rounded-[15px]">
                   <input

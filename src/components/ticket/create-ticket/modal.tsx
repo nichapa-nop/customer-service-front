@@ -1,62 +1,57 @@
 "use client";
-import CreateTicketSuccess from "@/app/(main)/(modal)/ticket/create-ticket-success/page";
 import {
   Description,
   Dialog,
   DialogBackdrop,
   DialogPanel,
   DialogTitle,
+  Select,
   Transition,
 } from "@headlessui/react";
+import { motion } from "framer-motion";
 import React, { Dispatch, Fragment, SetStateAction, useState } from "react";
-
-// type Props = {
-//   isOpen: boolean;
-//   setIsOpen: Dispatch<SetStateAction<boolean>>;
-// };
+import CreateTicketSuccess from "../create-ticket-success/modal";
 
 interface Props {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   onClose?: () => void;
+  // initialTicket: TicketResponse;
 }
-//const CreateTicket({ isOpen, setIsOpen }: Props) {
 
-const CreateTicketModal: React.FC<Props> = ({ isOpen, onClose, setIsOpen }) => {
-  // let [isOpen, setIsOpen] = useState(false);
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-  // const openModal = () => setIsModalOpen(true);
-  // const closeModal = () => setIsModalOpen(false);
+const CreateTicketModal: React.FC<Props> = ({
+  isOpen,
+  onClose,
+  setIsOpen,
+  // initialTicket,
+}) => {
+  const [isCreateTicketSuccessModalOpen, setIsCreateTicketSuccessModalOpen] =
+    useState(false);
 
+  const openModal = () => {
+    setIsCreateTicketSuccessModalOpen(true);
+    if (onClose) {
+      onClose();
+    } else {
+      setIsOpen(false);
+    }
+  };
   return (
     <>
-      {/* <button
-        type="button"
-        className=" bg-red-500 h-10 rounded-[20px]"
-        onClick={() => setIsOpen(true)}
+      <Dialog
+        open={isOpen}
+        onClose={() => (onClose ? onClose() : setIsOpen(false))}
+        className="relative z-50 "
       >
-        + New Ticket
-      </button> */}
-      <Transition appear show={isOpen}>
-        <Transition.Child
-          as={Fragment}
-          enter="ease-out duration-300"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="ease-in duration-200"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <div className="fixed inset-0" />
-        </Transition.Child>
-        <Dialog
-          open={isOpen}
-          onClose={() => (onClose ? onClose() : setIsOpen(false))}
-          className="relative z-50 "
-        >
-          <DialogBackdrop className="fixed inset-0 bg-black/30" />
-          <div className="fixed inset-0 w-screen overflow-y-auto p-1 py-24">
-            <div className="flex min-h-full  items-center justify-center">
+        <DialogBackdrop className="fixed inset-0 bg-black/30" />
+        <div className="fixed inset-0 w-screen overflow-y-auto p-1 py-24">
+          <div className="flex min-h-full  items-center justify-center">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+            >
               <DialogPanel className="bg-light-gray2 w-[1000px] space-y-[50px] border rounded-[30px] p-12">
                 <div className="relative flex items-center justify-center">
                   <DialogTitle className="flex font-semibold text-[20px] text-center items-center">
@@ -81,7 +76,7 @@ const CreateTicketModal: React.FC<Props> = ({ isOpen, onClose, setIsOpen }) => {
                 {/* </Description> */}
 
                 <div className="bg-white p-6 h-[460px] rounded-xl shadow-light1">
-                  <p className="font-semibold text-[20px] pl-6">
+                  <p className="font-semibold text-[20px] pl-6 pt-2">
                     Customer Info
                   </p>
                   <div className="grid grid-cols-2 gap-2  p-3">
@@ -108,10 +103,21 @@ const CreateTicketModal: React.FC<Props> = ({ isOpen, onClose, setIsOpen }) => {
                     </div>
                     <div className="flex flex-col gap-2 p-4">
                       <p>Type</p>
-                      <input
+                      {/* <input
                         className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                         placeholder="Select"
-                      ></input>
+                      ></input> */}
+                      <Select
+                        name="Type"
+                        className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                      >
+                        <option disabled selected>
+                          Select
+                        </option>
+                        <option>CDD</option>
+                        <option>HR</option>
+                        <option>OTHER</option>
+                      </Select>
                     </div>
                     <div className=" flex flex-col gap-2 p-4">
                       <p>Email</p>
@@ -130,7 +136,7 @@ const CreateTicketModal: React.FC<Props> = ({ isOpen, onClose, setIsOpen }) => {
                   </div>
                 </div>
                 <div className="bg-white p-6 rounded-xl h-[430px] shadow-light1">
-                  <p className="font-semibold text-[20px] mb-2  pl-6">
+                  <p className="font-semibold text-[20px] mb-2  pl-6  pt-2">
                     System Info
                   </p>
                   <div className="grid grid-cols-2 gap-2  p-3">
@@ -172,7 +178,7 @@ const CreateTicketModal: React.FC<Props> = ({ isOpen, onClose, setIsOpen }) => {
                   </div>
                 </div>
                 <div className="flex flex-col bg-white p-6 rounded-[15px] h-[510px] shadow-light1">
-                  <p className=" font-semibold text-[20px] pl-6">
+                  <p className=" font-semibold text-[20px] pl-6 pt-2">
                     General Info
                   </p>
                   <div className=" p-3">
@@ -186,7 +192,7 @@ const CreateTicketModal: React.FC<Props> = ({ isOpen, onClose, setIsOpen }) => {
                     <div className="flex flex-col gap-2 p-4">
                       <p>Description</p>
                       <textarea
-                        className="bg-light-gray2 w-full h-[240px] rounded-[15px] p-4 hover:placeholder:text-space-black"
+                        className="bg-light-gray2 resize-none w-full h-[240px] rounded-[15px] p-4 hover:placeholder:text-space-black"
                         placeholder="Text"
                         // defaultValue={initialTicket.description}
                       ></textarea>
@@ -194,7 +200,9 @@ const CreateTicketModal: React.FC<Props> = ({ isOpen, onClose, setIsOpen }) => {
                   </div>
                 </div>
                 <div className="bg-white p-6 rounded-xl h-80 shadow-light1">
-                  <p className=" font-semibold text-[20px] pl-6">CS Info</p>
+                  <p className=" font-semibold text-[20px] pl-6 pt-2">
+                    CS Info
+                  </p>
                   <div className="grid grid-cols-2 gap-2  p-3">
                     <div className="flex flex-col gap-2 p-4 hover:placeholder:text-space-black">
                       <p>First Name (EN)</p>
@@ -222,21 +230,34 @@ const CreateTicketModal: React.FC<Props> = ({ isOpen, onClose, setIsOpen }) => {
                 <div className="flex gap-4 items-center justify-center ">
                   <button
                     className=" bg-gradient-to-tr from-deep-blue to-bright-red w-64 h-14 rounded-[30px] text-white"
-                    // onClick={openModal}
+                    onClick={() => {
+                      openModal();
+                    }}
                   >
                     Create Ticket
                   </button>
                   {/* <button onClick={() => setIsOpen(false)}>Cancel</button> */}
                 </div>
-                {/* <CreateTicketSuccess
-                  isOpen={isModalOpen}
-                  onclose={closeModal}
-                /> */}
+                {/* {isCreateTicketSuccessModalOpen && (
+                  <CreateTicketSuccess
+                    // initialTicket={ticketManagement.ticketId}
+                    isOpen={isCreateTicketSuccessModalOpen}
+                    setIsOpen={setIsCreateTicketSuccessModalOpen}
+                    onClose={() => setIsCreateTicketSuccessModalOpen(false)}
+                  />
+                )} */}
               </DialogPanel>
-            </div>
+            </motion.div>
           </div>
-        </Dialog>
-      </Transition>
+        </div>
+      </Dialog>
+
+      <CreateTicketSuccess
+        // initialTicket={i}
+        isOpen={isCreateTicketSuccessModalOpen}
+        setIsOpen={setIsCreateTicketSuccessModalOpen}
+        onClose={() => setIsCreateTicketSuccessModalOpen(false)}
+      />
     </>
   );
 };
