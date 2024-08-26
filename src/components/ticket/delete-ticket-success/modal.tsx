@@ -25,7 +25,9 @@ const DeleteTicketSuccess: React.FC<Props> = ({
     <>
       <Dialog
         open={isOpen}
-        onClose={() => (onClose ? onClose() : setIsOpen(false))}
+        onClose={() => {
+          onClose ? onClose() : setIsOpen(false);
+        }}
         className="relative z-50"
       >
         <DialogBackdrop className="fixed inset-0 bg-black/30" />

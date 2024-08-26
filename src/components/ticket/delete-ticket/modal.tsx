@@ -10,6 +10,8 @@ import {
 import { motion } from "framer-motion";
 import React, { Dispatch, Fragment, SetStateAction, useState } from "react";
 import DeleteTicketSuccessModal from "../delete-ticket-success/modal";
+import { deleteTicket } from "@/actions/deleteticket.action";
+import { Spinner } from "@nextui-org/react";
 
 interface Props {
   isOpen: boolean;
@@ -26,6 +28,7 @@ const DeleteTicketModal: React.FC<Props> = ({
 }) => {
   const [isDeleteTicketSuccessModalOpen, setIsDeleteTicketSuccessModalOpen] =
     useState(false);
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
   const openModal = () => {
     setIsDeleteTicketSuccessModalOpen(true);
@@ -35,6 +38,19 @@ const DeleteTicketModal: React.FC<Props> = ({
       setIsOpen(false);
     }
   };
+
+  // const [ticketId, setTicketId] = useState<string>("");
+  // async function deleteTicket(keyword?: string) {
+  //   const response
+  // }
+
+  async function handleDeleteTicket() {
+    setIsDeleting(true);
+    await deleteTicket({ ticketId: initialTicket.ticketId });
+    setIsDeleteTicketSuccessModalOpen(true);
+    setIsDeleting(false);
+  }
+
   return (
     <>
       <Dialog
@@ -96,10 +112,11 @@ const DeleteTicketModal: React.FC<Props> = ({
                   <button
                     className=" bg-gradient-to-tr from-deep-blue to-bright-red w-64 h-14 rounded-[30px] text-white"
                     onClick={() => {
-                      setIsDeleteTicketSuccessModalOpen(true);
+                      handleDeleteTicket();
                     }}
                   >
-                    Delete
+                    {isDeleting && <Spinner />}
+                    {!isDeleting && "Delete"}
                   </button>
                 </div>
               </DialogPanel>

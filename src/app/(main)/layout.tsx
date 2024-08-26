@@ -42,7 +42,25 @@ export default function Layout({
       >
         {/* <div className="mt-3 mb-10 ml-6"> */}
         <div className="flex flex-col w-full pt-10">
-          <div className="pl-6 pb-5">
+          <div className="flex items-center justify-start pl-6 pb-5 space-x-8">
+            {!isSidebarOpen && (
+              <button onClick={toggleSidebar}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.2}
+                  stroke="currentColor"
+                  className="size-10"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3.75 6.5h16.5M3.75 12.5h16.5M3.75 18.5h16.5"
+                  />
+                </svg>
+              </button>
+            )}
             <span className="text-lg md:text-xl lg:text-2xl font-semibold ">
               {getTitle()}
             </span>
