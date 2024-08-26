@@ -1,22 +1,6 @@
 import type { Metadata } from "next";
-import { Inter, Montserrat, Prompt } from "next/font/google";
 import "./globals.css";
 import classNames from "classnames";
-import seenpic from "../../img/image 7.png";
-
-const inter = Inter({ subsets: ["latin"] });
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-prompt",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-});
-const prompt = Prompt({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-prompt",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-});
 
 export const metadata: Metadata = {
   title: "Customer Service",
@@ -30,12 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={classNames(
-          `min-h-screen flex flex-1 overflow-hidden`
-          // "max-h-screen overflow-y-auto"
-        )}
-      >
+      <body className={classNames(`h-screen max-w-screen flex flex-1`)}>
         {children}
       </body>
     </html>

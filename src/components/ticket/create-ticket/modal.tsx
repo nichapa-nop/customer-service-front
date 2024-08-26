@@ -27,6 +27,7 @@ const CreateTicketModal: React.FC<Props> = ({
 }) => {
   const [isCreateTicketSuccessModalOpen, setIsCreateTicketSuccessModalOpen] =
     useState(false);
+  const [isCustomerInfoOpen, setIsCustomerInfoOpen] = useState(true);
 
   const openModal = () => {
     setIsCreateTicketSuccessModalOpen(true);
@@ -76,9 +77,24 @@ const CreateTicketModal: React.FC<Props> = ({
                 {/* </Description> */}
 
                 <div className="bg-white p-6 h-[460px] rounded-xl shadow-light1">
-                  <p className="font-semibold text-[20px] pl-6 pt-2">
-                    Customer Info
-                  </p>
+                  <div className="flex justify-between px-6 pt-2 pb-2">
+                    <p className="font-semibold text-[20px]">Customer Info</p>
+                    {/* <button onClick={() => setIsCustomerInfoOpen(false)}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className="size-10  "
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </button> */}
+                  </div>
+                  {/* {isCustomerInfoOpen && ( */}
                   <div className="grid grid-cols-2 gap-2  p-3">
                     <div className="flex flex-col gap-2 p-4">
                       <p>First Name (EN)</p>
@@ -98,7 +114,7 @@ const CreateTicketModal: React.FC<Props> = ({
                       <p>Phone Number</p>
                       <input
                         className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                        placeholder="0123456789"
+                        placeholder="012 345 6789"
                       ></input>
                     </div>
                     <div className="flex flex-col gap-2 p-4">
@@ -134,6 +150,7 @@ const CreateTicketModal: React.FC<Props> = ({
                       ></input>
                     </div>
                   </div>
+                  {/* )} */}
                 </div>
                 <div className="bg-white p-6 rounded-xl h-[430px] shadow-light1">
                   <p className="font-semibold text-[20px] mb-2  pl-6  pt-2">

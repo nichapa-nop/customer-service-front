@@ -68,33 +68,13 @@ export default function TicketManagementClient({
     getTicketList(page);
   }, [page]);
 
-  useEffect(() => {
-    const fetchTickets = async () => {
-      try {
-        const response = await fetch("/api/tickets"); // Adjust API endpoint as needed
-        const data: ITicketListResponse = await response.json();
-        setTickets(data.tickets);
-      } catch (error) {
-        console.error("Error fetching tickets:", error);
-      }
-    };
-
-    fetchTickets();
-  }, []);
-
   return (
-    <div className="bg-white h-full w-full flex ">
+    <div className="bg-white h-full w-full flex">
       <div className="w-full">
         <div className="flex w-full items-center justify-center ">
-          <div className="h-screen w-full  shadow-lg rounded-lg  items-center justify-center">
+          <div className="h-screen w-full shadow-lg rounded-lg  items-center justify-center">
             {/* <div className="pt-6 px-6 p-2"> */}
             <div className="pt-6">
-              <div className="mt-3 mb-10 ml-6">
-                <span className="text-lg md:text-xl lg:text-2xl font-semibold ">
-                  Ticket Management
-                </span>
-              </div>
-
               <div className=" flex flex-col h-full mx-6 text-[14px]">
                 <div className="grid grid-cols-7 space-x-4 h-[44px]  justify-center items-center mb-2">
                   <label className="flex items-center col-span-4 h-full rounded-[20px] px-4 space-x-3 shadow-light2">
@@ -266,7 +246,7 @@ export default function TicketManagementClient({
                         <input
                           type="checkbox"
                           className="appearance-none rounded-md cursor-pointer checked:bg-gradient-to-tr from-deep-blue to-bright-red w-[27px] h-[27px] border-light-gray1 border-[2px] relative
-             checked:after:content-[''] checked:after:absolute checked:after:left-[8px] checked:after:top-[3px] checked:after:w-[7px] checked:after:h-[14px] checked:after:border-white checked:after:border-r-[2px] checked:after:border-b-[2px] checked:after:rotate-45"
+                            checked:after:content-[''] checked:after:absolute checked:after:left-[8px] checked:after:top-[3px] checked:after:w-[7px] checked:after:h-[14px] checked:after:border-white checked:after:border-r-[2px] checked:after:border-b-[2px] checked:after:rotate-45"
                         ></input>
                       </th>
                       <th>Ticket ID</th>

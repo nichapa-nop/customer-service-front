@@ -41,6 +41,10 @@ const config: Config = {
         light2:
           "0 -10px 20px -5px rgba(0, 0, 0, 0.045), 0 8px 12px -2px rgba(0, 0, 0, 0.045)",
       },
+      transitionProperty: {
+        width: "width",
+        spacing: "margin, padding",
+      },
     },
   },
   plugins: [nextui(), require("daisyui")],
