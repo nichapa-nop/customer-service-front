@@ -15,20 +15,11 @@ export default function TicketManagementClient({
   tickets: TicketResponse[];
 }) {
   const [page, setPage] = useState<number>(1);
-  // const [tickets, setTickets] = useState<TicketResponse[]>(initialTickets);
   const [pageCount, setPageCount] = useState<number>();
-
-  // const { activeModal, openModal, closeModal, isModalOpen } = useModalManager();
   const { activeModal, openModal, closeModal, isModalOpen } = useModalManager();
-
   const [isCreateTicketModalOpen, setIsCreateTicketModalOpen] =
     useState<boolean>(false);
-
-  // const [checkedRows, setCheckedRows] = useState<{ [key: string]: boolean }>(
-  //   {}
-  // );
   const [itemCount, setItemCount] = useState<number>(0);
-
   const [isEditTicketModalOpen, setIsEditModalOpen] = useState<boolean>(false);
   // const [focusEditTicket, setFocusEditTicket] = useState<TicketResponse>();
   const [searchKeyword, setSearchKeyword] = useState<string>();
@@ -43,7 +34,6 @@ export default function TicketManagementClient({
   const [focusEditTicket, setFocusEditTicket] = useState<
     TicketResponse | undefined
   >(undefined);
-  // const [isModalOpen, setIsModalOpen] = useState<Record<string, boolean>>({});
 
   async function getTicketList(page: number = 1, keyword?: string) {
     const response = await getTicket({ page, keyword });
