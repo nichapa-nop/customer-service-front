@@ -42,19 +42,20 @@ export async function ApiManager<
       Authorization: useAccessToken
         ? `Bearer ${cookies().get("accessToken")?.value}`
         : "",
+      "Content-Type": "application/json",
     },
     method,
     body: body ? JSON.stringify(body) : undefined,
   });
 
   const success = response.ok;
+  const responseData = await response.json();
   if (!success) {
     if ([401, 403].includes(response.status)) {
       redirect("/login");
     }
-    return { success, data: null };
+    return { success, data: null, ...responseData };
   }
-  const responseData = await response.json();
   return {
     success,
     data: responseData,

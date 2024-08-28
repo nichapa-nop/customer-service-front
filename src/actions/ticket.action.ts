@@ -1,19 +1,22 @@
 "use server";
 
 import { ApiManager } from "@/api";
+import { ticketSchema } from "@/schemas/ticket.schema";
+import { z } from "zod";
 
-export async function createTicket({}) {
+export async function createTicket(data: any) {
   const response = await ApiManager<
     TicketResponse,
     never,
-    CreateTicketRequestBody
+    z.infer<typeof ticketSchema>
   >({
     path: "/ticket",
     method: "POST",
+    body: data,
   });
   if (response.success && response.data) {
     return {
-      // data: response.data.ticket
+      data: response.data,
       success: true,
     };
   } else {

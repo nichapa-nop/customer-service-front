@@ -15,6 +15,7 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import { ticketSchema } from "@/schemas/ticket.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { createTicket } from "@/actions/ticket.action";
 
 interface Props {
   isOpen: boolean;
@@ -27,6 +28,17 @@ type TicketSchema = z.infer<typeof ticketSchema>;
 
 const processForm: SubmitHandler<TicketSchema> = async (data) => {
   console.log(data);
+  try {
+    const result = await createTicket(data);
+    if (result.success) {
+      console.log("Ticket created successfully:", result.data);
+      // openModal(); // Open the success modal
+    }
+  } catch (error) {
+    console.error("Error creating ticket:", error);
+    // Handle error (e.g., show an error message to the user)
+    alert("Failed to create ticket. Please try again.");
+  }
 };
 
 const CreateTicketModal: React.FC<Props> = ({
@@ -37,7 +49,6 @@ const CreateTicketModal: React.FC<Props> = ({
 }) => {
   const [isCreateTicketSuccessModalOpen, setIsCreateTicketSuccessModalOpen] =
     useState(false);
-  const [isCustomerInfoOpen, setIsCustomerInfoOpen] = useState(true);
 
   const openModal = () => {
     setIsCreateTicketSuccessModalOpen(true);
@@ -58,6 +69,19 @@ const CreateTicketModal: React.FC<Props> = ({
     defaultValues: {
       cusFirstName: "",
       cusLastName: "",
+      cusPhoneNum: "",
+      cusEmail: "",
+      cusCompanyName: "",
+      cusCompanyType: "",
+      topic: "",
+      description: "",
+      platform: "",
+      incidentType: "",
+      businessImpact: "",
+      assignTo: "",
+      status: "",
+      feedbackCh: "",
+      ticketLink: "",
     },
   });
 
@@ -150,17 +174,49 @@ const CreateTicketModal: React.FC<Props> = ({
                     </div>
                     <div className="flex flex-col gap-2 p-4">
                       <p>Last Name (EN)</p>
-                      <input
-                        className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                        placeholder="Nopparat"
-                      ></input>
+                      <Controller
+                        control={control}
+                        name="cusLastName"
+                        render={({
+                          field: { value, name, onChange, onBlur },
+                        }) => {
+                          return (
+                            <input
+                              id="lastName"
+                              type="text"
+                              className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                              placeholder="Nopparat"
+                              value={value}
+                              name={name}
+                              onChange={onChange}
+                              onBlur={onBlur}
+                            ></input>
+                          );
+                        }}
+                      />
                     </div>
                     <div className="flex flex-col gap-2 p-4">
                       <p>Phone Number</p>
-                      <input
-                        className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                        placeholder="012 345 6789"
-                      ></input>
+                      <Controller
+                        control={control}
+                        name="cusPhoneNum"
+                        render={({
+                          field: { value, name, onChange, onBlur },
+                        }) => {
+                          return (
+                            <input
+                              id="PhoneNum"
+                              type="text"
+                              className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                              placeholder="012 345 6789"
+                              value={value}
+                              name={name}
+                              onChange={onChange}
+                              onBlur={onBlur}
+                            ></input>
+                          );
+                        }}
+                      />
                     </div>
                     <div className="flex flex-col gap-2 p-4">
                       <p>Type</p>
@@ -168,31 +224,75 @@ const CreateTicketModal: React.FC<Props> = ({
                         className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                         placeholder="Select"
                       ></input> */}
-                      <Select
-                        name="Type"
-                        className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                      >
-                        <option disabled selected>
-                          Select
-                        </option>
-                        <option>CDD</option>
-                        <option>HR</option>
-                        <option>OTHER</option>
-                      </Select>
+                      <Controller
+                        control={control}
+                        name="cusCompanyType" // Assuming 'cusCompanyType' is the correct field name in your schema
+                        render={({
+                          field: { onChange, onBlur, value, name },
+                        }) => (
+                          <select
+                            id="Type"
+                            name={name}
+                            value={value}
+                            onChange={onChange}
+                            onBlur={onBlur}
+                            className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                          >
+                            <option value="" disabled>
+                              Select
+                            </option>
+                            <option value="cdd">CDD</option>
+                            <option value="hr">HR</option>
+                            <option value="other">OTHER</option>
+                          </select>
+                        )}
+                      />
                     </div>
                     <div className=" flex flex-col gap-2 p-4">
                       <p>Email</p>
-                      <input
-                        className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                        placeholder="ee@baseplayhouse.co"
-                      ></input>
+                      <Controller
+                        control={control}
+                        name="cusEmail"
+                        render={({
+                          field: { value, name, onChange, onBlur },
+                        }) => {
+                          return (
+                            <input
+                              id="email"
+                              type="text"
+                              value={value}
+                              name={name}
+                              onChange={onChange}
+                              onBlur={onBlur}
+                              className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                              placeholder="ee@baseplayhouse.co"
+                            ></input>
+                          );
+                        }}
+                      />
                     </div>
                     <div className=" flex flex-col gap-2 p-4">
                       <p>Company Name</p>
-                      <input
-                        className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                        placeholder="BASE PLAYHOUSE CO. TLD."
-                      ></input>
+                      <Controller
+                        control={control}
+                        name="cusCompanyName"
+                        render={({
+                          field: { value, name, onChange, onBlur },
+                        }) => {
+                          return (
+                            <input
+                              id="CompanyName"
+                              type="text"
+                              value={value}
+                              name={name}
+                              onChange={onChange}
+                              onBlur={onBlur}
+                              className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                              placeholder="BASE PLAYHOUSE CO. TLD."
+                            ></input>
+                          );
+                        }}
+                      />
                     </div>
                   </div>
                   {/* )} */}
@@ -204,38 +304,150 @@ const CreateTicketModal: React.FC<Props> = ({
                   <div className="grid grid-cols-2 gap-2  p-3">
                     <div className="flex flex-col gap-2 p-4">
                       <p>Platform</p>
-                      <input
-                        className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                        placeholder="Select"
-                      ></input>
+                      <Controller
+                        control={control}
+                        name="platform"
+                        render={({
+                          field: { value, name, onChange, onBlur },
+                        }) => {
+                          return (
+                            <select
+                              id="platform"
+                              name={name}
+                              value={value}
+                              onChange={onChange}
+                              onBlur={onBlur}
+                              className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                            >
+                              <option value="" disabled>
+                                Select
+                              </option>
+                              <option value="cdd">CDD</option>
+                              <option value="hr">HR</option>
+                            </select>
+                          );
+                        }}
+                      />
                     </div>
                     <div className="flex flex-col gap-2 p-4">
                       <p>Incident Type</p>
-                      <input
-                        className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                        placeholder="Select"
-                      ></input>
+                      <Controller
+                        control={control}
+                        name="incidentType"
+                        render={({
+                          field: { value, name, onChange, onBlur },
+                        }) => {
+                          return (
+                            <select
+                              value={value}
+                              name={name}
+                              onChange={onChange}
+                              onBlur={onBlur}
+                              className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                            >
+                              <option value="" disabled>
+                                Select
+                              </option>
+                              <option value="issue">Issue</option>
+                              <option value="consult">Consult</option>
+                              <option value="other">Other</option>
+                            </select>
+                          );
+                        }}
+                      />
                     </div>
                     <div className="flex flex-col gap-2 p-4">
                       <p>Business Impact</p>
-                      <input
-                        className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                        placeholder="Select"
-                      ></input>
+                      <Controller
+                        control={control}
+                        name="businessImpact"
+                        render={({
+                          field: { value, name, onChange, onBlur },
+                        }) => {
+                          return (
+                            <select
+                              value={value}
+                              name={name}
+                              onChange={onChange}
+                              onBlur={onBlur}
+                              className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                            >
+                              <option value="" disabled>
+                                Select
+                              </option>
+                              <option value="s1">S1</option>
+                              <option value="s2">S2</option>
+                              <option value="s3">S3</option>
+                              <option value="s4">S4</option>
+                              <option value="no">No</option>
+                            </select>
+                          );
+                        }}
+                      />
                     </div>
                     <div className="flex flex-col gap-2 p-4">
                       <p>Feedback Channels</p>
-                      <input
-                        className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                        placeholder="Select"
-                      ></input>
+                      <Controller
+                        control={control}
+                        name="feedbackCh"
+                        render={({
+                          field: { value, name, onChange, onBlur },
+                        }) => {
+                          return (
+                            <select
+                              value={value}
+                              name={name}
+                              onChange={onChange}
+                              onBlur={onBlur}
+                              className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                            >
+                              <option value="" disabled>
+                                Select
+                              </option>
+                              <option value="help crunch">help crunch</option>
+                              <option value="phone">Phone</option>
+                              <option value="email">Email</option>
+                              <option value="line">Line</option>
+                              <option value="ticket">Ticket</option>
+                              <option value="base employee">
+                                BASE employee
+                              </option>
+                            </select>
+                          );
+                        }}
+                      />
                     </div>
                     <div className="flex flex-col gap-2 p-4">
                       <p>Ticket Link</p>
-                      <input
-                        className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                        placeholder="Select"
-                      ></input>
+                      <Controller
+                        control={control}
+                        name="ticketLink"
+                        render={({
+                          field: { value, name, onChange, onBlur },
+                        }) => {
+                          return (
+                            <select
+                              value={value}
+                              name={name}
+                              onChange={onChange}
+                              onBlur={onBlur}
+                              className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                            >
+                              <option value="" disabled>
+                                Select
+                              </option>
+                              <option value="help crunch">help crunch</option>
+                              <option value="phone">Phone</option>
+                              <option value="email">Email</option>
+                              <option value="line">Line</option>
+                              <option value="ticket">Ticket</option>
+                              <option value="base employee">
+                                BASE employee
+                              </option>
+                            </select>
+                          );
+                        }}
+                      />
                     </div>
                   </div>
                 </div>
@@ -246,18 +458,49 @@ const CreateTicketModal: React.FC<Props> = ({
                   <div className=" p-3">
                     <div className="flex flex-col gap-2 p-4">
                       <p>Topic</p>
-                      <input
-                        className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                        placeholder="Text"
-                      ></input>
+                      <Controller
+                        control={control}
+                        name="topic"
+                        render={({
+                          field: { value, name, onChange, onBlur },
+                        }) => {
+                          return (
+                            <input
+                              id="topic"
+                              type="text"
+                              value={value}
+                              name={name}
+                              onChange={onChange}
+                              onBlur={onBlur}
+                              className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                              placeholder="Text"
+                            ></input>
+                          );
+                        }}
+                      />
                     </div>
                     <div className="flex flex-col gap-2 p-4">
                       <p>Description</p>
-                      <textarea
-                        className="bg-light-gray2 resize-none w-full h-[240px] rounded-[15px] p-4 hover:placeholder:text-space-black"
-                        placeholder="Text"
-                        // defaultValue={initialTicket.description}
-                      ></textarea>
+                      <Controller
+                        control={control}
+                        name="description"
+                        render={({
+                          field: { value, name, onChange, onBlur },
+                        }) => {
+                          return (
+                            <textarea
+                              id="description"
+                              value={value}
+                              name={name}
+                              onChange={onChange}
+                              onBlur={onBlur}
+                              className="bg-light-gray2 resize-none w-full h-[240px] rounded-[15px] p-4 hover:placeholder:text-space-black"
+                              placeholder="Text"
+                              // defaultValue={initialTicket.description}
+                            ></textarea>
+                          );
+                        }}
+                      />
                     </div>
                   </div>
                 </div>
@@ -280,10 +523,26 @@ const CreateTicketModal: React.FC<Props> = ({
                     </div>
                     <div className="col-span-2 flex flex-col gap-2 p-4">
                       <p>Assign To</p>
-                      <input
-                        className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                        placeholder="ee@baseplayhouse.co"
-                      ></input>
+                      <Controller
+                        control={control}
+                        name="assignTo"
+                        render={({
+                          field: { value, name, onChange, onBlur },
+                        }) => {
+                          return (
+                            <input
+                              id="assignTo"
+                              type="email"
+                              value={value}
+                              name={name}
+                              onChange={onChange}
+                              onBlur={onBlur}
+                              className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                              placeholder="ee@baseplayhouse.co"
+                            ></input>
+                          );
+                        }}
+                      />
                     </div>
                   </div>
                 </div>
