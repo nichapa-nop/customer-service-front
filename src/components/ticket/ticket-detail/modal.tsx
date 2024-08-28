@@ -7,6 +7,7 @@ import {
   Transition,
 } from "@headlessui/react";
 import { motion } from "framer-motion";
+import { init } from "next/dist/compiled/webpack/webpack";
 import React, { Dispatch, SetStateAction } from "react";
 
 interface Props {
@@ -97,37 +98,37 @@ const TicketDetail: React.FC<Props> = ({
                     <div className="flex flex-col gap-4 p-4">
                       <p>First Name (EN)</p>
                       <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
-                        Nichapa
+                        {initialTicket.cusFirstName}
                       </span>
                     </div>
                     <div className="flex flex-col gap-4 p-4">
                       <p>Last Name (EN)</p>
                       <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
-                        Nopparat
+                        {initialTicket.cusLastName}
                       </span>
                     </div>
                     <div className="flex flex-col gap-4 p-4">
                       <p>Phone Number</p>
                       <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
-                        0123456789
+                        {initialTicket.cusPhoneNum}
                       </span>
                     </div>
                     <div className="flex flex-col gap-4 p-4">
                       <p>Type</p>
                       <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text uppercase">
-                        HR
+                        {initialTicket.cusCompanyType}
                       </span>
                     </div>
                     <div className=" flex flex-col gap-4 p-4">
                       <p>Email</p>
                       <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text lowercase">
-                        No.nichapa@baseplayhouse.co
+                        {initialTicket.cusEmail}
                       </span>
                     </div>
                     <div className=" flex flex-col gap-4 p-4">
                       <p>Company Name</p>
                       <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text uppercase">
-                        Nichapa
+                        {initialTicket.cusCompanyName}
                       </span>
                     </div>
                   </div>

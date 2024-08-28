@@ -1,7 +1,25 @@
 "use server";
 
 import { ApiManager } from "@/api";
-import { cookies } from "next/headers";
+
+export async function createTicket({}) {
+  const response = await ApiManager<
+    TicketResponse,
+    never,
+    CreateTicketRequestBody
+  >({
+    path: "/ticket",
+    method: "POST",
+  });
+  if (response.success && response.data) {
+    return {
+      // data: response.data.ticket
+      success: true,
+    };
+  } else {
+    throw new Error("Failed to fetch data");
+  }
+}
 
 export async function getTicket({
   page = 1,
@@ -35,4 +53,19 @@ export async function getTicketList() {
     useAccessToken: true,
   });
   return response;
+}
+
+export async function deleteTicket({ ticketId }: { ticketId: string }) {
+  const response = await ApiManager<TicketResponse, never, never>({
+    path: `/ticket/${ticketId}`,
+    method: "DELETE",
+  });
+  if (response.success && response.data) {
+    return {
+      // data: response.data.ticket
+      success: true,
+    };
+  } else {
+    throw new Error("Failed to fetch data");
+  }
 }

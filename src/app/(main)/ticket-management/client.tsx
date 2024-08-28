@@ -1,6 +1,6 @@
 "use client";
 
-import { getTicket } from "@/actions/getticket.action";
+import { getTicket } from "@/actions/ticket.action";
 import React, { useEffect, useRef, useState } from "react";
 import CreateTicket from "@/components/ticket/create-ticket/modal";
 import EditTicketModal from "@/components/ticket/edit-ticket/modal";

@@ -11,6 +11,10 @@ import {
 import { motion } from "framer-motion";
 import React, { Dispatch, Fragment, SetStateAction, useState } from "react";
 import CreateTicketSuccess from "../create-ticket-success/modal";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { z } from "zod";
+import { ticketSchema } from "@/schemas/ticket.schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 interface Props {
   isOpen: boolean;
@@ -18,6 +22,12 @@ interface Props {
   onClose?: () => void;
   // initialTicket: TicketResponse;
 }
+
+type TicketSchema = z.infer<typeof ticketSchema>;
+
+const processForm: SubmitHandler<TicketSchema> = async (data) => {
+  console.log(data);
+};
 
 const CreateTicketModal: React.FC<Props> = ({
   isOpen,
@@ -37,6 +47,22 @@ const CreateTicketModal: React.FC<Props> = ({
       setIsOpen(false);
     }
   };
+
+  // const [firstName, setFirstName] = useState<string>("");
+  // const [lastName, setLastName] = useState<string>("");
+  // const [phoneNum, setPhoneNum]
+
+  const { control, watch, handleSubmit } = useForm<TicketSchema>({
+    mode: "onChange",
+    resolver: zodResolver(ticketSchema),
+    defaultValues: {
+      cusFirstName: "",
+      cusLastName: "",
+    },
+  });
+
+  console.log(watch());
+
   return (
     <>
       <Dialog
@@ -45,7 +71,10 @@ const CreateTicketModal: React.FC<Props> = ({
         className="relative z-50 "
       >
         <DialogBackdrop className="fixed inset-0 bg-black/30" />
-        <div className="fixed inset-0 w-screen overflow-y-auto p-1 py-24">
+        <form
+          onSubmit={handleSubmit(processForm)}
+          className="fixed inset-0 w-screen overflow-y-auto p-1 py-24"
+        >
           <div className="flex min-h-full  items-center justify-center">
             <motion.div
               initial={{ opacity: 0 }}
@@ -98,10 +127,26 @@ const CreateTicketModal: React.FC<Props> = ({
                   <div className="grid grid-cols-2 gap-2  p-3">
                     <div className="flex flex-col gap-2 p-4">
                       <p>First Name (EN)</p>
-                      <input
-                        className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                        placeholder="Nichapa"
-                      ></input>
+                      <Controller
+                        control={control}
+                        name="cusFirstName"
+                        render={({
+                          field: { value, name, onChange, onBlur },
+                        }) => {
+                          return (
+                            <input
+                              id="firstName"
+                              type="text"
+                              className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                              placeholder="Nichapa"
+                              value={value}
+                              name={name}
+                              onChange={onChange}
+                              onBlur={onBlur}
+                            ></input>
+                          );
+                        }}
+                      />
                     </div>
                     <div className="flex flex-col gap-2 p-4">
                       <p>Last Name (EN)</p>
@@ -223,17 +268,15 @@ const CreateTicketModal: React.FC<Props> = ({
                   <div className="grid grid-cols-2 gap-2  p-3">
                     <div className="flex flex-col gap-2 p-4 hover:placeholder:text-space-black">
                       <p>First Name (EN)</p>
-                      <input
-                        className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                        placeholder="Nichapa"
-                      ></input>
+                      <p className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4">
+                        Nichapa
+                      </p>
                     </div>
                     <div className="flex flex-col gap-2 p-4">
                       <p>Last Name (EN)</p>
-                      <input
-                        className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                        placeholder="Nopparat"
-                      ></input>
+                      <p className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4">
+                        Nopparat
+                      </p>
                     </div>
                     <div className="col-span-2 flex flex-col gap-2 p-4">
                       <p>Assign To</p>
@@ -247,9 +290,7 @@ const CreateTicketModal: React.FC<Props> = ({
                 <div className="flex gap-4 items-center justify-center ">
                   <button
                     className=" bg-gradient-to-tr from-deep-blue to-bright-red w-64 h-14 rounded-[30px] text-white"
-                    onClick={() => {
-                      openModal();
-                    }}
+                    type="submit"
                   >
                     Create Ticket
                   </button>
@@ -266,7 +307,7 @@ const CreateTicketModal: React.FC<Props> = ({
               </DialogPanel>
             </motion.div>
           </div>
-        </div>
+        </form>
       </Dialog>
 
       <CreateTicketSuccess

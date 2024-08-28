@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.1.2",
+    "@hookform/resolvers": "^3.9.0",
     "@nextui-org/modal": "^2.0.36",
     "@nextui-org/react": "^2.4.2",
     "@nextui-org/spinner": "^2.0.33",
@@ -20,7 +21,9 @@
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18",
-    "react-hot-toast": "^2.4.1"
+    "react-hook-form": "^7.53.0",
+    "react-hot-toast": "^2.4.1",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20",

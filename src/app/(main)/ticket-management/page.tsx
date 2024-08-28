@@ -1,6 +1,6 @@
 "use server";
 
-import { getTicketList } from "@/actions/getticket.action";
+import { getTicketList } from "@/actions/ticket.action";
 import TicketManagementClient from "./client";
 
 async function TicketManagementPage() {

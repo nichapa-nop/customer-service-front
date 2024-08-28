@@ -10,7 +10,7 @@ import {
 import { motion } from "framer-motion";
 import React, { Dispatch, Fragment, SetStateAction, useState } from "react";
 import DeleteTicketSuccessModal from "../delete-ticket-success/modal";
-import { deleteTicket } from "@/actions/deleteticket.action";
+import { deleteTicket } from "@/actions/ticket.action";
 import { Spinner } from "@nextui-org/react";
 
 interface Props {
