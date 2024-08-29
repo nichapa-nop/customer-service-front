@@ -21,7 +21,7 @@ interface ITicketListResponse {
   tickets: TicketResponse[];
 }
 
-interface CreateTicketRequestBodyDTO {
+interface TicketRequestBodyDTO {
   cusFirstName: string;
   cusLastName: string;
   cusPhoneNum: string;
@@ -38,3 +38,21 @@ interface CreateTicketRequestBodyDTO {
   feedbackCh: string;
   ticketLink: string;
 }
+
+// interface EditTicketRequestBodyDTO {
+//   cusFirstName: string;
+//   cusLastName: string;
+//   cusPhoneNum: string;
+//   cusEmail: string;
+//   cusCompanyName: string;
+//   cusCompanyType: string;
+//   topic: string;
+//   description: string;
+//   platform: string;
+//   incidentType: string;
+//   businessImpact: string;
+//   assignTo?: AccountResponse;
+//   status: string;
+//   feedbackCh: string;
+//   ticketLink: string;
+// }

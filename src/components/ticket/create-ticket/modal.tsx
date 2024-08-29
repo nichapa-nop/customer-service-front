@@ -510,13 +510,11 @@ const CreateTicketModal: React.FC<Props> = ({
                   <div className="grid grid-cols-2 gap-2  p-3">
                     <div className="flex flex-col gap-2 p-4 hover:placeholder:text-space-black">
                       <p>First Name (EN)</p>
-                      <p className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4">
-                        Nichapa
-                      </p>
+                      <p className="w-full h-10 rounded-[15px] pl-4">Nichapa</p>
                     </div>
                     <div className="flex flex-col gap-2 p-4">
                       <p>Last Name (EN)</p>
-                      <p className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4">
+                      <p className="w-full h-10 rounded-[15px] pl-4">
                         Nopparat
                       </p>
                     </div>

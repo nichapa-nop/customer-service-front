@@ -8,7 +8,7 @@ export async function createTicket(data: any) {
   const response = await ApiManager<
     TicketResponse,
     never,
-    CreateTicketRequestBodyDTO
+    TicketRequestBodyDTO
   >({
     path: "/ticket",
     method: "POST",
@@ -69,6 +69,33 @@ export async function deleteTicket({ ticketId }: { ticketId: string }) {
       success: true,
     };
   } else {
+    throw new Error("Failed to fetch data");
+  }
+}
+
+export async function editTicket(
+  { ticketId }: { ticketId: string },
+  data: any
+) {
+  const response = await ApiManager<
+    TicketResponse,
+    never,
+    TicketRequestBodyDTO
+  >({
+    path: `/ticket/${ticketId}`,
+    method: "PUT",
+    body: data,
+    next: {
+      revalidateTags: ["get-ticket-list"],
+    },
+  });
+  if (response.success && response.data) {
+    return {
+      data: response.data,
+      success: true,
+    };
+  } else {
+    console.log(response);
     throw new Error("Failed to fetch data");
   }
 }

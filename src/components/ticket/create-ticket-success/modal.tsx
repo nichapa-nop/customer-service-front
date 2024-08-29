@@ -1,11 +1,9 @@
 "use client";
 import {
-  Description,
   Dialog,
   DialogBackdrop,
   DialogPanel,
   DialogTitle,
-  Transition,
 } from "@headlessui/react";
 import { motion } from "framer-motion";
 import { Dispatch, Fragment, SetStateAction, useState } from "react";
@@ -15,8 +13,6 @@ interface Props {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   onClose?: () => void;
   ticketId: string | null; // New prop for ticketId
-
-  // initialTicket: TicketResponse;
 }
 
 const CreateTicketSuccess: React.FC<Props> = ({
@@ -24,10 +20,7 @@ const CreateTicketSuccess: React.FC<Props> = ({
   onClose,
   setIsOpen,
   ticketId,
-  // initialTicket,
 }) => {
-  //   let [isOpen, setIsOpen] = useState(false);
-
   return (
     <>
       <Dialog
