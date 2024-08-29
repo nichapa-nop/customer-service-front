@@ -7,6 +7,7 @@ import { useModalManager } from "@/components/modalmanager/page";
 import TicketRow from "@/components/ticketrow/ticketrow";
 import { getTicketList } from "@/actions/ticket.action";
 import DeleteTicketSuccess from "@/components/ticket/delete-ticket-success/modal";
+import EditTicketSuccess from "@/components/ticket/edit-ticket-success/modal";
 
 type Props = {};
 
@@ -41,6 +42,9 @@ export default function TicketManagementClient({
     useState<boolean>(false);
   const [latestDeleteTicket, setLatestDeleteTicket] =
     useState<TicketResponse>();
+
+  const [isEditTicketSuccessModalOpen, setIsEditTicketSuccessModalOpen] =
+    useState<boolean>(false);
 
   async function fetchLastestTickets(page: number = 1, keyword?: string) {
     const response = await getTicketList({ page, keyword });
@@ -197,7 +201,8 @@ export default function TicketManagementClient({
                   </button>
                   <button
                     type="button"
-                    className="flex flex-row items-center justify-between px-6 bg-gradient-to-tr from-deep-blue to-bright-red text-white h-full rounded-[20px] shadow-light2"
+                    className="flex flex-row items-center justify-center px-6 bg-gradient-to-tr from-deep-blue to-bright-red text-white h-full bg-white rounded-[20px] shadow-light2 space-x-2"
+                    // className="flex flex-row items-center justify-between px-6 bg-gradient-to-tr from-deep-blue to-bright-red text-white h-full rounded-[20px] shadow-light2"
                     onClick={() => openModal("create")}
                   >
                     <svg
@@ -280,6 +285,9 @@ export default function TicketManagementClient({
                           setIsDeleteTicketSuccessModalOpen
                         }
                         setLatestDeleteTicket={setLatestDeleteTicket}
+                        setIsEditSuccessModalOpen={
+                          setIsEditTicketSuccessModalOpen
+                        }
                       />
                     ))}
                   </tbody>
@@ -349,6 +357,12 @@ export default function TicketManagementClient({
                 isOpen={isDeleteTicketSuccessModalOpen}
                 setIsOpen={setIsDeleteTicketSuccessModalOpen}
                 ticketId={latestDeleteTicket.ticketId}
+              />
+            )}
+            {isEditTicketSuccessModalOpen && (
+              <EditTicketSuccess
+                isOpen={isEditTicketSuccessModalOpen}
+                setIsOpen={setIsEditTicketSuccessModalOpen}
               />
             )}
           </div>

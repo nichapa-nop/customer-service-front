@@ -4,6 +4,7 @@ import React, { Dispatch, SetStateAction, useState } from "react";
 import EditTicketModal from "@/components/ticket/edit-ticket/modal"; // Adjust import as necessary
 import DeleteTicketModal from "../ticket/delete-ticket/modal";
 import TicketDetail from "../ticket/ticket-detail/modal";
+import CloseTicketModal from "../ticket/close-ticket/modal";
 
 interface TicketRowProps {
   ticket: TicketResponse;
@@ -11,6 +12,7 @@ interface TicketRowProps {
   handleCheckboxChange: (ticketId: string) => void;
   setIsDeleteSuccessModalOpen: Dispatch<SetStateAction<boolean>>;
   setLatestDeleteTicket: Dispatch<SetStateAction<TicketResponse | undefined>>;
+  setIsEditSuccessModalOpen: Dispatch<SetStateAction<boolean>>;
   //   openModal: (modalType: string) => void;
   //   closeModal: () => void;
   //   isModalOpen: (modalType: string) => boolean;
@@ -22,6 +24,7 @@ const TicketRow: React.FC<TicketRowProps> = ({
   handleCheckboxChange,
   setIsDeleteSuccessModalOpen,
   setLatestDeleteTicket,
+  setIsEditSuccessModalOpen,
   //   setFocusEditTicket,
   //   openModal,
   //   closeModal,
@@ -31,6 +34,8 @@ const TicketRow: React.FC<TicketRowProps> = ({
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
   const [isTicketDetailModalOpen, setIsTicketDetailModalOpen] =
+    useState<boolean>(false);
+  const [isCloseTicketModalOpen, setIsCloseTicketModalOpen] =
     useState<boolean>(false);
 
   const getStatusBackgroundColor = (status: string) => {
@@ -169,13 +174,7 @@ const TicketRow: React.FC<TicketRowProps> = ({
             <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
           </svg>
         </button>
-        {isEditModalOpen && (
-          <EditTicketModal
-            initialTicket={ticket}
-            isOpen={isEditModalOpen}
-            setIsOpen={setIsEditModalOpen}
-          />
-        )}
+
         <button
           onClick={() => {
             setIsDeleteModalOpen(true);
@@ -229,11 +228,27 @@ const TicketRow: React.FC<TicketRowProps> = ({
             setLatestDeleteTicket={setLatestDeleteTicket}
           />
         )}
+        {isEditModalOpen && (
+          <EditTicketModal
+            initialTicket={ticket}
+            isOpen={isEditModalOpen}
+            setIsOpen={setIsEditModalOpen}
+            setIsEditTicketSuccessModalOpen={setIsEditSuccessModalOpen}
+          />
+        )}
         {isTicketDetailModalOpen && (
           <TicketDetail
             initialTicket={ticket}
             isOpen={isTicketDetailModalOpen}
             setIsOpen={setIsTicketDetailModalOpen}
+          />
+        )}
+        {isCloseTicketModalOpen && (
+          <CloseTicketModal
+            // initialTicket={ticket}
+            isOpen={isCloseTicketModalOpen}
+            setIsOpen={setIsCloseTicketModalOpen}
+            // onClose={() => setIsEditTicketSuccessModalOpen(false)}
           />
         )}
       </td>

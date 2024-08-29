@@ -41,7 +41,7 @@ export default function Layout({
         }`}
       >
         {/* <div className="mt-3 mb-10 ml-6"> */}
-        <div className="flex flex-col w-full pt-10">
+        <div className="flex flex-col w-full pt-8">
           <div className="flex items-center justify-start pl-6 pb-5 space-x-8">
             {!isSidebarOpen && (
               <button onClick={toggleSidebar}>

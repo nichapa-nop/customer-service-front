@@ -22,6 +22,7 @@ interface Props {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   initialTicket: TicketResponse;
   onClose?: () => void;
+  setIsEditTicketSuccessModalOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 type TicketSchema = z.infer<typeof ticketSchema>;
@@ -31,6 +32,7 @@ const EditTicketModal: React.FC<Props> = ({
   onClose,
   setIsOpen,
   initialTicket,
+  setIsEditTicketSuccessModalOpen,
 }) => {
   // let [isOpen, setIsOpen] = useState(false);
   // console.log(initialTicket);
@@ -50,21 +52,11 @@ const EditTicketModal: React.FC<Props> = ({
     }
   };
 
-  const [isEditTicketSuccessModalOpen, setIsEditTicketSuccessModalOpen] =
-    useState(false);
+  // const [isEditTicketSuccessModalOpen, setIsEditTicketSuccessModalOpen] =
+  //   useState(false);
   const [isCloseTicketModalOpen, setIsCloseTicketModalOpen] = useState(false);
 
-  const openModal = () => {
-    setIsEditTicketSuccessModalOpen(true);
-    if (onClose) {
-      onClose();
-    } else {
-      setIsOpen(false);
-    }
-  };
-
   const processForm: SubmitHandler<TicketSchema> = async (data) => {
-    console.log(data);
     try {
       const editTicketResponse = await editTicket(
         { ticketId: initialTicket.ticketId },
@@ -72,16 +64,17 @@ const EditTicketModal: React.FC<Props> = ({
       );
 
       if (editTicketResponse.success) {
-        console.log("Ticket edit successfully:", editTicketResponse.data);
-        // setCreatedTicketId(result.data.ticketId); // Save ticket ID
-        // console.log(result.data.ticketId);
-        openModal(); // Open the success modal
+        setIsOpen(false);
+        setIsEditTicketSuccessModalOpen(true);
+
+        // openModal(); // Open the success modal
       }
     } catch (error) {
       console.error("Error edit ticket:", error);
       alert("Failed to edit ticket. Please try again.");
     }
   };
+  const [isEditing, setIsEditing] = useState<boolean>(false);
 
   const { control, watch, handleSubmit } = useForm<TicketSchema>({
     mode: "onChange",
@@ -590,13 +583,6 @@ const EditTicketModal: React.FC<Props> = ({
                     >
                       Close
                     </button>
-                    {isCloseTicketModalOpen && (
-                      <CloseTicketModal
-                        isOpen={isCloseTicketModalOpen}
-                        setIsOpen={setIsCloseTicketModalOpen}
-                        // onClose={() => setIsEditTicketSuccessModalOpen(false)}
-                      />
-                    )}
                   </div>
                   <div className=" flex justify-between py-4 px-7">
                     <div className="flex flex-row items-center space-x-5">

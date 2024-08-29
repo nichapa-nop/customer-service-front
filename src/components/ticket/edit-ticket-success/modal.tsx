@@ -1,3 +1,4 @@
+import { editTicket } from "@/actions/ticket.action";
 import {
   Dialog,
   DialogBackdrop,
@@ -5,13 +6,14 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import { motion } from "framer-motion";
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 
 interface Props {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   //   initialTicket: TicketResponse;
   onClose?: () => void;
+  // ticketId: string;
 }
 
 const EditTicketSuccess: React.FC<Props> = ({

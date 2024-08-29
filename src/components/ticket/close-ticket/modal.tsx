@@ -12,9 +12,15 @@ interface Props {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   onClose?: () => void;
+  // initialticket: TicketResponse[];
 }
 
-const CloseTicketModal: React.FC<Props> = ({ isOpen, onClose, setIsOpen }) => {
+const CloseTicketModal: React.FC<Props> = ({
+  isOpen,
+  onClose,
+  setIsOpen,
+  // initialticket,
+}) => {
   const [isCloseTicketSuccessModalOpen, setIsCloseTicketSuccessModalOpen] =
     useState(false);
 
