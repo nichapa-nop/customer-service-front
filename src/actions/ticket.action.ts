@@ -8,11 +8,14 @@ export async function createTicket(data: any) {
   const response = await ApiManager<
     TicketResponse,
     never,
-    z.infer<typeof ticketSchema>
+    CreateTicketRequestBodyDTO
   >({
     path: "/ticket",
     method: "POST",
     body: data,
+    next: {
+      revalidateTags: ["get-ticket-list"],
+    },
   });
   if (response.success && response.data) {
     return {
@@ -24,7 +27,7 @@ export async function createTicket(data: any) {
   }
 }
 
-export async function getTicket({
+export async function getTicketList({
   page = 1,
   itemsPerPage = 7,
   keyword,
@@ -36,6 +39,9 @@ export async function getTicket({
     path: "/ticket",
     method: "GET",
     query: { page, itemsPerPage, keyword },
+    next: {
+      tags: ["get-ticket-list"],
+    },
   });
   // console.log(keyword);
   if (response.success && response.data) {
@@ -49,19 +55,13 @@ export async function getTicket({
   }
 }
 
-export async function getTicketList() {
-  const response = await ApiManager<ITicketListResponse>({
-    path: "/ticket",
-    method: "GET",
-    useAccessToken: true,
-  });
-  return response;
-}
-
 export async function deleteTicket({ ticketId }: { ticketId: string }) {
   const response = await ApiManager<TicketResponse, never, never>({
     path: `/ticket/${ticketId}`,
     method: "DELETE",
+    next: {
+      revalidateTags: ["get-ticket-list"],
+    },
   });
   if (response.success && response.data) {
     return {

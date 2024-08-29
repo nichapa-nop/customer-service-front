@@ -1,5 +1,5 @@
 // components/TicketRow.tsx
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 // import TicketResponse  from '@/api-interface/ticket.interface'; // Adjust import based on your project structure
 import EditTicketModal from "@/components/ticket/edit-ticket/modal"; // Adjust import as necessary
 import DeleteTicketModal from "../ticket/delete-ticket/modal";
@@ -9,6 +9,8 @@ interface TicketRowProps {
   ticket: TicketResponse;
   checkedRows: Record<string, boolean>;
   handleCheckboxChange: (ticketId: string) => void;
+  setIsDeleteSuccessModalOpen: Dispatch<SetStateAction<boolean>>;
+  setLatestDeleteTicket: Dispatch<SetStateAction<TicketResponse | undefined>>;
   //   openModal: (modalType: string) => void;
   //   closeModal: () => void;
   //   isModalOpen: (modalType: string) => boolean;
@@ -18,6 +20,8 @@ const TicketRow: React.FC<TicketRowProps> = ({
   ticket,
   checkedRows,
   handleCheckboxChange,
+  setIsDeleteSuccessModalOpen,
+  setLatestDeleteTicket,
   //   setFocusEditTicket,
   //   openModal,
   //   closeModal,
@@ -221,6 +225,8 @@ const TicketRow: React.FC<TicketRowProps> = ({
             initialTicket={ticket}
             isOpen={isDeleteModalOpen}
             setIsOpen={setIsDeleteModalOpen}
+            setIsDeleteTicketSuccessModalOpen={setIsDeleteSuccessModalOpen}
+            setLatestDeleteTicket={setLatestDeleteTicket}
           />
         )}
         {isTicketDetailModalOpen && (

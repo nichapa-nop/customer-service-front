@@ -1,11 +1,12 @@
 "use client";
 
-import { getTicket } from "@/actions/ticket.action";
 import React, { useEffect, useRef, useState } from "react";
 import CreateTicket from "@/components/ticket/create-ticket/modal";
 import EditTicketModal from "@/components/ticket/edit-ticket/modal";
 import { useModalManager } from "@/components/modalmanager/page";
 import TicketRow from "@/components/ticketrow/ticketrow";
+import { getTicketList } from "@/actions/ticket.action";
+import DeleteTicketSuccess from "@/components/ticket/delete-ticket-success/modal";
 
 type Props = {};
 
@@ -24,19 +25,25 @@ export default function TicketManagementClient({
   // const [focusEditTicket, setFocusEditTicket] = useState<TicketResponse>();
   const [searchKeyword, setSearchKeyword] = useState<string>();
   const timeoutRef = useRef<NodeJS.Timeout>();
+  const [isPageChanged, setIsPageChanged] = useState<boolean>(false);
 
   const handleCheckboxChange = (ticketId: string) => {
     setCheckedRows((prev) => ({ ...prev, [ticketId]: !prev[ticketId] }));
   };
 
-  const [tickets, setTickets] = useState<TicketResponse[]>([]);
+  const [tickets, setTickets] = useState<TicketResponse[]>(initialTickets);
   const [checkedRows, setCheckedRows] = useState<Record<string, boolean>>({});
   const [focusEditTicket, setFocusEditTicket] = useState<
     TicketResponse | undefined
   >(undefined);
 
-  async function getTicketList(page: number = 1, keyword?: string) {
-    const response = await getTicket({ page, keyword });
+  const [isDeleteTicketSuccessModalOpen, setIsDeleteTicketSuccessModalOpen] =
+    useState<boolean>(false);
+  const [latestDeleteTicket, setLatestDeleteTicket] =
+    useState<TicketResponse>();
+
+  async function fetchLastestTickets(page: number = 1, keyword?: string) {
+    const response = await getTicketList({ page, keyword });
     setTickets(response.data);
     setPageCount(
       Math.ceil(
@@ -49,14 +56,20 @@ export default function TicketManagementClient({
   useEffect(() => {
     clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
-      getTicketList(1, searchKeyword);
+      fetchLastestTickets(1, searchKeyword);
     }, 1000);
   }, [searchKeyword]);
 
   // console.log(page);
   useEffect(() => {
-    getTicketList(page);
+    if (isPageChanged) {
+      fetchLastestTickets(page);
+    }
   }, [page]);
+
+  useEffect(() => {
+    setTickets(initialTickets);
+  }, [initialTickets]);
 
   return (
     <div className="bg-white h-full w-full flex">
@@ -263,6 +276,10 @@ export default function TicketManagementClient({
                         ticket={ticket}
                         checkedRows={checkedRows}
                         handleCheckboxChange={handleCheckboxChange}
+                        setIsDeleteSuccessModalOpen={
+                          setIsDeleteTicketSuccessModalOpen
+                        }
+                        setLatestDeleteTicket={setLatestDeleteTicket}
                       />
                     ))}
                   </tbody>
@@ -273,9 +290,13 @@ export default function TicketManagementClient({
               <footer className="flex justify-between items-center p-3">
                 <div className="mx-4 text-dark-gray">{itemCount} Items</div>
                 <div className=" flex space-x-5 items-center">
+                  {/* {page <= 0 && ( */}
                   <button
                     className="flex bg-light-gray1 h-[34px] w-[34px] rounded-[20px]  items-center justify-center"
-                    onClick={() => setPage(page - 1)}
+                    onClick={() => {
+                      setIsPageChanged(true);
+                      setPage(page - 1);
+                    }}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -292,13 +313,17 @@ export default function TicketManagementClient({
                       />
                     </svg>
                   </button>
+                  {/* )} */}
                   <input
                     className="outline outline-light-gray1 w-20 h-11 rounded-[15px] text-center"
                     placeholder={`${page}`}
                   ></input>
                   <button
                     className="flex bg-light-gray1 h-[34px] w-[34px] rounded-[20px]  items-center justify-center"
-                    onClick={() => setPage(page + 1)}
+                    onClick={() => {
+                      setIsPageChanged(true);
+                      setPage(page + 1);
+                    }}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -319,6 +344,13 @@ export default function TicketManagementClient({
                 </div>
               </footer>
             </div>
+            {isDeleteTicketSuccessModalOpen && latestDeleteTicket && (
+              <DeleteTicketSuccess
+                isOpen={isDeleteTicketSuccessModalOpen}
+                setIsOpen={setIsDeleteTicketSuccessModalOpen}
+                ticketId={latestDeleteTicket.ticketId}
+              />
+            )}
           </div>
         </div>
       </div>

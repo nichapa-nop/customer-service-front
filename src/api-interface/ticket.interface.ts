@@ -21,7 +21,7 @@ interface ITicketListResponse {
   tickets: TicketResponse[];
 }
 
-interface CreateTicketRequestBody {
+interface CreateTicketRequestBodyDTO {
   cusFirstName: string;
   cusLastName: string;
   cusPhoneNum: string;

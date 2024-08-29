@@ -14,6 +14,8 @@ interface Props {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   onClose?: () => void;
+  ticketId: string | null; // New prop for ticketId
+
   // initialTicket: TicketResponse;
 }
 
@@ -21,6 +23,7 @@ const CreateTicketSuccess: React.FC<Props> = ({
   isOpen,
   onClose,
   setIsOpen,
+  ticketId,
   // initialTicket,
 }) => {
   //   let [isOpen, setIsOpen] = useState(false);
@@ -72,7 +75,7 @@ const CreateTicketSuccess: React.FC<Props> = ({
 
                 <div className="flex flex-col h-[120px] rounded-xl items-center justify-center">
                   <p className="font-semibold text-[20px]  mb-3 text-center">
-                    Ticket #INC0000xx has been created!
+                    Ticket #{ticketId} has been created!
                   </p>
                   <p className=" text-[16px] text-center">
                     You can access and manage this ticket details through the

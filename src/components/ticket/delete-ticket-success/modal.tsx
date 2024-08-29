@@ -13,12 +13,14 @@ interface Props {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   onClose?: () => void;
+  ticketId?: string;
 }
 
 const DeleteTicketSuccess: React.FC<Props> = ({
   isOpen,
   onClose,
   setIsOpen,
+  ticketId,
   // initialTicket
 }) => {
   return (
@@ -70,7 +72,7 @@ const DeleteTicketSuccess: React.FC<Props> = ({
 
                 <div className="flex flex-col h-[120px] rounded-xl items-center justify-center">
                   <p className="font-semibold text-[20px]  mb-3 text-center">
-                    Ticket #INC000xx has been deleted
+                    Ticket #{ticketId} has been deleted
                   </p>
                   <p className=" text-[16px]  text-center">
                     You can review the updated ticket list in the 'Ticket

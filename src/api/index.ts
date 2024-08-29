@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { stringify } from "querystring";
@@ -25,6 +26,7 @@ export async function ApiManager<
   useAccessToken = true,
   apiVersion = "v1",
   method,
+  next,
 }: {
   path: string;
   body?: TRequestBody;
@@ -32,12 +34,16 @@ export async function ApiManager<
   useAccessToken?: boolean;
   apiVersion?: "v1" | "v2";
   method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
+  next?: RequestInit["next"] & {
+    revalidateTags?: string[];
+  };
 }): Promise<ApiResponse<TResponseBody>> {
   let targetEndpoint = `${apiEndpoint}/${apiVersion}${path}`;
   if (query) {
     targetEndpoint += `?${stringify(query)}`;
   }
   const response = await fetch(targetEndpoint, {
+    next,
     headers: {
       Authorization: useAccessToken
         ? `Bearer ${cookies().get("accessToken")?.value}`
@@ -50,6 +56,13 @@ export async function ApiManager<
 
   const success = response.ok;
   const responseData = await response.json();
+
+  if (next?.revalidateTags?.length) {
+    next.revalidateTags.forEach((tag) => {
+      revalidateTag(tag);
+    });
+  }
+
   if (!success) {
     if ([401, 403].includes(response.status)) {
       redirect("/login");

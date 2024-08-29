@@ -26,21 +26,6 @@ interface Props {
 
 type TicketSchema = z.infer<typeof ticketSchema>;
 
-const processForm: SubmitHandler<TicketSchema> = async (data) => {
-  console.log(data);
-  try {
-    const result = await createTicket(data);
-    if (result.success) {
-      console.log("Ticket created successfully:", result.data);
-      // openModal(); // Open the success modal
-    }
-  } catch (error) {
-    console.error("Error creating ticket:", error);
-    // Handle error (e.g., show an error message to the user)
-    alert("Failed to create ticket. Please try again.");
-  }
-};
-
 const CreateTicketModal: React.FC<Props> = ({
   isOpen,
   onClose,
@@ -49,6 +34,8 @@ const CreateTicketModal: React.FC<Props> = ({
 }) => {
   const [isCreateTicketSuccessModalOpen, setIsCreateTicketSuccessModalOpen] =
     useState(false);
+
+  const [createdTicketId, setCreatedTicketId] = useState<string | null>(null); // New state for ticket ID
 
   const openModal = () => {
     setIsCreateTicketSuccessModalOpen(true);
@@ -59,9 +46,21 @@ const CreateTicketModal: React.FC<Props> = ({
     }
   };
 
-  // const [firstName, setFirstName] = useState<string>("");
-  // const [lastName, setLastName] = useState<string>("");
-  // const [phoneNum, setPhoneNum]
+  const processForm: SubmitHandler<TicketSchema> = async (data) => {
+    console.log(data);
+    try {
+      const result = await createTicket(data);
+      if (result.success) {
+        console.log("Ticket created successfully:", result.data);
+        setCreatedTicketId(result.data.ticketId); // Save ticket ID
+        console.log(result.data.ticketId);
+        openModal(); // Open the success modal
+      }
+    } catch (error) {
+      console.error("Error creating ticket:", error);
+      alert("Failed to create ticket. Please try again.");
+    }
+  };
 
   const { control, watch, handleSubmit } = useForm<TicketSchema>({
     mode: "onChange",
@@ -574,6 +573,7 @@ const CreateTicketModal: React.FC<Props> = ({
         isOpen={isCreateTicketSuccessModalOpen}
         setIsOpen={setIsCreateTicketSuccessModalOpen}
         onClose={() => setIsCreateTicketSuccessModalOpen(false)}
+        ticketId={createdTicketId} // Pass ticketId here
       />
     </>
   );

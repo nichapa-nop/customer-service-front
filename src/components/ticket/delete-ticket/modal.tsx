@@ -18,6 +18,8 @@ interface Props {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   initialTicket: TicketResponse;
   onClose?: () => void;
+  setIsDeleteTicketSuccessModalOpen: Dispatch<SetStateAction<boolean>>;
+  setLatestDeleteTicket: Dispatch<SetStateAction<TicketResponse | undefined>>;
 }
 
 const DeleteTicketModal: React.FC<Props> = ({
@@ -25,19 +27,10 @@ const DeleteTicketModal: React.FC<Props> = ({
   onClose,
   setIsOpen,
   initialTicket,
+  setIsDeleteTicketSuccessModalOpen,
+  setLatestDeleteTicket,
 }) => {
-  const [isDeleteTicketSuccessModalOpen, setIsDeleteTicketSuccessModalOpen] =
-    useState(false);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
-
-  const openModal = () => {
-    setIsDeleteTicketSuccessModalOpen(true);
-    if (onClose) {
-      onClose();
-    } else {
-      setIsOpen(false);
-    }
-  };
 
   // const [ticketId, setTicketId] = useState<string>("");
   // async function deleteTicket(keyword?: string) {
@@ -46,8 +39,13 @@ const DeleteTicketModal: React.FC<Props> = ({
 
   async function handleDeleteTicket() {
     setIsDeleting(true);
-    await deleteTicket({ ticketId: initialTicket.ticketId });
-    setIsDeleteTicketSuccessModalOpen(true);
+    const deleteResponse = await deleteTicket({
+      ticketId: initialTicket.ticketId,
+    });
+    if (deleteResponse.success) {
+      setIsDeleteTicketSuccessModalOpen(true);
+      setLatestDeleteTicket(initialTicket);
+    }
     setIsDeleting(false);
   }
 
@@ -124,14 +122,6 @@ const DeleteTicketModal: React.FC<Props> = ({
           </div>
         </div>
       </Dialog>
-      <DeleteTicketSuccessModal
-        isOpen={isDeleteTicketSuccessModalOpen}
-        setIsOpen={setIsDeleteTicketSuccessModalOpen}
-        onClose={() => {
-          setIsDeleteTicketSuccessModalOpen(false);
-          setIsOpen(false);
-        }}
-      />
     </>
   );
 };
