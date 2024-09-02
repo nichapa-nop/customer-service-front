@@ -39,6 +39,11 @@ interface TicketRequestBodyDTO {
   ticketLink: string;
 }
 
+interface CloseTicketRequestBodyDTO {
+  email: string;
+  solution: string;
+}
+
 // interface EditTicketRequestBodyDTO {
 //   cusFirstName: string;
 //   cusLastName: string;

@@ -13,6 +13,8 @@ interface TicketRowProps {
   setIsDeleteSuccessModalOpen: Dispatch<SetStateAction<boolean>>;
   setLatestDeleteTicket: Dispatch<SetStateAction<TicketResponse | undefined>>;
   setIsEditSuccessModalOpen: Dispatch<SetStateAction<boolean>>;
+  setIsCloseTicketSuccessModalOpen: Dispatch<SetStateAction<boolean>>;
+  setTargetCloseTicket: Dispatch<SetStateAction<TicketResponse | undefined>>;
   //   openModal: (modalType: string) => void;
   //   closeModal: () => void;
   //   isModalOpen: (modalType: string) => boolean;
@@ -25,6 +27,8 @@ const TicketRow: React.FC<TicketRowProps> = ({
   setIsDeleteSuccessModalOpen,
   setLatestDeleteTicket,
   setIsEditSuccessModalOpen,
+  setIsCloseTicketSuccessModalOpen,
+  setTargetCloseTicket,
   //   setFocusEditTicket,
   //   openModal,
   //   closeModal,
@@ -37,6 +41,8 @@ const TicketRow: React.FC<TicketRowProps> = ({
     useState<boolean>(false);
   const [isCloseTicketModalOpen, setIsCloseTicketModalOpen] =
     useState<boolean>(false);
+  const [focusCloseTicketModal, setFocusCloseTicketModal] =
+    useState<TicketResponse>();
 
   const getStatusBackgroundColor = (status: string) => {
     switch (status.toLowerCase()) {
@@ -234,6 +240,8 @@ const TicketRow: React.FC<TicketRowProps> = ({
             isOpen={isEditModalOpen}
             setIsOpen={setIsEditModalOpen}
             setIsEditTicketSuccessModalOpen={setIsEditSuccessModalOpen}
+            setIsCloseTicketModalOpen={setIsCloseTicketModalOpen}
+            setFocusCloseTicketModal={setFocusCloseTicketModal}
           />
         )}
         {isTicketDetailModalOpen && (
@@ -243,11 +251,14 @@ const TicketRow: React.FC<TicketRowProps> = ({
             setIsOpen={setIsTicketDetailModalOpen}
           />
         )}
-        {isCloseTicketModalOpen && (
+        {isCloseTicketModalOpen && focusCloseTicketModal && (
           <CloseTicketModal
             // initialTicket={ticket}
             isOpen={isCloseTicketModalOpen}
             setIsOpen={setIsCloseTicketModalOpen}
+            ticket={focusCloseTicketModal}
+            setIsCloseTicketSuccess={setIsCloseTicketSuccessModalOpen}
+            setTargetCloseTicket={setTargetCloseTicket}
             // onClose={() => setIsEditTicketSuccessModalOpen(false)}
           />
         )}

@@ -11,12 +11,14 @@ interface Props {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   onClose?: () => void;
+  ticketId: string;
 }
 
 const CloseTicketSuccessModal: React.FC<Props> = ({
   isOpen,
   onClose,
   setIsOpen,
+  ticketId,
 }) => {
   return (
     <>
@@ -65,7 +67,7 @@ const CloseTicketSuccessModal: React.FC<Props> = ({
 
                 <div className="flex flex-col h-[120px] rounded-xl items-center justify-center">
                   <p className="font-semibold text-[20px]  mb-3 text-center">
-                    Ticket #INC000xx has been closed
+                    Ticket #{ticketId} has been closed
                   </p>
                   <p className=" text-[16px] text-center">
                     To re-open this ticket, please access the ticket list page

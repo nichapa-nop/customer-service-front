@@ -23,6 +23,7 @@ export async function createTicket(data: any) {
       success: true,
     };
   } else {
+    console.log(response.data);
     throw new Error("Failed to fetch data");
   }
 }
@@ -81,6 +82,33 @@ export async function editTicket(
     TicketResponse,
     never,
     TicketRequestBodyDTO
+  >({
+    path: `/ticket/${ticketId}`,
+    method: "PUT",
+    body: data,
+    next: {
+      revalidateTags: ["get-ticket-list"],
+    },
+  });
+  if (response.success && response.data) {
+    return {
+      data: response.data,
+      success: true,
+    };
+  } else {
+    console.log(response);
+    throw new Error("Failed to fetch data");
+  }
+}
+
+export async function closeTicket(
+  { ticketId }: { ticketId: string },
+  data: any
+) {
+  const response = await ApiManager<
+    TicketResponse,
+    never,
+    CloseTicketRequestBodyDTO
   >({
     path: `/ticket/${ticketId}`,
     method: "PUT",

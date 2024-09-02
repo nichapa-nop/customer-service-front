@@ -16,4 +16,6 @@ export const ticketSchema = z.object({
   status: z.string(),
   feedbackCh: z.string(),
   ticketLink: z.string(),
+  email: z.string(),
+  solution: z.string(),
 });

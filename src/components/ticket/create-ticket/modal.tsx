@@ -52,8 +52,9 @@ const CreateTicketModal: React.FC<Props> = ({
       const result = await createTicket(data);
       if (result.success) {
         console.log("Ticket created successfully:", result.data);
-        setCreatedTicketId(result.data.ticketId); // Save ticket ID
         console.log(result.data.ticketId);
+
+        setCreatedTicketId(result.data.ticketId); // Save ticket ID
         openModal(); // Open the success modal
       }
     } catch (error) {
@@ -98,7 +99,7 @@ const CreateTicketModal: React.FC<Props> = ({
           onSubmit={handleSubmit(processForm)}
           className="fixed inset-0 w-screen overflow-y-auto p-1 py-24"
         >
-          <div className="flex min-h-full  items-center justify-center">
+          <div className="flex min-h-full items-center justify-center">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -409,7 +410,7 @@ const CreateTicketModal: React.FC<Props> = ({
                               <option value="line">Line</option>
                               <option value="ticket">Ticket</option>
                               <option value="base employee">
-                                BASE employee
+                                BASE Employee
                               </option>
                             </select>
                           );
@@ -432,7 +433,11 @@ const CreateTicketModal: React.FC<Props> = ({
                               onBlur={onBlur}
                               className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                             >
-                              <option value="" disabled>
+                              <option
+                                className="text-dark-gray"
+                                value=""
+                                disabled
+                              >
                                 Select
                               </option>
                               <option value="help crunch">help crunch</option>
@@ -441,7 +446,7 @@ const CreateTicketModal: React.FC<Props> = ({
                               <option value="line">Line</option>
                               <option value="ticket">Ticket</option>
                               <option value="base employee">
-                                BASE employee
+                                BASE Employee
                               </option>
                             </select>
                           );

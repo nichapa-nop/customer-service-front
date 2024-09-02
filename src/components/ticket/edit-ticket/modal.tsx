@@ -23,6 +23,10 @@ interface Props {
   initialTicket: TicketResponse;
   onClose?: () => void;
   setIsEditTicketSuccessModalOpen: Dispatch<SetStateAction<boolean>>;
+  setIsCloseTicketModalOpen: Dispatch<SetStateAction<boolean>>;
+  setFocusCloseTicketModal: Dispatch<
+    SetStateAction<TicketResponse | undefined>
+  >;
 }
 
 type TicketSchema = z.infer<typeof ticketSchema>;
@@ -33,6 +37,8 @@ const EditTicketModal: React.FC<Props> = ({
   setIsOpen,
   initialTicket,
   setIsEditTicketSuccessModalOpen,
+  setIsCloseTicketModalOpen,
+  setFocusCloseTicketModal,
 }) => {
   // let [isOpen, setIsOpen] = useState(false);
   // console.log(initialTicket);
@@ -51,10 +57,6 @@ const EditTicketModal: React.FC<Props> = ({
         return "";
     }
   };
-
-  // const [isEditTicketSuccessModalOpen, setIsEditTicketSuccessModalOpen] =
-  //   useState(false);
-  const [isCloseTicketModalOpen, setIsCloseTicketModalOpen] = useState(false);
 
   const processForm: SubmitHandler<TicketSchema> = async (data) => {
     try {
@@ -170,7 +172,7 @@ const EditTicketModal: React.FC<Props> = ({
                             <input
                               id="firstName"
                               type="text"
-                              className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                              className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 "
                               placeholder="Nichapa"
                               value={value}
                               name={name}
@@ -579,6 +581,8 @@ const EditTicketModal: React.FC<Props> = ({
                       className=" bg-gradient-to-tr from-cancel-bl to-cancel-tr w-28 h-8 rounded-[15px] text-white"
                       onClick={() => {
                         setIsCloseTicketModalOpen(true);
+                        setIsOpen(false);
+                        setFocusCloseTicketModal(initialTicket);
                       }}
                     >
                       Close

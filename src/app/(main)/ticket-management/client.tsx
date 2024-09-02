@@ -8,6 +8,7 @@ import TicketRow from "@/components/ticketrow/ticketrow";
 import { getTicketList } from "@/actions/ticket.action";
 import DeleteTicketSuccess from "@/components/ticket/delete-ticket-success/modal";
 import EditTicketSuccess from "@/components/ticket/edit-ticket-success/modal";
+import CloseTicketSuccessModal from "@/components/ticket/close-ticket-success/modal";
 
 type Props = {};
 
@@ -45,6 +46,10 @@ export default function TicketManagementClient({
 
   const [isEditTicketSuccessModalOpen, setIsEditTicketSuccessModalOpen] =
     useState<boolean>(false);
+
+  const [isCloseTicketSuccessModalOpen, setIsCloseTicketSuccessModalOpen] =
+    useState<boolean>(false);
+  const [targetCloseTicket, setTargetCloseTicket] = useState<TicketResponse>();
 
   async function fetchLastestTickets(page: number = 1, keyword?: string) {
     const response = await getTicketList({ page, keyword });
@@ -288,6 +293,10 @@ export default function TicketManagementClient({
                         setIsEditSuccessModalOpen={
                           setIsEditTicketSuccessModalOpen
                         }
+                        setIsCloseTicketSuccessModalOpen={
+                          setIsCloseTicketSuccessModalOpen
+                        }
+                        setTargetCloseTicket={setTargetCloseTicket}
                       />
                     ))}
                   </tbody>
@@ -363,6 +372,13 @@ export default function TicketManagementClient({
               <EditTicketSuccess
                 isOpen={isEditTicketSuccessModalOpen}
                 setIsOpen={setIsEditTicketSuccessModalOpen}
+              />
+            )}
+            {isCloseTicketSuccessModalOpen && targetCloseTicket && (
+              <CloseTicketSuccessModal
+                isOpen={isCloseTicketSuccessModalOpen}
+                setIsOpen={setIsCloseTicketSuccessModalOpen}
+                ticketId={targetCloseTicket.ticketId}
               />
             )}
           </div>
