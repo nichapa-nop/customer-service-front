@@ -8,7 +8,7 @@ async function TicketManagementPage() {
   // return <TicketManagementClient data={apiResponse} />;
   const getTicketListResponse = await getTicketList({
     page: 1,
-    itemsPerPage: 7,
+    itemsPerPage: 6,
   });
 
   console.log(new Date());

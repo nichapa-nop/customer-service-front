@@ -1,13 +1,7 @@
 "use client";
 import { getAccountList } from "@/actions/account.action";
 import AccountRow from "@/components/accountrow/accountrow";
-import {
-  Description,
-  Dialog,
-  DialogBackdrop,
-  DialogPanel,
-  DialogTitle,
-} from "@headlessui/react";
+
 import React, { useEffect, useRef, useState } from "react";
 
 export default function AccountManagementClient({
@@ -182,50 +176,53 @@ export default function AccountManagementClient({
             </div>
             {/* <div className=" grid grid-rows-9 h-full bg-pink-200 "></div>
             </div> */}
-            <footer className="flex space-x-5 items-center  justify-end p-3 mt-auto">
-              <button
-                className="flex bg-light-gray1 h-[34px] w-[34px] rounded-[20px]  items-center justify-center"
-                // onClick={() => setPage(page - 1)}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="white"
-                  className="size-6"
+            <footer className="flex justify-between items-center p-6 mt-auto">
+              <div className="mx-4 text-dark-gray">{itemCount} Items</div>
+              <div className=" flex space-x-5 items-center">
+                <button
+                  className="flex bg-light-gray1 h-[34px] w-[34px] rounded-[20px]  items-center justify-center"
+                  // onClick={() => setPage(page - 1)}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.75 19.5 8.25 12l7.5-7.5"
-                  />
-                </svg>
-              </button>
-              <input
-                className="outline outline-light-gray1 w-20 h-11 rounded-[15px] text-center"
-                placeholder={`page`}
-              ></input>
-              <button
-                className="flex bg-light-gray1 h-[34px] w-[34px] rounded-[20px]  items-center justify-center"
-                // onClick={() => setPage(page + 1)}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="white"
-                  className="size-6"
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="white"
+                    className="size-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M15.75 19.5 8.25 12l7.5-7.5"
+                    />
+                  </svg>
+                </button>
+                <input
+                  className="outline outline-light-gray1 w-20 h-11 rounded-[15px] text-center"
+                  placeholder={`${page}`}
+                ></input>
+                <button
+                  className="flex bg-light-gray1 h-[34px] w-[34px] rounded-[20px]  items-center justify-center"
+                  // onClick={() => setPage(page + 1)}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                  />
-                </svg>
-              </button>
-              <span>Page 1 from 10</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="white"
+                    className="size-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                    />
+                  </svg>
+                </button>
+                <span>Page {page} from 10</span>
+              </div>
             </footer>
           </div>
         </div>

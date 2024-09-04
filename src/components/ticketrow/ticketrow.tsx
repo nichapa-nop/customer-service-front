@@ -62,7 +62,7 @@ const TicketRow: React.FC<TicketRowProps> = ({
   return (
     <tr
       key={ticket.ticketId}
-      className={`capitalize h-[60px] ${
+      className={`capitalize h-[68px] ${
         checkedRows[ticket.ticketId] ? "bg-light-orange" : ""
       }`}
     >

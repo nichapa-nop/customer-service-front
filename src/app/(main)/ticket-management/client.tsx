@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import CreateTicket from "@/components/ticket/create-ticket/modal";
-import EditTicketModal from "@/components/ticket/edit-ticket/modal";
 import { useModalManager } from "@/components/modalmanager/page";
 import TicketRow from "@/components/ticketrow/ticketrow";
 import { getTicketList } from "@/actions/ticket.action";
@@ -72,15 +71,14 @@ export default function TicketManagementClient({
   }, [initialTickets]);
 
   return (
-    <div className="bg-white w-full flex">
+    <div className="bg-white h-full w-full flex">
       <div className="w-full">
-        <div className="flex w-full">
+        <div className="flex w-full h-full">
           <div className=" w-full flex flex-col justify-between">
-            {/* <div className="pt-6 px-6 p-2"> */}
-            <div className="pt-6">
-              <div className=" flex flex-col mx-6 text-[14px]">
-                <div className="grid grid-cols-7 space-x-4 h-[44px] mb-2">
-                  <label className="flex items-center col-span-4 rounded-[20px] px-4 space-x-3 shadow-light2">
+            <div className="pt-6 p-2">
+              <div className=" flex flex-col">
+                <div className="grid grid-cols-7 space-x-4 h-[44px]  justify-center items-center mb-2 text-[14px] ">
+                  <label className="flex h-full items-center col-span-4 rounded-[20px] px-4 space-x-3 shadow-light2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -226,153 +224,153 @@ export default function TicketManagementClient({
                   />
                 </div>
               </div>
-              {/* <div className="flex flex-col"> */}
-              <div className="overflow-x-auto text-[14px]">
-                <table className="bg-white w-full table-fixed items-center justify-center text-center">
-                  <colgroup>
-                    <col className="w-[7%]" />
-                    <col className="w-[10%]" />
-                    <col className="w-[17%]" />
-                    <col className="w-[11%]" />
-                    <col className="w-[15%]" />
-                    <col className="w-[3%]" />
-                    <col className="w-[15%]" />
-                    <col className="w-[12%]" />
-                    <col className="w-[10%]" />
-                  </colgroup>
-                  <thead>
-                    <tr className="h-[68px] ">
-                      <th className="px-2">
-                        {/* <input
+            </div>
+            {/* <div className="flex flex-col"> */}
+            <div className="overflow-x-auto text-[14px]">
+              <table className="bg-white w-full table-fixed items-center justify-center text-center">
+                <colgroup>
+                  <col className="w-[7%]" />
+                  <col className="w-[10%]" />
+                  <col className="w-[17%]" />
+                  <col className="w-[11%]" />
+                  <col className="w-[15%]" />
+                  <col className="w-[3%]" />
+                  <col className="w-[15%]" />
+                  <col className="w-[12%]" />
+                  <col className="w-[10%]" />
+                </colgroup>
+                <thead>
+                  <tr className="h-[68px] ">
+                    <th className="px-2">
+                      {/* <input
                         type="checkbox"
                         className="appearance-none rounded-md cursor-pointer checked:bg-gradient-to-tr from-deep-blue to-bright-red w-[27px] h-[27px] border-light-gray1 border-[2px]"
                       ></input> */}
-                        <input
-                          type="checkbox"
-                          className="appearance-none rounded-md cursor-pointer checked:bg-gradient-to-tr from-deep-blue to-bright-red w-[27px] h-[27px] border-light-gray1 border-[2px] relative
+                      <input
+                        type="checkbox"
+                        className="appearance-none rounded-md cursor-pointer checked:bg-gradient-to-tr from-deep-blue to-bright-red w-[27px] h-[27px] border-light-gray1 border-[2px] relative
                             checked:after:content-[''] checked:after:absolute checked:after:left-[8px] checked:after:top-[3px] checked:after:w-[7px] checked:after:h-[14px] checked:after:border-white checked:after:border-r-[2px] checked:after:border-b-[2px] checked:after:rotate-45"
-                        ></input>
-                      </th>
-                      <th>Ticket ID</th>
-                      <th className="w-44">Topic</th>
-                      <th>Platform</th>
-                      <th>Incident Type</th>
-                      <th>BI</th>
-                      <th>Assign To</th>
-                      <th>Status</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {/* <tr
+                      ></input>
+                    </th>
+                    <th>Ticket ID</th>
+                    <th>Topic</th>
+                    <th>Platform</th>
+                    <th>Incident Type</th>
+                    <th>BI</th>
+                    <th>Assign To</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* <tr
                   // key={ticket.ticketId}
                   // className={`h-[60px] ${
                   //   checkedRows[ticket.ticketId] ? "bg-light-orange" : ""
                   // }`}
                   >
                   </tr> */}
-                    {tickets.map((ticket) => (
-                      <TicketRow
-                        key={ticket.ticketId}
-                        ticket={ticket}
-                        checkedRows={checkedRows}
-                        handleCheckboxChange={handleCheckboxChange}
-                        setIsDeleteSuccessModalOpen={
-                          setIsDeleteTicketSuccessModalOpen
-                        }
-                        setLatestDeleteTicket={setLatestDeleteTicket}
-                        setIsEditSuccessModalOpen={
-                          setIsEditTicketSuccessModalOpen
-                        }
-                        setIsCloseTicketSuccessModalOpen={
-                          setIsCloseTicketSuccessModalOpen
-                        }
-                        setTargetCloseTicket={setTargetCloseTicket}
-                      />
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              {/* <div className=" grid grid-rows-9 h-full bg-pink-200 "></div>
-            </div> */}
-              <footer className="flex justify-between items-center p-3 mt-auto">
-                <div className="mx-4 text-dark-gray">{itemCount} Items</div>
-                <div className=" flex space-x-5 items-center">
-                  {/* {page <= 0 && ( */}
-                  <button
-                    className="flex bg-light-gray1 h-[34px] w-[34px] rounded-[20px]  items-center justify-center"
-                    onClick={() => {
-                      setIsPageChanged(true);
-                      setPage(page - 1);
-                    }}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="white"
-                      className="size-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M15.75 19.5 8.25 12l7.5-7.5"
-                      />
-                    </svg>
-                  </button>
-                  {/* )} */}
-                  <input
-                    className="outline outline-light-gray1 w-20 h-11 rounded-[15px] text-center"
-                    placeholder={`${page}`}
-                  ></input>
-                  <button
-                    className="flex bg-light-gray1 h-[34px] w-[34px] rounded-[20px]  items-center justify-center"
-                    onClick={() => {
-                      setIsPageChanged(true);
-                      setPage(page + 1);
-                    }}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="white"
-                      className="size-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                      />
-                    </svg>
-                  </button>
-                  <span>Page {page} from 10</span>
-                </div>
-              </footer>
+                  {tickets.map((ticket) => (
+                    <TicketRow
+                      key={ticket.ticketId}
+                      ticket={ticket}
+                      checkedRows={checkedRows}
+                      handleCheckboxChange={handleCheckboxChange}
+                      setIsDeleteSuccessModalOpen={
+                        setIsDeleteTicketSuccessModalOpen
+                      }
+                      setLatestDeleteTicket={setLatestDeleteTicket}
+                      setIsEditSuccessModalOpen={
+                        setIsEditTicketSuccessModalOpen
+                      }
+                      setIsCloseTicketSuccessModalOpen={
+                        setIsCloseTicketSuccessModalOpen
+                      }
+                      setTargetCloseTicket={setTargetCloseTicket}
+                    />
+                  ))}
+                </tbody>
+              </table>
             </div>
-            {isDeleteTicketSuccessModalOpen && latestDeleteTicket && (
-              <DeleteTicketSuccess
-                isOpen={isDeleteTicketSuccessModalOpen}
-                setIsOpen={setIsDeleteTicketSuccessModalOpen}
-                ticketId={latestDeleteTicket.ticketId}
-              />
-            )}
-            {isEditTicketSuccessModalOpen && (
-              <EditTicketSuccess
-                isOpen={isEditTicketSuccessModalOpen}
-                setIsOpen={setIsEditTicketSuccessModalOpen}
-              />
-            )}
-            {isCloseTicketSuccessModalOpen && targetCloseTicket && (
-              <CloseTicketSuccessModal
-                isOpen={isCloseTicketSuccessModalOpen}
-                setIsOpen={setIsCloseTicketSuccessModalOpen}
-                ticketId={targetCloseTicket.ticketId}
-              />
-            )}
+            {/* <div className=" grid grid-rows-9 h-full bg-pink-200 "></div>
+            </div> */}
+            <footer className="flex justify-between items-center p-6 mt-auto">
+              <div className="mx-4 text-dark-gray">{itemCount} Items</div>
+              <div className=" flex space-x-5 items-center">
+                {/* {page <= 0 && ( */}
+                <button
+                  className="flex bg-light-gray1 h-[34px] w-[34px] rounded-[20px]  items-center justify-center"
+                  onClick={() => {
+                    setIsPageChanged(true);
+                    setPage(page - 1);
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="white"
+                    className="size-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M15.75 19.5 8.25 12l7.5-7.5"
+                    />
+                  </svg>
+                </button>
+                {/* )} */}
+                <input
+                  className="outline outline-light-gray1 w-20 h-11 rounded-[15px] text-center"
+                  placeholder={`${page}`}
+                ></input>
+                <button
+                  className="flex bg-light-gray1 h-[34px] w-[34px] rounded-[20px]  items-center justify-center"
+                  onClick={() => {
+                    setIsPageChanged(true);
+                    setPage(page + 1);
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="white"
+                    className="size-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                    />
+                  </svg>
+                </button>
+                <span>Page {page} from 10</span>
+              </div>
+            </footer>
           </div>
+          {isDeleteTicketSuccessModalOpen && latestDeleteTicket && (
+            <DeleteTicketSuccess
+              isOpen={isDeleteTicketSuccessModalOpen}
+              setIsOpen={setIsDeleteTicketSuccessModalOpen}
+              ticketId={latestDeleteTicket.ticketId}
+            />
+          )}
+          {isEditTicketSuccessModalOpen && (
+            <EditTicketSuccess
+              isOpen={isEditTicketSuccessModalOpen}
+              setIsOpen={setIsEditTicketSuccessModalOpen}
+            />
+          )}
+          {isCloseTicketSuccessModalOpen && targetCloseTicket && (
+            <CloseTicketSuccessModal
+              isOpen={isCloseTicketSuccessModalOpen}
+              setIsOpen={setIsCloseTicketSuccessModalOpen}
+              ticketId={targetCloseTicket.ticketId}
+            />
+          )}
         </div>
       </div>
     </div>

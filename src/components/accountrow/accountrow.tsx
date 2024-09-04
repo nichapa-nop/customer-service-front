@@ -21,7 +21,7 @@ const AccountRow: React.FC<AccountRowProps> = ({ account }) => {
   };
 
   return (
-    <tr key={account.uuid} className="h-[68px]">
+    <tr key={account.uuid} className="h-[68px] hover:bg-light-orange">
       <td className="w-[20%]">
         <div className="flex flex-col items-start pl-10">
           <span className="truncate">

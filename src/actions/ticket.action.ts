@@ -46,7 +46,7 @@ export async function createTicket(data: any) {
 
 export async function getTicketList({
   page = 1,
-  itemsPerPage = 7,
+  itemsPerPage = 6,
   keyword,
 }: { page?: number; itemsPerPage?: number; keyword?: string } = {}) {
   const response = await ApiManager<{
