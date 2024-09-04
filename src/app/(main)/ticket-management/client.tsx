@@ -20,11 +20,7 @@ export default function TicketManagementClient({
   const [page, setPage] = useState<number>(1);
   const [pageCount, setPageCount] = useState<number>();
   const { activeModal, openModal, closeModal, isModalOpen } = useModalManager();
-  const [isCreateTicketModalOpen, setIsCreateTicketModalOpen] =
-    useState<boolean>(false);
   const [itemCount, setItemCount] = useState<number>(0);
-  const [isEditTicketModalOpen, setIsEditModalOpen] = useState<boolean>(false);
-  // const [focusEditTicket, setFocusEditTicket] = useState<TicketResponse>();
   const [searchKeyword, setSearchKeyword] = useState<string>();
   const timeoutRef = useRef<NodeJS.Timeout>();
   const [isPageChanged, setIsPageChanged] = useState<boolean>(false);
@@ -35,10 +31,6 @@ export default function TicketManagementClient({
 
   const [tickets, setTickets] = useState<TicketResponse[]>(initialTickets);
   const [checkedRows, setCheckedRows] = useState<Record<string, boolean>>({});
-  const [focusEditTicket, setFocusEditTicket] = useState<
-    TicketResponse | undefined
-  >(undefined);
-
   const [isDeleteTicketSuccessModalOpen, setIsDeleteTicketSuccessModalOpen] =
     useState<boolean>(false);
   const [latestDeleteTicket, setLatestDeleteTicket] =
@@ -46,7 +38,6 @@ export default function TicketManagementClient({
 
   const [isEditTicketSuccessModalOpen, setIsEditTicketSuccessModalOpen] =
     useState<boolean>(false);
-
   const [isCloseTicketSuccessModalOpen, setIsCloseTicketSuccessModalOpen] =
     useState<boolean>(false);
   const [targetCloseTicket, setTargetCloseTicket] = useState<TicketResponse>();
@@ -81,15 +72,15 @@ export default function TicketManagementClient({
   }, [initialTickets]);
 
   return (
-    <div className="bg-white h-full w-full flex">
+    <div className="bg-white w-full flex">
       <div className="w-full">
-        <div className="flex w-full items-center justify-center ">
-          <div className="h-screen w-full shadow-lg rounded-lg  items-center justify-center">
+        <div className="flex w-full">
+          <div className=" w-full flex flex-col justify-between">
             {/* <div className="pt-6 px-6 p-2"> */}
             <div className="pt-6">
-              <div className=" flex flex-col h-full mx-6 text-[14px]">
-                <div className="grid grid-cols-7 space-x-4 h-[44px]  justify-center items-center mb-2">
-                  <label className="flex items-center col-span-4 h-full rounded-[20px] px-4 space-x-3 shadow-light2">
+              <div className=" flex flex-col mx-6 text-[14px]">
+                <div className="grid grid-cols-7 space-x-4 h-[44px] mb-2">
+                  <label className="flex items-center col-span-4 rounded-[20px] px-4 space-x-3 shadow-light2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -304,7 +295,7 @@ export default function TicketManagementClient({
               </div>
               {/* <div className=" grid grid-rows-9 h-full bg-pink-200 "></div>
             </div> */}
-              <footer className="flex justify-between items-center p-3">
+              <footer className="flex justify-between items-center p-3 mt-auto">
                 <div className="mx-4 text-dark-gray">{itemCount} Items</div>
                 <div className=" flex space-x-5 items-center">
                   {/* {page <= 0 && ( */}

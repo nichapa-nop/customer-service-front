@@ -25,6 +25,15 @@
     text-wrap: balance;
   }
 
+  .sticky-footer {
+    position: fixed; /* Fixes the footer to the bottom */
+    bottom: 0; /* Positions it at the bottom of the page */
+    left: 0; /* Aligns it to the left side of the page */
+    width: 100%;
+    background-color: white; /* Optional: sets the background color */
+    z-index: 1000; /* Ensures it appears above other content */
+  }
+
   /* input:focus::placeholder {
     color: transparent;
     

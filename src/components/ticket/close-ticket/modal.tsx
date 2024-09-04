@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import React, { Dispatch, SetStateAction, useState } from "react";
 import CloseTicketSuccessModal from "../close-ticket-success/modal";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { ticketSchema } from "@/schemas/ticket.schema";
+import { closeTicketSchema, ticketSchema } from "@/schemas/ticket.schema";
 import { z } from "zod";
 import { closeTicket } from "@/actions/ticket.action";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,7 +23,7 @@ interface Props {
   // initialticket: TicketResponse[];
 }
 
-type TicketSchema = z.infer<typeof ticketSchema>;
+type CloseTicketSchema = z.infer<typeof closeTicketSchema>;
 
 const CloseTicketModal: React.FC<Props> = ({
   isOpen,
@@ -49,7 +49,7 @@ const CloseTicketModal: React.FC<Props> = ({
     }
   };
 
-  const processForm: SubmitHandler<TicketSchema> = async (data) => {
+  const processForm: SubmitHandler<CloseTicketSchema> = async (data) => {
     try {
       const closeTicketResponse = await closeTicket(
         { ticketId: ticket.ticketId },
@@ -65,15 +65,13 @@ const CloseTicketModal: React.FC<Props> = ({
       alert("Failed to close ticket. Please try again.");
     }
   };
-  const { control, watch, handleSubmit } = useForm<TicketSchema>({
+  const { control, watch, handleSubmit } = useForm<CloseTicketSchema>({
     mode: "onChange",
-    resolver: zodResolver(ticketSchema),
-    defaultValues: {
-      solution: "",
-      email: "",
-    },
+    resolver: zodResolver(closeTicketSchema),
+    defaultValues: {},
   });
 
+  console.log(watch());
   // async function handleCloseTicket() {
   //   // Call API Here;
 
@@ -82,6 +80,11 @@ const CloseTicketModal: React.FC<Props> = ({
   //   setTargetCloseTicket(ticket);
   //   setIsOpen(false);
   // }
+  const [isChecked, setIsChecked] = useState<boolean>(false);
+
+  const handleCheckbox = () => {
+    setIsChecked((prev) => !prev); // Toggle the state
+  };
 
   return (
     <>
@@ -138,7 +141,7 @@ const CloseTicketModal: React.FC<Props> = ({
                     <span className="text-white">{ticket.status}</span>
                   </div>
                 </div>
-                <div className=" bg-white shadow-sm p-6 h-[630px] rounded-xl">
+                <div className=" bg-white shadow-sm p-6 rounded-xl">
                   <p className="font-semibold text-[20px] pl-6">
                     Customer Info
                   </p>
@@ -163,7 +166,7 @@ const CloseTicketModal: React.FC<Props> = ({
                               onChange={onChange}
                               onBlur={onBlur}
                               className="bg-light-gray2 resize-none w-full h-[250px] rounded-[15px] p-4 hover:placeholder:text-space-black"
-                              placeholder="Text"
+                              placeholder="Solution"
                             ></textarea>
                           );
                         }}
@@ -171,22 +174,44 @@ const CloseTicketModal: React.FC<Props> = ({
                     </div>
                     <div className="flex flex-col gap-2 p-4">
                       <p className="font-medium">Inform the customer</p>
-                      <div className="  w-full h-[150px] rounded-[15px] hover:placeholder:text-space-black">
+                      <div
+                        className={`w-full rounded-[15px] hover:placeholder:text-space-black ${
+                          isChecked ? "h-[150px]" : ""
+                        }`}
+                      >
                         <div className="flex items-center mt-1 space-x-3">
                           <input
                             type="checkbox"
+                            onClick={handleCheckbox}
                             className="appearance-none rounded-md cursor-pointer checked:bg-gradient-to-tr from-deep-blue to-bright-red w-[27px] h-[27px] border-light-gray1 border-[2px] relative
                           checked:after:content-[''] checked:after:absolute checked:after:left-[8px] checked:after:top-[3px] checked:after:w-[7px] checked:after:h-[14px] checked:after:border-white checked:after:border-r-[2px] checked:after:border-b-[2px] checked:after:rotate-45"
                           ></input>
                           <span>Send email to Inform the customer</span>
                         </div>
-                        <div className=" flex flex-col gap-2 p-4 pl-10">
-                          <p className="font-medium">Customer Email</p>
-                          <input
-                            className=" bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                            placeholder="example.ee@baseplayhouse.co"
-                          ></input>
-                        </div>
+                        {isChecked && (
+                          <div className=" flex flex-col gap-2 p-4 pl-10">
+                            <p className="font-medium">Customer Email</p>
+                            <Controller
+                              control={control}
+                              name="email"
+                              render={({
+                                field: { value, name, onChange, onBlur },
+                              }) => {
+                                return (
+                                  <input
+                                    id="email"
+                                    value={value}
+                                    name={name}
+                                    onChange={onChange}
+                                    onBlur={onBlur}
+                                    className=" bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                                    placeholder="example.ee@baseplayhouse.co"
+                                  ></input>
+                                );
+                              }}
+                            />
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -195,9 +220,6 @@ const CloseTicketModal: React.FC<Props> = ({
                   <button
                     className=" bg-gradient-to-tr from-deep-blue to-bright-red w-64 h-14 rounded-[30px] text-white"
                     type="submit"
-                    // onClick={() => {
-                    //   handleCloseTicket();
-                    // }}
                   >
                     Confirm
                   </button>

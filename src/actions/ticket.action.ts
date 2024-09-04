@@ -4,7 +4,23 @@ import { ApiManager } from "@/api";
 import { ticketSchema } from "@/schemas/ticket.schema";
 import { z } from "zod";
 
+export async function showTicketDetail({ ticketId }: { ticketId: string }) {
+  const response = await ApiManager<TicketResponse, never, never>({
+    path: `/ticket/${ticketId}`,
+    method: "GET",
+  });
+  if (response.success && response.data) {
+    return {
+      // data: response.data.ticket
+      success: true,
+    };
+  } else {
+    throw new Error("Failed to fetch data");
+  }
+}
+
 export async function createTicket(data: any) {
+  console.log(data);
   const response = await ApiManager<
     TicketResponse,
     never,
@@ -110,7 +126,7 @@ export async function closeTicket(
     never,
     CloseTicketRequestBodyDTO
   >({
-    path: `/ticket/${ticketId}`,
+    path: `/closeticket/${ticketId}`,
     method: "PUT",
     body: data,
     next: {

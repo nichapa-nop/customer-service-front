@@ -21,7 +21,7 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
     <>
       <aside
         id="default-sidebar"
-        className={`top-0 absolute left-0 z-40 w-64 h-screen transition-transform 
+        className={`top-0 absolute left-0 z-40 w-64 transition-transform 
         ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } text-[14px] shadow-sm`}

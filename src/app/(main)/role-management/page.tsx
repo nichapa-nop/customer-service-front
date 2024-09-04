@@ -14,8 +14,8 @@ export default function RoleManagementClient() {
   return (
     <div className="bg-white h-full w-full flex">
       <div className="w-full">
-        <div className="flex w-full items-center justify-center ">
-          <div className=" h-screen w-full  shadow-lg rounded-lg  items-center justify-center">
+        <div className="flex w-full h-full">
+          <div className=" w-full flex flex-col justify-between">
             <div className=" pt-6 px-6 p-2">
               <div className=" flex flex-col h-full">
                 <div className="grid grid-cols-7 space-x-4 h-[44px]  justify-center items-center mb-2 text-[14px] ">
@@ -110,6 +110,7 @@ export default function RoleManagementClient() {
               </div>
             </div>
             {/* <div className="flex flex-col"> */}
+
             <div className="overflow-x-auto text-[14px]">
               <table className="bg-white w-full table-fixed items-center justify-center text-center">
                 <colgroup>
@@ -161,17 +162,26 @@ export default function RoleManagementClient() {
                             >
                               <stop
                                 offset="0%"
-                                style={{ stopColor: "#1f1a4f", stopOpacity: 1 }}
+                                style={{
+                                  stopColor: "#1f1a4f",
+                                  stopOpacity: 1,
+                                }}
                               />
                               {/* deep-blue */}
                               <stop
                                 offset="50%"
-                                style={{ stopColor: "#82303d", stopOpacity: 1 }}
+                                style={{
+                                  stopColor: "#82303d",
+                                  stopOpacity: 1,
+                                }}
                               />
                               {/* fade-purple */}
                               <stop
                                 offset="100%"
-                                style={{ stopColor: "#ec4723", stopOpacity: 1 }}
+                                style={{
+                                  stopColor: "#ec4723",
+                                  stopOpacity: 1,
+                                }}
                               />
                               {/* bright-red */}
                             </linearGradient>
@@ -221,17 +231,26 @@ export default function RoleManagementClient() {
                             >
                               <stop
                                 offset="0%"
-                                style={{ stopColor: "#1f1a4f", stopOpacity: 1 }}
+                                style={{
+                                  stopColor: "#1f1a4f",
+                                  stopOpacity: 1,
+                                }}
                               />
                               {/* deep-blue */}
                               <stop
                                 offset="50%"
-                                style={{ stopColor: "#82303d", stopOpacity: 1 }}
+                                style={{
+                                  stopColor: "#82303d",
+                                  stopOpacity: 1,
+                                }}
                               />
                               {/* fade-purple */}
                               <stop
                                 offset="100%"
-                                style={{ stopColor: "#ec4723", stopOpacity: 1 }}
+                                style={{
+                                  stopColor: "#ec4723",
+                                  stopOpacity: 1,
+                                }}
                               />
                               {/* bright-red */}
                             </linearGradient>
@@ -281,17 +300,26 @@ export default function RoleManagementClient() {
                             >
                               <stop
                                 offset="0%"
-                                style={{ stopColor: "#1f1a4f", stopOpacity: 1 }}
+                                style={{
+                                  stopColor: "#1f1a4f",
+                                  stopOpacity: 1,
+                                }}
                               />
                               {/* deep-blue */}
                               <stop
                                 offset="50%"
-                                style={{ stopColor: "#82303d", stopOpacity: 1 }}
+                                style={{
+                                  stopColor: "#82303d",
+                                  stopOpacity: 1,
+                                }}
                               />
                               {/* fade-purple */}
                               <stop
                                 offset="100%"
-                                style={{ stopColor: "#ec4723", stopOpacity: 1 }}
+                                style={{
+                                  stopColor: "#ec4723",
+                                  stopOpacity: 1,
+                                }}
                               />
                               {/* bright-red */}
                             </linearGradient>
@@ -341,17 +369,26 @@ export default function RoleManagementClient() {
                             >
                               <stop
                                 offset="0%"
-                                style={{ stopColor: "#1f1a4f", stopOpacity: 1 }}
+                                style={{
+                                  stopColor: "#1f1a4f",
+                                  stopOpacity: 1,
+                                }}
                               />
                               {/* deep-blue */}
                               <stop
                                 offset="50%"
-                                style={{ stopColor: "#82303d", stopOpacity: 1 }}
+                                style={{
+                                  stopColor: "#82303d",
+                                  stopOpacity: 1,
+                                }}
                               />
                               {/* fade-purple */}
                               <stop
                                 offset="100%"
-                                style={{ stopColor: "#ec4723", stopOpacity: 1 }}
+                                style={{
+                                  stopColor: "#ec4723",
+                                  stopOpacity: 1,
+                                }}
                               />
                               {/* bright-red */}
                             </linearGradient>
@@ -371,7 +408,7 @@ export default function RoleManagementClient() {
             </div>
             {/* <div className=" grid grid-rows-9 h-full bg-pink-200 "></div>
             </div> */}
-            <footer className=" flex space-x-5 items-center  justify-end p-3 ">
+            <footer className="flex space-x-5 items-center justify-end p-3 mt-auto">
               <button
                 className="flex bg-light-gray1 h-[34px] w-[34px] rounded-[20px]  items-center justify-center"
                 // onClick={() => setPage(page - 1)}

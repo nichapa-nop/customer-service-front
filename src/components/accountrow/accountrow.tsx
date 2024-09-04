@@ -1,3 +1,5 @@
+import React, { Dispatch, SetStateAction, useState } from "react";
+
 interface AccountRowProps {
   account: AccountResponse;
 }
@@ -7,7 +9,7 @@ const AccountRow: React.FC<AccountRowProps> = ({ account }) => {
     switch (status.toLowerCase()) {
       case "not_verify":
         return "bg-gradient-to-tr relative from-waiting-bl to-waiting-tr";
-      case "verify":
+      case "verified":
         return "bg-gradient-to-tr relative from-approve-bl to-approve-tr";
       case "disabled":
         return "bg-gradient-to-tr relative from-cancel-bl to-cancel-tr";
@@ -19,11 +21,13 @@ const AccountRow: React.FC<AccountRowProps> = ({ account }) => {
   };
 
   return (
-    <tr key={account.uuid}>
+    <tr key={account.uuid} className="h-[68px]">
       <td className="w-[20%]">
-        <div className="flex flex-col">
-          <span className="truncate">{account.firstName}</span>
-          <span className="truncate">{account.lastName}</span>
+        <div className="flex flex-col items-start pl-10">
+          <span className="truncate">
+            {account.firstName} {account.lastName}
+          </span>
+          <span className="text-dark-gray">Trainee</span>
         </div>
       </td>
       <td className="w-[30%]">{account.email}</td>
@@ -39,9 +43,9 @@ const AccountRow: React.FC<AccountRowProps> = ({ account }) => {
       </td>
       <td className="w-[10%] space-x-3">
         <button
-          onClick={() => {
-            // setIsEditModalOpen(true);
-          }}
+        // onClick={() => {
+        //   // setIsEditModalOpen(true);
+        // }}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -122,3 +126,5 @@ const AccountRow: React.FC<AccountRowProps> = ({ account }) => {
     </tr>
   );
 };
+
+export default AccountRow;

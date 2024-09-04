@@ -47,7 +47,6 @@ const CreateTicketModal: React.FC<Props> = ({
   };
 
   const processForm: SubmitHandler<TicketSchema> = async (data) => {
-    console.log(data);
     try {
       const result = await createTicket(data);
       if (result.success) {
@@ -63,25 +62,27 @@ const CreateTicketModal: React.FC<Props> = ({
     }
   };
 
-  const { control, watch, handleSubmit } = useForm<TicketSchema>({
+  const {
+    control,
+    watch,
+    handleSubmit,
+    formState: { isValid, errors },
+    reset,
+  } = useForm<TicketSchema>({
     mode: "onChange",
     resolver: zodResolver(ticketSchema),
     defaultValues: {
-      cusFirstName: "",
-      cusLastName: "",
-      cusPhoneNum: "",
-      cusEmail: "",
-      cusCompanyName: "",
-      cusCompanyType: "",
-      topic: "",
-      description: "",
-      platform: "",
-      incidentType: "",
-      businessImpact: "",
-      assignTo: "",
-      status: "",
-      feedbackCh: "",
-      ticketLink: "",
+      cusFirstName: "Nichapa",
+      cusLastName: "Nopparat",
+      cusPhoneNum: "0909096396",
+      cusEmail: "nichapa.no@baseplayhouse.co",
+      cusCompanyName: "BASE Playhouse",
+      cusCompanyType: "hr",
+      platform: "hr",
+      incidentType: "issue",
+      businessImpact: "s1",
+      topic: "This is test message",
+      description: "This is test message",
     },
   });
 
@@ -91,7 +92,10 @@ const CreateTicketModal: React.FC<Props> = ({
     <>
       <Dialog
         open={isOpen}
-        onClose={() => (onClose ? onClose() : setIsOpen(false))}
+        onClose={() => {
+          setIsOpen(false);
+          reset({});
+        }}
         className="relative z-50 "
       >
         <DialogBackdrop className="fixed inset-0 bg-black/30" />
@@ -552,6 +556,7 @@ const CreateTicketModal: React.FC<Props> = ({
                   <button
                     className=" bg-gradient-to-tr from-deep-blue to-bright-red w-64 h-14 rounded-[30px] text-white"
                     type="submit"
+                    disabled={!isValid}
                   >
                     Create Ticket
                   </button>

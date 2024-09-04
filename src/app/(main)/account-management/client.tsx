@@ -1,4 +1,6 @@
 "use client";
+import { getAccountList } from "@/actions/account.action";
+import AccountRow from "@/components/accountrow/accountrow";
 import {
   Description,
   Dialog,
@@ -6,19 +8,59 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-export default function AccountManagementClient() {
-  let [isOpen, setIsOpen] = useState(false);
+export default function AccountManagementClient({
+  accounts: initialAccounts,
+}: {
+  accounts: AccountResponse[];
+}) {
+  const [page, setPage] = useState<number>(1);
+  const [pageCount, setPageCount] = useState<number>();
+  const [itemCount, setItemCount] = useState<number>(0);
+
+  const [accounts, setAccounts] = useState<AccountResponse[]>(initialAccounts);
+
+  const [searchKeyword, setSearchKeyword] = useState<string>();
+  const timeoutRef = useRef<NodeJS.Timeout>();
+  const [isPageChanged, setIsPageChanged] = useState<boolean>(false);
+
+  async function fetchLastestAccounts(page: number = 1, keyword?: string) {
+    const response = await getAccountList({ page, keyword });
+    setAccounts(response.data);
+    setPageCount(
+      Math.ceil(
+        response.pagination.itemsCount / response.pagination.itemsPerpage
+      )
+    );
+    setItemCount(response.pagination.itemsCount); // Set the item count here
+  }
+
+  useEffect(() => {
+    clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      fetchLastestAccounts(1, searchKeyword);
+    }, 1000);
+  }, [searchKeyword]);
+
+  useEffect(() => {
+    if (isPageChanged) {
+      fetchLastestAccounts(page);
+    }
+  }, [page]);
+
+  useEffect(() => {
+    setAccounts(initialAccounts);
+  }, [initialAccounts]);
 
   return (
     <div className="bg-white h-full w-full flex">
       <div className="w-full">
-        <div className="flex w-full items-center justify-center ">
-          <div className="h-screen w-full shadow-lg rounded-lg  items-center justify-center">
-            <div className="pt-6">
-              <div className=" flex flex-col h-full mx-6 text-[14px]">
-                <div className="grid grid-cols-7 space-x-4 h-[44px]  justify-center items-center mb-2">
+        <div className="flex w-full h-full">
+          <div className=" w-full flex flex-col justify-between">
+            <div className=" pt-6 px-6 p-2">
+              <div className=" flex flex-col h-full">
+                <div className="grid grid-cols-7 space-x-4 h-[44px]  justify-center items-center mb-2 text-[14px] ">
                   <label className="flex items-center col-span-5 h-full rounded-[20px] px-4 space-x-3 shadow-light2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +80,10 @@ export default function AccountManagementClient() {
                     <input
                       id="searchbox"
                       placeholder="Search"
-                      className="grow focus:placeholder:text-white focus:outline-none placeholder:text-transparent placeholder:bg-clip-text placeholder:bg-gradient-to-tr from-deep-blue via-fade-purple to-bright-red placeholder:text-bold"
+                      className="grow focus:placeholder:text-white focus:outline-none placeholder:text-transparent placeholder:bg-clip-text placeholder:bg-gradient-to-tr from-deep-blue to-bright-red"
+                      onChange={(e) => {
+                        setSearchKeyword(e.target.value);
+                      }}
                     ></input>
                   </label>
                   <button className="flex flex-row items-center justify-between px-10 bg-white h-full rounded-[20px] shadow-light2">
@@ -129,152 +174,15 @@ export default function AccountManagementClient() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className=" h-[68px] hover:bg-light-orange">
-                    <td>
-                      <div className="flex flex-col items-start pl-9">
-                        <span>Nichapa Nopparat</span>
-                        <span className="text-dark-gray">Trainee</span>
-                      </div>
-                    </td>
-                    <td>nichapa.no@baseplayhouse.co</td>
-                    <td>0909090909</td>
-                    <td className="flex justify-center p-4">
-                      <div
-                        className={`bg-gradient-to-tr from-approve-bl to-approve-tr flex justify-center items-center  w-[118px] h-[35px] rounded-[15px] text-white text`}
-                      >
-                        <span className="truncate px-2">Verified</span>
-                      </div>
-                    </td>
-                    <td className="space-x-2">
-                      <button>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                          className="size-6"
-                        >
-                          <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
-                          <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
-                        </svg>
-                      </button>
-                      <button>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                          className="size-6 "
-                        >
-                          <defs>
-                            <linearGradient
-                              id="gradient1"
-                              x1="0%"
-                              y1="100%"
-                              x2="100%"
-                              y2="0%"
-                            >
-                              <stop
-                                offset="0%"
-                                style={{ stopColor: "#1f1a4f", stopOpacity: 1 }}
-                              />
-                              {/* deep-blue */}
-                              <stop
-                                offset="50%"
-                                style={{ stopColor: "#82303d", stopOpacity: 1 }}
-                              />
-                              {/* fade-purple */}
-                              <stop
-                                offset="100%"
-                                style={{ stopColor: "#ec4723", stopOpacity: 1 }}
-                              />
-                              {/* bright-red */}
-                            </linearGradient>
-                          </defs>
-                          <path
-                            fillRule="evenodd"
-                            d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z"
-                            clipRule="evenodd"
-                            fill="url(#gradient1)"
-                          />
-                        </svg>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr className="h-[68px] ">
-                    <td className="flex flex-col items-start">
-                      Nichapa Nopparat
-                      <span>Trainee</span>
-                    </td>
-                    <td>nichapa.no@baseplayhouse.co</td>
-                    <td>0909090909</td>
-                    <td>
-                      <div className="bg-approve-bl h-7 rounded-[15px] items-center justify-center">
-                        <span>Verified</span>
-                      </div>
-                    </td>
-                    <td></td>
-                  </tr>
-                  <tr className="h-[68px] ">
-                    <td className="flex flex-col items-start">
-                      Nichapa Nopparat
-                      <span>Trainee</span>
-                    </td>
-                    <td>nichapa.no@baseplayhouse.co</td>
-                    <td>0909090909</td>
-                    <td>
-                      <div className="bg-approve-bl h-7 rounded-[15px] items-center justify-center">
-                        <span>Verified</span>
-                      </div>
-                    </td>
-                    <td></td>
-                  </tr>
-                  <tr className="h-[68px] ">
-                    <td className="flex flex-col items-start">
-                      Nichapa Nopparat
-                      <span>Trainee</span>
-                    </td>
-                    <td>nichapa.no@baseplayhouse.co</td>
-                    <td>0909090909</td>
-                    <td>
-                      <div className="bg-approve-bl h-7 rounded-[15px] items-center justify-center">
-                        <span>Verified</span>
-                      </div>
-                    </td>
-                    <td></td>
-                  </tr>
-                  <tr className="h-[68px] ">
-                    <td className="flex flex-col items-start">
-                      Nichapa Nopparat
-                      <span>Trainee</span>
-                    </td>
-                    <td>nichapa.no@baseplayhouse.co</td>
-                    <td>0909090909</td>
-                    <td>
-                      <div className="bg-approve-bl h-7 rounded-[15px] items-center justify-center">
-                        <span>Verified</span>
-                      </div>
-                    </td>
-                    <td></td>
-                  </tr>
-                  <tr className="h-[68px] ">
-                    <td className="flex flex-col items-start">
-                      Nichapa Nopparat
-                      <span>Trainee</span>
-                    </td>
-                    <td>nichapa.no@baseplayhouse.co</td>
-                    <td>0909090909</td>
-                    <td>
-                      <div className="bg-approve-bl h-7 rounded-[15px] items-center justify-center">
-                        <span>Verified</span>
-                      </div>
-                    </td>
-                    <td></td>
-                  </tr>
+                  {accounts.map((account) => (
+                    <AccountRow key={account.uuid} account={account} />
+                  ))}
                 </tbody>
               </table>
             </div>
             {/* <div className=" grid grid-rows-9 h-full bg-pink-200 "></div>
             </div> */}
-            <footer className=" flex space-x-5 items-center  justify-end p-3 ">
+            <footer className="flex space-x-5 items-center  justify-end p-3 mt-auto">
               <button
                 className="flex bg-light-gray1 h-[34px] w-[34px] rounded-[20px]  items-center justify-center"
                 // onClick={() => setPage(page - 1)}
