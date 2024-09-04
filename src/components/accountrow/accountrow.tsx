@@ -33,12 +33,14 @@ const AccountRow: React.FC<AccountRowProps> = ({ account }) => {
       <td className="w-[30%]">{account.email}</td>
       <td className="w-[30%]">{account.phoneNum}</td>
       <td className="w-[30%]">
-        <div
-          className={`flex justify-center items-center  w-[118px] h-[35px] rounded-[15px] text-white text ${getStatusBackgroundColor(
-            account.status
-          )}`}
-        >
-          <span className="truncate px-2">{account.status}</span>
+        <div className="flex justify-center items-center">
+          <div
+            className={`flex justify-center items-center w-[118px] h-[35px] rounded-[15px] text-white text ${getStatusBackgroundColor(
+              account.status
+            )}`}
+          >
+            <span className="truncate px-2">{account.status}</span>
+          </div>
         </div>
       </td>
       <td className="w-[10%] space-x-3">

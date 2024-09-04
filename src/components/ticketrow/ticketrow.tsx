@@ -78,8 +78,6 @@ const TicketRow: React.FC<TicketRowProps> = ({
       <td
         className="w-[10%] truncate"
         onClick={() => {
-          //   setFocusEditTicket(ticket);
-          //   openModal("edit");
           setIsTicketDetailModalOpen(true);
         }}
       >
@@ -88,8 +86,6 @@ const TicketRow: React.FC<TicketRowProps> = ({
       <td
         className="w-[17%] truncate px-5 text-left"
         onClick={() => {
-          //   setFocusEditTicket(ticket);
-          //   openModal("edit");
           setIsTicketDetailModalOpen(true);
         }}
       >
@@ -98,8 +94,6 @@ const TicketRow: React.FC<TicketRowProps> = ({
       <td
         className="w-[11%] truncate"
         onClick={() => {
-          //   setFocusEditTicket(ticket);
-          //   openModal("edit");
           setIsTicketDetailModalOpen(true);
         }}
       >
@@ -108,8 +102,6 @@ const TicketRow: React.FC<TicketRowProps> = ({
       <td
         className="w-[15%] truncate"
         onClick={() => {
-          //   setFocusEditTicket(ticket);
-          //   openModal("edit");
           setIsTicketDetailModalOpen(true);
         }}
       >
@@ -118,8 +110,6 @@ const TicketRow: React.FC<TicketRowProps> = ({
       <td
         className="w-[3%] truncate"
         onClick={() => {
-          //   setFocusEditTicket(ticket);
-          //   openModal("edit");
           setIsTicketDetailModalOpen(true);
         }}
       >
@@ -128,8 +118,6 @@ const TicketRow: React.FC<TicketRowProps> = ({
       <td
         className="w-[15%]"
         onClick={() => {
-          //   setFocusEditTicket(ticket);
-          //   openModal("edit");
           setIsTicketDetailModalOpen(true);
         }}
       >
@@ -149,17 +137,17 @@ const TicketRow: React.FC<TicketRowProps> = ({
       <td
         className="w-[12%]"
         onClick={() => {
-          //   setFocusEditTicket(ticket);
-          //   openModal("edit");
           setIsTicketDetailModalOpen(true);
         }}
       >
-        <div
-          className={`flex justify-center items-center  w-[118px] h-[35px] rounded-[15px] text-white text ${getStatusBackgroundColor(
-            ticket.status
-          )}`}
-        >
-          <span className="truncate px-2">{ticket.status}</span>
+        <div className="flex justify-center items-center">
+          <div
+            className={`flex justify-center items-center  w-[118px] h-[35px] rounded-[15px] text-white text ${getStatusBackgroundColor(
+              ticket.status
+            )}`}
+          >
+            <span className="truncate px-2">{ticket.status}</span>
+          </div>
         </div>
       </td>
       <td className="w-[10%] space-x-3">
