@@ -1,5 +1,5 @@
 interface PaginationResponse {
   page: number;
-  itemsPerpage: number;
+  itemsPerPage: number;
   itemsCount: number;
 }

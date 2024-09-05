@@ -14,7 +14,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={classNames(`h-screen max-w-screen flex flex-1`)}>
+      <body
+        className={classNames(
+          `h-screen max-w-screen flex flex-1 overflow-hidden`
+        )}
+      >
         {children}
       </body>
     </html>

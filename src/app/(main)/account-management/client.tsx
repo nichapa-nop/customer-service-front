@@ -24,7 +24,7 @@ export default function AccountManagementClient({
     setAccounts(response.data);
     setPageCount(
       Math.ceil(
-        response.pagination.itemsCount / response.pagination.itemsPerpage
+        response.pagination.itemsCount / response.pagination.itemsPerPage
       )
     );
     setItemCount(response.pagination.itemsCount); // Set the item count here

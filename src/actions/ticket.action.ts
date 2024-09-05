@@ -1,8 +1,6 @@
 "use server";
 
 import { ApiManager } from "@/api";
-import { ticketSchema } from "@/schemas/ticket.schema";
-import { z } from "zod";
 
 export async function showTicketDetail({ ticketId }: { ticketId: string }) {
   const response = await ApiManager<TicketResponse, never, never>({
@@ -11,7 +9,6 @@ export async function showTicketDetail({ ticketId }: { ticketId: string }) {
   });
   if (response.success && response.data) {
     return {
-      // data: response.data.ticket
       success: true,
     };
   } else {
@@ -82,7 +79,6 @@ export async function deleteTicket({ ticketId }: { ticketId: string }) {
   });
   if (response.success && response.data) {
     return {
-      // data: response.data.ticket
       success: true,
     };
   } else {
@@ -140,6 +136,23 @@ export async function closeTicket(
     };
   } else {
     console.log(response);
+    throw new Error("Failed to fetch data");
+  }
+}
+
+export async function reOpenTicket({ ticketId }: { ticketId: string }) {
+  const response = await ApiManager<TicketResponse, never, never>({
+    path: `/reopenticket/${ticketId}`,
+    method: "PUT",
+    next: {
+      revalidateTags: ["get-ticket-list"],
+    },
+  });
+  if (response.success && response.data) {
+    return {
+      success: true,
+    };
+  } else {
     throw new Error("Failed to fetch data");
   }
 }

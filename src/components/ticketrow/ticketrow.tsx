@@ -43,6 +43,8 @@ const TicketRow: React.FC<TicketRowProps> = ({
     useState<boolean>(false);
   const [focusCloseTicketModal, setFocusCloseTicketModal] =
     useState<TicketResponse>();
+  const [isReOpenTicketModalOpen, setIsReOpenTicketModalOpen] =
+    useState<boolean>(false);
 
   const getStatusBackgroundColor = (status: string) => {
     switch (status.toLowerCase()) {
@@ -230,6 +232,7 @@ const TicketRow: React.FC<TicketRowProps> = ({
             setIsEditTicketSuccessModalOpen={setIsEditSuccessModalOpen}
             setIsCloseTicketModalOpen={setIsCloseTicketModalOpen}
             setFocusCloseTicketModal={setFocusCloseTicketModal}
+            setIsReOpenTicketModalOpen={setIsReOpenTicketModalOpen}
           />
         )}
         {isTicketDetailModalOpen && (

@@ -408,12 +408,12 @@ const CreateTicketModal: React.FC<Props> = ({
                               <option value="" disabled>
                                 Select
                               </option>
-                              <option value="help crunch">help crunch</option>
+                              <option value="help_crunch">help crunch</option>
                               <option value="phone">Phone</option>
                               <option value="email">Email</option>
                               <option value="line">Line</option>
                               <option value="ticket">Ticket</option>
-                              <option value="base employee">
+                              <option value="base_employee">
                                 BASE Employee
                               </option>
                             </select>
@@ -444,12 +444,12 @@ const CreateTicketModal: React.FC<Props> = ({
                               >
                                 Select
                               </option>
-                              <option value="help crunch">help crunch</option>
+                              <option value="help_crunch">help crunch</option>
                               <option value="phone">Phone</option>
                               <option value="email">Email</option>
                               <option value="line">Line</option>
                               <option value="ticket">Ticket</option>
-                              <option value="base employee">
+                              <option value="base_employee">
                                 BASE Employee
                               </option>
                             </select>

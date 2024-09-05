@@ -9,13 +9,11 @@ import {
 } from "@headlessui/react";
 import { motion } from "framer-motion";
 import { Dispatch, Fragment, SetStateAction, useState } from "react";
-import EditTicketSuccess from "../edit-ticket-success/modal";
-import CloseTicketModal from "../close-ticket/modal";
 import { ticketSchema } from "@/schemas/ticket.schema";
 import { z } from "zod";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { editTicket } from "@/actions/ticket.action";
+import { editTicket, reOpenTicket } from "@/actions/ticket.action";
 
 interface Props {
   isOpen: boolean;
@@ -27,6 +25,7 @@ interface Props {
   setFocusCloseTicketModal: Dispatch<
     SetStateAction<TicketResponse | undefined>
   >;
+  setIsReOpenTicketModalOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 type TicketSchema = z.infer<typeof ticketSchema>;
@@ -39,6 +38,7 @@ const EditTicketModal: React.FC<Props> = ({
   setIsEditTicketSuccessModalOpen,
   setIsCloseTicketModalOpen,
   setFocusCloseTicketModal,
+  setIsReOpenTicketModalOpen,
 }) => {
   // let [isOpen, setIsOpen] = useState(false);
   // console.log(initialTicket);
@@ -99,6 +99,16 @@ const EditTicketModal: React.FC<Props> = ({
       ticketLink: initialTicket.ticketLink || "",
     },
   });
+
+  async function handleReOpenTicket() {
+    const reOpenResponse = await reOpenTicket({
+      ticketId: initialTicket.ticketId,
+    });
+    if (reOpenResponse.success) {
+      setIsReOpenTicketModalOpen(true);
+      // setIsOpen(false);
+    }
+  }
 
   return (
     <>
@@ -410,12 +420,12 @@ const EditTicketModal: React.FC<Props> = ({
                               <option value="" disabled>
                                 Select
                               </option>
-                              <option value="help crunch">help crunch</option>
+                              <option value="help_crunch">help crunch</option>
                               <option value="phone">Phone</option>
                               <option value="email">Email</option>
                               <option value="line">Line</option>
                               <option value="ticket">Ticket</option>
-                              <option value="base employee">
+                              <option value="base_employee">
                                 BASE employee
                               </option>
                             </select>
@@ -442,12 +452,12 @@ const EditTicketModal: React.FC<Props> = ({
                               <option value="" disabled>
                                 Select
                               </option>
-                              <option value="help crunch">help crunch</option>
+                              <option value="help_crunch">help crunch</option>
                               <option value="phone">Phone</option>
                               <option value="email">Email</option>
                               <option value="line">Line</option>
                               <option value="ticket">Ticket</option>
-                              <option value="base employee">
+                              <option value="base_employee">
                                 BASE employee
                               </option>
                             </select>
@@ -577,16 +587,28 @@ const EditTicketModal: React.FC<Props> = ({
                       </div>
                       <p>Close/Re-open Ticket</p>
                     </div>
-                    <button
-                      className=" bg-gradient-to-tr from-cancel-bl to-cancel-tr w-28 h-8 rounded-[15px] text-white"
-                      onClick={() => {
-                        setIsCloseTicketModalOpen(true);
-                        setIsOpen(false);
-                        setFocusCloseTicketModal(initialTicket);
-                      }}
-                    >
-                      Close
-                    </button>
+                    {initialTicket.status !== "closed" && (
+                      <button
+                        className=" bg-gradient-to-tr from-cancel-bl to-cancel-tr w-28 h-8 rounded-[15px] text-white"
+                        onClick={() => {
+                          setIsCloseTicketModalOpen(true);
+                          setIsOpen(false);
+                          setFocusCloseTicketModal(initialTicket);
+                        }}
+                      >
+                        Close
+                      </button>
+                    )}
+                    {initialTicket.status == "closed" && (
+                      <button
+                        className=" bg-gradient-to-tr from-cancel-bl to-cancel-tr w-28 h-8 rounded-[15px] text-white"
+                        onClick={() => {
+                          handleReOpenTicket();
+                        }}
+                      >
+                        Re-open
+                      </button>
+                    )}
                   </div>
                   <div className=" flex justify-between py-4 px-7">
                     <div className="flex flex-row items-center space-x-5">
@@ -620,15 +642,6 @@ const EditTicketModal: React.FC<Props> = ({
                   >
                     Save
                   </button>
-                  {/* {isEditTicketSuccessModalOpen && (
-                    <EditTicketSuccess
-                      isOpen={isEditTicketSuccessModalOpen}
-                      setIsOpen={setIsEditTicketSuccessModalOpen}
-                      // onClose={() => setIsEditTicketSuccessModalOpen(false)}
-                    />
-                  )} */}
-
-                  {/* <button onClick={() => setIsOpen(false)}>Cancel</button> */}
                 </div>
               </DialogPanel>
             </motion.div>

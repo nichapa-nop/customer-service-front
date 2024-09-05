@@ -4,16 +4,22 @@ interface TicketResponse {
   cusPhoneNum: string;
   cusEmail: string;
   cusCompanyName: string;
-  cusCompanyType: string;
+  cusCompanyType: "hr" | "cdd" | "other";
   ticketId: string;
   topic: string;
   description: string;
-  platform: string;
-  incidentType: string;
-  businessImpact: string;
+  platform: "hr" | "cdd";
+  incidentType: "issue" | "consult" | "other";
+  businessImpact: "s1" | "s2" | "s3" | "s4" | "no";
   assignTo: AccountResponse;
   status: string;
-  feedbackCh: string;
+  feedbackCh:
+    | "help_crunch"
+    | "phone"
+    | "email"
+    | "line"
+    | "ticket"
+    | "base_employee";
   ticketLink: string;
 }
 
@@ -27,15 +33,21 @@ interface TicketRequestBodyDTO {
   cusPhoneNum: string;
   cusEmail: string;
   cusCompanyName: string;
-  cusCompanyType: string;
+  cusCompanyType: "hr" | "cdd" | "other";
   topic: string;
   description: string;
-  platform: string;
-  incidentType: string;
-  businessImpact: string;
+  platform: "hr" | "cdd";
+  incidentType: "issue" | "consult" | "other";
+  businessImpact: "s1" | "s2" | "s3" | "s4" | "no";
   assignTo?: AccountResponse;
   status: string;
-  feedbackCh: string;
+  feedbackCh:
+    | "help_crunch"
+    | "phone"
+    | "email"
+    | "line"
+    | "ticket"
+    | "base_employee";
   ticketLink: string;
 }
 

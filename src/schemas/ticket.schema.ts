@@ -14,7 +14,14 @@ export const ticketSchema = z.object({
   businessImpact: z.enum(["s1", "s2", "s3", "s4", "no"]),
   assignTo: z.string().email().optional(),
   status: z.string().optional(),
-  feedbackCh: z.string(),
+  feedbackCh: z.enum([
+    "help_crunch",
+    "phone",
+    "email",
+    "line",
+    "ticket",
+    "base_employee",
+  ]),
   ticketLink: z.string().optional(),
 });
 

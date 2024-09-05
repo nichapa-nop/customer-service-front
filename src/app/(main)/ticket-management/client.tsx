@@ -8,6 +8,7 @@ import { getTicketList } from "@/actions/ticket.action";
 import DeleteTicketSuccess from "@/components/ticket/delete-ticket-success/modal";
 import EditTicketSuccess from "@/components/ticket/edit-ticket-success/modal";
 import CloseTicketSuccessModal from "@/components/ticket/close-ticket-success/modal";
+import ReOpenTicketSuccess from "@/components/ticket/reopen-ticket-success/modal";
 
 type Props = {};
 
@@ -17,7 +18,7 @@ export default function TicketManagementClient({
   tickets: TicketResponse[];
 }) {
   const [page, setPage] = useState<number>(1);
-  const [pageCount, setPageCount] = useState<number>();
+  const [pageCount, setPageCount] = useState<number>(1);
   const { activeModal, openModal, closeModal, isModalOpen } = useModalManager();
   const [itemCount, setItemCount] = useState<number>(0);
   const [searchKeyword, setSearchKeyword] = useState<string>();
@@ -34,7 +35,8 @@ export default function TicketManagementClient({
     useState<boolean>(false);
   const [latestDeleteTicket, setLatestDeleteTicket] =
     useState<TicketResponse>();
-
+  const [isReOpenTicketSuccessModalOpen, setIsReOpenTicketSuccessModalOpen] =
+    useState<boolean>(false);
   const [isEditTicketSuccessModalOpen, setIsEditTicketSuccessModalOpen] =
     useState<boolean>(false);
   const [isCloseTicketSuccessModalOpen, setIsCloseTicketSuccessModalOpen] =
@@ -44,9 +46,11 @@ export default function TicketManagementClient({
   async function fetchLastestTickets(page: number = 1, keyword?: string) {
     const response = await getTicketList({ page, keyword });
     setTickets(response.data);
+    console.log(response.pagination.itemsCount);
+    console.log(response.pagination.itemsPerPage);
     setPageCount(
       Math.ceil(
-        response.pagination.itemsCount / response.pagination.itemsPerpage
+        response.pagination.itemsCount / response.pagination.itemsPerPage
       )
     );
     setItemCount(response.pagination.itemsCount); // Set the item count here
@@ -75,7 +79,7 @@ export default function TicketManagementClient({
       <div className="w-full">
         <div className="flex w-full h-full">
           <div className=" w-full flex flex-col justify-between">
-            <div className="pt-6 p-2">
+            <div className="pt-6 px-6 p-2">
               <div className=" flex flex-col">
                 <div className="grid grid-cols-7 space-x-4 h-[44px]  justify-center items-center mb-2 text-[14px] ">
                   <label className="flex h-full items-center col-span-4 rounded-[20px] px-4 space-x-3 shadow-light2">
@@ -304,6 +308,7 @@ export default function TicketManagementClient({
                     setIsPageChanged(true);
                     setPage(page - 1);
                   }}
+                  disabled={page == 1} // disabled ปุ่มเมื่อ page มากกว่าหรือเท่ากับ pageCount
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -324,6 +329,7 @@ export default function TicketManagementClient({
                 <input
                   className="outline outline-light-gray1 w-20 h-11 rounded-[15px] text-center"
                   placeholder={`${page}`}
+                  // onChange={setPage()}
                 ></input>
                 <button
                   className="flex bg-light-gray1 h-[34px] w-[34px] rounded-[20px]  items-center justify-center"
@@ -331,6 +337,7 @@ export default function TicketManagementClient({
                     setIsPageChanged(true);
                     setPage(page + 1);
                   }}
+                  disabled={page >= pageCount} // disabled ปุ่มเมื่อ page มากกว่าหรือเท่ากับ pageCount
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -347,7 +354,9 @@ export default function TicketManagementClient({
                     />
                   </svg>
                 </button>
-                <span>Page {page} from 10</span>
+                <span>
+                  Page {page} from {pageCount}
+                </span>
               </div>
             </footer>
           </div>
@@ -369,6 +378,12 @@ export default function TicketManagementClient({
               isOpen={isCloseTicketSuccessModalOpen}
               setIsOpen={setIsCloseTicketSuccessModalOpen}
               ticketId={targetCloseTicket.ticketId}
+            />
+          )}
+          {isReOpenTicketSuccessModalOpen && (
+            <ReOpenTicketSuccess
+              isOpen={isReOpenTicketSuccessModalOpen}
+              setIsOpen={setIsReOpenTicketSuccessModalOpen}
             />
           )}
         </div>
