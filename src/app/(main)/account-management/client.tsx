@@ -1,5 +1,6 @@
 "use client";
 import { getAccountList } from "@/actions/account.action";
+import CreateAccountModal from "@/components/account/create-account/modal";
 import AccountRow from "@/components/accountrow/accountrow";
 
 import React, { useEffect, useRef, useState } from "react";
@@ -14,7 +15,8 @@ export default function AccountManagementClient({
   const [itemCount, setItemCount] = useState<number>(0);
 
   const [accounts, setAccounts] = useState<AccountResponse[]>(initialAccounts);
-
+  const [isCreateAccountModalOpen, setIsCreateAccountModalOpen] =
+    useState<boolean>(false);
   const [searchKeyword, setSearchKeyword] = useState<string>();
   const timeoutRef = useRef<NodeJS.Timeout>();
   const [isPageChanged, setIsPageChanged] = useState<boolean>(false);
@@ -80,7 +82,7 @@ export default function AccountManagementClient({
                       }}
                     ></input>
                   </label>
-                  <button className="flex flex-row items-center justify-between px-10 bg-white h-full rounded-[20px] shadow-light2">
+                  <button className="flex flex-row items-center justify-center px-10 bg-white h-full rounded-[20px] shadow-light2 space-x-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -126,8 +128,8 @@ export default function AccountManagementClient({
                   </button>
                   <button
                     type="button"
-                    className="flex flex-row items-center justify-between px-4 bg-gradient-to-tr from-deep-blue to-bright-red text-white h-full rounded-[20px] shadow-light2"
-                    // onClick={openModal}
+                    className="flex flex-row items-center justify-center space-x-2 bg-gradient-to-tr from-deep-blue to-bright-red text-white h-full bg-white rounded-[20px] shadow-light2"
+                    onClick={() => setIsCreateAccountModalOpen(true)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -143,7 +145,7 @@ export default function AccountManagementClient({
                         d="M12 4.5v15m7.5-7.5h-15"
                       />
                     </svg>
-                    New Account
+                    <span>New Account</span>
                   </button>
                 </div>
               </div>
@@ -225,6 +227,12 @@ export default function AccountManagementClient({
               </div>
             </footer>
           </div>
+          {isCreateAccountModalOpen && (
+            <CreateAccountModal
+              isOpen={isCreateAccountModalOpen}
+              setIsOpen={setIsCreateAccountModalOpen}
+            />
+          )}
         </div>
       </div>
     </div>

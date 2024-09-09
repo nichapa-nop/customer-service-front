@@ -41,7 +41,7 @@ export default function RoleManagementClient() {
                       className="grow focus:placeholder:text-white focus:outline-none placeholder:text-transparent placeholder:bg-clip-text placeholder:bg-gradient-to-tr from-deep-blue via-fade-purple to-bright-red placeholder:text-bold"
                     ></input>
                   </label>
-                  <button className="flex flex-row items-center justify-between px-10 bg-white h-full rounded-[20px] shadow-light2">
+                  <button className="flex flex-row items-center justify-center px-10 bg-white h-full rounded-[20px] shadow-light2 space-x-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -87,7 +87,7 @@ export default function RoleManagementClient() {
                   </button>
                   <button
                     type="button"
-                    className="flex flex-row items-center justify-between px-7 bg-gradient-to-tr from-deep-blue to-bright-red text-white h-full rounded-[20px] shadow-light2"
+                    className="flex flex-row items-center justify-center px-6 bg-gradient-to-tr from-deep-blue to-bright-red text-white h-full bg-white rounded-[20px] shadow-light2 space-x-2"
                     // onClick={openModal}
                   >
                     <svg
@@ -104,7 +104,7 @@ export default function RoleManagementClient() {
                         d="M12 4.5v15m7.5-7.5h-15"
                       />
                     </svg>
-                    New Role
+                    <span>New Role</span>
                   </button>
                 </div>
               </div>

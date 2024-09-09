@@ -36,7 +36,6 @@ export async function createTicket(data: any) {
       success: true,
     };
   } else {
-    console.log(response.data);
     throw new Error("Failed to fetch data");
   }
 }

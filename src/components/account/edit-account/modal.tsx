@@ -1,5 +1,5 @@
 "use client";
-import React, { Dispatch, Fragment, SetStateAction } from "react";
+import React, { Fragment } from "react";
 import { useState } from "react";
 import {
   Dialog,
@@ -8,96 +8,58 @@ import {
   DialogTitle,
   Transition,
 } from "@headlessui/react";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { z } from "zod";
-import { accountSchema } from "@/schemas/account.schema";
-import { createAccount } from "@/actions/account.action";
-import toast from "react-hot-toast";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { motion } from "framer-motion";
+// import successpic from "../../../../img/success.png";
 
 interface Props {
   isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-  onClose?: () => void;
+  onClose: () => void;
 }
 
-type AccountSchema = z.infer<typeof accountSchema>;
+const EditAccount: React.FC<Props> = ({ isOpen, onClose }) => {
+  const [type, setType] = useState<string>();
+  const [platform, setPlatform] = useState<string>();
+  const [incidentType, setIncidentType] = useState<string>();
+  const [businessImpact, setBusinessImpact] = useState<string>();
+  const [feedbackCh, setFeedbackCh] = useState<string>();
+  //   let [isOpen, setIsOpen] = useState(false);
 
-const CreateAccountModal: React.FC<Props> = ({
-  isOpen,
-  setIsOpen,
-  onClose,
-}) => {
-  const [
-    isCreateAccountSuccesModalSuccess,
-    setIsCreateAccountSuccessModalOpen,
-  ] = useState(false);
+  //   const [type, setType] = useState<string>();
 
-  const openModal = () => {
-    setIsCreateAccountSuccessModalOpen(true);
-    if (onClose) {
-      onClose();
-    } else {
-      setIsOpen(false);
-    }
-  };
-
-  const processForm: SubmitHandler<AccountSchema> = async (data) => {
-    try {
-      const result = await createAccount(data);
-      if (result.success) {
-        toast.success("Create account success"),
-          {
-            position: "bottom-center",
-          };
-        openModal();
-      }
-    } catch (error) {
-      toast.error("failed to create account"),
-        {
-          position: "bottom-center",
-        };
-    }
-  };
-
-  const {
-    control,
-    watch,
-    handleSubmit,
-    formState: { isValid, errors },
-    reset,
-  } = useForm<AccountSchema>({
-    mode: "onChange",
-    resolver: zodResolver(accountSchema),
-    defaultValues: {},
-  });
+  function logType() {
+    console.log(type);
+  }
 
   return (
     <>
-      <Dialog
-        open={isOpen}
-        onClose={() => (onClose ? onClose() : setIsOpen(false))}
-        className="relative z-50"
-      >
-        <DialogBackdrop className="fixed inset-0 bg-black/30" />
-        <div className="fixed inset-0 w-screen overflow-y-auto p-1 py-24">
-          <div className="flex min-h-full  items-center justify-center">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <DialogPanel className="bg-light-gray2 w-[850px] space-y-[50px] border rounded-[30px] p-12">
+      <Transition appear show={isOpen}>
+        <Transition.Child
+          as={Fragment}
+          enter="ease-out duration-300"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="ease-in duration-200"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <div className="fixed inset-0" />
+        </Transition.Child>
+        <Dialog
+          open={isOpen}
+          onClose={() => onClose()}
+          className="relative z-50 "
+        >
+          <DialogBackdrop className="fixed inset-0 bg-black/30" />
+          <div className="fixed inset-0 w-screen overflow-y-auto p-1 ">
+            <div className="flex min-h-full  items-center justify-center">
+              <DialogPanel className=" bg-white w-[830px] h-[620px]  border rounded-[20px] p-6">
                 <DialogTitle className="font-semibold text-center text-[20px] mt-6 mb-10">
-                  Create New Account
+                  Edit Account
                 </DialogTitle>
                 {/* <Description>
                             This will permanently deactivate your account
                           </Description> */}
 
-                <div className="px-6 rounded-xl">
+                <div className="px-6 h-[400px] rounded-xl">
                   {/* <p className="font-semibold text-[20px] pl-6">
                               Customer Info
                             </p> */}
@@ -159,22 +121,16 @@ const CreateAccountModal: React.FC<Props> = ({
                   </div>
                 </div>
                 <div className="flex  items-center justify-center ">
-                  <button
-                    className=" bg-gradient-to-tr from-deep-blue to-bright-red w-64 h-14 rounded-[30px] text-white"
-                    type="submit"
-                    disabled={!isValid}
-                  >
-                    Create Account
+                  <button className=" bg-gradient-to-tr from-deep-blue to-bright-red w-64 h-14 rounded-[30px] text-white">
+                    Create Ticket
                   </button>
                   {/* <button onClick={() => setIsOpen(false)}>Cancel</button> */}
                 </div>
               </DialogPanel>
-            </motion.div>
+            </div>
           </div>
-        </div>
-      </Dialog>
+        </Dialog>
+      </Transition>
     </>
   );
 };
-
-export default CreateAccountModal;

@@ -1,10 +1,13 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
+import AccountDetail from "../account/account-detail/modal";
 
 interface AccountRowProps {
   account: AccountResponse;
 }
 
 const AccountRow: React.FC<AccountRowProps> = ({ account }) => {
+  const [isAccountDetailModalOpen, setIsAccountDetailModalOpen] =
+    useState<boolean>(false);
   const getStatusBackgroundColor = (status: string) => {
     switch (status.toLowerCase()) {
       case "not_verify":
@@ -21,8 +24,13 @@ const AccountRow: React.FC<AccountRowProps> = ({ account }) => {
   };
 
   return (
-    <tr key={account.uuid} className="h-[68px] hover:bg-light-orange">
-      <td className="w-[20%]">
+    <tr key={account.uuid} className="h-[68px]">
+      <td
+        className="w-[20%]"
+        onClick={() => {
+          setIsAccountDetailModalOpen(true);
+        }}
+      >
         <div className="flex flex-col items-start pl-10">
           <span className="truncate">
             {account.firstName} {account.lastName}
@@ -30,9 +38,28 @@ const AccountRow: React.FC<AccountRowProps> = ({ account }) => {
           <span className="text-dark-gray">Trainee</span>
         </div>
       </td>
-      <td className="w-[30%]">{account.email}</td>
-      <td className="w-[30%]">{account.phoneNum}</td>
-      <td className="w-[30%]">
+      <td
+        className="w-[30%]"
+        onClick={() => {
+          setIsAccountDetailModalOpen(true);
+        }}
+      >
+        {account.email}
+      </td>
+      <td
+        className="w-[30%]"
+        onClick={() => {
+          setIsAccountDetailModalOpen(true);
+        }}
+      >
+        {account.phoneNum}
+      </td>
+      <td
+        className="w-[30%]"
+        onClick={() => {
+          setIsAccountDetailModalOpen(true);
+        }}
+      >
         <div className="flex justify-center items-center">
           <div
             className={`flex justify-center items-center w-[118px] h-[35px] rounded-[15px] text-white text ${getStatusBackgroundColor(
@@ -116,14 +143,14 @@ const AccountRow: React.FC<AccountRowProps> = ({ account }) => {
             isOpen={isDeleteModalOpen}
             setIsOpen={setIsDeleteModalOpen}
           />
-        )}
+        )} */}
         {isAccountDetailModalOpen && (
           <AccountDetail
-            initialAccount={Account}
+            initialAccount={account}
             isOpen={isAccountDetailModalOpen}
             setIsOpen={setIsAccountDetailModalOpen}
           />
-        )} */}
+        )}
       </td>
     </tr>
   );

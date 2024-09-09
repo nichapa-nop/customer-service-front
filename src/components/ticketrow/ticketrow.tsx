@@ -29,11 +29,6 @@ const TicketRow: React.FC<TicketRowProps> = ({
   setIsEditSuccessModalOpen,
   setIsCloseTicketSuccessModalOpen,
   setTargetCloseTicket,
-  //   setFocusEditTicket,
-  //   openModal,
-  //   closeModal,
-  //   isModalOpen,
-  //   focusEditTicket,
 }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
