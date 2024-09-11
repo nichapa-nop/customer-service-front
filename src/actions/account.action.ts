@@ -50,3 +50,27 @@ export async function createAccount(data: any) {
     throw new Error("Failed to fetch data");
   }
 }
+
+export async function editAccount({ uuid }: { uuid: string }, data: any) {
+  const response = await ApiManager<
+    AccountResponse,
+    never,
+    AccountRequestBodyDTO
+  >({
+    path: `/account/${uuid}`,
+    method: "PUT",
+    body: data,
+    next: {
+      // revalidateTags: ["get-account-list"]
+    },
+  });
+
+  if (response.success && response.data) {
+    return {
+      data: response.data,
+      success: true,
+    };
+  } else {
+    throw new Error("Failed to fetch data");
+  }
+}

@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import AccountDetail from "../account/account-detail/modal";
+import EditAccountModal from "../account/edit-account/modal";
 
 interface AccountRowProps {
   account: AccountResponse;
@@ -7,6 +8,8 @@ interface AccountRowProps {
 
 const AccountRow: React.FC<AccountRowProps> = ({ account }) => {
   const [isAccountDetailModalOpen, setIsAccountDetailModalOpen] =
+    useState<boolean>(false);
+  const [isEditAccountModalOpen, setIsEditAccountModalOpen] =
     useState<boolean>(false);
   const getStatusBackgroundColor = (status: string) => {
     switch (status.toLowerCase()) {
@@ -72,9 +75,9 @@ const AccountRow: React.FC<AccountRowProps> = ({ account }) => {
       </td>
       <td className="w-[10%] space-x-3">
         <button
-        // onClick={() => {
-        //   // setIsEditModalOpen(true);
-        // }}
+          onClick={() => {
+            setIsEditAccountModalOpen(true);
+          }}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -86,13 +89,7 @@ const AccountRow: React.FC<AccountRowProps> = ({ account }) => {
             <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
           </svg>
         </button>
-        {/* {isEditModalOpen && (
-          <EditAccountModal
-            initialAccount={Account}
-            isOpen={isEditModalOpen}
-            setIsOpen={setIsEditModalOpen}
-          />
-        )} */}
+
         <button
           onClick={() => {
             // setIsDeleteModalOpen(true);
@@ -149,6 +146,13 @@ const AccountRow: React.FC<AccountRowProps> = ({ account }) => {
             initialAccount={account}
             isOpen={isAccountDetailModalOpen}
             setIsOpen={setIsAccountDetailModalOpen}
+          />
+        )}
+        {isEditAccountModalOpen && (
+          <EditAccountModal
+            initialAccount={account}
+            isOpen={isEditAccountModalOpen}
+            setIsOpen={setIsEditAccountModalOpen}
           />
         )}
       </td>
