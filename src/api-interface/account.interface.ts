@@ -5,7 +5,7 @@ interface AccountResponse {
   firstNameTh: string;
   lastNameTh: string;
   email: string;
-  status: "verified" | "not_verify" | "disabled";
+  status: "verified" | "not_verify" | "disabled" | "deleted";
   phoneNum: string;
 }
 
@@ -19,6 +19,6 @@ interface AccountRequestBodyDTO {
   firstNameTh: string;
   lastNameTh: string;
   email: string;
-  status: "verified" | "not_verify" | "disabled";
+  status: "verified" | "not_verify" | "disabled" | "deleted";
   phoneNum: string;
 }

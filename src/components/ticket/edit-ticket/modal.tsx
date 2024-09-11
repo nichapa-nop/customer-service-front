@@ -76,8 +76,6 @@ const EditTicketModal: React.FC<Props> = ({
       alert("Failed to edit ticket. Please try again.");
     }
   };
-  const [isEditing, setIsEditing] = useState<boolean>(false);
-
   const { control, watch, handleSubmit } = useForm<TicketSchema>({
     mode: "onChange",
     resolver: zodResolver(ticketSchema),

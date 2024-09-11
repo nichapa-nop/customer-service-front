@@ -40,6 +40,7 @@ const TicketRow: React.FC<TicketRowProps> = ({
     useState<TicketResponse>();
   const [isReOpenTicketModalOpen, setIsReOpenTicketModalOpen] =
     useState<boolean>(false);
+  const isButtonDisable = ticket.status === "deleted";
 
   const getStatusBackgroundColor = (status: string) => {
     switch (status.toLowerCase()) {
@@ -167,6 +168,7 @@ const TicketRow: React.FC<TicketRowProps> = ({
         </button>
 
         <button
+          disabled={isButtonDisable}
           onClick={() => {
             setIsDeleteModalOpen(true);
           }}

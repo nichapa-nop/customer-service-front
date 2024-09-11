@@ -1,6 +1,7 @@
 "use client";
 import { getAccountList } from "@/actions/account.action";
 import CreateAccountModal from "@/components/account/create-account/modal";
+import DeleteAccountSuccess from "@/components/account/delete-account-success/modal";
 import AccountRow from "@/components/accountrow/accountrow";
 
 import React, { useEffect, useRef, useState } from "react";
@@ -20,6 +21,8 @@ export default function AccountManagementClient({
   const [searchKeyword, setSearchKeyword] = useState<string>();
   const timeoutRef = useRef<NodeJS.Timeout>();
   const [isPageChanged, setIsPageChanged] = useState<boolean>(false);
+  const [isDeleteAccountSuccessModalOpen, setIsDeleteAccountSuccessModalOpen] =
+    useState<boolean>(false);
 
   async function fetchLastestAccounts(page: number = 1, keyword?: string) {
     const response = await getAccountList({ page, keyword });
@@ -171,7 +174,13 @@ export default function AccountManagementClient({
                 </thead>
                 <tbody>
                   {accounts.map((account) => (
-                    <AccountRow key={account.uuid} account={account} />
+                    <AccountRow
+                      key={account.uuid}
+                      account={account}
+                      setIsDeleteSuccessModalOpen={
+                        setIsDeleteAccountSuccessModalOpen
+                      }
+                    />
                   ))}
                 </tbody>
               </table>
@@ -227,6 +236,12 @@ export default function AccountManagementClient({
               </div>
             </footer>
           </div>
+          {isDeleteAccountSuccessModalOpen && (
+            <DeleteAccountSuccess
+              isOpen={isDeleteAccountSuccessModalOpen}
+              setIsOpen={setIsDeleteAccountSuccessModalOpen}
+            />
+          )}
           {isCreateAccountModalOpen && (
             <CreateAccountModal
               isOpen={isCreateAccountModalOpen}

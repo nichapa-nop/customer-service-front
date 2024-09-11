@@ -1,5 +1,5 @@
 "use client";
-import React, { Dispatch, Fragment, SetStateAction } from "react";
+import React, { Dispatch, Fragment, SetStateAction, use } from "react";
 import { useState } from "react";
 import {
   Dialog,
@@ -10,10 +10,19 @@ import {
 } from "@headlessui/react";
 import { motion } from "framer-motion";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { editAccount } from "@/actions/account.action";
+import {
+  deleteAccount,
+  editAccount,
+  enableAndDisableAccount,
+  recoveryAccount,
+  sendResetPasswordEmail,
+  sendVerifyEmail,
+} from "@/actions/account.action";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { accountSchema } from "@/schemas/account.schema";
 import { z } from "zod";
+import { Switch } from "@nextui-org/react";
+import toast from "react-hot-toast";
 // import successpic from "../../../../img/success.png";
 
 interface Props {
@@ -77,6 +86,74 @@ const EditAccountModal: React.FC<Props> = ({
     },
   });
 
+  const [enableAndDisableSwitchEnabled, setEnableAndDisableSwitchEnabled] =
+    useState(initialAccount.status !== "disabled");
+  const [recoverySwitchEnabled, setRecoverySwitchEnabled] = useState(
+    initialAccount.status !== "deleted"
+  );
+  const toggleEnableAndDisableSwitch = () => {
+    handleEnableAndDisable();
+    setEnableAndDisableSwitchEnabled(!enableAndDisableSwitchEnabled); // สลับสถานะ
+  };
+  async function handleEnableAndDisable() {
+    const enableAndDisableResponse = await enableAndDisableAccount({
+      uuid: initialAccount.uuid,
+    });
+    if (enableAndDisableResponse.success) {
+      // setIsEnableAndDisableSuccessModalOpen(true)
+    }
+  }
+
+  const toggleRecoverySwitch = () => {
+    handleRecovery();
+    setRecoverySwitchEnabled(!recoverySwitchEnabled); // สลับสถานะ
+  };
+
+  async function handleRecovery() {
+    if (initialAccount.status === "deleted") {
+      const recoveryResponse = await recoveryAccount({
+        uuid: initialAccount.uuid,
+      });
+      if (recoveryResponse.success) {
+        //setIsRecoverySuccessModalOpen(true)
+        toast.success("Recovery account success");
+      } else {
+        toast.error("Recovery account failed");
+      }
+    } else {
+      const deleteResponse = await deleteAccount({
+        uuid: initialAccount.uuid,
+      });
+      if (deleteResponse.success) {
+        //setIsRecoverySuccessModalOpen(true)
+      }
+    }
+  }
+
+  async function handleSendVerifyEmail() {
+    const sendEmailResponse = await sendVerifyEmail({
+      uuid: initialAccount.uuid,
+    });
+    if (sendEmailResponse.success) {
+      //setIsRecoverySuccessModalOpen(true)
+      toast.success("Send Email success");
+    } else {
+      toast.error("Send Email failed");
+    }
+  }
+
+  async function handleSendResetPasswordEmail() {
+    const sendResetPassResponse = await sendResetPasswordEmail({
+      uuid: initialAccount.uuid,
+    });
+    if (sendResetPassResponse.success) {
+      //setIsRecoverySuccessModalOpen(true)
+      toast.success("Send Email success");
+    } else {
+      toast.error("Send Email failed");
+    }
+  }
+
   return (
     <>
       <Dialog
@@ -99,7 +176,7 @@ const EditAccountModal: React.FC<Props> = ({
               <DialogPanel className="bg-light-gray2 w-[1000px] space-y-[50px] border rounded-[30px] p-12">
                 <div className="relative flex items-center justify-center">
                   <DialogTitle className="flex font-semibold text-[20px] text-center items-center">
-                    Account Detail
+                    Edit Account
                     <button
                       className="absolute right-0"
                       onClick={() => setIsOpen(false)}
@@ -329,16 +406,32 @@ const EditAccountModal: React.FC<Props> = ({
                       </div>
                       <p>Enable/Disable Account</p>
                     </div>
-                    <button
-                      className=" bg-gradient-to-tr from-cancel-bl to-cancel-tr w-28 h-8 rounded-[15px] text-white"
-                      onClick={() => {
-                        // setIsCloseTicketModalOpen(true);
-                        // setIsOpen(false);
-                        // setFocusCloseTicketModal(initialTicket);
-                      }}
-                    >
-                      Enable
-                    </button>
+
+                    <div className="flex items-center">
+                      <button
+                        onClick={toggleEnableAndDisableSwitch}
+                        className={`w-28 h-8 rounded-full transition-all duration-700 relative ${
+                          enableAndDisableSwitchEnabled
+                            ? "bg-gradient-to-tr from-deep-blue to-bright-red"
+                            : "bg-dark-gray"
+                        }`}
+                      >
+                        <div
+                          className={`absolute left-1 top-1 w-6 h-6 bg-white rounded-full transition-transform duration-700 transform ${
+                            enableAndDisableSwitchEnabled
+                              ? "translate-x-20"
+                              : ""
+                          }`}
+                        />
+                        <span
+                          className={`text-white text-[14px] transition-all duration-700 ${
+                            enableAndDisableSwitchEnabled ? "mr-3" : "ml-3"
+                          }`}
+                        >
+                          {enableAndDisableSwitchEnabled ? "Enable" : "Disable"}
+                        </span>
+                      </button>
+                    </div>
                   </div>
                   <div className=" flex justify-between py-4 px-7">
                     <div className="flex flex-row items-center space-x-5">
@@ -363,6 +456,7 @@ const EditAccountModal: React.FC<Props> = ({
                     <button
                       className=" bg-gradient-to-tr from-cancel-bl to-cancel-tr w-28 h-8 rounded-[15px] text-white"
                       onClick={() => {
+                        handleSendVerifyEmail();
                         // setIsCloseTicketModalOpen(true);
                         // setIsOpen(false);
                         // setFocusCloseTicketModal(initialTicket);
@@ -394,6 +488,7 @@ const EditAccountModal: React.FC<Props> = ({
                     <button
                       className=" bg-gradient-to-tr from-cancel-bl to-cancel-tr w-28 h-8 rounded-[15px] text-white"
                       onClick={() => {
+                        handleSendResetPasswordEmail();
                         // setIsCloseTicketModalOpen(true);
                         // setIsOpen(false);
                         // setFocusCloseTicketModal(initialTicket);
@@ -422,7 +517,7 @@ const EditAccountModal: React.FC<Props> = ({
                       </div>
                       <p>Delete/Recovery Account</p>
                     </div>
-                    <button
+                    {/* <button
                       className=" bg-gradient-to-tr from-cancel-bl to-cancel-tr w-28 h-8 rounded-[15px] text-white"
                       onClick={() => {
                         // setIsCloseTicketModalOpen(true);
@@ -431,7 +526,30 @@ const EditAccountModal: React.FC<Props> = ({
                       }}
                     >
                       Recovery
-                    </button>
+                    </button> */}
+                    <div className="flex items-center">
+                      <button
+                        onClick={toggleRecoverySwitch}
+                        className={`w-28 h-8 rounded-full transition-all duration-700 relative ${
+                          recoverySwitchEnabled
+                            ? "bg-gradient-to-tr from-deep-blue to-bright-red"
+                            : "bg-dark-gray"
+                        }`}
+                      >
+                        <div
+                          className={`absolute left-1 top-1 w-6 h-6 bg-white rounded-full transition-transform duration-700 transform ${
+                            recoverySwitchEnabled ? "translate-x-20" : ""
+                          }`}
+                        />
+                        <span
+                          className={`text-white text-[14px] transition-all duration-700 ${
+                            recoverySwitchEnabled ? "mr-3" : "ml-3"
+                          }`}
+                        >
+                          {recoverySwitchEnabled ? "Recovery" : "Deleted"}
+                        </span>
+                      </button>
+                    </div>
                   </div>
                 </div>
                 <div className="flex  items-center justify-center ">

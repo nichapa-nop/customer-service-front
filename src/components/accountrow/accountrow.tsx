@@ -1,16 +1,24 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import AccountDetail from "../account/account-detail/modal";
 import EditAccountModal from "../account/edit-account/modal";
+import DeleteAccountModal from "../account/delete-account/modal";
 
 interface AccountRowProps {
   account: AccountResponse;
+  setIsDeleteSuccessModalOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const AccountRow: React.FC<AccountRowProps> = ({ account }) => {
+const AccountRow: React.FC<AccountRowProps> = ({
+  account,
+  setIsDeleteSuccessModalOpen,
+}) => {
   const [isAccountDetailModalOpen, setIsAccountDetailModalOpen] =
     useState<boolean>(false);
   const [isEditAccountModalOpen, setIsEditAccountModalOpen] =
     useState<boolean>(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+  const isButtonDisable = account.status === "deleted";
+
   const getStatusBackgroundColor = (status: string) => {
     switch (status.toLowerCase()) {
       case "not_verify":
@@ -91,8 +99,9 @@ const AccountRow: React.FC<AccountRowProps> = ({ account }) => {
         </button>
 
         <button
+          disabled={isButtonDisable}
           onClick={() => {
-            // setIsDeleteModalOpen(true);
+            setIsDeleteModalOpen(true);
           }}
         >
           <svg
@@ -134,13 +143,15 @@ const AccountRow: React.FC<AccountRowProps> = ({ account }) => {
             />
           </svg>
         </button>
-        {/* {isDeleteModalOpen && (
+        {isDeleteModalOpen && (
           <DeleteAccountModal
-            initialAccount={Account}
+            initialAccount={account}
             isOpen={isDeleteModalOpen}
             setIsOpen={setIsDeleteModalOpen}
+            setIsDeleteAccountSuccessModalOpen={setIsDeleteSuccessModalOpen}
+            // setLatestDeleteTicket={setLatestDeleteTicket}
           />
-        )} */}
+        )}
         {isAccountDetailModalOpen && (
           <AccountDetail
             initialAccount={account}
