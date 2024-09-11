@@ -81,7 +81,10 @@ const CreateAccountModal: React.FC<Props> = ({
         className="relative z-50"
       >
         <DialogBackdrop className="fixed inset-0 bg-black/30" />
-        <div className="fixed inset-0 w-screen overflow-y-auto p-1 py-24">
+        <form
+          onSubmit={handleSubmit(processForm)}
+          className="fixed inset-0 w-screen overflow-y-auto p-1 py-24"
+        >
           <div className="flex min-h-full  items-center justify-center">
             <motion.div
               initial={{ opacity: 0 }}
@@ -106,55 +109,172 @@ const CreateAccountModal: React.FC<Props> = ({
                       <p className=" font-medium text-[14px]">
                         First Name (EN)
                       </p>
-                      <input
-                        className="bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4"
-                        placeholder="Nichapa"
-                      ></input>
+                      <Controller
+                        control={control}
+                        name="firstName"
+                        render={({
+                          field: { value, name, onChange, onBlur },
+                        }) => {
+                          return (
+                            <input
+                              id="firstName"
+                              type="text"
+                              value={value}
+                              name={name}
+                              onChange={onChange}
+                              onBlur={onBlur}
+                              className="bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4"
+                              placeholder="Nichapa"
+                            ></input>
+                          );
+                        }}
+                      />
                     </div>
                     <div className="flex flex-col gap-2 ">
                       <p className=" font-medium text-[14px]">Last Name (EN)</p>
-                      <input
-                        className="bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4"
-                        placeholder="Nopparat"
-                      ></input>
+                      <Controller
+                        control={control}
+                        name="lastName"
+                        render={({
+                          field: { value, name, onChange, onBlur },
+                        }) => {
+                          return (
+                            <input
+                              id="lastName"
+                              type="text"
+                              value={value}
+                              name={name}
+                              onChange={onChange}
+                              onBlur={onBlur}
+                              className="bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4"
+                              placeholder="Nopparat"
+                            ></input>
+                          );
+                        }}
+                      />
                     </div>
                     <div className="flex flex-col gap-2">
                       <p className=" font-medium text-[14px]">
                         First Name (TH)
                       </p>
-                      <input
-                        className="bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4"
-                        placeholder="สมชาย"
-                      ></input>
+                      <Controller
+                        control={control}
+                        name="firstNameTh"
+                        render={({
+                          field: { value, name, onChange, onBlur },
+                        }) => {
+                          return (
+                            <input
+                              id="firstNameTh"
+                              type="text"
+                              value={value}
+                              name={name}
+                              onChange={onChange}
+                              onBlur={onBlur}
+                              className="bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4"
+                              placeholder="สมชาย"
+                            ></input>
+                          );
+                        }}
+                      />
                     </div>
                     <div className="flex flex-col gap-2 ">
                       <p className=" font-medium text-[14px]">Last Name (TH)</p>
-                      <input
-                        className="bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4"
-                        placeholder="ใจดี"
-                      ></input>
+                      <Controller
+                        control={control}
+                        name="lastNameTh"
+                        render={({
+                          field: { value, name, onChange, onBlur },
+                        }) => {
+                          return (
+                            <input
+                              id="lastNameTh"
+                              type="text"
+                              value={value}
+                              name={name}
+                              onChange={onChange}
+                              onBlur={onBlur}
+                              className="bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4"
+                              placeholder="ใจดี"
+                            ></input>
+                          );
+                        }}
+                      />
                     </div>
                     <div className="flex flex-col gap-2 ">
                       <p className=" font-medium text-[14px]">Phone Number</p>
-                      <input
-                        className="bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4"
-                        placeholder="0123456789"
-                      ></input>
+                      <Controller
+                        control={control}
+                        name="phoneNum"
+                        render={({
+                          field: { value, name, onChange, onBlur },
+                        }) => {
+                          return (
+                            <input
+                              id="phoneNum"
+                              type="text"
+                              value={value}
+                              name={name}
+                              onChange={onChange}
+                              onBlur={onBlur}
+                              className="bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4"
+                              placeholder="0123456789"
+                            ></input>
+                          );
+                        }}
+                      />
                     </div>
 
                     <div className=" flex flex-col gap-2 ">
                       <p className=" font-medium text-[14px]">Email</p>
-                      <input
-                        className="bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4"
-                        placeholder="ee@baseplayhouse.co"
-                      ></input>
+                      <Controller
+                        control={control}
+                        name="email"
+                        render={({
+                          field: { onChange, onBlur, value, name },
+                        }) => {
+                          return (
+                            <input
+                              id="email"
+                              name={name}
+                              value={value}
+                              onChange={onChange}
+                              onBlur={onBlur}
+                              className="bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4"
+                              placeholder="ee@baseplayhouse.co"
+                            ></input>
+                          );
+                        }}
+                      />
                     </div>
                     <div className=" flex flex-col gap-2 ">
                       <p className=" font-medium text-[14px]">Role</p>
-                      <input
-                        className="bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4"
-                        placeholder="Select"
-                      ></input>
+                      <Controller
+                        control={control}
+                        //แก้เป็นroleหลังแก้หลังบ้าน
+                        name="email"
+                        render={({
+                          field: { value, name, onChange, onBlur },
+                        }) => {
+                          return (
+                            <select
+                              id="email"
+                              name={name}
+                              value={value}
+                              onChange={onChange}
+                              onBlur={onBlur}
+                              className="bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4"
+                            >
+                              <option value="" disabled>
+                                Select
+                              </option>
+                              {/* <option value="cdd">CDD</option>
+                              <option value="hr">HR</option>
+                              <option value="other">OTHER</option> */}
+                            </select>
+                          );
+                        }}
+                      />
                     </div>
                   </div>
                 </div>
@@ -171,7 +291,7 @@ const CreateAccountModal: React.FC<Props> = ({
               </DialogPanel>
             </motion.div>
           </div>
-        </div>
+        </form>
       </Dialog>
     </>
   );

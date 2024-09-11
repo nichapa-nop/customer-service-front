@@ -85,7 +85,10 @@ const EditAccountModal: React.FC<Props> = ({
         className="relative z-50"
       >
         <DialogBackdrop className="fixed inset-0 bg-black/30" />
-        <div className="fixed inset-0 w-screen overflow-y-auto p-1 py-24">
+        <form
+          onSubmit={handleSubmit(processForm)}
+          className="fixed inset-0 w-screen overflow-y-auto p-1 py-24"
+        >
           <div className="flex min-h-full  items-center justify-center">
             <motion.div
               initial={{ opacity: 0 }}
@@ -276,13 +279,13 @@ const EditAccountModal: React.FC<Props> = ({
                       <Controller
                         control={control}
                         //แก้เป็นroleหลังแก้หลังบ้าน
-                        name="status"
+                        name="email"
                         render={({
                           field: { value, name, onChange, onBlur },
                         }) => {
                           return (
                             <select
-                              id="status"
+                              id="email"
                               name={name}
                               value={value}
                               onChange={onChange}
@@ -292,9 +295,9 @@ const EditAccountModal: React.FC<Props> = ({
                               <option value="" disabled>
                                 Select
                               </option>
-                              <option value="cdd">CDD</option>
+                              {/* <option value="cdd">CDD</option>
                               <option value="hr">HR</option>
-                              <option value="other">OTHER</option>
+                              <option value="other">OTHER</option> */}
                             </select>
                           );
                         }}
@@ -443,7 +446,7 @@ const EditAccountModal: React.FC<Props> = ({
               </DialogPanel>
             </motion.div>
           </div>
-        </div>
+        </form>
       </Dialog>
     </>
   );
