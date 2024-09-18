@@ -7,6 +7,7 @@ interface AccountResponse {
   email: string;
   status: "verified" | "not_verify" | "disabled" | "deleted";
   phoneNum: string;
+  role: RoleResponse;
 }
 
 interface IAccountListResponse {

@@ -6,11 +6,13 @@ import DeleteAccountModal from "../account/delete-account/modal";
 interface AccountRowProps {
   account: AccountResponse;
   setIsDeleteSuccessModalOpen: Dispatch<SetStateAction<boolean>>;
+  initialRoles: RoleResponse[];
 }
 
 const AccountRow: React.FC<AccountRowProps> = ({
   account,
   setIsDeleteSuccessModalOpen,
+  initialRoles,
 }) => {
   const [isAccountDetailModalOpen, setIsAccountDetailModalOpen] =
     useState<boolean>(false);
@@ -35,7 +37,7 @@ const AccountRow: React.FC<AccountRowProps> = ({
   };
 
   return (
-    <tr key={account.uuid} className="h-[68px]">
+    <tr key={account.uuid} className="h-[68px] hover:bg-light-orange">
       <td
         className="w-[20%]"
         onClick={() => {
@@ -46,7 +48,13 @@ const AccountRow: React.FC<AccountRowProps> = ({
           <span className="truncate">
             {account.firstName} {account.lastName}
           </span>
-          <span className="text-dark-gray">Trainee</span>
+          <span
+            className={`text-dark-gray ${
+              account.role.roleName === "ceo" ? "uppercase" : "capitalize"
+            }`}
+          >
+            {account.role.roleName}
+          </span>
         </div>
       </td>
       <td
@@ -77,7 +85,9 @@ const AccountRow: React.FC<AccountRowProps> = ({
               account.status
             )}`}
           >
-            <span className="truncate px-2">{account.status}</span>
+            <span className="truncate px-2 capitalize">
+              {account.status === "not_verify" ? "not verify" : account.status}
+            </span>
           </div>
         </div>
       </td>
@@ -162,6 +172,7 @@ const AccountRow: React.FC<AccountRowProps> = ({
         {isEditAccountModalOpen && (
           <EditAccountModal
             initialAccount={account}
+            initialRoles={initialRoles}
             isOpen={isEditAccountModalOpen}
             setIsOpen={setIsEditAccountModalOpen}
           />

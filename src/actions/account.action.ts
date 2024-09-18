@@ -1,3 +1,5 @@
+"use server";
+
 import { ApiManager } from "@/api";
 import { revalidateTag } from "next/cache";
 
@@ -17,7 +19,6 @@ export async function getAccountList({
       tags: ["get-account-list"],
     },
   });
-  // console.log(keyword);
   if (response.success && response.data) {
     return {
       data: response.data.accounts,
@@ -39,7 +40,7 @@ export async function createAccount(data: any) {
     method: "POST",
     body: data,
     next: {
-      // revalidateTags: ["get-account-list"]
+      revalidateTags: ["get-account-list"],
     },
   });
   if (response.success && response.data) {
@@ -62,7 +63,7 @@ export async function editAccount({ uuid }: { uuid: string }, data: any) {
     method: "PUT",
     body: data,
     next: {
-      // revalidateTags: ["get-account-list"]
+      revalidateTags: ["get-account-list"],
     },
   });
 
@@ -72,6 +73,7 @@ export async function editAccount({ uuid }: { uuid: string }, data: any) {
       success: true,
     };
   } else {
+    console.log(response.data);
     throw new Error("Failed to fetch data");
   }
 }

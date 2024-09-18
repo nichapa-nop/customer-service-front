@@ -1,34 +1,30 @@
 "use client";
-import { getAccountList } from "@/actions/account.action";
-import CreateAccountModal from "@/components/account/create-account/modal";
-import DeleteAccountSuccess from "@/components/account/delete-account-success/modal";
-import AccountRow from "@/components/accountrow/accountrow";
+import { getRoleList } from "@/actions/role.action";
+import RoleRow from "@/components/rolerow/rolerow";
 
 import React, { useEffect, useRef, useState } from "react";
 
-export default function AccountManagementClient({
-  accounts: initialAccounts,
+export default function RoleManagementClient({
   roles: initialRoles,
 }: {
-  accounts: AccountResponse[];
   roles: RoleResponse[];
 }) {
   const [page, setPage] = useState<number>(1);
   const [pageCount, setPageCount] = useState<number>();
   const [itemCount, setItemCount] = useState<number>(0);
 
-  const [accounts, setAccounts] = useState<AccountResponse[]>(initialAccounts);
-  const [isCreateAccountModalOpen, setIsCreateAccountModalOpen] =
+  const [roles, setRoles] = useState<RoleResponse[]>(initialRoles);
+  const [isCreateRoleModalOpen, setIsCreateRoleModalOpen] =
     useState<boolean>(false);
   const [searchKeyword, setSearchKeyword] = useState<string>();
   const timeoutRef = useRef<NodeJS.Timeout>();
   const [isPageChanged, setIsPageChanged] = useState<boolean>(false);
-  const [isDeleteAccountSuccessModalOpen, setIsDeleteAccountSuccessModalOpen] =
+  const [isDeleteRoleSuccessModalOpen, setIsDeleteRoleSuccessModalOpen] =
     useState<boolean>(false);
 
-  async function fetchLastestAccounts(page: number = 1, keyword?: string) {
-    const response = await getAccountList({ page, keyword });
-    setAccounts(response.data);
+  async function fetchLastestRoles(page: number = 1, keyword?: string) {
+    const response = await getRoleList({ page, keyword });
+    setRoles(response.data);
     setPageCount(
       Math.ceil(
         response.pagination.itemsCount / response.pagination.itemsPerPage
@@ -40,19 +36,19 @@ export default function AccountManagementClient({
   useEffect(() => {
     clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
-      fetchLastestAccounts(1, searchKeyword);
+      fetchLastestRoles(1, searchKeyword);
     }, 1000);
   }, [searchKeyword]);
 
   useEffect(() => {
     if (isPageChanged) {
-      fetchLastestAccounts(page);
+      fetchLastestRoles(page);
     }
   }, [page]);
 
   useEffect(() => {
-    setAccounts(initialAccounts);
-  }, [initialAccounts]);
+    setRoles(initialRoles);
+  }, [initialRoles]);
 
   return (
     <div className="bg-white h-full w-full flex">
@@ -134,7 +130,7 @@ export default function AccountManagementClient({
                   <button
                     type="button"
                     className="flex flex-row items-center justify-center space-x-2 bg-gradient-to-tr from-deep-blue to-bright-red text-white h-full bg-white rounded-[20px] shadow-light2"
-                    onClick={() => setIsCreateAccountModalOpen(true)}
+                    onClick={() => setIsCreateRoleModalOpen(true)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -150,7 +146,7 @@ export default function AccountManagementClient({
                         d="M12 4.5v15m7.5-7.5h-15"
                       />
                     </svg>
-                    <span>New Account</span>
+                    <span>New Role</span>
                   </button>
                 </div>
               </div>
@@ -159,30 +155,26 @@ export default function AccountManagementClient({
             <div className="overflow-x-auto text-[14px]">
               <table className="bg-white w-full table-fixed items-center justify-center text-center">
                 <colgroup>
-                  <col className="w-[25%]" />
-                  <col className="w-[25%]" />
                   <col className="w-[20%]" />
-                  <col className="w-[15%]" />
-                  <col className="w-[15%]" />
+                  <col className="w-[60%]" />
+                  <col className="w-[20%]" />
                 </colgroup>
                 <thead>
                   <tr className="h-[68px] ">
-                    <th>Account</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <th>Role</th>
+                    <th>Group Menu</th>
+                    <th className="w-[300px]">Action</th>
                   </tr>
                 </thead>
+
                 <tbody>
-                  {accounts.map((account) => (
-                    <AccountRow
-                      key={account.uuid}
-                      initialRoles={initialRoles}
-                      account={account}
-                      setIsDeleteSuccessModalOpen={
-                        setIsDeleteAccountSuccessModalOpen
-                      }
+                  {roles.map((role) => (
+                    <RoleRow
+                      key={role.id}
+                      role={role}
+                      // setIsDeleteSuccessModalOpen={
+                      //   setIsDeleteRoleSuccessModalOpen
+                      // }
                     />
                   ))}
                 </tbody>
@@ -239,19 +231,18 @@ export default function AccountManagementClient({
               </div>
             </footer>
           </div>
-          {isDeleteAccountSuccessModalOpen && (
-            <DeleteAccountSuccess
-              isOpen={isDeleteAccountSuccessModalOpen}
-              setIsOpen={setIsDeleteAccountSuccessModalOpen}
+          {/* {isDeleteRoleSuccessModalOpen && (
+            <DeleteRoleSuccess
+              isOpen={isDeleteRoleSuccessModalOpen}
+              setIsOpen={setIsDeleteRoleSuccessModalOpen}
             />
           )}
-          {isCreateAccountModalOpen && (
-            <CreateAccountModal
-              isOpen={isCreateAccountModalOpen}
-              setIsOpen={setIsCreateAccountModalOpen}
-              initialRoles={initialRoles}
+          {isCreateRoleModalOpen && (
+            <CreateRoleModal
+              isOpen={isCreateRoleModalOpen}
+              setIsOpen={setIsCreateRoleModalOpen}
             />
-          )}
+          )} */}
         </div>
       </div>
     </div>

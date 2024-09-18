@@ -30,6 +30,7 @@ interface Props {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   onClose?: () => void;
   initialAccount: AccountResponse;
+  initialRoles: RoleResponse[];
 }
 
 type AccountSchema = z.infer<typeof accountSchema>;
@@ -39,6 +40,7 @@ const EditAccountModal: React.FC<Props> = ({
   setIsOpen,
   onClose,
   initialAccount,
+  initialRoles,
 }) => {
   const getStatusBackgroundColor = (status: string) => {
     switch (status.toLowerCase()) {
@@ -68,9 +70,12 @@ const EditAccountModal: React.FC<Props> = ({
         // openModal(); // Open the success modal
       }
     } catch (error) {
+      console.log(error);
       alert("Failed to edit ticket. Please try again.");
     }
   };
+
+  console.log(initialAccount.status);
 
   const { control, watch, handleSubmit } = useForm<AccountSchema>({
     mode: "onChange",
@@ -82,7 +87,8 @@ const EditAccountModal: React.FC<Props> = ({
       lastNameTh: initialAccount.lastNameTh || "",
       email: initialAccount.email || "",
       phoneNum: initialAccount.phoneNum || "",
-      status: initialAccount.status || "",
+      status: initialAccount.status,
+      role: initialAccount.role.roleName || "",
     },
   });
 
@@ -201,7 +207,11 @@ const EditAccountModal: React.FC<Props> = ({
                       initialAccount.status
                     )}`}
                   >
-                    <span className="text-white">{initialAccount.status}</span>
+                    <span className="text-white capitalize">
+                      {initialAccount.status === "not_verify"
+                        ? "not verify"
+                        : initialAccount.status}
+                    </span>
                   </div>
                 </div>
                 <div className="bg-white p-6 flex flex-col rounded-xl shadow-sm">
@@ -356,25 +366,34 @@ const EditAccountModal: React.FC<Props> = ({
                       <Controller
                         control={control}
                         //แก้เป็นroleหลังแก้หลังบ้าน
-                        name="email"
+                        name="role"
                         render={({
                           field: { value, name, onChange, onBlur },
                         }) => {
                           return (
                             <select
-                              id="email"
+                              id="role"
                               name={name}
                               value={value}
                               onChange={onChange}
                               onBlur={onBlur}
-                              className="bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4"
+                              className={`bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4 ${
+                                value === "ceo" ? "uppercase" : "capitalize"
+                              }`}
                             >
-                              <option value="" disabled>
-                                Select
-                              </option>
-                              {/* <option value="cdd">CDD</option>
-                              <option value="hr">HR</option>
-                              <option value="other">OTHER</option> */}
+                              <option value="">Select</option>
+                              {initialRoles.map((role) => (
+                                <option
+                                  className={`bg-white rounded-[15px] ${
+                                    role.roleName == "ceo"
+                                      ? "uppercase"
+                                      : "capitalize"
+                                  }`}
+                                  value={role.roleName}
+                                >
+                                  {role.roleName}
+                                </option>
+                              ))}
                             </select>
                           );
                         }}
@@ -409,6 +428,7 @@ const EditAccountModal: React.FC<Props> = ({
 
                     <div className="flex items-center">
                       <button
+                        type="button"
                         onClick={toggleEnableAndDisableSwitch}
                         className={`w-28 h-8 rounded-full transition-all duration-700 relative ${
                           enableAndDisableSwitchEnabled
@@ -517,16 +537,6 @@ const EditAccountModal: React.FC<Props> = ({
                       </div>
                       <p>Delete/Recovery Account</p>
                     </div>
-                    {/* <button
-                      className=" bg-gradient-to-tr from-cancel-bl to-cancel-tr w-28 h-8 rounded-[15px] text-white"
-                      onClick={() => {
-                        // setIsCloseTicketModalOpen(true);
-                        // setIsOpen(false);
-                        // setFocusCloseTicketModal(initialTicket);
-                      }}
-                    >
-                      Recovery
-                    </button> */}
                     <div className="flex items-center">
                       <button
                         onClick={toggleRecoverySwitch}
@@ -556,6 +566,9 @@ const EditAccountModal: React.FC<Props> = ({
                   <button
                     className=" bg-gradient-to-tr from-deep-blue to-bright-red w-64 h-14 rounded-[30px] text-white"
                     type="submit"
+                    // onClick={() => {
+                    //   console.log(watch());
+                    // }}
                   >
                     Save
                   </button>

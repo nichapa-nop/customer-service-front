@@ -80,7 +80,11 @@ const AccountDetail: React.FC<Props> = ({
                       initialAccount.status
                     )}`}
                   >
-                    <span className="text-white">{initialAccount.status}</span>
+                    <span className="text-white capitalize">
+                      {initialAccount.status === "not_verify"
+                        ? "not verify"
+                        : initialAccount.status}
+                    </span>
                   </div>
                 </div>
                 <div className="bg-white p-6 rounded-xl shadow-sm">
@@ -126,8 +130,14 @@ const AccountDetail: React.FC<Props> = ({
                     </div>
                     <div className="flex flex-col gap-4 p-4">
                       <p>Role</p>
-                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
-                        {initialAccount.email}
+                      <span
+                        className={`bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text ${
+                          initialAccount.role.roleName == "ceo"
+                            ? "uppercase"
+                            : "capitalize"
+                        }`}
+                      >
+                        {initialAccount.role.roleName}
                       </span>
                     </div>
                   </div>

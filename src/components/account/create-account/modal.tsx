@@ -15,11 +15,13 @@ import { createAccount } from "@/actions/account.action";
 import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
+import { Select, SelectItem } from "@nextui-org/react";
 
 interface Props {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   onClose?: () => void;
+  initialRoles: RoleResponse[];
 }
 
 type AccountSchema = z.infer<typeof accountSchema>;
@@ -28,11 +30,13 @@ const CreateAccountModal: React.FC<Props> = ({
   isOpen,
   setIsOpen,
   onClose,
+  initialRoles,
 }) => {
   const [
     isCreateAccountSuccesModalSuccess,
     setIsCreateAccountSuccessModalOpen,
   ] = useState(false);
+  const [roles, setRoles] = useState<RoleResponse[]>(initialRoles);
 
   const openModal = () => {
     setIsCreateAccountSuccessModalOpen(true);
@@ -51,6 +55,8 @@ const CreateAccountModal: React.FC<Props> = ({
           {
             position: "bottom-center",
           };
+        console.log(result.data.uuid);
+
         openModal();
       }
     } catch (error) {
@@ -96,14 +102,7 @@ const CreateAccountModal: React.FC<Props> = ({
                 <DialogTitle className="font-semibold text-center text-[20px] mt-6 mb-10">
                   Create New Account
                 </DialogTitle>
-                {/* <Description>
-                            This will permanently deactivate your account
-                          </Description> */}
-
                 <div className="px-6 rounded-xl">
-                  {/* <p className="font-semibold text-[20px] pl-6">
-                              Customer Info
-                            </p> */}
                   <div className="grid grid-cols-2 gap-x-9 gap-y-6 ">
                     <div className="flex flex-col gap-2 ">
                       <p className=" font-medium text-[14px]">
@@ -252,25 +251,37 @@ const CreateAccountModal: React.FC<Props> = ({
                       <Controller
                         control={control}
                         //แก้เป็นroleหลังแก้หลังบ้าน
-                        name="email"
+                        name="role"
                         render={({
                           field: { value, name, onChange, onBlur },
                         }) => {
                           return (
                             <select
-                              id="email"
+                              id="role"
+                              // label="Select"
                               name={name}
                               value={value}
                               onChange={onChange}
                               onBlur={onBlur}
-                              className="bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4"
+                              className={`bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4 ${
+                                value === "ceo" ? "uppercase" : "capitalize"
+                              }`}
                             >
-                              <option value="" disabled>
+                              <option className="select-disabled" value="">
                                 Select
                               </option>
-                              {/* <option value="cdd">CDD</option>
-                              <option value="hr">HR</option>
-                              <option value="other">OTHER</option> */}
+                              {initialRoles.map((role) => (
+                                <option
+                                  className={`bg-white rounded-[15px] ${
+                                    role.roleName == "ceo"
+                                      ? "uppercase"
+                                      : "capitalize"
+                                  }`}
+                                  value={role.roleName}
+                                >
+                                  {role.roleName}
+                                </option>
+                              ))}
                             </select>
                           );
                         }}
@@ -282,7 +293,7 @@ const CreateAccountModal: React.FC<Props> = ({
                   <button
                     className=" bg-gradient-to-tr from-deep-blue to-bright-red w-64 h-14 rounded-[30px] text-white"
                     type="submit"
-                    disabled={!isValid}
+                    // disabled={!isValid}
                   >
                     Create Account
                   </button>

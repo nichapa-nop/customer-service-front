@@ -6,6 +6,7 @@ export const accountSchema = z.object({
   firstNameTh: z.string().min(1),
   lastNameTh: z.string().min(1),
   email: z.string().email(),
-  status: z.enum(["verified", "not_verify", "disabled", "deleted"]),
+  status: z.enum(["verified", "not_verify", "disabled", "deleted"]).optional(),
   phoneNum: z.string().min(10).max(10),
+  role: z.string().min(1),
 });
