@@ -35,6 +35,7 @@ const DeleteAccountModal: React.FC<Props> = ({
       uuid: initialAccount.uuid,
     });
     if (deleteResponse.success) {
+      setIsOpen(false);
       setIsDeleteAccountSuccessModalOpen(true);
       //   setLatestDeleteAccount(initialAccount);
     }
@@ -88,7 +89,7 @@ const DeleteAccountModal: React.FC<Props> = ({
 
                 <div className="flex flex-col h-[120px] rounded-xl mb-6 items-center justify-center">
                   <p className="font-semibold text-[20px] mb-3 text-center">
-                    Are you sure you want to delete Account?
+                    Are you sure you want to delete this Account?
                   </p>
                   <p className=" text-[16px] text-center">
                     Please confirm your intention to delete this account. This

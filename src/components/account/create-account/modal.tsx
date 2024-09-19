@@ -263,12 +263,11 @@ const CreateAccountModal: React.FC<Props> = ({
                           return (
                             <select
                               id="role"
-                              // label="Select"
                               name={name}
                               value={value}
                               onChange={onChange}
                               onBlur={onBlur}
-                              className={`bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4`}
+                              className={`bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4 capitalize`}
                             >
                               <option className="select-disabled" value="">
                                 Select
@@ -303,11 +302,10 @@ const CreateAccountModal: React.FC<Props> = ({
                   <button
                     className=" bg-gradient-to-tr from-deep-blue to-bright-red w-64 h-14 rounded-[30px] text-white"
                     type="submit"
-                    // disabled={!isValid}
+                    disabled={!isValid}
                   >
                     Create Account
                   </button>
-                  {/* <button onClick={() => setIsOpen(false)}>Cancel</button> */}
                 </div>
               </DialogPanel>
             </motion.div>

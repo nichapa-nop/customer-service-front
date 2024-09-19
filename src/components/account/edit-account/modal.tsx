@@ -31,6 +31,8 @@ interface Props {
   onClose?: () => void;
   initialAccount: AccountResponse;
   initialRoles: RoleResponse[];
+  setIsEditAccountSuccessModalOpen: Dispatch<SetStateAction<boolean>>;
+  setIsDeleteAccountModalOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 type AccountSchema = z.infer<typeof accountSchema>;
@@ -41,6 +43,8 @@ const EditAccountModal: React.FC<Props> = ({
   onClose,
   initialAccount,
   initialRoles,
+  setIsEditAccountSuccessModalOpen,
+  setIsDeleteAccountModalOpen,
 }) => {
   const getStatusBackgroundColor = (status: string) => {
     switch (status.toLowerCase()) {
@@ -65,8 +69,7 @@ const EditAccountModal: React.FC<Props> = ({
       );
       if (editAccountResponse.success) {
         setIsOpen(false);
-        // setIsEditAccountSuccessModalOpen(true);
-
+        setIsEditAccountSuccessModalOpen(true);
         // openModal(); // Open the success modal
       }
     } catch (error) {
@@ -77,7 +80,12 @@ const EditAccountModal: React.FC<Props> = ({
 
   console.log(initialAccount.status);
 
-  const { control, watch, handleSubmit } = useForm<AccountSchema>({
+  const {
+    control,
+    watch,
+    handleSubmit,
+    formState: { isValid },
+  } = useForm<AccountSchema>({
     mode: "onChange",
     resolver: zodResolver(accountSchema),
     defaultValues: {
@@ -88,7 +96,7 @@ const EditAccountModal: React.FC<Props> = ({
       email: initialAccount.email || "",
       phoneNum: initialAccount.phoneNum || "",
       status: initialAccount.status,
-      roleId: initialAccount.role.roleName || "",
+      roleId: initialAccount.role.id.toString() || "", // Use the role id as a string
     },
   });
 
@@ -106,7 +114,8 @@ const EditAccountModal: React.FC<Props> = ({
       uuid: initialAccount.uuid,
     });
     if (enableAndDisableResponse.success) {
-      // setIsEnableAndDisableSuccessModalOpen(true)
+      setIsOpen(false);
+      setIsEditAccountSuccessModalOpen(true);
     }
   }
 
@@ -121,8 +130,8 @@ const EditAccountModal: React.FC<Props> = ({
         uuid: initialAccount.uuid,
       });
       if (recoveryResponse.success) {
-        //setIsRecoverySuccessModalOpen(true)
-        toast.success("Recovery account success");
+        setIsOpen(false);
+        setIsEditAccountSuccessModalOpen(true);
       } else {
         toast.error("Recovery account failed");
       }
@@ -131,7 +140,8 @@ const EditAccountModal: React.FC<Props> = ({
         uuid: initialAccount.uuid,
       });
       if (deleteResponse.success) {
-        //setIsRecoverySuccessModalOpen(true)
+        setIsOpen(false);
+        setIsDeleteAccountModalOpen(true);
       }
     }
   }
@@ -141,8 +151,8 @@ const EditAccountModal: React.FC<Props> = ({
       uuid: initialAccount.uuid,
     });
     if (sendEmailResponse.success) {
-      //setIsRecoverySuccessModalOpen(true)
-      toast.success("Send Email success");
+      setIsOpen(false);
+      setIsEditAccountSuccessModalOpen(true);
     } else {
       toast.error("Send Email failed");
     }
@@ -153,7 +163,8 @@ const EditAccountModal: React.FC<Props> = ({
       uuid: initialAccount.uuid,
     });
     if (sendResetPassResponse.success) {
-      //setIsRecoverySuccessModalOpen(true)
+      setIsOpen(false);
+      setIsEditAccountSuccessModalOpen(true);
       toast.success("Send Email success");
     } else {
       toast.error("Send Email failed");
@@ -372,16 +383,20 @@ const EditAccountModal: React.FC<Props> = ({
                         }) => {
                           return (
                             <select
-                              id="role"
+                              // id="role"
                               name={name}
                               value={value}
                               onChange={onChange}
                               onBlur={onBlur}
-                              className={`bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4 `}
+                              className={`bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4 capitalize`}
                             >
-                              <option value="">Select</option>
+                              <option className="select-disabled" value="">
+                                Select
+                              </option>
                               {initialRoles.map((role) => (
                                 <option
+                                  key={role.id}
+                                  value={role.id.toString()}
                                   className={`bg-white rounded-[15px] ${
                                     role.roleName == "ceo"
                                       ? "uppercase"
@@ -392,11 +407,10 @@ const EditAccountModal: React.FC<Props> = ({
                                       ? role.roleName.toUpperCase()
                                       : role.roleName
                                   }
-                                  value={role.roleName}
                                 >
                                   {["ceo"].includes(role.roleName)
                                     ? role.roleName.toUpperCase()
-                                    : role.roleName}{" "}
+                                    : role.roleName}
                                 </option>
                               ))}
                             </select>
@@ -572,9 +586,7 @@ const EditAccountModal: React.FC<Props> = ({
                   <button
                     className=" bg-gradient-to-tr from-deep-blue to-bright-red w-64 h-14 rounded-[30px] text-white"
                     type="submit"
-                    // onClick={() => {
-                    //   console.log(watch());
-                    // }}
+                    disabled={!isValid}
                   >
                     Save
                   </button>

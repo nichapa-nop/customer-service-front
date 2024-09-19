@@ -70,12 +70,12 @@ const CreateAccountSuccess: React.FC<Props> = ({
 
                 <div className="flex flex-col h-[120px] rounded-xl items-center justify-center">
                   <p className="font-semibold text-[20px]  mb-3 text-center">
-                    Account has been deleted
+                    Account has been created!
                   </p>
                   <p className=" text-[16px]  text-center">
-                    You can review the updated account list in the 'Account
+                    You can access and manage this account details through the
                     <br />
-                    Management' section accessible via the sidebar.
+                    'Account Management' section accessible from the sidebar.
                   </p>
                 </div>
               </DialogPanel>

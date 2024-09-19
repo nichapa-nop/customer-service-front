@@ -5,14 +5,16 @@ import DeleteAccountModal from "../account/delete-account/modal";
 
 interface AccountRowProps {
   account: AccountResponse;
-  setIsDeleteSuccessModalOpen: Dispatch<SetStateAction<boolean>>;
   initialRoles: RoleResponse[];
+  setIsDeleteAccountSuccessModalOpen: Dispatch<SetStateAction<boolean>>;
+  setIsEditAccountSuccessModalOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 const AccountRow: React.FC<AccountRowProps> = ({
   account,
-  setIsDeleteSuccessModalOpen,
+  setIsDeleteAccountSuccessModalOpen,
   initialRoles,
+  setIsEditAccountSuccessModalOpen,
 }) => {
   const [isAccountDetailModalOpen, setIsAccountDetailModalOpen] =
     useState<boolean>(false);
@@ -158,8 +160,9 @@ const AccountRow: React.FC<AccountRowProps> = ({
             initialAccount={account}
             isOpen={isDeleteModalOpen}
             setIsOpen={setIsDeleteModalOpen}
-            setIsDeleteAccountSuccessModalOpen={setIsDeleteSuccessModalOpen}
-            // setLatestDeleteTicket={setLatestDeleteTicket}
+            setIsDeleteAccountSuccessModalOpen={
+              setIsDeleteAccountSuccessModalOpen
+            }
           />
         )}
         {isAccountDetailModalOpen && (
@@ -175,6 +178,8 @@ const AccountRow: React.FC<AccountRowProps> = ({
             initialRoles={initialRoles}
             isOpen={isEditAccountModalOpen}
             setIsOpen={setIsEditAccountModalOpen}
+            setIsEditAccountSuccessModalOpen={setIsEditAccountSuccessModalOpen}
+            setIsDeleteAccountModalOpen={setIsDeleteModalOpen}
           />
         )}
       </td>

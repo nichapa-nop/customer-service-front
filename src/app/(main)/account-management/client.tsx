@@ -2,6 +2,7 @@
 import { getAccountList } from "@/actions/account.action";
 import CreateAccountModal from "@/components/account/create-account/modal";
 import DeleteAccountSuccess from "@/components/account/delete-account-success/modal";
+import EditAccountSuccess from "@/components/account/edit-account-success/modal";
 import AccountRow from "@/components/accountrow/accountrow";
 
 import React, { useEffect, useRef, useState } from "react";
@@ -24,6 +25,8 @@ export default function AccountManagementClient({
   const timeoutRef = useRef<NodeJS.Timeout>();
   const [isPageChanged, setIsPageChanged] = useState<boolean>(false);
   const [isDeleteAccountSuccessModalOpen, setIsDeleteAccountSuccessModalOpen] =
+    useState<boolean>(false);
+  const [isEditAccountSuccessModalOpen, setIsEditAccountSuccessModalOpen] =
     useState<boolean>(false);
 
   async function fetchLastestAccounts(page: number = 1, keyword?: string) {
@@ -180,8 +183,11 @@ export default function AccountManagementClient({
                       key={account.uuid}
                       initialRoles={initialRoles}
                       account={account}
-                      setIsDeleteSuccessModalOpen={
+                      setIsDeleteAccountSuccessModalOpen={
                         setIsDeleteAccountSuccessModalOpen
+                      }
+                      setIsEditAccountSuccessModalOpen={
+                        setIsEditAccountSuccessModalOpen
                       }
                     />
                   ))}
@@ -239,17 +245,23 @@ export default function AccountManagementClient({
               </div>
             </footer>
           </div>
+          <CreateAccountModal
+            isOpen={isCreateAccountModalOpen}
+            setIsOpen={setIsCreateAccountModalOpen}
+            initialRoles={initialRoles}
+          />
           {isDeleteAccountSuccessModalOpen && (
             <DeleteAccountSuccess
               isOpen={isDeleteAccountSuccessModalOpen}
               setIsOpen={setIsDeleteAccountSuccessModalOpen}
             />
           )}
-          <CreateAccountModal
-            isOpen={isCreateAccountModalOpen}
-            setIsOpen={setIsCreateAccountModalOpen}
-            initialRoles={initialRoles}
-          />
+          {isEditAccountSuccessModalOpen && (
+            <EditAccountSuccess
+              isOpen={isEditAccountSuccessModalOpen}
+              setIsOpen={setIsEditAccountSuccessModalOpen}
+            />
+          )}
         </div>
       </div>
     </div>

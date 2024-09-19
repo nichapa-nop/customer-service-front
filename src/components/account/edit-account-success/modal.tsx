@@ -1,4 +1,4 @@
-import { editTicket } from "@/actions/ticket.action";
+"use client";
 import {
   Dialog,
   DialogBackdrop,
@@ -6,7 +6,7 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import { motion } from "framer-motion";
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 
 interface Props {
   isOpen: boolean;
@@ -14,13 +14,20 @@ interface Props {
   onClose?: () => void;
 }
 
-const EditTicketSuccess: React.FC<Props> = ({ isOpen, onClose, setIsOpen }) => {
+const EditAccountSuccess: React.FC<Props> = ({
+  isOpen,
+  onClose,
+  setIsOpen,
+  // initialAccount
+}) => {
   return (
     <>
       <Dialog
         open={isOpen}
-        onClose={() => (onClose ? onClose() : setIsOpen(false))}
-        className="relative z-50 "
+        onClose={() => {
+          onClose ? onClose() : setIsOpen(false);
+        }}
+        className="relative z-50"
       >
         <DialogBackdrop className="fixed inset-0 bg-black/30" />
 
@@ -50,23 +57,20 @@ const EditTicketSuccess: React.FC<Props> = ({ isOpen, onClose, setIsOpen }) => {
                     </button>
                   </DialogTitle>
                 </div>
-                {/* <Description>
-                This will permanently deactivate your account
-              </Description> */}
                 <div className="flex justify-center items-center mt-8 mb-6">
                   <img
-                    src="/assets/images/success.png "
+                    src="/assets/images/success.png"
                     className="h-[100px] w-[100px] "
                   ></img>
                 </div>
 
-                <div className="flex flex-col p-6 h-[120px] rounded-xl items-center justify-center">
+                <div className="flex flex-col h-[120px] rounded-xl items-center justify-center">
                   <p className="font-semibold text-[20px]  mb-3 text-center">
-                    Your Change has been save!
+                    Your changes have been saved!
                   </p>
                   <p className=" text-[16px]  text-center">
-                    You can review these changes in the <br />
-                    'Ticket Management' section accessible from the sidebar.
+                    You can review these changes in the 'Account <br />
+                    Management' section accessible from the sidebar.
                   </p>
                 </div>
               </DialogPanel>
@@ -78,4 +82,4 @@ const EditTicketSuccess: React.FC<Props> = ({ isOpen, onClose, setIsOpen }) => {
   );
 };
 
-export default EditTicketSuccess;
+export default EditAccountSuccess;
