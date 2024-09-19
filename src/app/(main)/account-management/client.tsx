@@ -245,13 +245,11 @@ export default function AccountManagementClient({
               setIsOpen={setIsDeleteAccountSuccessModalOpen}
             />
           )}
-          {isCreateAccountModalOpen && (
-            <CreateAccountModal
-              isOpen={isCreateAccountModalOpen}
-              setIsOpen={setIsCreateAccountModalOpen}
-              initialRoles={initialRoles}
-            />
-          )}
+          <CreateAccountModal
+            isOpen={isCreateAccountModalOpen}
+            setIsOpen={setIsCreateAccountModalOpen}
+            initialRoles={initialRoles}
+          />
         </div>
       </div>
     </div>

@@ -22,4 +22,5 @@ interface AccountRequestBodyDTO {
   email: string;
   status: "verified" | "not_verify" | "disabled" | "deleted";
   phoneNum: string;
+  roleId: number;
 }

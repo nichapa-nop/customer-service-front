@@ -61,7 +61,7 @@ const EditAccountModal: React.FC<Props> = ({
     try {
       const editAccountResponse = await editAccount(
         { uuid: initialAccount.uuid },
-        data
+        { ...data, roleId: +data.roleId }
       );
       if (editAccountResponse.success) {
         setIsOpen(false);
@@ -88,7 +88,7 @@ const EditAccountModal: React.FC<Props> = ({
       email: initialAccount.email || "",
       phoneNum: initialAccount.phoneNum || "",
       status: initialAccount.status,
-      role: initialAccount.role.roleName || "",
+      roleId: initialAccount.role.roleName || "",
     },
   });
 
@@ -366,7 +366,7 @@ const EditAccountModal: React.FC<Props> = ({
                       <Controller
                         control={control}
                         //แก้เป็นroleหลังแก้หลังบ้าน
-                        name="role"
+                        name="roleId"
                         render={({
                           field: { value, name, onChange, onBlur },
                         }) => {
@@ -377,9 +377,7 @@ const EditAccountModal: React.FC<Props> = ({
                               value={value}
                               onChange={onChange}
                               onBlur={onBlur}
-                              className={`bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4 ${
-                                value === "ceo" ? "uppercase" : "capitalize"
-                              }`}
+                              className={`bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4 `}
                             >
                               <option value="">Select</option>
                               {initialRoles.map((role) => (
@@ -389,9 +387,16 @@ const EditAccountModal: React.FC<Props> = ({
                                       ? "uppercase"
                                       : "capitalize"
                                   }`}
+                                  label={
+                                    ["ceo"].includes(role.roleName)
+                                      ? role.roleName.toUpperCase()
+                                      : role.roleName
+                                  }
                                   value={role.roleName}
                                 >
-                                  {role.roleName}
+                                  {["ceo"].includes(role.roleName)
+                                    ? role.roleName.toUpperCase()
+                                    : role.roleName}{" "}
                                 </option>
                               ))}
                             </select>
@@ -539,6 +544,7 @@ const EditAccountModal: React.FC<Props> = ({
                     </div>
                     <div className="flex items-center">
                       <button
+                        type="button"
                         onClick={toggleRecoverySwitch}
                         className={`w-28 h-8 rounded-full transition-all duration-700 relative ${
                           recoverySwitchEnabled

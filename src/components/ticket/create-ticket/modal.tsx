@@ -560,16 +560,7 @@ const CreateTicketModal: React.FC<Props> = ({
                   >
                     Create Ticket
                   </button>
-                  {/* <button onClick={() => setIsOpen(false)}>Cancel</button> */}
                 </div>
-                {/* {isCreateTicketSuccessModalOpen && (
-                  <CreateTicketSuccess
-                    // initialTicket={ticketManagement.ticketId}
-                    isOpen={isCreateTicketSuccessModalOpen}
-                    setIsOpen={setIsCreateTicketSuccessModalOpen}
-                    onClose={() => setIsCreateTicketSuccessModalOpen(false)}
-                  />
-                )} */}
               </DialogPanel>
             </motion.div>
           </div>

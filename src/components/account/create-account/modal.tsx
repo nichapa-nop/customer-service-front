@@ -16,6 +16,7 @@ import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { Select, SelectItem } from "@nextui-org/react";
+import CreateAccountSuccess from "../create-account-success/modal";
 
 interface Props {
   isOpen: boolean;
@@ -32,11 +33,8 @@ const CreateAccountModal: React.FC<Props> = ({
   onClose,
   initialRoles,
 }) => {
-  const [
-    isCreateAccountSuccesModalSuccess,
-    setIsCreateAccountSuccessModalOpen,
-  ] = useState(false);
-  const [roles, setRoles] = useState<RoleResponse[]>(initialRoles);
+  const [isCreateAccountSuccesModalOpen, setIsCreateAccountSuccessModalOpen] =
+    useState(false);
 
   const openModal = () => {
     setIsCreateAccountSuccessModalOpen(true);
@@ -49,8 +47,8 @@ const CreateAccountModal: React.FC<Props> = ({
 
   const processForm: SubmitHandler<AccountSchema> = async (data) => {
     try {
-      const result = await createAccount(data);
-      if (result.success) {
+      const result = await createAccount({ ...data, roleId: +data.roleId });
+      if (result.success && result.data) {
         toast.success("Create account success"),
           {
             position: "bottom-center",
@@ -58,6 +56,11 @@ const CreateAccountModal: React.FC<Props> = ({
         console.log(result.data.uuid);
 
         openModal();
+      } else {
+        console.log(result.status);
+        if (result.status === 409) {
+          toast.error("This email is already exist");
+        }
       }
     } catch (error) {
       toast.error("failed to create account"),
@@ -78,6 +81,8 @@ const CreateAccountModal: React.FC<Props> = ({
     resolver: zodResolver(accountSchema),
     defaultValues: {},
   });
+
+  // console.log(watch());
 
   return (
     <>
@@ -251,7 +256,7 @@ const CreateAccountModal: React.FC<Props> = ({
                       <Controller
                         control={control}
                         //แก้เป็นroleหลังแก้หลังบ้าน
-                        name="role"
+                        name="roleId"
                         render={({
                           field: { value, name, onChange, onBlur },
                         }) => {
@@ -263,9 +268,7 @@ const CreateAccountModal: React.FC<Props> = ({
                               value={value}
                               onChange={onChange}
                               onBlur={onBlur}
-                              className={`bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4 ${
-                                value === "ceo" ? "uppercase" : "capitalize"
-                              }`}
+                              className={`bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4`}
                             >
                               <option className="select-disabled" value="">
                                 Select
@@ -277,9 +280,16 @@ const CreateAccountModal: React.FC<Props> = ({
                                       ? "uppercase"
                                       : "capitalize"
                                   }`}
-                                  value={role.roleName}
+                                  label={
+                                    ["ceo"].includes(role.roleName)
+                                      ? role.roleName.toUpperCase()
+                                      : role.roleName
+                                  }
+                                  value={role.id}
                                 >
-                                  {role.roleName}
+                                  {["ceo"].includes(role.roleName)
+                                    ? role.roleName.toUpperCase()
+                                    : role.roleName}
                                 </option>
                               ))}
                             </select>
@@ -304,6 +314,11 @@ const CreateAccountModal: React.FC<Props> = ({
           </div>
         </form>
       </Dialog>
+      <CreateAccountSuccess
+        isOpen={isCreateAccountSuccesModalOpen}
+        setIsOpen={setIsCreateAccountSuccessModalOpen}
+        onClose={() => setIsCreateAccountSuccessModalOpen(false)}
+      />
     </>
   );
 };

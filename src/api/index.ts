@@ -10,6 +10,7 @@ const apiEndpoint = process.env.PROJECT_API_ENDPOINT;
 type ApiResponse<T> = {
   success: boolean;
   data: T | null;
+  status: number;
 };
 
 export async function ApiManager<
@@ -68,10 +69,11 @@ export async function ApiManager<
     if ([401, 403].includes(response.status)) {
       redirect("/login");
     }
-    return { success, data: null, ...responseData };
+    return { success, data: null, ...responseData, status: response.status };
   }
   return {
     success,
     data: responseData,
+    status: response.status,
   };
 }

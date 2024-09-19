@@ -43,14 +43,7 @@ export async function createAccount(data: any) {
       revalidateTags: ["get-account-list"],
     },
   });
-  if (response.success && response.data) {
-    return {
-      data: response.data,
-      success: true,
-    };
-  } else {
-    throw new Error("Failed to fetch data");
-  }
+  return response;
 }
 
 export async function editAccount({ uuid }: { uuid: string }, data: any) {
