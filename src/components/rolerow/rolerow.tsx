@@ -5,10 +5,14 @@ interface RoleRowProps {
 const RoleRow: React.FC<RoleRowProps> = ({ role }) => {
   return (
     <tr key={role.id} className="h-[68px] hover:bg-light-orange">
-      <td className="w-[20%] text-left pl-12">{role.roleName}</td>
+      <td className="w-[20%] text-left pl-12 capitalize">
+        {["ceo"].includes(role.roleName)
+          ? role.roleName.toUpperCase()
+          : role.roleName}
+      </td>
       <td className="w-[60%] text-left pl-12">
-        "role.groupMenu": One, Two, Three, Four, Five, Six, Seven, Eight, Nine,
-        Ten, Eleven
+        {role.groupMenu.name}: One, Two, Three, Four, Five, Six, Seven, Eight,
+        Nine, Ten, Eleven
       </td>
       <td className="w-[20%] space-x-3">
         <button

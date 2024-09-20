@@ -6,6 +6,6 @@ interface GroupMenuResponse {
 interface RoleResponse {
   id: number;
   roleName: string;
-  priority: number;
+  // priority: number;
   groupMenu: GroupMenuResponse;
 }
