@@ -15,7 +15,6 @@ import { createAccount } from "@/actions/account.action";
 import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
-import { Select, SelectItem } from "@nextui-org/react";
 import CreateAccountSuccess from "../create-account-success/modal";
 
 interface Props {
@@ -103,9 +102,22 @@ const CreateAccountModal: React.FC<Props> = ({
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <DialogPanel className="bg-light-gray2 w-[850px] space-y-[50px] border rounded-[30px] p-12">
+              <DialogPanel className="bg-white w-[850px] space-y-[50px] border rounded-[30px] p-12">
                 <DialogTitle className="font-semibold text-center text-[20px] mt-6 mb-10">
                   Create New Account
+                  <button
+                    className="absolute right-0"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className="size-10"
+                    >
+                      <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
+                    </svg>
+                  </button>
                 </DialogTitle>
                 <div className="px-6 rounded-xl">
                   <div className="grid grid-cols-2 gap-x-9 gap-y-6 ">
@@ -127,7 +139,7 @@ const CreateAccountModal: React.FC<Props> = ({
                               name={name}
                               onChange={onChange}
                               onBlur={onBlur}
-                              className="bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4"
+                              className="bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4  hover:placeholder:text-space-black"
                               placeholder="Nichapa"
                             ></input>
                           );
@@ -150,7 +162,7 @@ const CreateAccountModal: React.FC<Props> = ({
                               name={name}
                               onChange={onChange}
                               onBlur={onBlur}
-                              className="bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4"
+                              className="bg-light-gray2 placeholder:text-dark-gray hover:placeholder:text-space-black w-full h-10 rounded-[15px] pl-4"
                               placeholder="Nopparat"
                             ></input>
                           );
@@ -175,7 +187,7 @@ const CreateAccountModal: React.FC<Props> = ({
                               name={name}
                               onChange={onChange}
                               onBlur={onBlur}
-                              className="bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4"
+                              className="bg-light-gray2 placeholder:text-dark-gray hover:placeholder:text-space-black w-full h-10 rounded-[15px] pl-4"
                               placeholder="สมชาย"
                             ></input>
                           );
@@ -198,7 +210,7 @@ const CreateAccountModal: React.FC<Props> = ({
                               name={name}
                               onChange={onChange}
                               onBlur={onBlur}
-                              className="bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4"
+                              className="bg-light-gray2 placeholder:text-dark-gray hover:placeholder:text-space-black w-full h-10 rounded-[15px] pl-4"
                               placeholder="ใจดี"
                             ></input>
                           );
@@ -221,7 +233,7 @@ const CreateAccountModal: React.FC<Props> = ({
                               name={name}
                               onChange={onChange}
                               onBlur={onBlur}
-                              className="bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4"
+                              className="bg-light-gray2 placeholder:text-dark-gray hover:placeholder:text-space-black w-full h-10 rounded-[15px] pl-4"
                               placeholder="0123456789"
                             ></input>
                           );
@@ -244,7 +256,7 @@ const CreateAccountModal: React.FC<Props> = ({
                               value={value}
                               onChange={onChange}
                               onBlur={onBlur}
-                              className="bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4"
+                              className="bg-light-gray2 placeholder:text-dark-gray hover:placeholder:text-space-black w-full h-10 rounded-[15px] pl-4"
                               placeholder="ee@baseplayhouse.co"
                             ></input>
                           );

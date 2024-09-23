@@ -1,5 +1,6 @@
 "use client";
 import { getRoleList } from "@/actions/role.action";
+import CreateRoleModal from "@/components/role/create-role/modal";
 import RoleRow from "@/components/rolerow/rolerow";
 
 import React, { useEffect, useRef, useState } from "react";
@@ -231,6 +232,10 @@ export default function RoleManagementClient({
               </div>
             </footer>
           </div>
+          <CreateRoleModal
+            isOpen={isCreateRoleModalOpen}
+            setIsOpen={setIsCreateRoleModalOpen}
+          />
           {/* {isDeleteRoleSuccessModalOpen && (
             <DeleteRoleSuccess
               isOpen={isDeleteRoleSuccessModalOpen}

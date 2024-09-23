@@ -1,16 +1,33 @@
+import { useState } from "react";
+import RoleDetail from "../role/role-detail/modal";
+
 interface RoleRowProps {
   role: RoleResponse;
 }
 
 const RoleRow: React.FC<RoleRowProps> = ({ role }) => {
+  const [isRoleDetailModalOpen, setIsRoleDetailModalOpen] =
+    useState<boolean>(false);
+  const [isEditRoleModalOpen, setIsEditRoleModalOpen] =
+    useState<boolean>(false);
   return (
     <tr key={role.id} className="h-[68px] hover:bg-light-orange">
-      <td className="w-[20%] text-left pl-12 capitalize">
+      <td
+        className="w-[20%] text-left pl-12 capitalize"
+        onClick={() => {
+          setIsRoleDetailModalOpen(true);
+        }}
+      >
         {["ceo"].includes(role.roleName)
           ? role.roleName.toUpperCase()
           : role.roleName}
       </td>
-      <td className="w-[60%] text-left pl-12">
+      <td
+        className="w-[60%] text-left pl-12"
+        onClick={() => {
+          setIsRoleDetailModalOpen(true);
+        }}
+      >
         {role.groupMenu.name}: One, Two, Three, Four, Five, Six, Seven, Eight,
         Nine, Ten, Eleven
       </td>
@@ -78,6 +95,16 @@ const RoleRow: React.FC<RoleRowProps> = ({ role }) => {
             />
           </svg>
         </button>
+        {isRoleDetailModalOpen && (
+          <RoleDetail
+            initialRole={role}
+            isOpen={isRoleDetailModalOpen}
+            setIsOpen={setIsRoleDetailModalOpen}
+          />
+        )}
+        {/* {isEditRoleModalOpen && 
+
+        } */}
       </td>
     </tr>
   );

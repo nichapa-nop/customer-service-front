@@ -1,10 +1,8 @@
 import {
-  Description,
   Dialog,
   DialogBackdrop,
   DialogPanel,
   DialogTitle,
-  Transition,
 } from "@headlessui/react";
 import { motion } from "framer-motion";
 import { Dispatch, SetStateAction } from "react";
