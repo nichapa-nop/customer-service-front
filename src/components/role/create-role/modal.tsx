@@ -1,19 +1,74 @@
+import { createRole } from "@/actions/role.action";
+import { roleSchema } from "@/schemas/role.schema";
 import {
   Dialog,
   DialogBackdrop,
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { z } from "zod";
+import CreateRoleSuccess from "../create-role-success/modal";
 
 interface Props {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   onClose?: () => void;
+  initialGroupMenus: GroupMenuResponse[];
 }
 
-const CreateRoleModal: React.FC<Props> = ({ isOpen, setIsOpen, onClose }) => {
+type RoleSchema = z.infer<typeof roleSchema>;
+
+const CreateRoleModal: React.FC<Props> = ({
+  isOpen,
+  setIsOpen,
+  onClose,
+  initialGroupMenus,
+}) => {
+  const [isCreateRoleSuccessModalOpen, setIsCreateRoleSuccessModalOpen] =
+    useState<boolean>(false);
+
+  const [createdRoleName, setCreatedRoleName] = useState<number | null>(null);
+
+  const openModal = () => {
+    setIsCreateRoleSuccessModalOpen(true);
+    if (onClose) {
+      onClose();
+    } else {
+      setIsOpen(false);
+    }
+  };
+
+  const processForm: SubmitHandler<RoleSchema> = async (data) => {
+    try {
+      console.log(data);
+      const result = await createRole(data);
+      if (result.success) {
+        setCreatedRoleName(result.data.id);
+        openModal();
+      }
+    } catch (error) {
+      alert("Failed to create role. Please try again.");
+    }
+  };
+
+  const {
+    control,
+    watch,
+    handleSubmit,
+    formState: { isValid, errors },
+    reset,
+  } = useForm<RoleSchema>({
+    mode: "onChange",
+    resolver: zodResolver(roleSchema),
+    defaultValues: {},
+  });
+
+  console.log(watch());
+
   return (
     <>
       <Dialog
@@ -22,7 +77,10 @@ const CreateRoleModal: React.FC<Props> = ({ isOpen, setIsOpen, onClose }) => {
         className="relative z-50"
       >
         <DialogBackdrop className="fixed inset-0 bg-black/30" />
-        <div className="fixed inset-0 w-screen overflow-y-auto p-1 py-24">
+        <form
+          onSubmit={handleSubmit(processForm)}
+          className="fixed inset-0 w-screen overflow-y-auto p-1 py-24"
+        >
           <div className="flex min-h-full  items-center justify-center">
             <motion.div
               initial={{ opacity: 0 }}
@@ -52,54 +110,67 @@ const CreateRoleModal: React.FC<Props> = ({ isOpen, setIsOpen, onClose }) => {
                 <div className="flex flex-col space-y-10 text-[14px]">
                   <div className="flex flex-col gap-4 px-4 capitalize">
                     <p className=" font-medium text-[14px]">Role Name</p>
-                    <input
-                      id="name"
-                      type="text"
-                      //   value={value}
-                      //   name={name}
-                      //   onChange={onChange}
-                      //   onBlur={onBlur}
-                      className="bg-light-gray2 placeholder:text-dark-gray hover:placeholder:text-space-black w-full h-10 rounded-[15px] pl-4"
-                      placeholder="Employee"
-                    ></input>
+                    <Controller
+                      control={control}
+                      name="name"
+                      render={({
+                        field: { value, name, onChange, onBlur },
+                      }) => {
+                        return (
+                          <input
+                            id="name"
+                            type="text"
+                            value={value}
+                            name={name}
+                            onChange={onChange}
+                            onBlur={onBlur}
+                            className="bg-light-gray2 placeholder:text-dark-gray hover:placeholder:text-space-black w-full h-10 rounded-[15px] pl-4"
+                            placeholder="Employee"
+                          ></input>
+                        );
+                      }}
+                    />
                   </div>
                   <div className="flex flex-col gap-4 px-4 capitalize">
                     <p>Group Menu</p>
-                    <select
-                      id="groupMenu"
-                      //   name={name}
-                      //   value={value}
-                      //   onChange={onChange}
-                      //   onBlur={onBlur}
-                      className={`bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4 capitalize`}
-                    >
-                      <option className="select-disabled" value="">
-                        Select
-                      </option>
-                      <option>
-                        Group A: One, Two, Three, Four, Five, Six, Seven, Eight,
-                        Nine, Ten, Eleven
-                      </option>
-                      <option>
-                        Group A: One, Two, Three, Four, Five, Six, Seven, Eight,
-                        Nine, Ten, Eleven
-                      </option>
-                      <option>
-                        Group A: One, Two, Three, Four, Five, Six, Seven, Eight,
-                        Nine, Ten, Eleven
-                      </option>
-                      <option>
-                        Group A: One, Two, Three, Four, Five, Six, Seven, Eight,
-                        Nine, Ten, Eleven
-                      </option>
-                    </select>
+                    <Controller
+                      control={control}
+                      name="groupMenuId"
+                      render={({
+                        field: { value, name, onChange, onBlur },
+                      }) => {
+                        return (
+                          <select
+                            id="groupMenu"
+                            name={name}
+                            value={value}
+                            onChange={onChange}
+                            onBlur={onBlur}
+                            className={`bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4 capitalize`}
+                          >
+                            <option className="select-disabled" value="">
+                              Select
+                            </option>
+                            {initialGroupMenus.map((groupMenu) => (
+                              <option
+                                key={groupMenu.id}
+                                value={groupMenu.id}
+                                label={`${groupMenu.name}: ${groupMenu.menus
+                                  .map((menu) => menu.menuName)
+                                  .join(", ")}`}
+                              ></option>
+                            ))}
+                          </select>
+                        );
+                      }}
+                    />
                   </div>
                 </div>
                 <div className="flex  items-center justify-center ">
                   <button
                     className=" bg-gradient-to-tr from-deep-blue to-bright-red w-64 h-14 rounded-[30px] text-white"
                     type="submit"
-                    // disabled={!isValid}
+                    disabled={!isValid}
                   >
                     Create Role
                   </button>
@@ -107,8 +178,13 @@ const CreateRoleModal: React.FC<Props> = ({ isOpen, setIsOpen, onClose }) => {
               </DialogPanel>
             </motion.div>
           </div>
-        </div>
+        </form>
       </Dialog>
+      <CreateRoleSuccess
+        isOpen={isCreateRoleSuccessModalOpen}
+        setIsOpen={setIsCreateRoleSuccessModalOpen}
+        roleName={createdRoleName}
+      />
     </>
   );
 };

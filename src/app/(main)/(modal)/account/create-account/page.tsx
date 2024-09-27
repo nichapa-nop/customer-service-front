@@ -16,7 +16,7 @@ export default function ticketManagement() {
   const [incidentType, setIncidentType] = useState<string>();
   const [businessImpact, setBusinessImpact] = useState<string>();
   const [feedbackCh, setFeedbackCh] = useState<string>();
-  let [isOpen, setIsOpen] = useState(false);
+  let [isOpen, setIsOpen] = useState<boolean>(false);
 
   //   const [type, setType] = useState<string>();
 

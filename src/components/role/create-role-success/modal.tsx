@@ -1,34 +1,39 @@
+"use client";
 import {
+  Description,
   Dialog,
   DialogBackdrop,
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
 import { motion } from "framer-motion";
-import { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 
 interface Props {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  initialRole: RoleResponse;
   onClose?: () => void;
+  roleName: number | null;
 }
 
-const RoleDetail: React.FC<Props> = ({
+const CreateRoleSuccess: React.FC<Props> = ({
   isOpen,
-  setIsOpen,
-  initialRole,
   onClose,
+  setIsOpen,
+  roleName,
 }) => {
   return (
     <>
       <Dialog
         open={isOpen}
-        onClose={() => (onClose ? onClose() : setIsOpen(false))}
+        onClose={() => {
+          onClose ? onClose() : setIsOpen(false);
+        }}
         className="relative z-50"
       >
         <DialogBackdrop className="fixed inset-0 bg-black/30" />
-        <div className="fixed inset-0 w-screen overflow-y-auto p-1 py-24">
+
+        <div className="fixed inset-0 w-screen overflow-y-auto p-1">
           <div className="flex min-h-full  items-center justify-center">
             <motion.div
               initial={{ opacity: 0 }}
@@ -36,10 +41,9 @@ const RoleDetail: React.FC<Props> = ({
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <DialogPanel className="bg-light-gray2 w-[680px] space-y-[50px] border rounded-[30px] p-12">
+              <DialogPanel className="bg-white w-[650px] h-[400px] border rounded-[20px] p-12 ">
                 <div className="relative flex items-center justify-center">
                   <DialogTitle className="flex font-semibold text-[20px] text-center items-center">
-                    Role Detail
                     <button
                       className="absolute right-0"
                       onClick={() => setIsOpen(false)}
@@ -55,24 +59,25 @@ const RoleDetail: React.FC<Props> = ({
                     </button>
                   </DialogTitle>
                 </div>
+                {/* <Description>
+                This will permanently deactivate your role
+              </Description> */}
+                <div className="flex justify-center items-center mt-8 mb-6">
+                  <img
+                    src="/assets/images/success.png"
+                    className="h-[100px] w-[100px] "
+                  ></img>
+                </div>
 
-                <div className="flex flex-col space-y-10 text-[14px] pb-8">
-                  <div className="flex flex-col gap-4 px-4 capitalize">
-                    <p>Role Name</p>
-                    <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
-                      {initialRole.roleName}
-                    </span>
-                  </div>
-                  <div className="flex flex-col gap-4 px-4 capitalize">
-                    <p>Group Menu</p>
-                    <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
-                      {`${
-                        initialRole.groupMenu.name
-                      }: ${initialRole.groupMenu.menus
-                        .map((menu) => menu.menuName)
-                        .join(", ")}`}
-                    </span>
-                  </div>
+                <div className="flex flex-col h-[120px] rounded-xl items-center justify-center">
+                  <p className="font-semibold text-[20px]  mb-3 text-center">
+                    Role ${roleName} has been created!
+                  </p>
+                  <p className=" text-[16px]  text-center">
+                    You can access and manage this role details through the
+                    <br />
+                    'Role Management' section accessible from the sidebar.
+                  </p>
                 </div>
               </DialogPanel>
             </motion.div>
@@ -83,4 +88,4 @@ const RoleDetail: React.FC<Props> = ({
   );
 };
 
-export default RoleDetail;
+export default CreateRoleSuccess;

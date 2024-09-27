@@ -40,9 +40,6 @@ const EditTicketModal: React.FC<Props> = ({
   setFocusCloseTicketModal,
   setIsReOpenTicketModalOpen,
 }) => {
-  // let [isOpen, setIsOpen] = useState(false);
-  // console.log(initialTicket);
-
   const getStatusBackgroundColor = (status: string) => {
     switch (status.toLowerCase()) {
       case "in progress":

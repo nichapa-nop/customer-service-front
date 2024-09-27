@@ -33,7 +33,7 @@ const CreateTicketModal: React.FC<Props> = ({
   // initialTicket,
 }) => {
   const [isCreateTicketSuccessModalOpen, setIsCreateTicketSuccessModalOpen] =
-    useState(false);
+    useState<boolean>(false);
 
   const [createdTicketId, setCreatedTicketId] = useState<string | null>(null); // New state for ticket ID
 

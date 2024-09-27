@@ -33,7 +33,7 @@ const CreateAccountModal: React.FC<Props> = ({
   initialRoles,
 }) => {
   const [isCreateAccountSuccesModalOpen, setIsCreateAccountSuccessModalOpen] =
-    useState(false);
+    useState<boolean>(false);
 
   const openModal = () => {
     setIsCreateAccountSuccessModalOpen(true);

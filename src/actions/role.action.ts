@@ -26,3 +26,23 @@ export async function getRoleList({
     throw new Error("Failed to fetch data");
   }
 }
+
+export async function createRole(data: any) {
+  const response = await ApiManager<RoleResponse, never, RoleRequestBody>({
+    path: "/role",
+    method: "POST",
+    body: data,
+    next: {
+      revalidateTags: ["get-role-list"],
+    },
+  });
+  if (response.success && response.data) {
+    return {
+      data: response.data,
+      success: true,
+    };
+  } else {
+    console.log(response.data);
+    throw new Error("Failed to fetch data");
+  }
+}

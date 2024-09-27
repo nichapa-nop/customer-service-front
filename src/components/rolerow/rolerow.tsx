@@ -3,9 +3,10 @@ import RoleDetail from "../role/role-detail/modal";
 
 interface RoleRowProps {
   role: RoleResponse;
+  initialGroupMenus: GroupMenuResponse[];
 }
 
-const RoleRow: React.FC<RoleRowProps> = ({ role }) => {
+const RoleRow: React.FC<RoleRowProps> = ({ role, initialGroupMenus }) => {
   const [isRoleDetailModalOpen, setIsRoleDetailModalOpen] =
     useState<boolean>(false);
   const [isEditRoleModalOpen, setIsEditRoleModalOpen] =
@@ -13,7 +14,7 @@ const RoleRow: React.FC<RoleRowProps> = ({ role }) => {
   return (
     <tr key={role.id} className="h-[68px] hover:bg-light-orange">
       <td
-        className="w-[20%] text-left pl-12 capitalize"
+        className="w-[20%] text-left pl-16 capitalize"
         onClick={() => {
           setIsRoleDetailModalOpen(true);
         }}
@@ -23,13 +24,16 @@ const RoleRow: React.FC<RoleRowProps> = ({ role }) => {
           : role.roleName}
       </td>
       <td
-        className="w-[60%] text-left pl-12"
+        className="w-[60%] text-left pl-20"
         onClick={() => {
           setIsRoleDetailModalOpen(true);
         }}
       >
-        {role.groupMenu.name}: One, Two, Three, Four, Five, Six, Seven, Eight,
-        Nine, Ten, Eleven
+        <span>
+          {`${role.groupMenu.name}: ${role.groupMenu.menus
+            .map((menu) => menu.menuName)
+            .join(", ")}`}
+        </span>
       </td>
       <td className="w-[20%] space-x-3">
         <button

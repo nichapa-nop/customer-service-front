@@ -7,8 +7,10 @@ import React, { useEffect, useRef, useState } from "react";
 
 export default function RoleManagementClient({
   roles: initialRoles,
+  groupMenus = [],
 }: {
   roles: RoleResponse[];
+  groupMenus?: GroupMenuResponse[];
 }) {
   const [page, setPage] = useState<number>(1);
   const [pageCount, setPageCount] = useState<number>();
@@ -173,6 +175,7 @@ export default function RoleManagementClient({
                     <RoleRow
                       key={role.id}
                       role={role}
+                      initialGroupMenus={groupMenus}
                       // setIsDeleteSuccessModalOpen={
                       //   setIsDeleteRoleSuccessModalOpen
                       // }
@@ -235,6 +238,7 @@ export default function RoleManagementClient({
           <CreateRoleModal
             isOpen={isCreateRoleModalOpen}
             setIsOpen={setIsCreateRoleModalOpen}
+            initialGroupMenus={groupMenus}
           />
           {/* {isDeleteRoleSuccessModalOpen && (
             <DeleteRoleSuccess
