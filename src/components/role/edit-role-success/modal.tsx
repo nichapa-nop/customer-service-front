@@ -1,6 +1,5 @@
 "use client";
 import {
-  Description,
   Dialog,
   DialogBackdrop,
   DialogPanel,
@@ -13,15 +12,9 @@ interface Props {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   onClose?: () => void;
-  roleName: string | null;
 }
 
-const CreateRoleSuccess: React.FC<Props> = ({
-  isOpen,
-  onClose,
-  setIsOpen,
-  roleName,
-}) => {
+const EditRoleSuccess: React.FC<Props> = ({ isOpen, onClose, setIsOpen }) => {
   return (
     <>
       <Dialog
@@ -71,12 +64,12 @@ const CreateRoleSuccess: React.FC<Props> = ({
 
                 <div className="flex flex-col h-[120px] rounded-xl items-center justify-center">
                   <p className="font-semibold text-[20px]  mb-3 text-center">
-                    Role {roleName} has been created!
+                    Your edit has been saved!
                   </p>
                   <p className=" text-[16px]  text-center">
-                    You can access and manage this role details through the
+                    You can review these changes in the 'Role
                     <br />
-                    'Role Management' section accessible from the sidebar.
+                    Management' section accessible from the sidebar.
                   </p>
                 </div>
               </DialogPanel>
@@ -88,4 +81,4 @@ const CreateRoleSuccess: React.FC<Props> = ({
   );
 };
 
-export default CreateRoleSuccess;
+export default EditRoleSuccess;

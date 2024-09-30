@@ -1,4 +1,4 @@
-import { createRole } from "@/actions/role.action";
+import { editRole } from "@/actions/role.action";
 import { roleSchema } from "@/schemas/role.schema";
 import {
   Dialog,
@@ -10,31 +10,27 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { Dispatch, SetStateAction, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { z } from "zod";
-import CreateRoleSuccess from "../create-role-success/modal";
+import { number, z } from "zod";
 
 interface Props {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   onClose?: () => void;
+  initialRole: RoleResponse;
   initialGroupMenus: GroupMenuResponse[];
 }
 
 type RoleSchema = z.infer<typeof roleSchema>;
 
-const CreateRoleModal: React.FC<Props> = ({
+const EditRoleModal: React.FC<Props> = ({
   isOpen,
   setIsOpen,
   onClose,
+  initialRole,
   initialGroupMenus,
 }) => {
-  const [isCreateRoleSuccessModalOpen, setIsCreateRoleSuccessModalOpen] =
-    useState<boolean>(false);
-
-  const [createdRoleName, setCreatedRoleName] = useState<string | null>(null);
-
   const openModal = () => {
-    setIsCreateRoleSuccessModalOpen(true);
+    // setIsEditRoleSuccessModalOpen(true);
     if (onClose) {
       onClose();
     } else {
@@ -44,16 +40,18 @@ const CreateRoleModal: React.FC<Props> = ({
 
   const processForm: SubmitHandler<RoleSchema> = async (data) => {
     try {
-      const result = await createRole({
-        roleName: data.roleName,
-        groupMenuId: +data.groupMenuId,
-      });
+      const result = await editRole(
+        { id: initialRole.id },
+        {
+          roleName: data.roleName,
+          groupMenuId: +data.groupMenuId,
+        }
+      );
       if (result.success) {
-        setCreatedRoleName(data.roleName);
         openModal();
       }
     } catch (error) {
-      alert("Failed to create role. Please try again.");
+      alert("Failed to edit role. Please try again.");
     }
   };
 
@@ -66,7 +64,10 @@ const CreateRoleModal: React.FC<Props> = ({
   } = useForm<RoleSchema>({
     mode: "onChange",
     resolver: zodResolver(roleSchema),
-    defaultValues: {},
+    defaultValues: {
+      roleName: initialRole.roleName,
+      groupMenuId: initialRole.groupMenu.name,
+    },
   });
 
   console.log(watch());
@@ -93,7 +94,7 @@ const CreateRoleModal: React.FC<Props> = ({
               <DialogPanel className="bg-white w-[680px] space-y-[50px] border rounded-[30px] p-12">
                 <div className="relative flex items-center justify-center">
                   <DialogTitle className="flex font-semibold text-[20px] text-center items-center">
-                    Create New Role
+                    Edit New Role
                     <button
                       className="absolute right-0"
                       onClick={() => setIsOpen(false)}
@@ -174,7 +175,7 @@ const CreateRoleModal: React.FC<Props> = ({
                     type="submit"
                     disabled={!isValid}
                   >
-                    Create Role
+                    Edit Role
                   </button>
                 </div>
               </DialogPanel>
@@ -182,13 +183,13 @@ const CreateRoleModal: React.FC<Props> = ({
           </div>
         </form>
       </Dialog>
-      <CreateRoleSuccess
-        isOpen={isCreateRoleSuccessModalOpen}
-        setIsOpen={setIsCreateRoleSuccessModalOpen}
-        roleName={createdRoleName}
-      />
+      {/* <EditRoleSuccess
+        isOpen={isEditRoleSuccessModalOpen}
+        setIsOpen={setIsEditRoleSuccessModalOpen}
+        roleName={editdRoleName}
+      /> */}
     </>
   );
 };
 
-export default CreateRoleModal;
+export default EditRoleModal;

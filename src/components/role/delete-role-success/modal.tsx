@@ -13,10 +13,10 @@ interface Props {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   onClose?: () => void;
-  roleName: string | null;
+  roleName?: string;
 }
 
-const CreateRoleSuccess: React.FC<Props> = ({
+const DeleteRoleSuccess: React.FC<Props> = ({
   isOpen,
   onClose,
   setIsOpen,
@@ -71,12 +71,12 @@ const CreateRoleSuccess: React.FC<Props> = ({
 
                 <div className="flex flex-col h-[120px] rounded-xl items-center justify-center">
                   <p className="font-semibold text-[20px]  mb-3 text-center">
-                    Role {roleName} has been created!
+                    Role '<span className="capitalize">{roleName}</span>' has
+                    been deleted!
                   </p>
                   <p className=" text-[16px]  text-center">
-                    You can access and manage this role details through the
-                    <br />
-                    'Role Management' section accessible from the sidebar.
+                    You can review the updated role list in the 'Role <br />
+                    Management' section accessible via the sidebar.
                   </p>
                 </div>
               </DialogPanel>
@@ -88,4 +88,4 @@ const CreateRoleSuccess: React.FC<Props> = ({
   );
 };
 
-export default CreateRoleSuccess;
+export default DeleteRoleSuccess;

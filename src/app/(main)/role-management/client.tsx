@@ -1,6 +1,7 @@
 "use client";
 import { getRoleList } from "@/actions/role.action";
 import CreateRoleModal from "@/components/role/create-role/modal";
+import DeleteRoleSuccess from "@/components/role/delete-role-success/modal";
 import RoleRow from "@/components/rolerow/rolerow";
 
 import React, { useEffect, useRef, useState } from "react";
@@ -24,6 +25,7 @@ export default function RoleManagementClient({
   const [isPageChanged, setIsPageChanged] = useState<boolean>(false);
   const [isDeleteRoleSuccessModalOpen, setIsDeleteRoleSuccessModalOpen] =
     useState<boolean>(false);
+  const [latestDeleteRole, setLatestDeleteRole] = useState<RoleResponse>();
 
   async function fetchLastestRoles(page: number = 1, keyword?: string) {
     const response = await getRoleList({ page, keyword });
@@ -176,9 +178,10 @@ export default function RoleManagementClient({
                       key={role.id}
                       role={role}
                       initialGroupMenus={groupMenus}
-                      // setIsDeleteSuccessModalOpen={
-                      //   setIsDeleteRoleSuccessModalOpen
-                      // }
+                      setIsDeleteSuccessModalOpen={
+                        setIsDeleteRoleSuccessModalOpen
+                      }
+                      setLatestDeleteRole={setLatestDeleteRole}
                     />
                   ))}
                 </tbody>
@@ -240,18 +243,13 @@ export default function RoleManagementClient({
             setIsOpen={setIsCreateRoleModalOpen}
             initialGroupMenus={groupMenus}
           />
-          {/* {isDeleteRoleSuccessModalOpen && (
+          {isDeleteRoleSuccessModalOpen && latestDeleteRole && (
             <DeleteRoleSuccess
               isOpen={isDeleteRoleSuccessModalOpen}
               setIsOpen={setIsDeleteRoleSuccessModalOpen}
+              roleName={latestDeleteRole.roleName}
             />
           )}
-          {isCreateRoleModalOpen && (
-            <CreateRoleModal
-              isOpen={isCreateRoleModalOpen}
-              setIsOpen={setIsCreateRoleModalOpen}
-            />
-          )} */}
         </div>
       </div>
     </div>

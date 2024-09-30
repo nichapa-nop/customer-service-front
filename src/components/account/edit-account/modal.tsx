@@ -21,7 +21,6 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { accountSchema } from "@/schemas/account.schema";
 import { z } from "zod";
-import { Switch } from "@nextui-org/react";
 import toast from "react-hot-toast";
 // import successpic from "../../../../img/success.png";
 

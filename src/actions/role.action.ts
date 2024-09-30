@@ -28,7 +28,7 @@ export async function getRoleList({
 }
 
 export async function createRole(data: any) {
-  const response = await ApiManager<RoleResponse, never, RoleRequestBody>({
+  const response = await ApiManager<RoleResponse, never, RoleRequestBodyDTO>({
     path: "/role",
     method: "POST",
     body: data,
@@ -42,7 +42,44 @@ export async function createRole(data: any) {
       success: true,
     };
   } else {
+    console.log(response);
+    throw new Error("Failed to fetch data");
+  }
+}
+
+export async function editRole({ id }: { id: number }, data: any) {
+  const response = await ApiManager<RoleResponse, never, RoleRequestBodyDTO>({
+    path: `/role/${id}`,
+    method: "PUT",
+    body: data,
+    next: {
+      revalidateTags: ["get-role-list"],
+    },
+  });
+  if (response.success && response.data) {
+    return {
+      data: response.data,
+      success: true,
+    };
+  } else {
     console.log(response.data);
+    throw new Error("Failed to fetch data");
+  }
+}
+
+export async function deleteRole({ id }: { id: number }) {
+  const response = await ApiManager<RoleResponse, never, never>({
+    path: `/role/${id}`,
+    method: "DELETE",
+    next: {
+      revalidateTags: ["get-role-list"],
+    },
+  });
+  if (response.success) {
+    return {
+      success: true,
+    };
+  } else {
     throw new Error("Failed to fetch data");
   }
 }

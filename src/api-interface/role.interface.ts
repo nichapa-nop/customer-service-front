@@ -19,7 +19,7 @@ interface RoleResponse {
   groupMenu: GroupMenuResponse;
 }
 
-interface RoleRequestBody {
+interface RoleRequestBodyDTO {
   roleName: string;
   groupMenuId: number;
 }

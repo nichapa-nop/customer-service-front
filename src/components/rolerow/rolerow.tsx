@@ -1,15 +1,26 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import RoleDetail from "../role/role-detail/modal";
+import EditRoleModal from "../role/edit-role/modal";
+import DeleteRoleModal from "../role/delete-role/modal";
 
 interface RoleRowProps {
   role: RoleResponse;
   initialGroupMenus: GroupMenuResponse[];
+  setIsDeleteSuccessModalOpen: Dispatch<SetStateAction<boolean>>;
+  setLatestDeleteRole: Dispatch<SetStateAction<RoleResponse | undefined>>;
 }
 
-const RoleRow: React.FC<RoleRowProps> = ({ role, initialGroupMenus }) => {
+const RoleRow: React.FC<RoleRowProps> = ({
+  role,
+  initialGroupMenus,
+  setLatestDeleteRole,
+  setIsDeleteSuccessModalOpen,
+}) => {
   const [isRoleDetailModalOpen, setIsRoleDetailModalOpen] =
     useState<boolean>(false);
   const [isEditRoleModalOpen, setIsEditRoleModalOpen] =
+    useState<boolean>(false);
+  const [isDeleteRoleModalOpen, setIsDeleteRoleModalOpen] =
     useState<boolean>(false);
   return (
     <tr key={role.id} className="h-[68px] hover:bg-light-orange">
@@ -37,11 +48,9 @@ const RoleRow: React.FC<RoleRowProps> = ({ role, initialGroupMenus }) => {
       </td>
       <td className="w-[20%] space-x-3">
         <button
-        //   onClick={() => {
-        //     //   setFocusEditTicket(ticket);
-        //     //   openModal("edit");
-        //     setIsEditModalOpen(true);
-        //   }}
+          onClick={() => {
+            setIsEditRoleModalOpen(true);
+          }}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -55,10 +64,9 @@ const RoleRow: React.FC<RoleRowProps> = ({ role, initialGroupMenus }) => {
         </button>
 
         <button
-        //   disabled={isButtonDisable}
-        //   onClick={() => {
-        //     setIsDeleteModalOpen(true);
-        //   }}
+          onClick={() => {
+            setIsDeleteRoleModalOpen(true);
+          }}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -106,9 +114,23 @@ const RoleRow: React.FC<RoleRowProps> = ({ role, initialGroupMenus }) => {
             setIsOpen={setIsRoleDetailModalOpen}
           />
         )}
-        {/* {isEditRoleModalOpen && 
-
-        } */}
+        {isEditRoleModalOpen && (
+          <EditRoleModal
+            initialRole={role}
+            isOpen={isEditRoleModalOpen}
+            setIsOpen={setIsEditRoleModalOpen}
+            initialGroupMenus={initialGroupMenus}
+          />
+        )}
+        {isDeleteRoleModalOpen && (
+          <DeleteRoleModal
+            initialRole={role}
+            isOpen={isDeleteRoleModalOpen}
+            setIsOpen={setIsDeleteRoleModalOpen}
+            setIsDeleteRoleSuccessModalOpen={setIsDeleteSuccessModalOpen}
+            setLatestDeleteRole={setLatestDeleteRole}
+          />
+        )}
       </td>
     </tr>
   );
