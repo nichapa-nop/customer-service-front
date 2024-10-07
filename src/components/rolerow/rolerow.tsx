@@ -2,12 +2,14 @@ import { Dispatch, SetStateAction, useState } from "react";
 import RoleDetail from "../role/role-detail/modal";
 import EditRoleModal from "../role/edit-role/modal";
 import DeleteRoleModal from "../role/delete-role/modal";
+import EditRoleSuccess from "../role/edit-role-success/modal";
 
 interface RoleRowProps {
   role: RoleResponse;
   initialGroupMenus: GroupMenuResponse[];
   setIsDeleteSuccessModalOpen: Dispatch<SetStateAction<boolean>>;
   setLatestDeleteRole: Dispatch<SetStateAction<RoleResponse | undefined>>;
+  setIsEditSuccessModalOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 const RoleRow: React.FC<RoleRowProps> = ({
@@ -15,6 +17,7 @@ const RoleRow: React.FC<RoleRowProps> = ({
   initialGroupMenus,
   setLatestDeleteRole,
   setIsDeleteSuccessModalOpen,
+  setIsEditSuccessModalOpen,
 }) => {
   const [isRoleDetailModalOpen, setIsRoleDetailModalOpen] =
     useState<boolean>(false);
@@ -120,6 +123,7 @@ const RoleRow: React.FC<RoleRowProps> = ({
             isOpen={isEditRoleModalOpen}
             setIsOpen={setIsEditRoleModalOpen}
             initialGroupMenus={initialGroupMenus}
+            setIsEditRoleSuccessModalOpen={setIsEditSuccessModalOpen}
           />
         )}
         {isDeleteRoleModalOpen && (

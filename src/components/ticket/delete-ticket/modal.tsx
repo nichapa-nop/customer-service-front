@@ -29,11 +29,6 @@ const DeleteTicketModal: React.FC<Props> = ({
 }) => {
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
-  // const [ticketId, setTicketId] = useState<string>("");
-  // async function deleteTicket(keyword?: string) {
-  //   const response
-  // }
-
   async function handleDeleteTicket() {
     setIsDeleting(true);
     const deleteResponse = await deleteTicket({

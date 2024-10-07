@@ -133,7 +133,7 @@ const CreateTicketModal: React.FC<Props> = ({
                   {/* This will permanently deactivate your account */}
                 {/* </Description> */}
 
-                <div className="bg-white p-6 h-[460px] rounded-xl shadow-light1">
+                <div className="bg-white p-6 rounded-[20px] shadow-light1">
                   <div className="flex justify-between px-6 pt-2 pb-2">
                     <p className="font-semibold text-[20px]">Customer Info</p>
                     {/* <button onClick={() => setIsCustomerInfoOpen(false)}>
@@ -152,9 +152,12 @@ const CreateTicketModal: React.FC<Props> = ({
                     </button> */}
                   </div>
                   {/* {isCustomerInfoOpen && ( */}
-                  <div className="grid grid-cols-2 gap-2  p-3">
+                  <div className="grid grid-cols-2 gap-2 p-3">
                     <div className="flex flex-col gap-2 p-4">
-                      <p>First Name (EN)</p>
+                      <p>
+                        First Name (EN)
+                        {/* <span className="text-red-500"> *</span> */}
+                      </p>
                       <Controller
                         control={control}
                         name="cusFirstName"
@@ -162,22 +165,38 @@ const CreateTicketModal: React.FC<Props> = ({
                           field: { value, name, onChange, onBlur },
                         }) => {
                           return (
-                            <input
-                              id="firstName"
-                              type="text"
-                              className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                              placeholder="Nichapa"
-                              value={value}
-                              name={name}
-                              onChange={onChange}
-                              onBlur={onBlur}
-                            ></input>
+                            <div>
+                              <input
+                                id="firstName"
+                                type="text"
+                                // className={`bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black ${
+                                //   errors.cusFirstName
+                                //     ? "border-red-500 border"
+                                //     : ""
+                                // }`}
+                                className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                                placeholder="Nichapa"
+                                value={value}
+                                name={name}
+                                onChange={onChange}
+                                onBlur={onBlur}
+                                required
+                              ></input>
+                              {/* {errors.cusFirstName && (
+                                <p className="text-red-500 text-sm mt-1">
+                                  {errors.cusFirstName.message}
+                                </p>
+                              )} */}
+                            </div>
                           );
                         }}
                       />
                     </div>
                     <div className="flex flex-col gap-2 p-4">
-                      <p>Last Name (EN)</p>
+                      <p>
+                        Last Name (EN)
+                        {/* <span className="text-red-500"> *</span> */}
+                      </p>
                       <Controller
                         control={control}
                         name="cusLastName"
@@ -185,22 +204,37 @@ const CreateTicketModal: React.FC<Props> = ({
                           field: { value, name, onChange, onBlur },
                         }) => {
                           return (
-                            <input
-                              id="lastName"
-                              type="text"
-                              className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                              placeholder="Nopparat"
-                              value={value}
-                              name={name}
-                              onChange={onChange}
-                              onBlur={onBlur}
-                            ></input>
+                            <div>
+                              <input
+                                id="lastName"
+                                type="text"
+                                // className={`bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black ${
+                                //   errors.cusLastName
+                                //     ? "border-red-500 border"
+                                //     : ""
+                                // }`}
+                                className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                                placeholder="Nopparat"
+                                value={value}
+                                name={name}
+                                onChange={onChange}
+                                onBlur={onBlur}
+                              ></input>
+                              {/* {errors.cusLastName && (
+                                <p className="text-red-500 text-sm mt-1">
+                                  {errors.cusLastName.message}
+                                </p>
+                              )} */}
+                            </div>
                           );
                         }}
                       />
                     </div>
                     <div className="flex flex-col gap-2 p-4">
-                      <p>Phone Number</p>
+                      <p>
+                        Phone Number
+                        {/* <span className="text-red-500"> *</span> */}
+                      </p>
                       <Controller
                         control={control}
                         name="cusPhoneNum"
@@ -208,22 +242,37 @@ const CreateTicketModal: React.FC<Props> = ({
                           field: { value, name, onChange, onBlur },
                         }) => {
                           return (
-                            <input
-                              id="PhoneNum"
-                              type="text"
-                              className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                              placeholder="012 345 6789"
-                              value={value}
-                              name={name}
-                              onChange={onChange}
-                              onBlur={onBlur}
-                            ></input>
+                            <div>
+                              <input
+                                id="PhoneNum"
+                                type="text"
+                                // className={`bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black ${
+                                //   errors.cusLastName
+                                //     ? "border-red-500 border"
+                                //     : ""
+                                // }`}
+                                className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                                placeholder="012 345 6789"
+                                value={value}
+                                name={name}
+                                onChange={onChange}
+                                onBlur={onBlur}
+                              ></input>
+                              {/* {errors.cusPhoneNum && (
+                                <p className="text-red-500 text-sm mt-1">
+                                  Phone Number is required
+                                </p>
+                              )} */}
+                            </div>
                           );
                         }}
                       />
                     </div>
                     <div className="flex flex-col gap-2 p-4">
-                      <p>Type</p>
+                      <p>
+                        Type
+                        {/* <span className="text-red-500"> *</span> */}
+                      </p>
                       {/* <input
                         className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
                         placeholder="Select"
@@ -252,7 +301,7 @@ const CreateTicketModal: React.FC<Props> = ({
                         )}
                       />
                     </div>
-                    <div className=" flex flex-col gap-2 p-4">
+                    <div className="flex flex-col gap-2 p-4">
                       <p>Email</p>
                       <Controller
                         control={control}
@@ -261,16 +310,26 @@ const CreateTicketModal: React.FC<Props> = ({
                           field: { value, name, onChange, onBlur },
                         }) => {
                           return (
-                            <input
-                              id="email"
-                              type="text"
-                              value={value}
-                              name={name}
-                              onChange={onChange}
-                              onBlur={onBlur}
-                              className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
-                              placeholder="ee@baseplayhouse.co"
-                            ></input>
+                            <div>
+                              <input
+                                id="email"
+                                type="text"
+                                value={value}
+                                name={name}
+                                onChange={onChange}
+                                onBlur={onBlur}
+                                // className={`bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black ${
+                                //   errors.cusEmail ? "border-red-500 border" : ""
+                                // }`}
+                                className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                                placeholder="ee@baseplayhouse.co"
+                              />
+                              {/* {errors.cusEmail && (
+                                <p className="text-red-500 text-sm mt-1">
+                                  {errors.cusEmail.message}
+                                </p>
+                              )} */}
+                            </div>
                           );
                         }}
                       />
@@ -301,7 +360,7 @@ const CreateTicketModal: React.FC<Props> = ({
                   </div>
                   {/* )} */}
                 </div>
-                <div className="bg-white p-6 rounded-xl h-[430px] shadow-light1">
+                <div className="bg-white p-6 rounded-[20px] shadow-light1">
                   <p className="font-semibold text-[20px] mb-2  pl-6  pt-2">
                     System Info
                   </p>
@@ -459,7 +518,7 @@ const CreateTicketModal: React.FC<Props> = ({
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col bg-white p-6 rounded-[15px] h-[510px] shadow-light1">
+                <div className="flex flex-col bg-white p-6 rounded-[15px] shadow-light1">
                   <p className=" font-semibold text-[20px] pl-6 pt-2">
                     General Info
                   </p>
@@ -512,7 +571,7 @@ const CreateTicketModal: React.FC<Props> = ({
                     </div>
                   </div>
                 </div>
-                <div className="bg-white p-6 rounded-xl h-80 shadow-light1">
+                <div className="bg-white p-6 rounded-[20px] shadow-light1">
                   <p className=" font-semibold text-[20px] pl-6 pt-2">
                     CS Info
                   </p>

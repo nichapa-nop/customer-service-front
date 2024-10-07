@@ -46,8 +46,6 @@ export default function TicketManagementClient({
   async function fetchLastestTickets(page: number = 1, keyword?: string) {
     const response = await getTicketList({ page, keyword });
     setTickets(response.data);
-    console.log(response.pagination.itemsCount);
-    console.log(response.pagination.itemsPerPage);
     setPageCount(
       Math.ceil(
         response.pagination.itemsCount / response.pagination.itemsPerPage
@@ -254,6 +252,7 @@ export default function TicketManagementClient({
                         type="checkbox"
                         className="appearance-none rounded-md cursor-pointer checked:bg-gradient-to-tr from-deep-blue to-bright-red w-[27px] h-[27px] border-light-gray1 border-[2px] relative
                             checked:after:content-[''] checked:after:absolute checked:after:left-[8px] checked:after:top-[3px] checked:after:w-[7px] checked:after:h-[14px] checked:after:border-white checked:after:border-r-[2px] checked:after:border-b-[2px] checked:after:rotate-45"
+                        //checkallrow
                       ></input>
                     </th>
                     <th>Ticket ID</th>

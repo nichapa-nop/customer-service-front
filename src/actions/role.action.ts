@@ -62,7 +62,7 @@ export async function editRole({ id }: { id: number }, data: any) {
       success: true,
     };
   } else {
-    console.log(response.data);
+    console.log(response);
     throw new Error("Failed to fetch data");
   }
 }

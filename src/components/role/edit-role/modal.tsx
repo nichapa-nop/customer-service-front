@@ -10,7 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { Dispatch, SetStateAction, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { number, z } from "zod";
+import { z } from "zod";
 
 interface Props {
   isOpen: boolean;
@@ -18,6 +18,7 @@ interface Props {
   onClose?: () => void;
   initialRole: RoleResponse;
   initialGroupMenus: GroupMenuResponse[];
+  setIsEditRoleSuccessModalOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 type RoleSchema = z.infer<typeof roleSchema>;
@@ -28,9 +29,10 @@ const EditRoleModal: React.FC<Props> = ({
   onClose,
   initialRole,
   initialGroupMenus,
+  setIsEditRoleSuccessModalOpen,
 }) => {
   const openModal = () => {
-    // setIsEditRoleSuccessModalOpen(true);
+    setIsEditRoleSuccessModalOpen(true);
     if (onClose) {
       onClose();
     } else {
@@ -94,7 +96,7 @@ const EditRoleModal: React.FC<Props> = ({
               <DialogPanel className="bg-white w-[680px] space-y-[50px] border rounded-[30px] p-12">
                 <div className="relative flex items-center justify-center">
                   <DialogTitle className="flex font-semibold text-[20px] text-center items-center">
-                    Edit New Role
+                    Edit Role
                     <button
                       className="absolute right-0"
                       onClick={() => setIsOpen(false)}
@@ -183,11 +185,6 @@ const EditRoleModal: React.FC<Props> = ({
           </div>
         </form>
       </Dialog>
-      {/* <EditRoleSuccess
-        isOpen={isEditRoleSuccessModalOpen}
-        setIsOpen={setIsEditRoleSuccessModalOpen}
-        roleName={editdRoleName}
-      /> */}
     </>
   );
 };

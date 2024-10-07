@@ -103,22 +103,25 @@ const CreateAccountModal: React.FC<Props> = ({
               transition={{ duration: 0.5 }}
             >
               <DialogPanel className="bg-white w-[850px] space-y-[50px] border rounded-[30px] p-12">
-                <DialogTitle className="font-semibold text-center text-[20px] mt-6 mb-10">
-                  Create New Account
-                  <button
-                    className="absolute right-0"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      className="size-10"
+                <div className="relative flex items-center justify-center">
+                  <DialogTitle className="flex font-semibold text-[20px] text-center items-center">
+                    Create New Account
+                    <button
+                      className="absolute right-0"
+                      onClick={() => setIsOpen(false)}
                     >
-                      <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
-                    </svg>
-                  </button>
-                </DialogTitle>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className="size-10"
+                      >
+                        <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
+                      </svg>
+                    </button>
+                  </DialogTitle>
+                </div>
+
                 <div className="px-6 rounded-xl">
                   <div className="grid grid-cols-2 gap-x-9 gap-y-6 ">
                     <div className="flex flex-col gap-2 ">

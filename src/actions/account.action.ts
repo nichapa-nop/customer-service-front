@@ -1,7 +1,6 @@
 "use server";
 
 import { ApiManager } from "@/api";
-import { revalidateTag } from "next/cache";
 
 export async function getAccountList({
   page = 1,
@@ -154,4 +153,11 @@ export async function sendResetPasswordEmail({ uuid }: { uuid: string }) {
   } else {
     throw new Error("Failed to fetch data");
   }
+}
+
+export async function getResetPasswordInformation(token: string) {
+  return await ApiManager<ResetPasswordTokenInformation, never, never>({
+    method: "GET",
+    path: `/reset-password/${token}`,
+  });
 }

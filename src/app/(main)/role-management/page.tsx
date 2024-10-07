@@ -13,6 +13,7 @@ export default async function RoleManagementPage() {
   if (!(getRoleListResponse.success && getRoleListResponse.data)) {
     throw new Error("Can not fetch role list");
   }
+
   return (
     <RoleManagementClient
       roles={getRoleListResponse.data}

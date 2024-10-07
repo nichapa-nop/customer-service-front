@@ -24,3 +24,9 @@ interface AccountRequestBodyDTO {
   phoneNum: string;
   roleId: number;
 }
+
+interface ResetPasswordTokenInformation {
+  isValid: boolean;
+  isExpired: boolean;
+  email: string;
+}

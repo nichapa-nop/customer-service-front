@@ -36,8 +36,8 @@ const DeleteRoleModal: React.FC<Props> = ({
     });
     if (deleteResponse.success) {
       setIsOpen(false);
-      // setIsDeleteRoleSuccessModalOpen(true);
-      //   setLatestDeleteRole(initialRole);
+      setIsDeleteRoleSuccessModalOpen(true);
+      setLatestDeleteRole(initialRole);
     }
     setIsDeleting(false);
   }

@@ -2,6 +2,7 @@
 import { getRoleList } from "@/actions/role.action";
 import CreateRoleModal from "@/components/role/create-role/modal";
 import DeleteRoleSuccess from "@/components/role/delete-role-success/modal";
+import EditRoleSuccess from "@/components/role/edit-role-success/modal";
 import RoleRow from "@/components/rolerow/rolerow";
 
 import React, { useEffect, useRef, useState } from "react";
@@ -26,6 +27,8 @@ export default function RoleManagementClient({
   const [isDeleteRoleSuccessModalOpen, setIsDeleteRoleSuccessModalOpen] =
     useState<boolean>(false);
   const [latestDeleteRole, setLatestDeleteRole] = useState<RoleResponse>();
+  const [isEditRoleSuccessModalOpen, setIsEditRoleSuccessModalOpen] =
+    useState<boolean>(false);
 
   async function fetchLastestRoles(page: number = 1, keyword?: string) {
     const response = await getRoleList({ page, keyword });
@@ -182,6 +185,7 @@ export default function RoleManagementClient({
                         setIsDeleteRoleSuccessModalOpen
                       }
                       setLatestDeleteRole={setLatestDeleteRole}
+                      setIsEditSuccessModalOpen={setIsEditRoleSuccessModalOpen}
                     />
                   ))}
                 </tbody>
@@ -248,6 +252,12 @@ export default function RoleManagementClient({
               isOpen={isDeleteRoleSuccessModalOpen}
               setIsOpen={setIsDeleteRoleSuccessModalOpen}
               roleName={latestDeleteRole.roleName}
+            />
+          )}
+          {isEditRoleSuccessModalOpen && (
+            <EditRoleSuccess
+              isOpen={isEditRoleSuccessModalOpen}
+              setIsOpen={setIsEditRoleSuccessModalOpen}
             />
           )}
         </div>

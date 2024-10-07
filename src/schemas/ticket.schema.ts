@@ -1,8 +1,14 @@
 import { z } from "zod";
 
 export const ticketSchema = z.object({
-  cusFirstName: z.string().min(1),
-  cusLastName: z.string().min(1),
+  cusFirstName: z
+    .string()
+    .min(1, "FirstName is required")
+    .max(50, "Character is not more than 50 characters"),
+  cusLastName: z
+    .string()
+    .min(1, "LastName is required")
+    .max(50, "Character is not more than 50 characters"),
   cusPhoneNum: z.string().min(10).max(10),
   cusEmail: z.string().email(),
   cusCompanyName: z.string(),
