@@ -121,6 +121,13 @@ import React, { useState, useEffect } from "react";
 import seenpic from "../../../../img/SV_SEEN-C_.png";
 import bgpic from "../../../../img/Rectangle 3.png";
 import { useParams, useRouter } from "next/navigation";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { z } from "zod";
+import { resetPasswordSchema } from "@/schemas/account.schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { resetPassword } from "@/actions/account.action";
+
+type ResetPasswordFields = z.infer<typeof resetPasswordSchema>;
 
 export default function ResetPasswordClient({
   token,
@@ -129,14 +136,11 @@ export default function ResetPasswordClient({
   token: string;
   email: string;
 }) {
-  const [password, setPassword] = useState<string>("");
-  const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [passwordTouched, setPasswordTouched] = useState(false);
-  const [confirmPasswordTouched, setConfirmPasswordTouched] = useState(false);
-  // const [token, setToken] = useState<string | null>(null);
-  //   const { token } = useParams<{ token: string }>();
   const router = useRouter();
-
+  const { register, handleSubmit, control } = useForm<ResetPasswordFields>({
+    mode: "onChange",
+    resolver: zodResolver(resetPasswordSchema),
+  });
   // useEffect(() => {
   //   // Extract token from the URL query parameters
   //   const { token } = router.query;
@@ -145,48 +149,37 @@ export default function ResetPasswordClient({
   //   }
   // }, [router.query]);
 
-  async function handleResetPassword(e: React.FormEvent) {
-    e.preventDefault();
-    setPasswordTouched(true);
-    setConfirmPasswordTouched(true);
-
+  const processForm: SubmitHandler<ResetPasswordFields> = async (data) => {
     // Validate passwords
-    if (password !== confirmPassword) {
+    if (data.password !== data.confirmPassword) {
       alert("Passwords do not match");
       return;
     }
 
     // Send the token and new password to the backend
     try {
-      const response = await fetch("http://localhost:5000/v1/reset-password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          token, // Send the token from the URL
-          password,
-        }),
+      const response = await resetPassword(token, {
+        password: data.password,
       });
 
-      const result = await response.json();
-      if (response.ok) {
+      if (response.success) {
         alert("Password successfully reset!");
         router.push("/login");
       } else {
-        alert(result.message || "Failed to reset password.");
+        alert("Failed to reset password.");
       }
     } catch (error) {
-      alert("An error occurred. Please try again.");
+      console.log(error);
+      //   alert("An error occurred. Please try again.");
     }
-  }
+  };
 
   return (
     <div className="bg-gradient-to-tr from-deep-blue to-bright-red h-screen w-full">
       <div className="flex items-center justify-center min-h-screen">
         <form
           className="flex flex-row bg-white h-[650px] w-[923px] rounded-lg overflow-hidden"
-          onSubmit={handleResetPassword}
+          onSubmit={handleSubmit(processForm)}
         >
           <div className="bg-gradient-to-tr from-deep-blue via-fade-purple to-bright-red w-[461px] h-[650px] overflow-hidden">
             <img
@@ -221,43 +214,67 @@ export default function ResetPasswordClient({
             </div>
             <div className="flex flex-col pt-6">
               <label htmlFor="password">New Password</label>
-              <div className="bg-dark-gray hover:bg-gradient-to-tr from-deep-blue to-bright-red mt-1 p-[2px] rounded-[15px]">
-                <input
-                  type="password"
-                  id="password"
-                  className="w-full h-[48px] rounded-[13px] pl-5"
-                  placeholder="● ● ● ● ● ● ● ● ● ● ● ●"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  onBlur={() => setPasswordTouched(true)}
-                  required
-                  minLength={3}
-                />
-              </div>
-              {passwordTouched && password.length < 3 && (
-                <p className="text-red-500 text-sm">
-                  Password must be at least 3 characters long
-                </p>
-              )}
+
+              <Controller
+                control={control}
+                name="password"
+                render={({
+                  field: { name, value, onChange, onBlur },
+                  fieldState: { error, isTouched },
+                }) => (
+                  <>
+                    <div className="bg-dark-gray hover:bg-gradient-to-tr from-deep-blue to-bright-red mt-1 p-[2px] rounded-[15px]">
+                      <input
+                        type="password"
+                        id="password"
+                        className="w-full h-[48px] rounded-[13px] pl-5"
+                        name={name}
+                        value={value}
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        required
+                        placeholder="● ● ● ● ● ● ● ● ● ● ● ●"
+                        minLength={6}
+                      />
+                    </div>
+                    {isTouched && error?.message && (
+                      <p className="text-red-500 text-sm">{error.message}</p>
+                    )}
+                  </>
+                )}
+              />
             </div>
             <div className="flex flex-col pt-3">
               <label htmlFor="confirmPassword">Confirm Password</label>
-              <div className="bg-dark-gray hover:bg-gradient-to-tr from-deep-blue to-bright-red mt-1 p-[2px] rounded-[15px]">
-                <input
-                  type="password"
-                  id="confirmPassword"
-                  className="w-full h-[48px] rounded-[13px] pl-5"
-                  placeholder="● ● ● ● ● ● ● ● ● ● ● ●"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  onBlur={() => setConfirmPasswordTouched(true)}
-                  required
-                  minLength={3}
-                />
-              </div>
-              {confirmPasswordTouched && password !== confirmPassword && (
-                <p className="text-red-500 text-sm">Passwords do not match</p>
-              )}
+
+              <Controller
+                control={control}
+                name="confirmPassword"
+                render={({
+                  field: { name, value, onChange, onBlur },
+                  fieldState: { error, isTouched },
+                }) => (
+                  <>
+                    <div className="bg-dark-gray hover:bg-gradient-to-tr from-deep-blue to-bright-red mt-1 p-[2px] rounded-[15px]">
+                      <input
+                        type="password"
+                        id="confirm-password"
+                        className="w-full h-[48px] rounded-[13px] pl-5"
+                        placeholder="● ● ● ● ● ● ● ● ● ● ● ●"
+                        name={name}
+                        value={value}
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        required
+                        minLength={6}
+                      />
+                    </div>
+                    {isTouched && error?.message && (
+                      <p className="text-red-500 text-sm">{error.message}</p>
+                    )}
+                  </>
+                )}
+              />
             </div>
             <div className="mt-auto pt-8 text-center">
               <button

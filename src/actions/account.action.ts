@@ -161,3 +161,25 @@ export async function getResetPasswordInformation(token: string) {
     path: `/reset-password/${token}`,
   });
 }
+
+export async function resetPassword(
+  token: string,
+  data: ResetPasswordRequestBodyDTO
+) {
+  let response = await ApiManager<
+    AccountResponse,
+    never,
+    ResetPasswordRequestBodyDTO
+  >({
+    path: `/v1/reset-password${token}`,
+    method: "PUT",
+    body: data,
+  });
+  if (response.success) {
+    return {
+      success: true,
+    };
+  } else {
+    throw new Error("Failed to fetch data");
+  }
+}

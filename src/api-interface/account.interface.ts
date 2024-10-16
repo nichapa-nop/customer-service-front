@@ -30,3 +30,8 @@ interface ResetPasswordTokenInformation {
   isExpired: boolean;
   email: string;
 }
+
+interface ResetPasswordRequestBodyDTO {
+  // token: string;
+  password: string;
+}

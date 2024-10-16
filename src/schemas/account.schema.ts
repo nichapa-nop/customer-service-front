@@ -10,3 +10,13 @@ export const accountSchema = z.object({
   phoneNum: z.string().min(10).max(10),
   roleId: z.string().min(1),
 });
+
+export const resetPasswordSchema = z
+  .object({
+    password: z.string().min(6, "Password length must be contain 6 characters"),
+    confirmPassword: z.string().min(6),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"], // แสดง error ที่ confirmPassword เมื่อไม่ตรงกับ password
+  });
