@@ -13,7 +13,7 @@ export const accountSchema = z.object({
 
 export const resetPasswordSchema = z
   .object({
-    password: z.string().min(6, "Password length must be contain 6 characters"),
+    password: z.string().min(6, "Password is required"),
     confirmPassword: z.string().min(6),
   })
   .refine((data) => data.password === data.confirmPassword, {

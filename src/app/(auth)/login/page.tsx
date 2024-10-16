@@ -262,13 +262,11 @@ export default function LoginPage() {
                     onChange={(e) => setPassword(e.target.value)}
                     onBlur={() => setPasswordTouched(true)}
                     required
-                    minLength={3}
+                    minLength={6}
                   />
                 </div>
                 {passwordTouched && !isPasswordValid && (
-                  <p className="text-red-500 text-sm">
-                    Password must be at least 3 characters
-                  </p>
+                  <p className="text-red-500 text-sm">Password is required</p>
                 )}
               </div>
 

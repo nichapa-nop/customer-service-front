@@ -11,25 +11,22 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
-  // const [isOpen, setIsOpen] = useState(true);
   const pathname = usePathname();
 
-  // const toggleSidebar = () => {
-  //   setIsOpen(!isOpen);
-  // };
   return (
     <>
       <aside
         id="default-sidebar"
-        className={`top-0 absolute left-0 z-40 w-64 transition-transform 
+        className={`top-0 absolute left-0 z-40 w-64 h-[100vh] transition-transform 
         ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } text-[14px] shadow-sm`}
+        } text-[14px] shadow-sm flex flex-col bg-light-gray2`}
         aria-label="Sidebar"
       >
-        <div className="h-full w-full px-3 py-4 bg-gray-50 dark:bg-gray-800">
+        <div className="flex-grow h-full px-3 py-4 dark:bg-gray-800">
+          {/* Added flex-grow */}
           <ul className="space-y-4 font-medium">
-            <li className="flex items-center justify-between mb-6 mt-1">
+            <li className="flex items-center justify-between mt-1">
               <a
                 href="#"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
@@ -249,45 +246,26 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
               </a>
             </li>
           </ul>
-          <div className="flex min-h-[400px] rounded-[20px] items-end justify-center p-1">
-            <div className=" flex space-x-3 bg-white w-full h-[75px] rounded-[20px] p-4 shadow-light1">
-              <div className="rounded-full overflow-hidden">
-                <Image
-                  src="/assets/images/profilepic.jpg"
-                  alt="user"
-                  width={40}
-                  height={40}
-                ></Image>
-              </div>
-              <div className="flex flex-col">
-                <span>Nichapa Nopparat</span>
-                <span className=" text-gray-500">Trainee</span>
-              </div>
+        </div>
+
+        {/*user session*/}
+        <div className="flex rounded-[20px] items-end justify-center p-3 mt-auto">
+          <div className=" flex space-x-3 bg-white w-full h-[75px] rounded-[20px] p-4 shadow-light1">
+            <div className="rounded-full overflow-hidden">
+              <Image
+                src="/assets/images/profilepic.jpg"
+                alt="user"
+                width={40}
+                height={40}
+              ></Image>
+            </div>
+            <div className="flex flex-col">
+              <span>Nichapa Nopparat</span>
+              <span className=" text-gray-500">Trainee</span>
             </div>
           </div>
         </div>
       </aside>
     </>
-    // {!isOpen && (
-    //   <button
-    //     onClick={toggleSidebar}
-    //     className="fixed top-4 left-4 z-50 p-2 bg-white rounded-full shadow-md"
-    //   >
-    //     <svg
-    //       xmlns="http://www.w3.org/2000/svg"
-    //       fill="none"
-    //       viewBox="0 0 24 24"
-    //       strokeWidth={1.5}
-    //       stroke="currentColor"
-    //       className="w-6 h-6"
-    //     >
-    //       <path
-    //         strokeLinecap="round"
-    //         strokeLinejoin="round"
-    //         d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-    //       />
-    //     </svg>
-    //   </button>
-    // )}
   );
 }
