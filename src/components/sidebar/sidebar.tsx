@@ -281,7 +281,7 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
         {/*user session*/}
         <div className="flex rounded-[20px] items-end justify-center p-3 mt-auto flex-col">
           <div
-            className=" flex space-x-3 bg-white w-full h-[75px] rounded-[20px] p-4 shadow-light1 cursor-pointer hover:opacity-70"
+            className="w-full flex space-x-3 bg-white h-[75px] rounded-[20px] p-4 shadow-light1 cursor-pointer hover:opacity-70"
             onClick={() => setIsDropDownOpen(!isDropDownOpen)}
           >
             <div className="rounded-full overflow-hidden">
@@ -292,24 +292,52 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
                 height={40}
               ></Image>
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col text-sm font-normal">
               <span>{getName()}</span>
-              <span className="capitalize text-gray-500">{getRole()}</span>
+              <span
+                className={`font-light text-sm ${
+                  getRole() == "ceo" ? "uppercase" : "capitalize"
+                }`}
+              >
+                {getRole()}
+              </span>
             </div>
           </div>
 
-          {isDropDownOpen && (
-            <div className="w-full flex flex-col p-2">
-              <button
-                className="bg-gradient-to-tr from-deep-blue to-bright-red text-white h-10 rounded-[20px]"
-                onClick={() => {
-                  logout();
-                }}
+          {/* {isDropDownOpen && ( */}
+          <div
+            className={`w-full flex justify-center p-2 transform origin-top transition-all duration-300 ease-in-out ${
+              isDropDownOpen ? "opacity-100 h-16" : "opacity-0 h-0"
+            }`}
+          >
+            <button
+              className="bg-gradient-to-tr from-deep-blue to-bright-red text-white h-10 rounded-[20px] space-x-4 px-3 flex items-center justify-center"
+              onClick={() => {
+                logout();
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                className="size-5"
               >
-                Logout
-              </button>
-            </div>
-          )}
+                <path
+                  fillRule="evenodd"
+                  d="M3 4.25A2.25 2.25 0 0 1 5.25 2h5.5A2.25 2.25 0 0 1 13 4.25v2a.75.75 0 0 1-1.5 0v-2a.75.75 0 0 0-.75-.75h-5.5a.75.75 0 0 0-.75.75v11.5c0 .414.336.75.75.75h5.5a.75.75 0 0 0 .75-.75v-2a.75.75 0 0 1 1.5 0v2A2.25 2.25 0 0 1 10.75 18h-5.5A2.25 2.25 0 0 1 3 15.75V4.25Z"
+                  clipRule="evenodd"
+                />
+                <path
+                  fillRule="evenodd"
+                  d="M6 10a.75.75 0 0 1 .75-.75h9.546l-1.048-.943a.75.75 0 1 1 1.004-1.114l2.5 2.25a.75.75 0 0 1 0 1.114l-2.5 2.25a.75.75 0 1 1-1.004-1.114l1.048-.943H6.75A.75.75 0 0 1 6 10Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+
+              <span>Logout</span>
+            </button>
+          </div>
+          {/* )} */}
         </div>
       </aside>
     </>

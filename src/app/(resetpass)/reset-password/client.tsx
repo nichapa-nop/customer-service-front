@@ -82,7 +82,7 @@ export default function ResetPasswordClient({
               />
             </div>
             <div className="pt-6 pb-4 justify-center items-center text-center">
-              <span className="bg-gradient-to-tr from-deep-blue via-fade-purple to-bright-red inline-block text-transparent bg-clip-text font-medium">
+              <span className="bg-gradient-to-tr from-deep-blue via-fade-purple to-bright-red inline-block text-transparent bg-clip-text ">
                 Please provide your new password
               </span>
             </div>

@@ -140,10 +140,15 @@ export async function sendVerifyEmail({ uuid }: { uuid: string }) {
   }
 }
 
-export async function sendResetPasswordEmail({ uuid }: { uuid: string }) {
-  const response = await ApiManager<AccountResponse, never, never>({
+export async function sendResetPasswordEmail(data: any) {
+  const response = await ApiManager<
+    AccountResponse,
+    never,
+    AccountRequestBodyDTO
+  >({
     path: `/reset-password`,
-    method: "PUT",
+    method: "POST",
+    body: data,
     // next: {
     //   revalidateTags: ["get-account-list"],
     // },

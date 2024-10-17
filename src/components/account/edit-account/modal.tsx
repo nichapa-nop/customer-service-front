@@ -159,7 +159,7 @@ const EditAccountModal: React.FC<Props> = ({
 
   async function handleSendResetPasswordEmail() {
     const sendResetPassResponse = await sendResetPasswordEmail({
-      uuid: initialAccount.uuid,
+      email: initialAccount.email,
     });
     if (sendResetPassResponse.success) {
       setIsOpen(false);
