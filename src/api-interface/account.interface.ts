@@ -22,7 +22,7 @@ interface AccountRequestBodyDTO {
   email: string;
   status: "verified" | "not_verify" | "disabled" | "deleted";
   phoneNum: string;
-  roleId: number;
+  role: RoleResponse;
 }
 
 interface ResetPasswordTokenInformation {
@@ -34,4 +34,10 @@ interface ResetPasswordTokenInformation {
 interface ResetPasswordRequestBodyDTO {
   // token: string;
   password: string;
+}
+
+interface MyAccountInfo {
+  firstName: string;
+  lastName: string;
+  role: string;
 }

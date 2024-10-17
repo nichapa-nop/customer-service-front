@@ -1,8 +1,9 @@
 "use client";
 
+import { getMyInfo, logout } from "@/actions/account.action";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import { seenpic } from ""
 
 interface SidebarProps {
@@ -12,6 +13,35 @@ interface SidebarProps {
 
 export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
   const pathname = usePathname();
+  const [myInfo, setMyInfo] = useState<AccountResponse>();
+  const [isDropDownOpen, setIsDropDownOpen] = useState<boolean>(false);
+
+  async function fetchInfo() {
+    const accountInfo = await getMyInfo();
+    if (accountInfo.success && accountInfo.data) {
+      setMyInfo(accountInfo.data);
+    }
+  }
+
+  function getName() {
+    if (myInfo) {
+      return `${myInfo.firstName} ${myInfo.lastName}`;
+    } else {
+      return "-";
+    }
+  }
+
+  function getRole() {
+    if (myInfo) {
+      return myInfo.role.roleName;
+    } else {
+      return "-";
+    }
+  }
+
+  useEffect(() => {
+    fetchInfo().catch((e) => console.error(e));
+  }, []);
 
   return (
     <>
@@ -20,7 +50,7 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
         className={`top-0 absolute left-0 z-40 w-64 h-[100vh] transition-transform 
         ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } text-[14px] shadow-sm flex flex-col bg-light-gray2`}
+        } text-[14px] shadow-sm flex flex-col bg-light-gray2 pb-2`}
         aria-label="Sidebar"
       >
         <div className="flex-grow h-full px-3 py-4 dark:bg-gray-800">
@@ -249,8 +279,11 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
         </div>
 
         {/*user session*/}
-        <div className="flex rounded-[20px] items-end justify-center p-3 mt-auto">
-          <div className=" flex space-x-3 bg-white w-full h-[75px] rounded-[20px] p-4 shadow-light1">
+        <div className="flex rounded-[20px] items-end justify-center p-3 mt-auto flex-col">
+          <div
+            className=" flex space-x-3 bg-white w-full h-[75px] rounded-[20px] p-4 shadow-light1 cursor-pointer hover:opacity-70"
+            onClick={() => setIsDropDownOpen(!isDropDownOpen)}
+          >
             <div className="rounded-full overflow-hidden">
               <Image
                 src="/assets/images/profilepic.jpg"
@@ -260,10 +293,23 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
               ></Image>
             </div>
             <div className="flex flex-col">
-              <span>Nichapa Nopparat</span>
-              <span className=" text-gray-500">Trainee</span>
+              <span>{getName()}</span>
+              <span className="capitalize text-gray-500">{getRole()}</span>
             </div>
           </div>
+
+          {isDropDownOpen && (
+            <div className="w-full flex flex-col p-2">
+              <button
+                className="bg-gradient-to-tr from-deep-blue to-bright-red text-white h-10 rounded-[20px]"
+                onClick={() => {
+                  logout();
+                }}
+              >
+                Logout
+              </button>
+            </div>
+          )}
         </div>
       </aside>
     </>

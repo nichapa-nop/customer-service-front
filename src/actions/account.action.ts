@@ -1,6 +1,8 @@
 "use server";
 
 import { ApiManager } from "@/api";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export async function getAccountList({
   page = 1,
@@ -166,20 +168,24 @@ export async function resetPassword(
   token: string,
   data: ResetPasswordRequestBodyDTO
 ) {
-  let response = await ApiManager<
-    AccountResponse,
-    never,
-    ResetPasswordRequestBodyDTO
-  >({
-    path: `/v1/reset-password${token}`,
+  return ApiManager<AccountResponse, never, ResetPasswordRequestBodyDTO>({
+    path: `/reset-password/${token}`,
     method: "PUT",
     body: data,
   });
-  if (response.success) {
-    return {
-      success: true,
-    };
-  } else {
-    throw new Error("Failed to fetch data");
-  }
+}
+
+export async function getMyInfo() {
+  return ApiManager<AccountResponse, never, never>({
+    path: `/account-info`,
+    method: "GET",
+    next: {
+      tags: ["my-info"],
+    },
+  });
+}
+
+export async function logout() {
+  cookies().delete("accessToken");
+  return redirect("/login");
 }

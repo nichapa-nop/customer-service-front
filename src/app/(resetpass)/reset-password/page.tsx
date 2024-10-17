@@ -2,6 +2,7 @@
 
 import { getResetPasswordInformation } from "@/actions/account.action";
 import ResetPasswordClient from "./client";
+import { redirect } from "next/navigation";
 
 type Props = {
   searchParams: {
@@ -17,10 +18,10 @@ export default async function ResetPasswordPage({
   }
   const getTokenInformation = await getResetPasswordInformation(token);
   if (!(getTokenInformation.success && getTokenInformation.data?.isValid)) {
-    throw new Error("Token is invalid");
+    redirect("/login");
   }
   if (getTokenInformation.data.isExpired) {
-    throw new Error("Token has been expired");
+    redirect("/login");
   }
   return (
     <ResetPasswordClient token={token} email={getTokenInformation.data.email} />
