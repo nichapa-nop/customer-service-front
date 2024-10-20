@@ -9,6 +9,9 @@ import DeleteTicketSuccess from "@/components/ticket/delete-ticket-success/modal
 import EditTicketSuccess from "@/components/ticket/edit-ticket-success/modal";
 import CloseTicketSuccessModal from "@/components/ticket/close-ticket-success/modal";
 import ReOpenTicketSuccess from "@/components/ticket/reopen-ticket-success/modal";
+import ExcelJS from "exceljs";
+import dayjs from "dayjs";
+import { saveAs } from "file-saver";
 
 type Props = {};
 
@@ -30,7 +33,11 @@ export default function TicketManagementClient({
   };
 
   const [tickets, setTickets] = useState<TicketResponse[]>(initialTickets);
-  const [checkedRows, setCheckedRows] = useState<Record<string, boolean>>({});
+  const [checkedRows, setCheckedRows] = useState<Record<string, boolean>>(
+    tickets.reduce((checked, next) => {
+      return { ...checked, [next.ticketId]: false };
+    }, {} as Record<string, boolean>)
+  );
   const [isDeleteTicketSuccessModalOpen, setIsDeleteTicketSuccessModalOpen] =
     useState<boolean>(false);
   const [latestDeleteTicket, setLatestDeleteTicket] =
@@ -45,6 +52,60 @@ export default function TicketManagementClient({
   const [checkAllRow, setCheckAllRow] = useState<boolean>(false);
 
   // console.log(checkAllRow);
+
+  async function handleExportExcel() {
+    const workbook = new ExcelJS.Workbook();
+    const newSheet = workbook.addWorksheet("tickets");
+    newSheet.columns = [
+      {
+        header: "Ticket ID",
+        key: "ticketId",
+      },
+      {
+        header: "Topic",
+        key: "topic",
+      },
+      {
+        header: "Platform",
+        key: "platform",
+      },
+      {
+        header: "Incident Type",
+        key: "incidentType",
+      },
+      {
+        header: "BI",
+        key: "businessImpact",
+      },
+      {
+        header: "Assigned To",
+        key: "assignTo",
+      },
+      {
+        header: "Status",
+        key: "status",
+      },
+    ];
+    newSheet.addRows(
+      tickets.map((ticket) => ({
+        ...ticket,
+        assignTo: ticket.assignTo?.firstName,
+      }))
+    );
+    const buffer = await workbook.xlsx.writeBuffer();
+
+    const blob = new Blob([buffer], { type: "text/xlsx;charset=utf-8;" });
+    saveAs(blob, `Export_Tickets_${dayjs().format("DD_MM_YYYY")}.xlsx`);
+  }
+
+  useEffect(() => {
+    setCheckedRows((prev) => ({
+      ...prev,
+      ...Object.fromEntries(
+        tickets.map((ticket) => [ticket.ticketId, checkAllRow])
+      ),
+    }));
+  }, [checkAllRow]);
 
   async function fetchLastestTickets(page: number = 1, keyword?: string) {
     const response = await getTicketList({ page, keyword });
@@ -108,7 +169,12 @@ export default function TicketManagementClient({
                       }}
                     ></input>
                   </label>
-                  <button className="flex flex-row items-center justify-center px-10 bg-white h-full rounded-[20px] shadow-light2 space-x-2">
+                  <button
+                    className="flex flex-row items-center justify-center px-10 bg-white h-full rounded-[20px] shadow-light2 space-x-2"
+                    onClick={() => {
+                      handleExportExcel();
+                    }}
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -154,7 +220,11 @@ export default function TicketManagementClient({
                       Export
                     </span>
                   </button>
-                  <button className="flex flex-row items-center justify-center px-10 bg-white h-full rounded-[20px] shadow-light2 space-x-2">
+                  <div
+                    className="dropdown dropdown-bottom flex flex-row items-center justify-center px-10 bg-white h-full rounded-[20px] shadow-light2 space-x-2"
+                    tabIndex={0}
+                    role="button"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -174,17 +244,14 @@ export default function TicketManagementClient({
                             offset="0%"
                             style={{ stopColor: "#1f1a4f", stopOpacity: 1 }}
                           />
-                          {/* deep-blue */}
                           <stop
                             offset="50%"
                             style={{ stopColor: "#82303d", stopOpacity: 1 }}
                           />
-                          {/* fade-purple */}
                           <stop
                             offset="100%"
                             style={{ stopColor: "#ec4723", stopOpacity: 1 }}
                           />
-                          {/* bright-red */}
                         </linearGradient>
                       </defs>
                       <path
@@ -194,10 +261,61 @@ export default function TicketManagementClient({
                         stroke="url(#gradient1)"
                       />
                     </svg>
-                    <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
+                    <div className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
                       Filter
-                    </span>
-                  </button>
+                    </div>
+                    <ul
+                      tabIndex={0}
+                      className="menu dropdown-content bg-base-100 rounded-box z-[1] mt-4 w-96 p-2 drop-shadow-lg grid grid-cols-2 gap-2"
+                    >
+                      <li className="menu-title col-span-2">
+                        <span className="text-bright-red">Platform</span>
+                      </li>
+                      <li>
+                        <a>HR</a>
+                      </li>
+                      <li>
+                        <a>Item 2</a>
+                      </li>
+                      <li className="menu-title col-span-2">
+                        <span className="text-bright-red">Insident Type</span>
+                      </li>
+                      <li>
+                        <a>Item 3</a>
+                      </li>
+                      <li>
+                        <a>Item 4</a>
+                      </li>
+                      <li>
+                        <a>Item 5</a>
+                      </li>
+                      <li className="menu-title col-span-2">
+                        <span className="text-bright-red">Business Impact</span>
+                      </li>
+                      <li>
+                        <a>Item 3</a>
+                      </li>
+                      <li>
+                        <a>Item 4</a>
+                      </li>
+                      <li>
+                        <a>Item 5</a>
+                      </li>
+                      <li className="menu-title col-span-2">
+                        <span className="text-bright-red">Status</span>
+                      </li>
+                      <li>
+                        <a>Item 3</a>
+                      </li>
+                      <li>
+                        <a>Item 4</a>
+                      </li>
+                      <li>
+                        <a>Item 5</a>
+                      </li>
+                    </ul>
+                  </div>
+
                   <button
                     type="button"
                     className="flex flex-row items-center justify-center px-6 bg-gradient-to-tr from-deep-blue to-bright-red text-white h-full bg-white rounded-[20px] shadow-light2 space-x-2"
@@ -237,11 +355,11 @@ export default function TicketManagementClient({
                   <col className="w-[7%]" />
                   <col className="w-[10%]" />
                   <col className="w-[17%]" />
-                  <col className="w-[11%]" />
-                  <col className="w-[15%]" />
+                  <col className="w-[10%]" />
+                  <col className="w-[13%]" />
                   <col className="w-[3%]" />
                   <col className="w-[15%]" />
-                  <col className="w-[12%]" />
+                  <col className="w-[15%]" />
                   <col className="w-[10%]" />
                 </colgroup>
                 <thead>
@@ -255,7 +373,7 @@ export default function TicketManagementClient({
                         type="checkbox"
                         className="appearance-none rounded-md cursor-pointer checked:bg-gradient-to-tr from-deep-blue to-bright-red w-[27px] h-[27px] border-light-gray1 border-[2px] relative
                             checked:after:content-[''] checked:after:absolute checked:after:left-[8px] checked:after:top-[3px] checked:after:w-[7px] checked:after:h-[14px] checked:after:border-white checked:after:border-r-[2px] checked:after:border-b-[2px] checked:after:rotate-45"
-                        onClick={() => setCheckAllRow(true)}
+                        onChange={() => setCheckAllRow(!checkAllRow)}
                       ></input>
                     </th>
                     <th>Ticket ID</th>

@@ -15,6 +15,7 @@ interface TicketRowProps {
   setIsEditSuccessModalOpen: Dispatch<SetStateAction<boolean>>;
   setIsCloseTicketSuccessModalOpen: Dispatch<SetStateAction<boolean>>;
   setTargetCloseTicket: Dispatch<SetStateAction<TicketResponse | undefined>>;
+
   //   openModal: (modalType: string) => void;
   //   closeModal: () => void;
   //   isModalOpen: (modalType: string) => boolean;
@@ -90,7 +91,7 @@ const TicketRow: React.FC<TicketRowProps> = ({
         {ticket.topic}
       </td>
       <td
-        className="w-[11%] truncate"
+        className="w-[10%] truncate uppercase"
         onClick={() => {
           setIsTicketDetailModalOpen(true);
         }}
@@ -98,7 +99,7 @@ const TicketRow: React.FC<TicketRowProps> = ({
         {ticket.platform}
       </td>
       <td
-        className="w-[15%] truncate"
+        className="w-[13%] truncate"
         onClick={() => {
           setIsTicketDetailModalOpen(true);
         }}
@@ -133,7 +134,7 @@ const TicketRow: React.FC<TicketRowProps> = ({
         </div>
       </td>
       <td
-        className="w-[12%]"
+        className="w-[15%]"
         onClick={() => {
           setIsTicketDetailModalOpen(true);
         }}

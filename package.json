@@ -17,6 +17,9 @@
     "@nextui-org/system": "^2.2.2",
     "@nextui-org/theme": "^2.2.6",
     "classnames": "^2.5.1",
+    "dayjs": "^1.11.13",
+    "exceljs": "^4.4.0",
+    "file-saver": "^2.0.5",
     "framer-motion": "^11.3.28",
     "next": "14.2.4",
     "next-auth": "^4.24.8",
@@ -28,6 +31,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/file-saver": "^2.0.7",
     "@types/node": "^20",
     "@types/react": "18.3.3",
     "@types/react-dom": "^18",

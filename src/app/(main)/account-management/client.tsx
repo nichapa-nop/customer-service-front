@@ -90,7 +90,11 @@ export default function AccountManagementClient({
                       }}
                     ></input>
                   </label>
-                  <button className="flex flex-row items-center justify-center px-10 bg-white h-full rounded-[20px] shadow-light2 space-x-2">
+                  <div
+                    className="dropdown dropdown-bottom flex flex-row items-center justify-center px-10 bg-white h-full rounded-[20px] shadow-light2 space-x-2"
+                    tabIndex={0}
+                    role="button"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -110,17 +114,14 @@ export default function AccountManagementClient({
                             offset="0%"
                             style={{ stopColor: "#1f1a4f", stopOpacity: 1 }}
                           />
-                          {/* deep-blue */}
                           <stop
                             offset="50%"
                             style={{ stopColor: "#82303d", stopOpacity: 1 }}
                           />
-                          {/* fade-purple */}
                           <stop
                             offset="100%"
                             style={{ stopColor: "#ec4723", stopOpacity: 1 }}
                           />
-                          {/* bright-red */}
                         </linearGradient>
                       </defs>
                       <path
@@ -130,10 +131,51 @@ export default function AccountManagementClient({
                         stroke="url(#gradient1)"
                       />
                     </svg>
-                    <span className="bg-gradient-to-tr from-deep-blue via-fade-purple to-bright-red inline-block text-transparent bg-clip-text">
+                    <div className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
                       Filter
-                    </span>
-                  </button>
+                    </div>
+                    <ul
+                      tabIndex={0}
+                      className="menu dropdown-content bg-base-100 rounded-box z-[1] mt-4 w-96 p-2 drop-shadow-lg grid grid-cols-2 gap-2"
+                    >
+                      <li className="menu-title col-span-2">
+                        <span className="text-bright-red">Role</span>
+                      </li>
+                      <li>
+                        <a>CEO</a>
+                      </li>
+                      <li>
+                        <a>Manager</a>
+                      </li>
+
+                      <li>
+                        <a>Employee</a>
+                      </li>
+                      <li>
+                        <a>Trainee</a>
+                      </li>
+
+                      <li className="menu-title col-span-2">
+                        <span className="text-bright-red">Status</span>
+                      </li>
+                      <li>
+                        <a>Verify</a>
+                      </li>
+                      <li>
+                        <a>Not Verify</a>
+                      </li>
+                      <li>
+                        <a>Disable</a>
+                      </li>
+                      <li>
+                        <a>Enable</a>
+                      </li>
+                      <li>
+                        <a>Deleted</a>
+                      </li>
+                    </ul>
+                  </div>
+
                   <button
                     type="button"
                     className="flex flex-row items-center justify-center space-x-2 bg-gradient-to-tr from-deep-blue to-bright-red text-white h-full bg-white rounded-[20px] shadow-light2"

@@ -50,7 +50,7 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
         className={`top-0 absolute left-0 z-40 w-64 h-[100vh] transition-transform 
         ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } text-[14px] shadow-sm flex flex-col bg-light-gray2 pb-2`}
+        } text-[12px] drop-shadow-2xl flex flex-col bg-light-gray2`}
         aria-label="Sidebar"
       >
         <div className="flex-grow h-full px-3 py-4 dark:bg-gray-800">
@@ -91,7 +91,7 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
               <a
                 href="/ticket-management"
                 //   className="flex items-center p-2 text-gray-900  dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group h-14 rounded-[20px] shadow-light1 "
-                className={`flex items-center p-4 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group h-14 rounded-[20px] shadow-light1 ${
+                className={`flex items-center pl-5 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group h-14 rounded-[20px] shadow-light1 ${
                   pathname === "/ticket-management"
                     ? "bg-gradient-to-tr from-deep-blue to-bright-red bg-clip-text text-transparent "
                     : ""
@@ -139,7 +139,7 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
                     }
                   />
                 </svg>
-                <span className="flex-1 ms-3 whitespace-nowrap">
+                <span className="pl-5 whitespace-nowrap">
                   Ticket Management
                 </span>
               </a>
@@ -147,7 +147,7 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
             <li>
               <a
                 href="/account-management"
-                className={`flex items-center p-4 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group h-14 rounded-[20px] shadow-light1 ${
+                className={`flex items-center pl-5 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group h-14 rounded-[20px] shadow-light1 ${
                   pathname === "/account-management"
                     ? "bg-gradient-to-tr from-deep-blue to-bright-red bg-clip-text text-transparent "
                     : ""
@@ -196,7 +196,7 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
                   />
                 </svg>
 
-                <span className="flex-1 ms-3 whitespace-nowrap">
+                <span className="pl-5 whitespace-nowrap">
                   Account Management
                 </span>
               </a>
@@ -204,7 +204,7 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
             <li>
               <a
                 href="/role-management"
-                className={`flex items-center p-4 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group h-14 rounded-[20px] shadow-light1 ${
+                className={`flex items-center pl-5 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group h-14 rounded-[20px] shadow-light1 ${
                   pathname === "/role-management"
                     ? "bg-gradient-to-tr from-deep-blue to-bright-red bg-clip-text text-transparent "
                     : ""
@@ -270,9 +270,7 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
                   />
                 </svg>
 
-                <span className="flex-1 ms-3 whitespace-nowrap">
-                  Role Management
-                </span>
+                <span className="pl-5 whitespace-nowrap">Role Management</span>
               </a>
             </li>
           </ul>
@@ -284,7 +282,7 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
             className="w-full flex space-x-3 bg-white h-[75px] rounded-[20px] p-4 shadow-light1 cursor-pointer hover:opacity-70"
             onClick={() => setIsDropDownOpen(!isDropDownOpen)}
           >
-            <div className="rounded-full overflow-hidden">
+            <div className="rounded-full overflow-hidden h-10 w-10">
               <Image
                 src="/assets/images/profilepic.jpg"
                 alt="user"
@@ -292,7 +290,7 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
                 height={40}
               ></Image>
             </div>
-            <div className="flex flex-col text-sm font-normal">
+            <div className="flex flex-col text-sm font-normal pl-1">
               <span>{getName()}</span>
               <span
                 className={`font-light text-sm ${
@@ -306,7 +304,7 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
 
           {/* {isDropDownOpen && ( */}
           <div
-            className={`w-full flex justify-center p-2 transform origin-top transition-all duration-300 ease-in-out ${
+            className={`w-full flex justify-center pt-4 transform origin-top transition-all duration-300 ease-in-out ${
               isDropDownOpen ? "opacity-100 h-16" : "opacity-0 h-0"
             }`}
           >
