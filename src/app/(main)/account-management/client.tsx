@@ -4,8 +4,14 @@ import CreateAccountModal from "@/components/account/create-account/modal";
 import DeleteAccountSuccess from "@/components/account/delete-account-success/modal";
 import EditAccountSuccess from "@/components/account/edit-account-success/modal";
 import AccountRow from "@/components/accountrow/accountrow";
+import classNames from "classnames";
 
 import React, { useEffect, useRef, useState } from "react";
+
+export interface AccountFilterers {
+  roleName?: string;
+  status?: AccountStatus;
+}
 
 export default function AccountManagementClient({
   accounts: initialAccounts,
@@ -28,9 +34,14 @@ export default function AccountManagementClient({
     useState<boolean>(false);
   const [isEditAccountSuccessModalOpen, setIsEditAccountSuccessModalOpen] =
     useState<boolean>(false);
+  const [filterers, setFilterers] = useState<AccountFilterers>({});
 
   async function fetchLastestAccounts(page: number = 1, keyword?: string) {
-    const response = await getAccountList({ page, keyword });
+    const response = await getAccountList({
+      page,
+      keyword,
+      filters: filterers,
+    });
     setAccounts(response.data);
     setPageCount(
       Math.ceil(
@@ -52,6 +63,11 @@ export default function AccountManagementClient({
       fetchLastestAccounts(page);
     }
   }, [page]);
+
+  useEffect(() => {
+    fetchLastestAccounts(1, searchKeyword);
+    setPage(1);
+  }, [filterers]);
 
   useEffect(() => {
     setAccounts(initialAccounts);
@@ -141,19 +157,32 @@ export default function AccountManagementClient({
                       <li className="menu-title col-span-2">
                         <span className="text-bright-red">Role</span>
                       </li>
-                      <li>
-                        <a>CEO</a>
-                      </li>
-                      <li>
-                        <a>Manager</a>
-                      </li>
-
-                      <li>
-                        <a>Employee</a>
-                      </li>
-                      <li>
-                        <a>Trainee</a>
-                      </li>
+                      {initialRoles.map((role) => (
+                        <li
+                          className={classNames("capitalize", {
+                            "text-bright-red border-[1px] border-bright-red rounded-lg":
+                              filterers?.roleName === role.roleName,
+                          })}
+                          onClick={(e) => {
+                            if (filterers?.roleName === role.roleName) {
+                              setFilterers((prev) => ({
+                                ...prev,
+                                roleName: undefined,
+                              }));
+                            } else {
+                              setFilterers((prev) => ({
+                                ...prev,
+                                roleName: role.roleName,
+                              }));
+                            }
+                          }}
+                          key={role.roleName}
+                        >
+                          <a>
+                            {role.roleName === "ceo" ? "CEO" : role.roleName}
+                          </a>
+                        </li>
+                      ))}
 
                       <li className="menu-title col-span-2">
                         <span className="text-bright-red">Status</span>

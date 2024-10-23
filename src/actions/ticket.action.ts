@@ -1,6 +1,7 @@
 "use server";
 
 import { ApiManager } from "@/api";
+import { Filterers } from "@/app/(main)/ticket-management/client";
 
 export async function showTicketDetail({ ticketId }: { ticketId: string }) {
   const response = await ApiManager<TicketResponse, never, never>({
@@ -44,14 +45,25 @@ export async function getTicketList({
   page = 1,
   itemsPerPage = 6,
   keyword,
-}: { page?: number; itemsPerPage?: number; keyword?: string } = {}) {
+  filters = {},
+}: {
+  page?: number;
+  itemsPerPage?: number;
+  keyword?: string;
+  filters?: Filterers;
+} = {}) {
   const response = await ApiManager<{
     tickets: TicketResponse[];
     pagination: PaginationResponse;
   }>({
     path: "/ticket",
     method: "GET",
-    query: { page, itemsPerPage, keyword },
+    query: {
+      page,
+      itemsPerPage,
+      keyword,
+      ...filters,
+    },
     next: {
       tags: ["get-ticket-list"],
     },
@@ -64,6 +76,7 @@ export async function getTicketList({
       pagination: response.data.pagination,
     };
   } else {
+    console.log(response.status, response.data);
     throw new Error("Failed to fetch data");
   }
 }

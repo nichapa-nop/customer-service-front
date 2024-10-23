@@ -12,8 +12,16 @@ import ReOpenTicketSuccess from "@/components/ticket/reopen-ticket-success/modal
 import ExcelJS from "exceljs";
 import dayjs from "dayjs";
 import { saveAs } from "file-saver";
+import classNames from "classnames";
 
 type Props = {};
+
+export interface Filterers {
+  platform?: Platform;
+  incidentType?: IncidentType;
+  businessImpact?: BusinessImpact;
+  status?: TicketStatus;
+}
 
 export default function TicketManagementClient({
   tickets: initialTickets,
@@ -50,6 +58,7 @@ export default function TicketManagementClient({
     useState<boolean>(false);
   const [targetCloseTicket, setTargetCloseTicket] = useState<TicketResponse>();
   const [checkAllRow, setCheckAllRow] = useState<boolean>(false);
+  const [filterers, setFilterers] = useState<Filterers>({});
 
   // console.log(checkAllRow);
 
@@ -108,7 +117,11 @@ export default function TicketManagementClient({
   }, [checkAllRow]);
 
   async function fetchLastestTickets(page: number = 1, keyword?: string) {
-    const response = await getTicketList({ page, keyword });
+    const response = await getTicketList({
+      page,
+      keyword,
+      filters: filterers,
+    });
     setTickets(response.data);
     setPageCount(
       Math.ceil(
@@ -124,6 +137,11 @@ export default function TicketManagementClient({
       fetchLastestTickets(1, searchKeyword);
     }, 1000);
   }, [searchKeyword]);
+
+  useEffect(() => {
+    fetchLastestTickets(1, searchKeyword);
+    setPage(1);
+  }, [filterers]);
 
   // console.log(page);
   useEffect(() => {
@@ -271,47 +289,308 @@ export default function TicketManagementClient({
                       <li className="menu-title col-span-2">
                         <span className="text-bright-red">Platform</span>
                       </li>
-                      <li>
+                      <li
+                        className={classNames({
+                          "text-bright-red border-[1px] border-bright-red rounded-lg":
+                            filterers?.platform === "hr",
+                        })}
+                        onClick={(e) => {
+                          if (filterers?.platform === "hr") {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              platform: undefined,
+                            }));
+                          } else {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              platform: "hr",
+                            }));
+                          }
+                        }}
+                      >
                         <a>HR</a>
                       </li>
-                      <li>
-                        <a>Item 2</a>
+                      <li
+                        className={classNames({
+                          "text-bright-red border-[1px] border-bright-red rounded-lg":
+                            filterers?.platform === "cdd",
+                        })}
+                        onClick={(e) => {
+                          if (filterers?.platform === "cdd") {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              platform: undefined,
+                            }));
+                          } else {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              platform: "cdd",
+                            }));
+                          }
+                        }}
+                      >
+                        <a>CDD</a>
                       </li>
                       <li className="menu-title col-span-2">
                         <span className="text-bright-red">Insident Type</span>
                       </li>
-                      <li>
-                        <a>Item 3</a>
+                      <li
+                        className={classNames({
+                          "text-bright-red border-[1px] border-bright-red rounded-lg":
+                            filterers?.incidentType === "issue",
+                        })}
+                        onClick={(e) => {
+                          if (filterers?.incidentType === "issue") {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              incidentType: undefined,
+                            }));
+                          } else {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              incidentType: "issue",
+                            }));
+                          }
+                        }}
+                      >
+                        <a>Issue</a>
                       </li>
-                      <li>
-                        <a>Item 4</a>
+                      <li
+                        className={classNames({
+                          "text-bright-red border-[1px] border-bright-red rounded-lg":
+                            filterers?.incidentType === "consult",
+                        })}
+                        onClick={(e) => {
+                          if (filterers?.incidentType === "consult") {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              incidentType: undefined,
+                            }));
+                          } else {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              incidentType: "consult",
+                            }));
+                          }
+                        }}
+                      >
+                        <a>Consult</a>
                       </li>
-                      <li>
-                        <a>Item 5</a>
+                      <li
+                        className={classNames({
+                          "text-bright-red border-[1px] border-bright-red rounded-lg":
+                            filterers?.incidentType === "other",
+                        })}
+                        onClick={(e) => {
+                          if (filterers?.incidentType === "other") {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              incidentType: undefined,
+                            }));
+                          } else {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              incidentType: "other",
+                            }));
+                          }
+                        }}
+                      >
+                        <a>Other</a>
                       </li>
                       <li className="menu-title col-span-2">
                         <span className="text-bright-red">Business Impact</span>
                       </li>
-                      <li>
-                        <a>Item 3</a>
+                      <li
+                        className={classNames({
+                          "text-bright-red border-[1px] border-bright-red rounded-lg":
+                            filterers?.businessImpact === "s1",
+                        })}
+                        onClick={(e) => {
+                          if (filterers?.businessImpact === "s1") {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              businessImpact: undefined,
+                            }));
+                          } else {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              businessImpact: "s1",
+                            }));
+                          }
+                        }}
+                      >
+                        <a>S1</a>
                       </li>
-                      <li>
-                        <a>Item 4</a>
+                      <li
+                        className={classNames({
+                          "text-bright-red border-[1px] border-bright-red rounded-lg":
+                            filterers?.businessImpact === "s2",
+                        })}
+                        onClick={(e) => {
+                          if (filterers?.businessImpact === "s2") {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              businessImpact: undefined,
+                            }));
+                          } else {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              businessImpact: "s2",
+                            }));
+                          }
+                        }}
+                      >
+                        <a>S2</a>
                       </li>
-                      <li>
-                        <a>Item 5</a>
+                      <li
+                        className={classNames({
+                          "text-bright-red border-[1px] border-bright-red rounded-lg":
+                            filterers?.businessImpact === "s3",
+                        })}
+                        onClick={(e) => {
+                          if (filterers?.businessImpact === "s3") {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              businessImpact: undefined,
+                            }));
+                          } else {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              businessImpact: "s3",
+                            }));
+                          }
+                        }}
+                      >
+                        <a>S3</a>
+                      </li>
+                      <li
+                        className={classNames({
+                          "text-bright-red border-[1px] border-bright-red rounded-lg":
+                            filterers?.businessImpact === "s4",
+                        })}
+                        onClick={(e) => {
+                          if (filterers?.businessImpact === "s4") {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              businessImpact: undefined,
+                            }));
+                          } else {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              businessImpact: "s4",
+                            }));
+                          }
+                        }}
+                      >
+                        <a>S4</a>
+                      </li>
+                      <li
+                        className={classNames({
+                          "text-bright-red border-[1px] border-bright-red rounded-lg":
+                            filterers?.businessImpact === "no",
+                        })}
+                        onClick={(e) => {
+                          if (filterers?.businessImpact === "no") {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              businessImpact: undefined,
+                            }));
+                          } else {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              businessImpact: "no",
+                            }));
+                          }
+                        }}
+                      >
+                        <a>No</a>
                       </li>
                       <li className="menu-title col-span-2">
                         <span className="text-bright-red">Status</span>
                       </li>
-                      <li>
-                        <a>Item 3</a>
+                      <li
+                        className={classNames({
+                          "text-bright-red border-[1px] border-bright-red rounded-lg":
+                            filterers?.status === "open",
+                        })}
+                        onClick={(e) => {
+                          if (filterers?.status === "open") {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              status: undefined,
+                            }));
+                          } else {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              status: "open",
+                            }));
+                          }
+                        }}
+                      >
+                        <a>Open</a>
                       </li>
-                      <li>
-                        <a>Item 4</a>
+                      <li
+                        className={classNames({
+                          "text-bright-red border-[1px] border-bright-red rounded-lg":
+                            filterers?.status === "in progress",
+                        })}
+                        onClick={(e) => {
+                          if (filterers?.status === "in progress") {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              status: undefined,
+                            }));
+                          } else {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              status: "in progress",
+                            }));
+                          }
+                        }}
+                      >
+                        <a>In Progress</a>
                       </li>
-                      <li>
-                        <a>Item 5</a>
+                      <li
+                        className={classNames({
+                          "text-bright-red border-[1px] border-bright-red rounded-lg":
+                            filterers?.status === "closed",
+                        })}
+                        onClick={(e) => {
+                          if (filterers?.status === "closed") {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              status: undefined,
+                            }));
+                          } else {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              status: "closed",
+                            }));
+                          }
+                        }}
+                      >
+                        <a>Closed</a>
+                      </li>
+                      <li
+                        className={classNames({
+                          "text-bright-red border-[1px] border-bright-red rounded-lg":
+                            filterers?.status === "deleted",
+                        })}
+                        onClick={(e) => {
+                          if (filterers?.status === "deleted") {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              status: undefined,
+                            }));
+                          } else {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              status: "deleted",
+                            }));
+                          }
+                        }}
+                      >
+                        <a>Deleted</a>
                       </li>
                     </ul>
                   </div>

@@ -1,6 +1,7 @@
 "use server";
 
 import { ApiManager } from "@/api";
+import { AccountFilterers } from "@/app/(main)/account-management/client";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -8,14 +9,20 @@ export async function getAccountList({
   page = 1,
   itemsPerPage = 6,
   keyword,
-}: { page?: number; itemsPerPage?: number; keyword?: string } = {}) {
+  filters = {},
+}: {
+  page?: number;
+  itemsPerPage?: number;
+  keyword?: string;
+  filters?: AccountFilterers;
+} = {}) {
   const response = await ApiManager<{
     accounts: AccountResponse[];
     pagination: PaginationResponse;
   }>({
     path: "/account",
     method: "GET",
-    query: { page, itemsPerPage, keyword },
+    query: { page, itemsPerPage, keyword, ...filters },
     next: {
       tags: ["get-account-list"],
     },

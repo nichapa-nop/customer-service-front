@@ -1,3 +1,5 @@
+type AccountStatus = "verified" | "not_verify" | "disabled" | "deleted";
+
 interface AccountResponse {
   uuid: string;
   firstName: string;
@@ -5,7 +7,7 @@ interface AccountResponse {
   firstNameTh: string;
   lastNameTh: string;
   email: string;
-  status: "verified" | "not_verify" | "disabled" | "deleted";
+  status: AccountStatus;
   phoneNum: string;
   role: RoleResponse;
 }
@@ -20,7 +22,7 @@ interface AccountRequestBodyDTO {
   firstNameTh: string;
   lastNameTh: string;
   email: string;
-  status: "verified" | "not_verify" | "disabled" | "deleted";
+  status: AccountStatus;
   phoneNum: string;
   role: RoleResponse;
 }
