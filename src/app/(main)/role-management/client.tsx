@@ -66,7 +66,7 @@ export default function RoleManagementClient({
             <div className=" pt-6 px-6 p-2">
               <div className=" flex flex-col h-full">
                 <div className="grid grid-cols-7 space-x-4 h-[44px]  justify-center items-center mb-2 text-[14px] ">
-                  <label className="flex items-center col-span-5 h-full rounded-[20px] px-4 space-x-3 shadow-light2">
+                  <label className="flex items-center col-span-6 h-full rounded-[20px] px-4 space-x-3 shadow-light2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -91,7 +91,7 @@ export default function RoleManagementClient({
                       }}
                     ></input>
                   </label>
-                  <div
+                  {/* <div
                     className="dropdown dropdown-bottom flex flex-row items-center justify-center px-10 bg-white h-full rounded-[20px] shadow-light2 space-x-2"
                     tabIndex={0}
                     role="button"
@@ -158,7 +158,7 @@ export default function RoleManagementClient({
                         <a>Item 4</a>
                       </li>
                     </ul>
-                  </div>
+                  </div> */}
 
                   <button
                     type="button"
