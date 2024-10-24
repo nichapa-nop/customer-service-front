@@ -50,8 +50,8 @@ const CreateTicketModal: React.FC<Props> = ({
     try {
       const result = await createTicket(data);
       if (result.success) {
-        console.log("Ticket created successfully:", result.data);
-        console.log(result.data.ticketId);
+        //console.log("Ticket created successfully:", result.data);
+        //console.log(result.data.ticketId);
 
         setCreatedTicketId(result.data.ticketId); // Save ticket ID
         openModal(); // Open the success modal
@@ -86,7 +86,7 @@ const CreateTicketModal: React.FC<Props> = ({
     },
   });
 
-  console.log(watch());
+  //console.log(watch());
 
   return (
     <>

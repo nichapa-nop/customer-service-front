@@ -60,7 +60,7 @@ export default function TicketManagementClient({
   const [checkAllRow, setCheckAllRow] = useState<boolean>(false);
   const [filterers, setFilterers] = useState<Filterers>({});
 
-  // console.log(checkAllRow);
+  // //console.log(checkAllRow);
 
   async function handleExportExcel() {
     const workbook = new ExcelJS.Workbook();
@@ -149,7 +149,7 @@ export default function TicketManagementClient({
     setPage(1);
   }, [filterers]);
 
-  // console.log(page);
+  // //console.log(page);
   useEffect(() => {
     if (isPageChanged) {
       fetchLastestTickets(page);

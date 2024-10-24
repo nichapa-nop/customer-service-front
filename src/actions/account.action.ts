@@ -74,7 +74,7 @@ export async function editAccount({ uuid }: { uuid: string }, data: any) {
       success: true,
     };
   } else {
-    console.log(response.data);
+    //console.log(response.data);
     throw new Error("Failed to fetch data");
   }
 }

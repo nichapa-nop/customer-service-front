@@ -21,7 +21,7 @@ export default function ticketManagement() {
   //   const [type, setType] = useState<string>();
 
   function logType() {
-    console.log(type);
+    //console.log(type);
   }
 
   return (

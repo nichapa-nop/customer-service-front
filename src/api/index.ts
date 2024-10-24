@@ -57,7 +57,7 @@ export async function ApiManager<
 
   const success = response.ok;
   const responseData = await response.json();
-  // console.log(responseData);
+  // //console.log(responseData);
 
   if (next?.revalidateTags?.length) {
     next.revalidateTags.forEach((tag) => {

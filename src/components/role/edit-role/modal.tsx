@@ -72,7 +72,7 @@ const EditRoleModal: React.FC<Props> = ({
     },
   });
 
-  console.log(watch());
+  //console.log(watch());
 
   return (
     <>

@@ -18,7 +18,7 @@ export async function showTicketDetail({ ticketId }: { ticketId: string }) {
 }
 
 export async function createTicket(data: any) {
-  console.log(data);
+  //console.log(data);
   const response = await ApiManager<
     TicketResponse,
     never,
@@ -68,7 +68,7 @@ export async function getTicketList({
       tags: ["get-ticket-list"],
     },
   });
-  // console.log(keyword);
+  // //console.log(keyword);
   if (response.success && response.data) {
     return {
       data: response.data.tickets,
@@ -76,7 +76,7 @@ export async function getTicketList({
       pagination: response.data.pagination,
     };
   } else {
-    console.log(response.status, response.data);
+    //console.log(response.status, response.data);
     throw new Error("Failed to fetch data");
   }
 }
@@ -120,7 +120,7 @@ export async function editTicket(
       success: true,
     };
   } else {
-    console.log(response);
+    //console.log(response);
     throw new Error("Failed to fetch data");
   }
 }
@@ -147,7 +147,7 @@ export async function closeTicket(
       success: true,
     };
   } else {
-    console.log(response);
+    //console.log(response);
     throw new Error("Failed to fetch data");
   }
 }

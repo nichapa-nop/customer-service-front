@@ -52,11 +52,11 @@ const CreateAccountModal: React.FC<Props> = ({
           {
             position: "bottom-center",
           };
-        console.log(result.data.uuid);
+        //console.log(result.data.uuid);
 
         openModal();
       } else {
-        console.log(result.status);
+        //console.log(result.status);
         if (result.status === 409) {
           toast.error("This email is already exist");
         }
@@ -81,7 +81,7 @@ const CreateAccountModal: React.FC<Props> = ({
     defaultValues: {},
   });
 
-  // console.log(watch());
+  // //console.log(watch());
 
   return (
     <>

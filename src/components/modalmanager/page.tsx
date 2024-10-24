@@ -9,7 +9,7 @@ export function useModalManager() {
     // ถ้ามี Modal อื่นเปิดอยู่ ให้ปิดก่อน
     if (activeModal !== null && activeModal !== modalType) {
       // ทำการปิด Modal ที่เปิดอยู่ (อาจจะต้องเพิ่มโค้ดเพื่อจัดการการปิด Modal ตามที่คุณต้องการ)
-      console.log(`Closing ${activeModal} modal`);
+      //console.log(`Closing ${activeModal} modal`);
     }
 
     // เปิด Modal ใหม่

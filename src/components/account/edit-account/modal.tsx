@@ -72,12 +72,12 @@ const EditAccountModal: React.FC<Props> = ({
         // openModal(); // Open the success modal
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       alert("Failed to edit ticket. Please try again.");
     }
   };
 
-  console.log(initialAccount.status);
+  //console.log(initialAccount.status);
 
   const {
     control,

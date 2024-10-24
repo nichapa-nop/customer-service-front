@@ -12,7 +12,7 @@ async function TicketManagementPage() {
   });
 
   if (!(getTicketListResponse.success && getTicketListResponse.data)) {
-    console.log(getTicketListResponse.data);
+    //console.log(getTicketListResponse.data);
     throw new Error("Can not fetch ticket list");
   }
   return <TicketManagementClient tickets={getTicketListResponse.data} />;
