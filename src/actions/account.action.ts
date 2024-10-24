@@ -197,6 +197,17 @@ export async function getMyInfo() {
   });
 }
 
+export async function getAccount({ uuid }: { uuid: string }) {
+  return ApiManager<AccountDetailResponseBodyDTO, never, never>({
+    path: `/account/${uuid}`,
+    method: "GET",
+    next: {
+      tags: ["cs-info"],
+    },
+    // body: data,
+  });
+}
+
 export async function logout() {
   cookies().delete("accessToken");
   return redirect("/login");

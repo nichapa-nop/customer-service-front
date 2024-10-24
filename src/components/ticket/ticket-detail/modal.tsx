@@ -1,3 +1,4 @@
+import { getAccount } from "@/actions/account.action";
 import {
   Dialog,
   DialogBackdrop,
@@ -6,7 +7,7 @@ import {
 } from "@headlessui/react";
 import { motion } from "framer-motion";
 import { init } from "next/dist/compiled/webpack/webpack";
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 interface Props {
   isOpen: boolean;
@@ -14,7 +15,6 @@ interface Props {
   initialTicket: TicketResponse;
   onClose?: () => void;
 }
-
 const TicketDetail: React.FC<Props> = ({
   isOpen,
   setIsOpen,
@@ -35,6 +35,20 @@ const TicketDetail: React.FC<Props> = ({
         return "";
     }
   };
+
+  const [csInfo, setCsInfo] = useState<AccountResponse>();
+
+  async function getCsAccount() {
+    const accountInfo = await getAccount({ uuid: initialTicket.createdBy });
+    if (accountInfo.success && accountInfo.data) {
+      // console.log(accountInfo.data);
+      setCsInfo(accountInfo.data.accountDetail);
+      // console.log(csInfo);
+    }
+  }
+  useEffect(() => {
+    getCsAccount().catch((e) => console.error(e));
+  }, []);
 
   return (
     <>
@@ -95,37 +109,37 @@ const TicketDetail: React.FC<Props> = ({
                   <div className="grid grid-cols-2 gap-2 p-3">
                     <div className="flex flex-col gap-4 p-4">
                       <p>First Name (EN)</p>
-                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
+                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text w-fit">
                         {initialTicket.cusFirstName}
                       </span>
                     </div>
                     <div className="flex flex-col gap-4 p-4">
                       <p>Last Name (EN)</p>
-                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
+                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text w-fit">
                         {initialTicket.cusLastName}
                       </span>
                     </div>
                     <div className="flex flex-col gap-4 p-4">
                       <p>Phone Number</p>
-                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
+                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text w-fit">
                         {initialTicket.cusPhoneNum}
                       </span>
                     </div>
                     <div className="flex flex-col gap-4 p-4">
                       <p>Type</p>
-                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text uppercase">
+                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text uppercase w-fit">
                         {initialTicket.cusCompanyType}
                       </span>
                     </div>
                     <div className=" flex flex-col gap-4 p-4">
                       <p>Email</p>
-                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text lowercase">
+                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text lowercase w-fit">
                         {initialTicket.cusEmail}
                       </span>
                     </div>
                     <div className=" flex flex-col gap-4 p-4">
                       <p>Company Name</p>
-                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text uppercase">
+                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text uppercase w-fit">
                         {initialTicket.cusCompanyName}
                       </span>
                     </div>
@@ -135,34 +149,34 @@ const TicketDetail: React.FC<Props> = ({
                   <p className="font-semibold text-[20px] mb-2  pl-6">
                     System Info
                   </p>
-                  <div className="grid grid-cols-2 gap-2  p-3">
+                  <div className="grid grid-cols-2 gap-2 p-3">
                     <div className="flex flex-col gap-4 p-4">
                       <p>Platform</p>
-                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text uppercase">
+                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text uppercase w-fit">
                         {initialTicket.platform}
                       </span>
                     </div>
                     <div className="flex flex-col gap-4 p-4">
                       <p>Incident Type</p>
-                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
+                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text w-fit">
                         {initialTicket.incidentType}
                       </span>
                     </div>
                     <div className="flex flex-col gap-4 p-4">
                       <p>Business Impact</p>
-                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
+                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text w-fit">
                         {initialTicket.businessImpact}
                       </span>
                     </div>
                     <div className="flex flex-col gap-4 p-4">
                       <p>Feedback Channels</p>
-                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
+                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text w-fit">
                         {initialTicket.feedbackCh}
                       </span>
                     </div>
                     <div className="flex flex-col gap-4 p-4">
                       <p>Ticket Link</p>
-                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
+                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text w-fit">
                         {initialTicket.ticketLink
                           ? initialTicket.ticketLink
                           : "-"}
@@ -177,7 +191,7 @@ const TicketDetail: React.FC<Props> = ({
                   <div className=" p-3">
                     <div className="flex flex-col gap-4 p-4">
                       <p>Topic</p>
-                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
+                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text w-fit">
                         {initialTicket.topic}
                       </span>
                     </div>
@@ -187,31 +201,34 @@ const TicketDetail: React.FC<Props> = ({
                         className="bg-dark-gray w-full h-[240px] rounded-[15px] p-4 "
                         defaultValue={initialTicket.description}
                       ></textarea> */}
-                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text  h-[240px]">
+                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text h-[240px] w-fit">
                         {initialTicket.description}
                       </span>
                     </div>
                   </div>
                 </div>
-                <div className="bg-white p-6 rounded-[20px] h-80 shadow-sm">
+                <div
+                  key={JSON.stringify(csInfo)}
+                  className="bg-white p-6 rounded-[20px] h-80 shadow-sm"
+                >
                   <p className=" font-semibold text-[20px] pl-6">CS Info</p>
                   <div className="grid grid-cols-2 gap-2  p-3">
                     <div className="flex flex-col gap-4 p-4">
                       <p>First Name (EN)</p>
-                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
-                        {initialTicket.assignTo?.firstName}
+                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text w-fit">
+                        {csInfo?.firstName}
                       </span>
                     </div>
                     <div className="flex flex-col gap-4 p-4">
                       <p>Last Name (EN)</p>
-                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
-                        {initialTicket.assignTo?.lastName}
+                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text w-fit">
+                        {csInfo?.lastName}
                       </span>
                     </div>
                     <div className="col-span-2 flex flex-col gap-4 p-4">
                       <p>Assign To</p>
-                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text  h-[240px]">
-                        {initialTicket.assignTo?.email}
+                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text h-[240px] w-fit">
+                        {initialTicket.assignTo?.email || "-"}
                       </span>
                     </div>
                   </div>

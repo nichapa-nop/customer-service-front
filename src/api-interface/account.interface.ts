@@ -1,5 +1,9 @@
 type AccountStatus = "verified" | "not_verify" | "disabled" | "deleted";
 
+interface AccountDetailResponseBodyDTO {
+  accountDetail: AccountResponse;
+}
+
 interface AccountResponse {
   uuid: string;
   firstName: string;

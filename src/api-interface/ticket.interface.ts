@@ -15,6 +15,7 @@ interface TicketDetailResponseBodyDTO {
 }
 
 interface TicketResponse {
+  uuid: string;
   cusFirstName: string;
   cusLastName: string;
   cusPhoneNum: string;
@@ -31,6 +32,7 @@ interface TicketResponse {
   status: TicketStatus;
   feedbackCh: FeedbackChannel;
   ticketLink: string;
+  createdBy: string;
 }
 
 interface ITicketListResponse {

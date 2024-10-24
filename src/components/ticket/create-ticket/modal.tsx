@@ -9,7 +9,13 @@ import {
   Transition,
 } from "@headlessui/react";
 import { motion } from "framer-motion";
-import React, { Dispatch, Fragment, SetStateAction, useState } from "react";
+import React, {
+  Dispatch,
+  Fragment,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import CreateTicketSuccess from "../create-ticket-success/modal";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -17,6 +23,7 @@ import { ticketSchema } from "@/schemas/ticket.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createTicket } from "@/actions/ticket.action";
 import classNames from "classnames";
+import { getMyInfo } from "@/actions/account.action";
 
 interface Props {
   isOpen: boolean;
@@ -33,6 +40,19 @@ const CreateTicketModal: React.FC<Props> = ({
   setIsOpen,
   initialTicket,
 }) => {
+  const [myInfo, setMyInfo] = useState<AccountResponse>();
+
+  async function fetchInfo() {
+    const accountInfo = await getMyInfo();
+    if (accountInfo.success && accountInfo.data) {
+      setMyInfo(accountInfo.data);
+    }
+  }
+
+  useEffect(() => {
+    fetchInfo().catch((e) => console.error(e));
+  }, []);
+
   const [isCreateTicketSuccessModalOpen, setIsCreateTicketSuccessModalOpen] =
     useState<boolean>(false);
 
@@ -153,7 +173,7 @@ const CreateTicketModal: React.FC<Props> = ({
                     </button> */}
                   </div>
                   {/* {isCustomerInfoOpen && ( */}
-                  <div className="grid grid-cols-2 gap-2 p-3">
+                  <div className="grid grid-cols-2 gap-2 p-3 text-[14px]">
                     <div className="flex flex-col gap-2 p-4">
                       <p>
                         First Name (EN)
@@ -382,10 +402,10 @@ const CreateTicketModal: React.FC<Props> = ({
                   {/* )} */}
                 </div>
                 <div className="bg-white p-6 rounded-[20px] shadow-light1">
-                  <p className="font-semibold text-[20px] mb-2  pl-6  pt-2">
+                  <p className="font-semibold text-[20px] mb-2 pl-6 pt-2">
                     System Info
                   </p>
-                  <div className="grid grid-cols-2 gap-2  p-3">
+                  <div className="grid grid-cols-2 gap-2 p-3 text-[14px]">
                     <div className="flex flex-col gap-2 p-4">
                       <p>Platform</p>
                       <Controller
@@ -649,7 +669,7 @@ const CreateTicketModal: React.FC<Props> = ({
                   <p className=" font-semibold text-[20px] pl-6 pt-2">
                     General Info
                   </p>
-                  <div className=" p-3">
+                  <div className=" text-[14px] p-3">
                     <div className="flex flex-col gap-2 p-4">
                       <p>Topic</p>
                       <Controller
@@ -702,16 +722,18 @@ const CreateTicketModal: React.FC<Props> = ({
                   <p className=" font-semibold text-[20px] pl-6 pt-2">
                     CS Info
                   </p>
-                  <div className="grid grid-cols-2 gap-2  p-3">
+                  <div className="grid grid-cols-2 gap-2 p-3 text-[14px]">
                     <div className="flex flex-col gap-2 p-4 hover:placeholder:text-space-black">
                       <p>First Name (EN)</p>
-                      <p className="w-full h-10 rounded-[15px] pl-4">Nichapa</p>
+                      <span className="w-fit h-10 rounded-[15px] pl-4 py-2 bg-gradient-to-tr from-deep-blue to-bright-red bg-clip-text text-transparent">
+                        {myInfo?.firstName}
+                      </span>
                     </div>
                     <div className="flex flex-col gap-2 p-4">
                       <p>Last Name (EN)</p>
-                      <p className="w-full h-10 rounded-[15px] pl-4">
-                        Nopparat
-                      </p>
+                      <span className="w-fit h-10 rounded-[15px] pl-4 py-2 bg-gradient-to-tr from-deep-blue to-bright-red bg-clip-text text-transparent">
+                        {myInfo?.lastName}
+                      </span>
                     </div>
                     <div className="col-span-2 flex flex-col gap-2 p-4">
                       <p>Assign To</p>

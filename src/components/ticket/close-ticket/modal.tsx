@@ -71,7 +71,7 @@ const CloseTicketModal: React.FC<Props> = ({
     defaultValues: {},
   });
 
-  //console.log(watch());
+  console.log(watch());
   // async function handleCloseTicket() {
   //   // Call API Here;
 
