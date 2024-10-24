@@ -89,44 +89,44 @@ const AccountDetail: React.FC<Props> = ({
                   <span className="font-semibold text-[20px] pl-6 ">
                     Account Information
                   </span>
-                  <div className="grid grid-cols-2 gap-2 p-3">
+                  <div className="grid grid-cols-2 gap-2 p-3 text-[14px] font-normal">
                     <div className="flex flex-col gap-4 p-4">
                       <p>First Name (EN)</p>
-                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
+                      <span className="w-fit bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
                         {initialAccount.firstName}
                       </span>
                     </div>
                     <div className="flex flex-col gap-4 p-4">
                       <p>Last Name (EN)</p>
-                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
+                      <span className="w-fit bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
                         {initialAccount.lastName}
                       </span>
                     </div>
                     <div className="flex flex-col gap-4 p-4">
                       <p>First Name (TH)</p>
-                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
+                      <span className="font-light w-fit bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
                         {initialAccount.firstNameTh}
                       </span>
                     </div>
                     <div className="flex flex-col gap-4 p-4">
                       <p>Last Name (TH)</p>
-                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
+                      <span className="font-light w-fit bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
                         {initialAccount.lastNameTh}
                       </span>
                     </div>
                     <div className="flex flex-col gap-4 p-4">
                       <p>Email</p>
-                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
+                      <span className="w-fit bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
                         {initialAccount.email}
                       </span>
                     </div>
                     <div className="flex flex-col gap-4 p-4">
                       <p>Phone Number</p>
-                      <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
+                      <span className="w-fit bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
                         {initialAccount.phoneNum}
                       </span>
                     </div>
-                    <div className="flex flex-col gap-4 p-4">
+                    <div className="w-fit flex flex-col gap-4 p-4">
                       <p>Role</p>
                       <span
                         className={`bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text ${

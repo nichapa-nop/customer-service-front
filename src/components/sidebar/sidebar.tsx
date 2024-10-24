@@ -279,7 +279,9 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
         {/*user session*/}
         <div className="flex rounded-[20px] items-end justify-center p-3 mt-auto flex-col">
           <div
-            className="w-full flex space-x-3 bg-white h-[75px] rounded-[20px] p-4 shadow-light1 cursor-pointer hover:opacity-70"
+            className={`w-full flex space-x-3 bg-white h-[75px] p-4 shadow-sm cursor-pointer hover:opacity-70 ${
+              isDropDownOpen ? " rounded-t-[20px]" : "rounded-[20px] "
+            }`}
             onClick={() => setIsDropDownOpen(!isDropDownOpen)}
           >
             <div className="rounded-full overflow-hidden h-10 w-10">
@@ -304,8 +306,10 @@ export default function Sidebar({ isOpen, toggleSidebar }: SidebarProps) {
 
           {/* {isDropDownOpen && ( */}
           <div
-            className={`w-full flex justify-center pt-4 transform origin-top transition-all duration-300 ease-in-out ${
-              isDropDownOpen ? "opacity-100 h-16" : "opacity-0 h-0"
+            className={`w-full bg-white flex justify-center pt-2 transform origin-top transition-all duration-300 ease-in-out ${
+              isDropDownOpen
+                ? "opacity-100 h-16 rounded-b-[20px] shadow-sm"
+                : "opacity-0 h-0"
             }`}
           >
             <button

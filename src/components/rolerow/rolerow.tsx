@@ -43,7 +43,7 @@ const RoleRow: React.FC<RoleRowProps> = ({
           setIsRoleDetailModalOpen(true);
         }}
       >
-        <span>
+        <span className="capitalize">
           {`${role.groupMenu.name}: ${role.groupMenu.menus
             .map((menu) => menu.menuName)
             .join(", ")}`}

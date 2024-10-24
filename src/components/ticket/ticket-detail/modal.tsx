@@ -102,11 +102,11 @@ const TicketDetail: React.FC<Props> = ({
                   </div>
                 </div>
 
-                <div className="bg-white p-6 h-[440px] rounded-xl shadow-sm capitalize">
+                <div className="bg-white p-6 rounded-xl shadow-sm capitalize">
                   <p className="font-semibold text-[20px] pl-6">
                     Customer Info
                   </p>
-                  <div className="grid grid-cols-2 gap-2 p-3">
+                  <div className="grid grid-cols-2 gap-2 p-3 text-[14px]">
                     <div className="flex flex-col gap-4 p-4">
                       <p>First Name (EN)</p>
                       <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text w-fit">
@@ -145,11 +145,11 @@ const TicketDetail: React.FC<Props> = ({
                     </div>
                   </div>
                 </div>
-                <div className="bg-white p-6 rounded-xl h-[420px] capitalize">
-                  <p className="font-semibold text-[20px] mb-2  pl-6">
+                <div className="bg-white p-6 rounded-xl capitalize">
+                  <p className="font-semibold text-[20px] mb-2 pl-6">
                     System Info
                   </p>
-                  <div className="grid grid-cols-2 gap-2 p-3">
+                  <div className="grid grid-cols-2 gap-2 p-3 text-[14px]">
                     <div className="flex flex-col gap-4 p-4">
                       <p>Platform</p>
                       <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text uppercase w-fit">
@@ -184,12 +184,12 @@ const TicketDetail: React.FC<Props> = ({
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col p-6 rounded-xl h-[560px] shadow-sm bg-white capitalize">
+                <div className="flex flex-col p-6 rounded-xl shadow-sm bg-white capitalize">
                   <p className=" font-semibold text-[20px] pl-6">
                     General Info
                   </p>
                   <div className=" p-3">
-                    <div className="flex flex-col gap-4 p-4">
+                    <div className="flex flex-col gap-4 p-4 text-[14px]">
                       <p>Topic</p>
                       <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text w-fit">
                         {initialTicket.topic}

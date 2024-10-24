@@ -384,7 +384,7 @@ const EditAccountModal: React.FC<Props> = ({
                               onChange={onChange}
                               onBlur={onBlur}
                               className={classNames(
-                                "bg-light-gray2 w-full h-10 rounded-[15px] pl-4",
+                                "bg-light-gray2 w-full h-10 rounded-[15px] pl-4 capitalize",
                                 {
                                   "text-dark-gray": [
                                     "",

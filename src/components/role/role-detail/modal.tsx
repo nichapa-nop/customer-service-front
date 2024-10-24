@@ -59,13 +59,13 @@ const RoleDetail: React.FC<Props> = ({
                 <div className="flex flex-col space-y-10 text-[14px] pb-8">
                   <div className="flex flex-col gap-4 px-4 capitalize">
                     <p>Role Name</p>
-                    <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
+                    <span className="w-fit bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
                       {initialRole.roleName}
                     </span>
                   </div>
                   <div className="flex flex-col gap-4 px-4 capitalize">
                     <p>Group Menu</p>
-                    <span className="bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
+                    <span className="w-fit bg-gradient-to-tr from-deep-blue to-bright-red inline-block text-transparent bg-clip-text">
                       {`${
                         initialRole.groupMenu.name
                       }: ${initialRole.groupMenu.menus
