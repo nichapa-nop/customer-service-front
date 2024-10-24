@@ -187,19 +187,88 @@ export default function AccountManagementClient({
                       <li className="menu-title col-span-2">
                         <span className="text-bright-red">Status</span>
                       </li>
-                      <li>
+                      <li
+                        className={classNames({
+                          "text-bright-red border-[1px] border-bright-red rounded-lg":
+                            filterers?.status === "verified",
+                        })}
+                        onClick={(e) => {
+                          if (filterers?.status === "verified") {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              status: undefined,
+                            }));
+                          } else {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              status: "verified",
+                            }));
+                          }
+                        }}
+                      >
                         <a>Verify</a>
                       </li>
-                      <li>
+                      <li
+                        className={classNames({
+                          "text-bright-red border-[1px] border-bright-red rounded-lg":
+                            filterers?.status === "not_verify",
+                        })}
+                        onClick={(e) => {
+                          if (filterers?.status === "not_verify") {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              status: undefined,
+                            }));
+                          } else {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              status: "not_verify",
+                            }));
+                          }
+                        }}
+                      >
                         <a>Not Verify</a>
                       </li>
-                      <li>
+                      <li
+                        className={classNames({
+                          "text-bright-red border-[1px] border-bright-red rounded-lg":
+                            filterers?.status === "disabled",
+                        })}
+                        onClick={(e) => {
+                          if (filterers?.status === "disabled") {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              status: undefined,
+                            }));
+                          } else {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              status: "disabled",
+                            }));
+                          }
+                        }}
+                      >
                         <a>Disable</a>
                       </li>
-                      <li>
-                        <a>Enable</a>
-                      </li>
-                      <li>
+                      <li
+                        className={classNames({
+                          "text-bright-red border-[1px] border-bright-red rounded-lg":
+                            filterers?.status === "deleted",
+                        })}
+                        onClick={(e) => {
+                          if (filterers?.status === "deleted") {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              status: undefined,
+                            }));
+                          } else {
+                            setFilterers((prev) => ({
+                              ...prev,
+                              status: "deleted",
+                            }));
+                          }
+                        }}
+                      >
                         <a>Deleted</a>
                       </li>
                     </ul>

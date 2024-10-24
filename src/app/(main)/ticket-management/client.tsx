@@ -95,8 +95,14 @@ export default function TicketManagementClient({
         key: "status",
       },
     ];
+    const checkedTickets = Object.keys(checkedRows).filter(
+      (key) => checkedRows[key]
+    );
+    const targetTickets = tickets.filter((ticket) =>
+      checkedTickets.includes(ticket.ticketId)
+    );
     newSheet.addRows(
-      tickets.map((ticket) => ({
+      targetTickets.map((ticket) => ({
         ...ticket,
         assignTo: ticket.assignTo?.firstName,
       }))
@@ -188,7 +194,10 @@ export default function TicketManagementClient({
                     ></input>
                   </label>
                   <button
-                    className="flex flex-row items-center justify-center px-10 bg-white h-full rounded-[20px] shadow-light2 space-x-2"
+                    className="flex flex-row items-center justify-center px-10 bg-white h-full rounded-[20px] shadow-light2 space-x-2 disabled:opacity-75"
+                    disabled={
+                      !Object.values(checkedRows).some((checked) => checked)
+                    }
                     onClick={() => {
                       handleExportExcel();
                     }}
