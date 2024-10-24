@@ -46,4 +46,8 @@
   textarea:focus::-webkit-input-placeholder {
     opacity: 0;
   }
+
+  select option[data-default] {
+    color: "#FA1C1C";
+  }
 }

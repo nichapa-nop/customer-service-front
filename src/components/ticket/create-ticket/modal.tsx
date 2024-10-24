@@ -16,12 +16,13 @@ import { z } from "zod";
 import { ticketSchema } from "@/schemas/ticket.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createTicket } from "@/actions/ticket.action";
+import classNames from "classnames";
 
 interface Props {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   onClose?: () => void;
-  // initialTicket: TicketResponse;
+  initialTicket: TicketResponse[];
 }
 
 type TicketSchema = z.infer<typeof ticketSchema>;
@@ -30,7 +31,7 @@ const CreateTicketModal: React.FC<Props> = ({
   isOpen,
   onClose,
   setIsOpen,
-  // initialTicket,
+  initialTicket,
 }) => {
   const [isCreateTicketSuccessModalOpen, setIsCreateTicketSuccessModalOpen] =
     useState<boolean>(false);
@@ -52,8 +53,8 @@ const CreateTicketModal: React.FC<Props> = ({
       if (result.success) {
         //console.log("Ticket created successfully:", result.data);
         //console.log(result.data.ticketId);
-
-        setCreatedTicketId(result.data.ticketId); // Save ticket ID
+        console.log(result.data);
+        setCreatedTicketId(result.data.ticketDetail.ticketId); // Save ticket ID
         openModal(); // Open the success modal
       }
     } catch (error) {
@@ -289,14 +290,34 @@ const CreateTicketModal: React.FC<Props> = ({
                             value={value}
                             onChange={onChange}
                             onBlur={onBlur}
-                            className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                            className={classNames(
+                              "bg-light-gray2 w-full h-10 rounded-[15px] pl-4",
+                              {
+                                "text-dark-gray": [
+                                  "",
+                                  null,
+                                  undefined,
+                                ].includes(value),
+                              }
+                            )}
                           >
-                            <option value="" disabled>
+                            <option
+                              className="text-space-black"
+                              value=""
+                              disabled
+                              selected
+                            >
                               Select
                             </option>
-                            <option value="cdd">CDD</option>
-                            <option value="hr">HR</option>
-                            <option value="other">OTHER</option>
+                            <option className="text-space-black" value="cdd">
+                              CDD
+                            </option>
+                            <option className="text-space-black" value="hr">
+                              HR
+                            </option>
+                            <option className="text-space-black" value="other">
+                              OTHER
+                            </option>
                           </select>
                         )}
                       />
@@ -380,13 +401,31 @@ const CreateTicketModal: React.FC<Props> = ({
                               value={value}
                               onChange={onChange}
                               onBlur={onBlur}
-                              className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                              className={classNames(
+                                "bg-light-gray2 w-full h-10 rounded-[15px] pl-4",
+                                {
+                                  "text-dark-gray": [
+                                    "",
+                                    null,
+                                    undefined,
+                                  ].includes(value),
+                                }
+                              )}
                             >
-                              <option value="" disabled>
+                              <option
+                                className="text-space-black"
+                                value=""
+                                disabled
+                                selected
+                              >
                                 Select
                               </option>
-                              <option value="cdd">CDD</option>
-                              <option value="hr">HR</option>
+                              <option className="text-space-black" value="cdd">
+                                CDD
+                              </option>
+                              <option className="text-space-black" value="hr">
+                                HR
+                              </option>
                             </select>
                           );
                         }}
@@ -406,14 +445,38 @@ const CreateTicketModal: React.FC<Props> = ({
                               name={name}
                               onChange={onChange}
                               onBlur={onBlur}
-                              className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                              className={classNames(
+                                "bg-light-gray2 w-full h-10 rounded-[15px] pl-4",
+                                {
+                                  "text-dark-gray": [
+                                    "",
+                                    null,
+                                    undefined,
+                                  ].includes(value),
+                                }
+                              )}
                             >
-                              <option value="" disabled>
+                              <option value="" disabled selected>
                                 Select
                               </option>
-                              <option value="issue">Issue</option>
-                              <option value="consult">Consult</option>
-                              <option value="other">Other</option>
+                              <option
+                                className="text-space-black"
+                                value="issue"
+                              >
+                                Issue
+                              </option>
+                              <option
+                                className="text-space-black"
+                                value="consult"
+                              >
+                                Consult
+                              </option>
+                              <option
+                                className="text-space-black"
+                                value="other"
+                              >
+                                Other
+                              </option>
                             </select>
                           );
                         }}
@@ -433,16 +496,35 @@ const CreateTicketModal: React.FC<Props> = ({
                               name={name}
                               onChange={onChange}
                               onBlur={onBlur}
-                              className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                              className={classNames(
+                                "bg-light-gray2 w-full h-10 rounded-[15px] pl-4",
+                                {
+                                  "text-dark-gray": [
+                                    "",
+                                    null,
+                                    undefined,
+                                  ].includes(value),
+                                }
+                              )}
                             >
-                              <option value="" disabled>
+                              <option value="" disabled selected>
                                 Select
                               </option>
-                              <option value="s1">S1</option>
-                              <option value="s2">S2</option>
-                              <option value="s3">S3</option>
-                              <option value="s4">S4</option>
-                              <option value="no">No</option>
+                              <option className="text-space-black" value="s1">
+                                S1
+                              </option>
+                              <option className="text-space-black" value="s2">
+                                S2
+                              </option>
+                              <option className="text-space-black" value="s3">
+                                S3
+                              </option>
+                              <option className="text-space-black" value="s4">
+                                S4
+                              </option>
+                              <option className="text-space-black" value="no">
+                                No
+                              </option>
                             </select>
                           );
                         }}
@@ -462,17 +544,51 @@ const CreateTicketModal: React.FC<Props> = ({
                               name={name}
                               onChange={onChange}
                               onBlur={onBlur}
-                              className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                              className={classNames(
+                                "bg-light-gray2 w-full h-10 rounded-[15px] pl-4",
+                                {
+                                  "text-dark-gray": [
+                                    "",
+                                    null,
+                                    undefined,
+                                  ].includes(value),
+                                }
+                              )}
                             >
-                              <option value="" disabled>
+                              <option value="" disabled selected>
                                 Select
                               </option>
-                              <option value="help_crunch">help crunch</option>
-                              <option value="phone">Phone</option>
-                              <option value="email">Email</option>
-                              <option value="line">Line</option>
-                              <option value="ticket">Ticket</option>
-                              <option value="base_employee">
+                              <option
+                                className="text-space-black"
+                                value="help_crunch"
+                              >
+                                help crunch
+                              </option>
+                              <option
+                                className="text-space-black"
+                                value="phone"
+                              >
+                                Phone
+                              </option>
+                              <option
+                                className="text-space-black"
+                                value="email"
+                              >
+                                Email
+                              </option>
+                              <option className="text-space-black" value="line">
+                                Line
+                              </option>
+                              <option
+                                className="text-space-black"
+                                value="ticket"
+                              >
+                                Ticket
+                              </option>
+                              <option
+                                className="text-space-black"
+                                value="base_employee"
+                              >
                                 BASE Employee
                               </option>
                             </select>
@@ -494,23 +610,34 @@ const CreateTicketModal: React.FC<Props> = ({
                               name={name}
                               onChange={onChange}
                               onBlur={onBlur}
-                              className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                              className={classNames(
+                                "bg-light-gray2 w-full h-10 rounded-[15px] pl-4",
+                                {
+                                  "text-dark-gray": [
+                                    "",
+                                    null,
+                                    undefined,
+                                  ].includes(value),
+                                }
+                              )}
                             >
                               <option
                                 className="text-dark-gray"
                                 value=""
                                 disabled
+                                selected
                               >
                                 Select
                               </option>
-                              <option value="help_crunch">help crunch</option>
-                              <option value="phone">Phone</option>
-                              <option value="email">Email</option>
-                              <option value="line">Line</option>
-                              <option value="ticket">Ticket</option>
-                              <option value="base_employee">
-                                BASE Employee
-                              </option>
+                              {initialTicket.map((ticket) => (
+                                <option
+                                  className="text-space-black"
+                                  label={ticket.ticketId}
+                                  value={ticket.ticketId}
+                                >
+                                  {ticket.ticketId}
+                                </option>
+                              ))}
                             </select>
                           );
                         }}

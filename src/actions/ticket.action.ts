@@ -20,7 +20,7 @@ export async function showTicketDetail({ ticketId }: { ticketId: string }) {
 export async function createTicket(data: any) {
   //console.log(data);
   const response = await ApiManager<
-    TicketResponse,
+    TicketDetailResponseBodyDTO,
     never,
     TicketRequestBodyDTO
   >({

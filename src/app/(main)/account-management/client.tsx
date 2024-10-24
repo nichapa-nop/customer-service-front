@@ -21,7 +21,7 @@ export default function AccountManagementClient({
   roles: RoleResponse[];
 }) {
   const [page, setPage] = useState<number>(1);
-  const [pageCount, setPageCount] = useState<number>();
+  const [pageCount, setPageCount] = useState<number>(1);
   const [itemCount, setItemCount] = useState<number>(0);
 
   const [accounts, setAccounts] = useState<AccountResponse[]>(initialAccounts);
@@ -339,9 +339,14 @@ export default function AccountManagementClient({
             <footer className="flex justify-between items-center p-6 mt-auto">
               <div className="mx-4 text-dark-gray">{itemCount} Items</div>
               <div className=" flex space-x-5 items-center">
+                {/* {page <= 0 && ( */}
                 <button
                   className="flex bg-light-gray1 h-[34px] w-[34px] rounded-[20px]  items-center justify-center"
-                  // onClick={() => setPage(page - 1)}
+                  onClick={() => {
+                    setIsPageChanged(true);
+                    setPage(page - 1);
+                  }}
+                  disabled={page == 1} // disabled ปุ่มเมื่อ page มากกว่าหรือเท่ากับ pageCount
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -358,13 +363,20 @@ export default function AccountManagementClient({
                     />
                   </svg>
                 </button>
+                {/* )} */}
                 <input
                   className="outline outline-light-gray1 w-20 h-11 rounded-[15px] text-center"
                   placeholder={`${page}`}
+                  disabled
+                  // onChange={setPage()}
                 ></input>
                 <button
                   className="flex bg-light-gray1 h-[34px] w-[34px] rounded-[20px]  items-center justify-center"
-                  // onClick={() => setPage(page + 1)}
+                  onClick={() => {
+                    setIsPageChanged(true);
+                    setPage(page + 1);
+                  }}
+                  disabled={page >= pageCount} // disabled ปุ่มเมื่อ page มากกว่าหรือเท่ากับ pageCount
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -381,7 +393,9 @@ export default function AccountManagementClient({
                     />
                   </svg>
                 </button>
-                <span>Page {page} from 10</span>
+                <span>
+                  Page {page} from {pageCount}
+                </span>
               </div>
             </footer>
           </div>

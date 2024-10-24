@@ -628,6 +628,7 @@ export default function TicketManagementClient({
                   </button>
 
                   <CreateTicket
+                    initialTicket={initialTickets}
                     isOpen={isModalOpen("create")}
                     setIsOpen={(isOpen) =>
                       isOpen ? openModal("create") : closeModal()
@@ -737,6 +738,7 @@ export default function TicketManagementClient({
                 <input
                   className="outline outline-light-gray1 w-20 h-11 rounded-[15px] text-center"
                   placeholder={`${page}`}
+                  disabled
                   // onChange={setPage()}
                 ></input>
                 <button

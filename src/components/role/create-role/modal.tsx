@@ -12,6 +12,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import CreateRoleSuccess from "../create-role-success/modal";
+import classNames from "classnames";
 
 interface Props {
   isOpen: boolean;
@@ -134,7 +135,7 @@ const CreateRoleModal: React.FC<Props> = ({
                     />
                   </div>
                   <div className="flex flex-col gap-4 px-4 capitalize">
-                    <p>Group Menu</p>
+                    <p className=" font-medium text-[14px]">Group Menu</p>
                     <Controller
                       control={control}
                       name="groupMenuId"
@@ -148,9 +149,23 @@ const CreateRoleModal: React.FC<Props> = ({
                             value={value}
                             onChange={onChange}
                             onBlur={onBlur}
-                            className={`bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4 capitalize`}
+                            className={classNames(
+                              "bg-light-gray2 w-full h-10 rounded-[15px] pl-4",
+                              {
+                                "text-dark-gray": [
+                                  "",
+                                  null,
+                                  undefined,
+                                ].includes(value),
+                              }
+                            )}
                           >
-                            <option className="select-disabled" value="">
+                            <option
+                              className="text-dark-gray"
+                              value=""
+                              disabled
+                              selected
+                            >
                               Select
                             </option>
                             {initialGroupMenus.map((groupMenu) => (
@@ -160,6 +175,7 @@ const CreateRoleModal: React.FC<Props> = ({
                                 label={`${groupMenu.name}: ${groupMenu.menus
                                   .map((menu) => menu.menuName)
                                   .join(", ")}`}
+                                className="text-space-black"
                               ></option>
                             ))}
                           </select>

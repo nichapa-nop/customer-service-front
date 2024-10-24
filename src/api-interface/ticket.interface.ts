@@ -10,6 +10,10 @@ type FeedbackChannel =
   | "base_employee";
 type TicketStatus = "open" | "in progress" | "closed" | "deleted";
 
+interface TicketDetailResponseBodyDTO {
+  ticketDetail: TicketResponse;
+}
+
 interface TicketResponse {
   cusFirstName: string;
   cusLastName: string;

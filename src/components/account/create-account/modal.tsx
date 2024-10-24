@@ -16,6 +16,7 @@ import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import CreateAccountSuccess from "../create-account-success/modal";
+import classNames from "classnames";
 
 interface Props {
   isOpen: boolean;
@@ -282,14 +283,28 @@ const CreateAccountModal: React.FC<Props> = ({
                               value={value}
                               onChange={onChange}
                               onBlur={onBlur}
-                              className={`bg-light-gray2 placeholder:text-dark-gray w-full h-10 rounded-[15px] pl-4 capitalize`}
+                              className={classNames(
+                                "bg-light-gray2 w-full h-10 rounded-[15px] pl-4",
+                                {
+                                  "text-dark-gray": [
+                                    "",
+                                    null,
+                                    undefined,
+                                  ].includes(value),
+                                }
+                              )}
                             >
-                              <option className="select-disabled" value="">
+                              <option
+                                className="text-dark-gray"
+                                value=""
+                                disabled
+                                selected
+                              >
                                 Select
                               </option>
                               {initialRoles.map((role) => (
                                 <option
-                                  className={`bg-white rounded-[15px] ${
+                                  className={`bg-white text-space-black rounded-[15px] ${
                                     role.roleName == "ceo"
                                       ? "uppercase"
                                       : "capitalize"

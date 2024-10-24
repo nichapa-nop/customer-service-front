@@ -14,6 +14,7 @@ import { z } from "zod";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { editTicket, reOpenTicket } from "@/actions/ticket.action";
+import classNames from "classnames";
 
 interface Props {
   isOpen: boolean;
@@ -442,17 +443,56 @@ const EditTicketModal: React.FC<Props> = ({
                               name={name}
                               onChange={onChange}
                               onBlur={onBlur}
-                              className="bg-light-gray2 w-full h-10 rounded-[15px] pl-4 hover:placeholder:text-space-black"
+                              className={classNames(
+                                "bg-light-gray2 w-full h-10 rounded-[15px] pl-4",
+                                {
+                                  "text-dark-gray": [
+                                    "",
+                                    null,
+                                    undefined,
+                                  ].includes(value),
+                                }
+                              )}
                             >
-                              <option value="" disabled>
+                              <option
+                                className="text-dark-gray"
+                                value=""
+                                disabled
+                                selected
+                              >
                                 Select
                               </option>
-                              <option value="help_crunch">help crunch</option>
-                              <option value="phone">Phone</option>
-                              <option value="email">Email</option>
-                              <option value="line">Line</option>
-                              <option value="ticket">Ticket</option>
-                              <option value="base_employee">
+                              <option
+                                className="text-space-black"
+                                value="help_crunch"
+                              >
+                                help crunch
+                              </option>
+                              <option
+                                className="text-space-black"
+                                value="phone"
+                              >
+                                Phone
+                              </option>
+                              <option
+                                className="text-space-black"
+                                value="email"
+                              >
+                                Email
+                              </option>
+                              <option className="text-space-black" value="line">
+                                Line
+                              </option>
+                              <option
+                                className="text-space-black"
+                                value="ticket"
+                              >
+                                Ticket
+                              </option>
+                              <option
+                                className="text-space-black"
+                                value="base_employee"
+                              >
                                 BASE employee
                               </option>
                             </select>
