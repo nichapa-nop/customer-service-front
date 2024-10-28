@@ -75,9 +75,9 @@ const DeleteTicketSuccess: React.FC<Props> = ({
                     Ticket #{ticketId} has been deleted
                   </p>
                   <p className=" text-[16px]  text-center">
-                    You can review the updated ticket list in the 'Ticket
+                    You can review the updated ticket list in the &apos;Ticket
                     <br />
-                    Management' section accessible via the sidebar.
+                    Management&apos; section accessible via the sidebar.
                   </p>
                 </div>
               </DialogPanel>

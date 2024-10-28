@@ -69,8 +69,8 @@ const EditAccountSuccess: React.FC<Props> = ({
                     Your changes have been saved!
                   </p>
                   <p className=" text-[16px]  text-center">
-                    You can review these changes in the 'Account <br />
-                    Management' section accessible from the sidebar.
+                    You can review these changes in the &apos;Account <br />
+                    Management&apos; section accessible from the sidebar.
                   </p>
                 </div>
               </DialogPanel>

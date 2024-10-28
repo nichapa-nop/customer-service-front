@@ -71,12 +71,13 @@ const DeleteRoleSuccess: React.FC<Props> = ({
 
                 <div className="flex flex-col h-[120px] rounded-xl items-center justify-center">
                   <p className="font-semibold text-[20px]  mb-3 text-center">
-                    Role '<span className="capitalize">{roleName}</span>' has
-                    been deleted!
+                    Role &apos;<span className="capitalize">{roleName}</span>
+                    &apos; has been deleted!
                   </p>
                   <p className=" text-[16px]  text-center">
-                    You can review the updated role list in the 'Role <br />
-                    Management' section accessible via the sidebar.
+                    You can review the updated role list in the &apos;Role{" "}
+                    <br />
+                    Management&apos; section accessible via the sidebar.
                   </p>
                 </div>
               </DialogPanel>

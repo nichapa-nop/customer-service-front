@@ -73,8 +73,10 @@ const DeleteAccountSuccess: React.FC<Props> = ({
                     This account has been deleted!
                   </p>
                   <p className=" text-[16px]  text-center">
-                    To recover account, please navigate to the 'Account <br />
-                    Management's List' page and use the 'Edit' icon.
+                    To recover account, please navigate to the &apos;Account
+                    <br />
+                    Management&apos;s List&apos; page and use the
+                    &apos;Edit&apos; icon.
                   </p>
                 </div>
               </DialogPanel>

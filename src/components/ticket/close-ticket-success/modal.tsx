@@ -73,7 +73,8 @@ const CloseTicketSuccessModal: React.FC<Props> = ({
                     To re-open this ticket, please access the ticket list page
                     and
                     <br />
-                    use the 'Edit' icon associated with this ticket number.
+                    use the &apos;Edit&apos; icon associated with this ticket
+                    number.
                   </p>
                 </div>
               </DialogPanel>

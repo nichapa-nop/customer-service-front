@@ -122,14 +122,10 @@ const TicketRow: React.FC<TicketRowProps> = ({
       >
         <div className="flex flex-col">
           <span className="truncate">
-            {ticket.assignTo?.firstName
-              ? `${ticket.assignTo?.firstName}`
-              : "firstname"}
+            {ticket.assignTo?.firstName ? `${ticket.assignTo?.firstName}` : "-"}
           </span>
           <span className="truncate">
-            {ticket.assignTo?.lastName
-              ? `${ticket.assignTo?.lastName}`
-              : "lastname"}
+            {ticket.assignTo?.lastName ? `${ticket.assignTo?.lastName}` : ""}
           </span>
         </div>
       </td>

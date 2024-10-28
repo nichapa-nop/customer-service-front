@@ -67,9 +67,9 @@ const EditRoleSuccess: React.FC<Props> = ({ isOpen, onClose, setIsOpen }) => {
                     Your edit has been saved!
                   </p>
                   <p className=" text-[16px]  text-center">
-                    You can review these changes in the 'Role
+                    You can review these changes in the &apos;Role
                     <br />
-                    Management' section accessible from the sidebar.
+                    Management&apos; section accessible from the sidebar.
                   </p>
                 </div>
               </DialogPanel>

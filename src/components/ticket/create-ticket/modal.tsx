@@ -93,17 +93,18 @@ const CreateTicketModal: React.FC<Props> = ({
     mode: "onChange",
     resolver: zodResolver(ticketSchema),
     defaultValues: {
-      // cusFirstName: "Nichapa",
-      // cusLastName: "Nopparat",
-      // cusPhoneNum: "0909096396",
-      // cusEmail: "nichapa.no@baseplayhouse.co",
-      // cusCompanyName: "BASE Playhouse",
-      // cusCompanyType: "hr",
-      // platform: "hr",
-      // incidentType: "issue",
-      // businessImpact: "s1",
-      // topic: "This is test message",
-      // description: "This is test message",
+      cusFirstName: "Nichapa",
+      cusLastName: "Nopparat",
+      cusPhoneNum: "0909096396",
+      cusEmail: "nichapa.no@baseplayhouse.co",
+      cusCompanyName: "BASE Playhouse",
+      cusCompanyType: "hr",
+      platform: "hr",
+      feedbackCh: "line",
+      incidentType: "issue",
+      businessImpact: "no",
+      topic: "Unfriendly Customer Service",
+      description: "Unfriendly Customer Service",
     },
   });
 
@@ -651,6 +652,7 @@ const CreateTicketModal: React.FC<Props> = ({
                               </option>
                               {initialTicket.map((ticket) => (
                                 <option
+                                  key={ticket.ticketId}
                                   className="text-space-black"
                                   label={ticket.ticketId}
                                   value={ticket.ticketId}

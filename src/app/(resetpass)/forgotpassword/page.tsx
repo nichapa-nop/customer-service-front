@@ -55,7 +55,7 @@ export default function ForgotPasswordPage() {
             </div>
             <div className=" mt-10 mb-6 justify-center items-center text-center">
               <span className=" bg-gradient-to-tr from-deep-blue via-fade-purple to-bright-red   inline-block text-transparent bg-clip-text font-medium">
-                Enter your email address and we'll send <br />
+                Enter your email address and we&apos;ll send <br />
                 you a link to re-setpassword
               </span>
             </div>

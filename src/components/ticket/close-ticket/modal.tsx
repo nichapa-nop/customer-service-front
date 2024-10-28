@@ -109,7 +109,7 @@ const CloseTicketModal: React.FC<Props> = ({
               <DialogPanel className="bg-light-gray2 w-[920px] space-y-[50px] border rounded-[30px] p-12 ">
                 <div className="relative flex items-center justify-center">
                   <DialogTitle className="flex font-semibold text-[20px] text-center items-center">
-                    Edit Ticket
+                    Close Ticket
                     <button
                       className="absolute right-0"
                       onClick={() => setIsOpen(false)}

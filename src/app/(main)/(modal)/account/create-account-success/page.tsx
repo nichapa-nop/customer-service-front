@@ -7,7 +7,7 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import { useState } from "react";
-import successpic from "../../../../../img/success.png";
+import successpic from "../../../../../../public/assets/images/success.png";
 
 export default function Example() {
   let [isOpen, setIsOpen] = useState(false);
@@ -42,7 +42,8 @@ export default function Example() {
                 <p className=" text-[16px]  text-center">
                   You can access and manage this account details through the
                   <br />
-                  'Account Management' section accessible from the sidebar.
+                  &apos;Account Management&apos; section accessible from the
+                  sidebar.
                 </p>
               </div>
             </DialogPanel>

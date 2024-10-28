@@ -304,6 +304,7 @@ const CreateAccountModal: React.FC<Props> = ({
                               </option>
                               {initialRoles.map((role) => (
                                 <option
+                                  key={role.id}
                                   className={`bg-white text-space-black rounded-[15px] ${
                                     role.roleName == "ceo"
                                       ? "uppercase"

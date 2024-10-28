@@ -89,9 +89,9 @@ const DeleteRoleModal: React.FC<Props> = ({
 
                 <div className="flex flex-col h-[120px] rounded-xl mb-6 items-center justify-center">
                   <p className="font-semibold text-[20px] mb-3 text-center">
-                    Are you sure you want to delete this role '
-                    <span className="capitalize">{initialRole.roleName}</span>'
-                    ?
+                    Are you sure you want to delete this role &apos;
+                    <span className="capitalize">{initialRole.roleName}</span>
+                    &apos; ?
                   </p>
                   <p className=" text-[16px] text-center">
                     Please confirm your intention to delete this role. This

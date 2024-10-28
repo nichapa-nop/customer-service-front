@@ -76,7 +76,8 @@ const CreateRoleSuccess: React.FC<Props> = ({
                   <p className=" text-[16px]  text-center">
                     You can access and manage this role details through the
                     <br />
-                    'Role Management' section accessible from the sidebar.
+                    &apos;Role Management&apos; section accessible from the
+                    sidebar.
                   </p>
                 </div>
               </DialogPanel>

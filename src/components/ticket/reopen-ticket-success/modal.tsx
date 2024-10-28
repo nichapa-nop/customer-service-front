@@ -70,7 +70,8 @@ const ReOpenTicketSuccess: React.FC<Props> = ({
                   </p>
                   <p className=" text-[16px]  text-center">
                     You can review these changes in the <br />
-                    'Ticket Management' section accessible from the sidebar.
+                    &apos;Ticket Management&apos; section accessible from the
+                    sidebar.
                   </p>
                 </div>
               </DialogPanel>

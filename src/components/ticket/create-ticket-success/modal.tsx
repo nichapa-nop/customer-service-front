@@ -73,7 +73,8 @@ const CreateTicketSuccess: React.FC<Props> = ({
                   <p className=" text-[16px] text-center">
                     You can access and manage this ticket details through the
                     <br />
-                    'Ticket Management' section accessible from the sidebar.
+                    &apos;Ticket Management&apos; section accessible from the
+                    sidebar.
                   </p>
                 </div>
               </DialogPanel>

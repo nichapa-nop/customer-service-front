@@ -10,7 +10,7 @@ import {
 } from "@headlessui/react";
 // import successpic from "../../../../img/success.png";
 
-export default function ticketManagement() {
+export default function TicketManagement() {
   const [type, setType] = useState<string>();
   const [platform, setPlatform] = useState<string>();
   const [incidentType, setIncidentType] = useState<string>();
