@@ -76,7 +76,7 @@ export async function getTicketList({
       pagination: response.data.pagination,
     };
   } else {
-    //console.log(response.status, response.data);
+    console.log(response.status, response.data);
     throw new Error("Failed to fetch data");
   }
 }
